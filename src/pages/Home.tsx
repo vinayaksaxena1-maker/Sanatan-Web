@@ -4,7 +4,7 @@
  * Built with Resilient 5-State Components & Sacred HeroBanner
  */
 
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from '../i18n/i18nContext';
 import { Sun, Share2, Clock, CalendarDays, Compass } from 'lucide-react';
 import {
@@ -18,9 +18,20 @@ import {
   Badge,
   VedicInfoPill,
 } from '../components/common';
+import { AnalogWatch } from '../components/watch/AnalogWatch';
+import { MoonPhaseVisualizer } from '../components/moon/MoonPhaseVisualizer';
+import { TithiCard } from '../components/moon/TithiCard';
+import { TithiSlider } from '../components/moon/TithiSlider';
+import type { TithiPaksha } from '../data/tithiSpiritualData';
 
 export const Home: React.FC = () => {
   const { t } = useTranslation();
+  const [tithiSelection, setTithiSelection] = useState<{ day: number; paksha: TithiPaksha; isPreview: boolean }>({ day: 1, paksha: 'Shukla', isPreview: false });
+  const syncLiveTithi = useCallback((day: number, paksha: TithiPaksha) => {
+    setTithiSelection((current) => current.isPreview ? current : { day, paksha, isPreview: false });
+  }, []);
+  const selectTithi = (day: number) => setTithiSelection((current) => ({ ...current, day, isPreview: true }));
+  const selectPaksha = (paksha: TithiPaksha) => setTithiSelection((current) => ({ ...current, paksha, isPreview: true }));
 
   return (
     <div className="space-y-6">
@@ -74,6 +85,21 @@ export const Home: React.FC = () => {
           </>
         }
       />
+
+      <AnalogWatch status={{ title: 'वर्तमान समय', description: 'स्थानीय समय के अनुसार घड़ी चल रही है। वैदिक दृश्य में तारीख और सेकंड हैंड भी देखें।', auspicious: true }} />
+
+      <MoonPhaseVisualizer
+        selectedTithi={tithiSelection.day}
+        selectedPaksha={tithiSelection.paksha}
+        isTithiPreview={tithiSelection.isPreview}
+        onLiveTithi={syncLiveTithi}
+        onReturnToLive={() => setTithiSelection((current) => ({ ...current, isPreview: false }))}
+      />
+
+      <section className="tithi-explorer" aria-label="15 तिथियों का ऊर्जा अन्वेषक">
+        <TithiSlider day={tithiSelection.day} paksha={tithiSelection.paksha} onChange={selectTithi} onPakshaChange={selectPaksha} />
+        <TithiCard day={tithiSelection.day} paksha={tithiSelection.paksha} isPreview={tithiSelection.isPreview} />
+      </section>
 
       {/* Aaj Ka Haal - Resilient 5-State Sacred Card */}
       <Card variant="sacred" interactive>
