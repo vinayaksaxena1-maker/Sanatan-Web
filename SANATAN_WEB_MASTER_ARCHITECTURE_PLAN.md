@@ -168,6 +168,51 @@
 ```
 * **Mandatory Footnote**: AI provides exact copy-paste slash command footnote at the end of every audit report.
 
+### 🔔 MANDATORY AGENT-SWITCH & GRAPHIFY HANDOFF DIRECTIVE (अनिवार्य अलर्ट नियम)
+
+जब भी किसी एजेंट का काम समाप्त होगा और दूसरे एजेंट की बारी आएगी, तो AI अपनी ऑडिट रिपोर्ट के अंत में अनिवार्य रूप से निम्नलिखित बॉक्स बनाकर यूज़र को स्पष्ट मार्गदर्शन देगा:
+
+1. **जब Phase 2 का काम खत्म हो (Gate 2 पर - Graphify First, Then Codex):**
+   ```text
+   -------------------------------------------------------------------------
+   🧭 [MILESTONE 1: GRAPHIFY ARCHITECTURE MAP]:
+   - AstroEngine v2 का गणित और 1,902 टेस्ट्स पूरे होने पर Antigravity सबसे पहले `/graphify` चलाकर पूरे इंजन, 5,000 शहरों और टाइमज़ोन का एक संपूर्ण 'विजुअल नॉलेज मैप' जनरेट करेगा।
+   
+   🔔 [AGENT SWITCH ALERT]: ANTIGRAVITY PHASE 2 COMPLETED!
+   👉 अब आपको CODEX पर जाना है:
+      1. Codex में प्रोजेक्ट फ़ोल्डर खोलें: `d:\Sanatan Web`
+      2. बस यह कमांड कॉपी करके Codex में पेस्ट करें:
+         "SANATAN_WEB_MASTER_ARCHITECTURE_PLAN.md देखो, UI sample/mockup_01_home.png देखो और Phase 3 (Sub-phase 3.1) की रोलेक्स घड़ी का UI शुरू करो"
+   -------------------------------------------------------------------------
+   ```
+
+2. **जब Antigravity का काम खत्म हो (Gate 6A, Gate 7A पर):**
+   ```text
+   -------------------------------------------------------------------------
+   🔔 [AGENT SWITCH ALERT]: ANTIGRAVITY MATH & LOGIC COMPLETED!
+   👉 अब आपको CODEX पर जाना है:
+      1. Codex में प्रोजेक्ट फ़ोल्डर खोलें: `d:\Sanatan Web`
+      2. बस यह कमांड कॉपी करके Codex में पेस्ट करें:
+         "SANATAN_WEB_MASTER_ARCHITECTURE_PLAN.md देखो, UI sample/[mockup_name] देखो और [Sub-phase Name] का UI शुरू करो"
+   -------------------------------------------------------------------------
+   ```
+
+3. **जब Codex का UI काम खत्म हो और वापस Antigravity की बारी आए (Gate 5, Gate 6B, Gate 7B पर):**
+   ```text
+   -------------------------------------------------------------------------
+   🔔 [AGENT SWITCH ALERT]: CODEX UI WORK COMPLETED!
+   👉 अब आपको वापस ANTIGRAVITY पर जाना है:
+      1. Antigravity चैट में वापस आएं।
+      2. बस यह कमांड कॉपी करके भेजें:
+         "/goal [Next Sub-phase Name] पूरा करो और Micro-Audit देकर रुक जाओ"
+   -------------------------------------------------------------------------
+   ```
+
+4. **जब पूरा प्रोजेक्ट (Phase 7B) समाप्त हो (Gate 7B पर):**
+   - Antigravity पर लौटते ही संपूर्ण 13 हब्स का 'Final Master Graphify Map' जनरेट होगा, जिसके बाद Phase 8 (फ़्लाइट मोड टेस्ट व /brag वीडियो) शुरू होगा।
+
+
+
 ---
 
 ## 2.7 Programmatic SEO vs Edge Defense Matrix
@@ -313,6 +358,11 @@
 
 3. **🛡️ Asset Preservation Rule**:
    - Phase 0 और पूरे डेवलपमेंट के दौरान `d:\Sanatan Web\UI sample\` डायरेक्टरी और इसकी 13 इमेजेस सुरक्षित रहेंगी (डिलीट या ओवरराइट नहीं की जाएंगी)।
+
+### 🔔 7. Agent-Switch Alert & Graphify Milestone Directive (अनिवार्य अलर्ट नियम)
+* Section 2.6 में उल्लिखित **MANDATORY AGENT-SWITCH & GRAPHIFY HANDOFF DIRECTIVE** का 100% कड़ाई से पालन होगा।
+* **Phase 2 की समाप्ति (Gate 2)** पर Antigravity सबसे पहले `/graphify` चलाकर सम्पूर्ण इंजन आर्किटेक्चर, 5,000 शहरों व टाइमज़ोन का विजुअल नॉलेज मैप बनाएगा, फिर स्पष्ट [AGENT SWITCH ALERT] देकर यूज़र को Codex पर स्विच करने का निर्देश देगा।
+* प्रत्येक UI चरण के अंत में Codex यूज़र को वापस Antigravity पर भेजने का स्पष्ट निर्देश देगा।
 
 ---
 
