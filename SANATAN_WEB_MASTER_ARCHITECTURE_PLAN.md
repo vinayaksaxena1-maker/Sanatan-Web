@@ -416,7 +416,7 @@ SANATAN GHADI (सनातन घड़ी) MASTER SITEMAP (13 HUBS)
 > [!IMPORTANT]
 > यह लाइव स्टेटस बोर्ड प्रोजेक्ट की वास्तविक स्थिति को एक नज़र में दर्शाता है। जैसे-जैसे फेज़ और सब-फेज़ पूरे होंगे, यह बोर्ड और नीचे दिए गए संबंधित चेकपॉइंट्स वास्तविक समय में अपडेट होते रहेंगे:
 
-- **Phase 0:** 🔄 (Current Active Phase - Sub-phase 0.3 completed, Sub-phase 0.4 ready)
+- **Phase 0:** 🔄 (Current Active Phase - Sub-phase 0.4 completed, Sub-phase 0.5 ready)
 - **Phase 1:** ⏳ (Pending)
 - **Phase 2:** ⏳ (Pending)
 - **Phase 3:** ⏳ (Pending)
@@ -467,7 +467,7 @@ flowchart TD
 * ✅ **Verification Gate**: `npm run build` generates valid `dist/` directory without compilation errors; `vercel.json` validates clean JSON syntax.
 * 🛑 **MICRO-AUDIT & HALT**: Vercel routing & build verified $\rightarrow$ 2-line status $\rightarrow$ **INSTANT HALT with Next-Command Footnote**.
 
-#### Sub-phase 0.4: Tailwind CSS v4 Native Vite Integration `[PENDING ⏳]`
+#### Sub-phase 0.4: Tailwind CSS v4 Native Vite Integration `[COMPLETED ✅ - 2026-10-20 18:29]`
 * 📁 **Target File Paths**: `vite.config.ts`, `src/index.css`, `src/App.tsx`, `src/main.tsx`
 * 🧩 **Key Components / Exports**: `@tailwindcss/vite` plugin registered in `vite.config.ts`; `@import "tailwindcss";` in `src/index.css`; zero legacy `tailwind.config.js` bloat.
 * ✅ **Verification Gate**: `npm run build` succeeds and applies Tailwind utility styles.
