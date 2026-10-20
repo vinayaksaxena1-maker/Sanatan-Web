@@ -7,6 +7,7 @@
 import { useState, useCallback, createContext, useContext, type ReactNode } from 'react';
 import type { CityLocation } from '../types/location';
 import majorCitiesData from '../data/majorCities250.json';
+import { searchCitiesDatabase } from '../engine/citiesDatabase';
 
 export const majorCities = majorCitiesData as CityLocation[];
 
@@ -72,6 +73,7 @@ export interface LocationStoreValue {
   setCity: (city: CityLocation) => void;
   detectDeviceLocation: () => Promise<CityLocation>;
   searchCities: (query: string) => CityLocation[];
+  searchTownsAsync: (query: string, includeGlobal?: boolean) => Promise<CityLocation[]>;
   toggleFavorite: (city: CityLocation) => void;
   isFavorite: (cityId: string) => boolean;
 }
@@ -255,6 +257,13 @@ export const LocationProvider: React.FC<LocationProviderProps> = ({
     [favoriteCities]
   );
 
+  const searchTownsAsync = useCallback(
+    async (query: string, includeGlobal: boolean = false): Promise<CityLocation[]> => {
+      return searchCitiesDatabase(query, { includeGlobalNominatim: includeGlobal });
+    },
+    []
+  );
+
   return (
     <LocationContext.Provider
       value={{
@@ -267,6 +276,7 @@ export const LocationProvider: React.FC<LocationProviderProps> = ({
         setCity,
         detectDeviceLocation,
         searchCities,
+        searchTownsAsync,
         toggleFavorite,
         isFavorite,
       }}

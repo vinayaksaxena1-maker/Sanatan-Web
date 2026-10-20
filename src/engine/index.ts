@@ -1,0 +1,319 @@
+/**
+ * AstroEngine v2.0 (AstroEngine_v_2.0)
+ * High-precision Vedic Panchang, Horoscope, Astronomical, and Hindu Festival Engine
+ * Powered by Proprietary JPL Bridge & MIT astronomy-engine.
+ *
+ * @license MIT
+ * @author Vinayak Saxena
+ */
+
+// 1. Core Data Models and Types
+export * from './types';
+
+// 2. High-Precision Proprietary JPL Astronomical Engine & Compatibility Proxy
+export {
+  astronomicalEngine,
+  registerEngineListener,
+  isReady,
+  isEngineCalculating,
+  registerActiveExpectedKeys,
+  isTimeoutTriggered,
+  getEngineProgressStage,
+  getRetryCount,
+  getLastDiagnosticInfo,
+  isMaxRetriesReached,
+  extendInitializationTimeout,
+  retryEngineInitialization,
+  registerPanchangCacheClearer
+} from './astronomicalEngine';
+export type {
+  SolarTimes,
+  MoonTimes,
+  PlanetPosition,
+  PanchangPositions,
+  AscendantDetail,
+  BhavaCuspDetail,
+  NatalPlanetDetail,
+  NatalChartData,
+  AstronomicalEngine
+} from './astronomicalEngine';
+
+// 3. Low-Level Astronomical & Ephemeris Bridge
+export {
+  drik_calc_ut,
+  drik_rise_trans,
+  drik_houses,
+  drik_get_ayanamsa_ut,
+  getAyanamshaForSystem,
+  drik_julday,
+  drik_revjul,
+  drik_set_sid_mode,
+  drik_get_sid_mode,
+  swe_calc_ut,
+  swe_rise_trans,
+  swe_houses,
+  swe_get_ayanamsa_ut,
+  swe_get_ayanamsa,
+  swe_julday,
+  swe_revjul,
+  swe_set_sid_mode,
+  swe_get_sid_mode,
+  calculateSolarTimesCore,
+  calculateMoonTimesCore,
+  calculatePanchangPositionsCore,
+  calculateTimezoneOffset,
+  findBoundaryCrossing,
+  findNewMoonJd,
+  UnsupportedHouseSystemError,
+  SE_SUN,
+  SE_MOON,
+  SE_MERCURY,
+  SE_VENUS,
+  SE_MARS,
+  SE_JUPITER,
+  SE_SATURN,
+  SE_MEAN_NODE,
+  SE_TRUE_NODE,
+  SE_KETU,
+  SEFLG_SWIEPH,
+  SEFLG_SPEED,
+  SEFLG_SIDEREAL,
+  SE_SIDM_LAHIRI
+} from './core/sanatan_jpl_bridge';
+export type { AyanamshaSystem } from './core/sanatan_jpl_bridge';
+
+// 4. Complete Vedic Panchang Calculations
+export {
+  getPanchangForDate,
+  clearPanchangCache,
+  getMuhuratsForPanchang,
+  getChoghadiyaPresentationData,
+  calculateIshtakala,
+  calculatePaya,
+  calculateDagdaTithi,
+  calculateShivaVaas,
+  calculateAgniVaas,
+  calculatePushkarYog,
+  calculateSolarTimes,
+  TITHI_DETAILS,
+  NAKSHATRA_DETAILS,
+  YOGA_DETAILS,
+  KARANA_DETAILS,
+  MONTHS_ENGLISH_HINDI,
+  INDIAN_CITIES,
+  FESTVALS_PRESETS
+} from './panchangCalc';
+
+// 5. Hindu Festivals and Vrats Engine (100+ dynamic festival & vrat rules)
+export {
+  getFestivalsForDay,
+  getFestivalsForYear,
+  getFestivalsForMonth,
+  getPanchangForFestivalDay
+} from './festivalEngine';
+
+// 6. Muhurat and Auspicious Event Timing Rules
+export {
+  checkMuhurats
+} from './muhuratRules';
+export type {
+  MuhuratSuitability
+} from './muhuratRules';
+
+// 7. Planetary Transits and Gochar Calculations
+export {
+  calculateFutureTransits,
+  getUpcomingTransits,
+  SIGN_MAP,
+  PLANET_MAP,
+  TRANSIT_PREDICTIONS
+} from './transitEngine';
+export type {
+  TransitItem
+} from './transitEngine';
+
+// 8. Geographic Databases & Offline Reverse Geocoding
+export {
+  EXTENDED_INDIAN_CITIES
+} from './indianCities';
+export {
+  findClosestCity
+} from './geocoder';
+export {
+  detectDeviceLocation
+} from './locationService';
+
+// 9. Bilingual Dictionaries and Translations (Hindi / English)
+export {
+  translations
+} from './translations';
+
+// 10. Diagnostic Logger & Engine Benchmarks
+export {
+  EngineLogger
+} from './engineLogger';
+
+// 11. Automated Validation Suite
+export {
+  runBulkValidation
+} from './validateEngine';
+
+// 12. Kundli Core & Multi-Style Presentation Charts
+export * from './kundli/houseCusps';
+export * from './kundli/charts/northIndianChart';
+export * from './kundli/charts/southIndianChart';
+export * from './kundli/charts/eastIndianChart';
+export * from './kundli/drishtiEngine';
+
+// 13. Shodashvarga (16 Divisional Charts) Engine
+export * from './vargas/shodashvarga';
+
+// 14. Shadbala & Planetary Avasthas Engine
+export * from './shadbala/shadbalaEngine';
+
+// 15. Ashtakavarga Engine
+export * from './ashtakavarga/ashtakavargaEngine';
+
+// 16. Dasha Systems Engine (Vimshottari, Yogini, Ashtottari, Chara)
+export * from './dasha/dashaEngine';
+
+// 17. Predictive Synthesis & Specialized Systems (KP, Jaimini, Tajik, Lal Kitab, Panch Pakshi)
+export * from './synthesis/predictiveEngine';
+
+// 18. Master Plug-and-Play Facade, Input Resolver & Vedic Remedies Engine
+export * from './facade/inputResolver';
+export * from './facade/svgRenderers';
+export * from './facade/horoscopeFacade';
+export * from './remedies/remedyEngine';
+
+// 19. Core Calculation Exports (Unified High-Level Interface)
+import { getPanchangForDate } from './panchangCalc';
+import { astronomicalEngine } from './astronomicalEngine';
+import type { AyanamshaSystem } from './core/sanatan_jpl_bridge';
+
+export { calculateShadbala } from './shadbala/shadbalaEngine';
+export { calculateAshtakavarga } from './ashtakavarga/ashtakavargaEngine';
+
+/**
+ * High-level Vedic Panchang calculation for a specific location and date.
+ */
+export function calculatePanchang(lat: number, lon: number, date: Date = new Date()) {
+  return getPanchangForDate(lat, lon, date);
+}
+
+/**
+ * Calculates planetary positions and details for a given date and UTC offset.
+ */
+export function calculatePlanets(date: Date = new Date(), offsetHours: number = 5.5) {
+  return astronomicalEngine.getPanchangPositions(date, offsetHours);
+}
+
+/**
+ * Calculates Vedic Ascendant (Lagna) detail for given location, date, and ayanamsha.
+ */
+export function calculateAscendant(
+  lat: number,
+  lon: number,
+  date: Date = new Date(),
+  ayanamsha: AyanamshaSystem = 'Lahiri'
+) {
+  return astronomicalEngine.getAscendant(lat, lon, date, ayanamsha);
+}
+
+/**
+ * Calculates complete Natal Kundli (Ascendant, 12 Bhava cusps, and 9 Grahas).
+ */
+export function calculateKundli(
+  lat: number,
+  lon: number,
+  date: Date = new Date(),
+  houseSystem: 'Sripati' | 'Placidus' | 'EqualHouse' = 'Sripati',
+  ayanamsha: AyanamshaSystem = 'Lahiri'
+) {
+  return astronomicalEngine.getNatalChart(lat, lon, date, houseSystem, ayanamsha);
+}
+
+// 20. 5,000+ Indian Towns Dynamic Database & Search Engine (Sub-phase 2.2)
+export {
+  loadIndianTownsDatabase,
+  isTownsDatabaseLoaded,
+  clearTownsDatabaseCache,
+  getBundledMajorCities,
+  calculateDistanceKm,
+  findClosestTown,
+  getCityById,
+  searchIndianTowns,
+  searchCitiesDatabase
+} from './citiesDatabase';
+export type { CitySearchOptions } from './citiesDatabase';
+
+// 21. Native Intl DST & NRI Timezone Adapter (Sub-phase 2.2)
+export {
+  normalizeTimezone,
+  getTimezoneOffsetMinutes,
+  formatTimezoneOffset,
+  getTimezoneOffsetWithDST,
+  getTimezoneOffsetHours,
+  isDaylightSavingTime,
+  getTimezoneAbbr
+} from './timezoneAdapter';
+
+// 22. High-Precision Moonrise Calculation Engine (Sub-phase 2.3)
+export {
+  calculateMoonrise,
+  calculateDetailedMoonrise,
+  getKarwaChauthMoonrise,
+  getSankashtiMoonrise,
+  getEidHilalMoonTimes
+} from './moonriseEngine';
+export type { DetailedMoonriseResult } from './moonriseEngine';
+
+// 23. Vrata Nirnaya, Udaya Tithi & Ekadashi Parana Engine (Sub-phase 2.3)
+export {
+  determineUdayaTithi,
+  checkEkadashiVedha,
+  calculateHariVasaraEnd,
+  calculateEkadashiParana,
+  determineEkadashiVrata,
+  formatJdToTime
+} from './vrataNirnaya';
+export type {
+  UdayaTithiResult,
+  EkadashiVedhaResult,
+  HariVasaraResult
+} from './vrataNirnaya';
+
+// 24. 13 Regional Panchangs & Calendars Adapters (Sub-phase 2.3)
+export {
+  calculateRegionalPanchang,
+  calculateAmantaPanchang,
+  calculatePurnimantaPanchang,
+  calculateTamilPanchangam,
+  calculateBengaliPanjika,
+  calculateISKCONPanchang,
+  calculateMalayalamPanchangam,
+  calculateOdiaPanjika,
+  calculateGujaratiPanchang,
+  calculateMarathiPanchang,
+  calculateTeluguPanchangam,
+  calculateKannadaPanchangam,
+  getRegionalProfile,
+  listSupportedRegionalPanchangs,
+  REGIONAL_PANCHANG_PROFILES
+} from './regionalAdapters';
+export type { RegionalOptions } from './regionalAdapters';
+
+// 25. Background Web Worker Offloading Engine (Sub-phase 2.6)
+export {
+  computeYearlyPanchangAsync,
+  compute120YearVimshottariAsync,
+  computeYearlyFestivalsAsync,
+  computeRangePanchangAsync,
+  pingWorker,
+  terminateWorker,
+  isWorkerActive,
+  workerManager
+} from './workerBridge';
+export type { YearlyPanchangDaySummary } from './workerBridge';
+
+

@@ -29,6 +29,7 @@ const SettingsHub = lazy(() => import('../pages/settings/SettingsHub'));
 const PrivacyPolicy = lazy(() => import('../pages/legal/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('../pages/legal/TermsOfService'));
 const AboutUs = lazy(() => import('../pages/legal/AboutUs'));
+const EngineSandbox = lazy(() => import('../pages/sandbox/EngineSandbox'));
 
 export type HubRoute =
   | '/'
@@ -43,7 +44,9 @@ export type HubRoute =
   | '/settings'
   | '/privacy-policy'
   | '/terms'
-  | '/about-us';
+  | '/about-us'
+  | '/sandbox'
+  | '/engine-sandbox';
 
 interface RouterContextValue {
   currentPath: string;
@@ -184,6 +187,9 @@ export const AppRoutes: React.FC = () => {
         return <TermsOfService />;
       case '/about-us':
         return <AboutUs />;
+      case '/sandbox':
+      case '/engine-sandbox':
+        return <EngineSandbox />;
       default:
         return <Home />;
     }

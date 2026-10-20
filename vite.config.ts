@@ -25,6 +25,7 @@ export default defineConfig({
         comments: false,
       },
     },
+    chunkSizeWarningLimit: 2500,
     rollupOptions: {
       output: {
         compact: true,
@@ -67,7 +68,9 @@ export default defineConfig({
           '**/festival/**',
           '**/nakshatra/**',
           '**/rashi/**',
+          '**/indianTowns5000*.*',
           '**/data/indianTowns5000*.json',
+          '**/assets/indianTowns5000*.js',
         ],
         globPatterns: ['**/*.{js,css,woff2,ico,svg,png,webmanifest}'],
       },
