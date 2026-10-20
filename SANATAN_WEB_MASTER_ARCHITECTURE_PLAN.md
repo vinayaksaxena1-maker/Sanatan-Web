@@ -416,7 +416,7 @@ SANATAN GHADI (सनातन घड़ी) MASTER SITEMAP (13 HUBS)
 > [!IMPORTANT]
 > यह लाइव स्टेटस बोर्ड प्रोजेक्ट की वास्तविक स्थिति को एक नज़र में दर्शाता है। जैसे-जैसे फेज़ और सब-फेज़ पूरे होंगे, यह बोर्ड और नीचे दिए गए संबंधित चेकपॉइंट्स वास्तविक समय में अपडेट होते रहेंगे:
 
-- **Phase 0:** 🔄 (Current Active Phase - Sub-phase 0.7 completed, Sub-phase 0.8 ready)
+- **Phase 0:** ✅ (Completed & Tested)
 - **Phase 1:** ⏳ (Pending)
 - **Phase 2:** ⏳ (Pending)
 - **Phase 3:** ⏳ (Pending)
@@ -497,7 +497,7 @@ flowchart TD
 * ✅ **Verification Gate**: Inspect `dist/` build output: confirm zero `.map` files exist and console statements are stripped.
 * 🛑 **MICRO-AUDIT & HALT**: Code armor settings verified $\rightarrow$ 2-line status $\rightarrow$ **INSTANT HALT with Next-Command Footnote**.
 
-#### Sub-phase 0.8: Initial Commit & GitHub Remote Push `[PENDING ⏳]`
+#### Sub-phase 0.8: Initial Commit & GitHub Remote Push `[COMPLETED ✅ - 2026-10-20 18:40 - Tag: v0.0.1]`
 * 📁 **Target File Paths**: Complete Phase 0 workspace files
 * 🧩 **Key Components / Exports**: Git commit `v0.0.1-init`, tagged release `v0.0.1`, `SANATAN_WEB_MASTER_ARCHITECTURE_PLAN.md` updated with `[COMPLETED ✅]`.
 * ✅ **Verification Gate**: `git push -u origin main` succeeds; commit visible on GitHub remote.
