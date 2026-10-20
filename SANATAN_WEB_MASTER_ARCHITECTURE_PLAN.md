@@ -416,7 +416,7 @@ SANATAN GHADI (सनातन घड़ी) MASTER SITEMAP (13 HUBS)
 > [!IMPORTANT]
 > यह लाइव स्टेटस बोर्ड प्रोजेक्ट की वास्तविक स्थिति को एक नज़र में दर्शाता है। जैसे-जैसे फेज़ और सब-फेज़ पूरे होंगे, यह बोर्ड और नीचे दिए गए संबंधित चेकपॉइंट्स वास्तविक समय में अपडेट होते रहेंगे:
 
-- **Phase 0:** 🔄 (Current Active Phase - Sub-phase 0.6 completed, Sub-phase 0.7 ready)
+- **Phase 0:** 🔄 (Current Active Phase - Sub-phase 0.7 completed, Sub-phase 0.8 ready)
 - **Phase 1:** ⏳ (Pending)
 - **Phase 2:** ⏳ (Pending)
 - **Phase 3:** ⏳ (Pending)
@@ -488,7 +488,7 @@ flowchart TD
 * ✅ **Verification Gate**: `npm run build` outputs `dist/sw.js` and `dist/manifest.webmanifest`; precache manifest excludes programmatic SEO folders.
 * 🛑 **MICRO-AUDIT & HALT**: PWA precache guardrail verified $\rightarrow$ 2-line status $\rightarrow$ **INSTANT HALT with Next-Command Footnote**.
 
-#### Sub-phase 0.7: Code Armor & Theft Protection Build Configuration `[PENDING ⏳]`
+#### Sub-phase 0.7: Code Armor & Theft Protection Build Configuration `[COMPLETED ✅ - 2026-10-20 18:38]`
 * 📁 **Target File Paths**: `vite.config.ts`
 * 🧩 **Key Components / Exports**: 
   - `build.sourcemap: false` (Zero source-maps emitted in production; F12 inspection shows 0% source code).
