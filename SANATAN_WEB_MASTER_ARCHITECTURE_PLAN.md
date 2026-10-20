@@ -416,7 +416,7 @@ SANATAN GHADI (सनातन घड़ी) MASTER SITEMAP (13 HUBS)
 > [!IMPORTANT]
 > यह लाइव स्टेटस बोर्ड प्रोजेक्ट की वास्तविक स्थिति को एक नज़र में दर्शाता है। जैसे-जैसे फेज़ और सब-फेज़ पूरे होंगे, यह बोर्ड और नीचे दिए गए संबंधित चेकपॉइंट्स वास्तविक समय में अपडेट होते रहेंगे:
 
-- **Phase 0:** 🔄 (Current Active Phase - Sub-phase 0.5 completed, Sub-phase 0.6 ready)
+- **Phase 0:** 🔄 (Current Active Phase - Sub-phase 0.6 completed, Sub-phase 0.7 ready)
 - **Phase 1:** ⏳ (Pending)
 - **Phase 2:** ⏳ (Pending)
 - **Phase 3:** ⏳ (Pending)
@@ -479,7 +479,7 @@ flowchart TD
 * ✅ **Verification Gate**: `npm ls lucide-react d3 dexie vite-plugin-pwa` resolves clean tree with 0 missing peer dependencies.
 * 🛑 **MICRO-AUDIT & HALT**: Dependency tree verified $\rightarrow$ 2-line status $\rightarrow$ **INSTANT HALT with Next-Command Footnote**.
 
-#### Sub-phase 0.6: PWA Precache Explosion Guardrail (`globIgnores`) & Manifest Setup `[PENDING ⏳]`
+#### Sub-phase 0.6: PWA Precache Explosion Guardrail (`globIgnores`) & Manifest Setup `[COMPLETED ✅ - 2026-10-20 18:36]`
 * 📁 **Target File Paths**: `vite.config.ts`, `public/manifest.json`, `public/favicon.ico`, `src/registerServiceWorker.ts`
 * 🧩 **Key Components / Exports**: 
   - `VitePWA` plugin with strict `workbox.globIgnores: ['**/panchang/**', '**/festival/**', '**/nakshatra/**', '**/rashi/**', '**/data/indianTowns5000*.json']`.
