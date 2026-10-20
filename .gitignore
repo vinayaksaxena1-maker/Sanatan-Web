@@ -1,0 +1,41 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node modules / Dependencies
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment files
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Build & Cache outputs
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+.turbo/
+.cache/
+
+# Living Master Architecture Plan must NEVER be ignored (SSOT Mandate)
+!SANATAN_WEB_MASTER_ARCHITECTURE_PLAN.md
