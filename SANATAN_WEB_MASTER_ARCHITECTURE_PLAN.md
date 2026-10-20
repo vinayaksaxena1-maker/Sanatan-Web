@@ -416,7 +416,7 @@ SANATAN GHADI (सनातन घड़ी) MASTER SITEMAP (13 HUBS)
 > [!IMPORTANT]
 > यह लाइव स्टेटस बोर्ड प्रोजेक्ट की वास्तविक स्थिति को एक नज़र में दर्शाता है। जैसे-जैसे फेज़ और सब-फेज़ पूरे होंगे, यह बोर्ड और नीचे दिए गए संबंधित चेकपॉइंट्स वास्तविक समय में अपडेट होते रहेंगे:
 
-- **Phase 0:** ⏳ (Pending Approval — Ready to start Sub-phase 0.1)
+- **Phase 0:** 🔄 (Current Active Phase - Sub-phase 0.1 completed, Sub-phase 0.2 ready)
 - **Phase 1:** ⏳ (Pending)
 - **Phase 2:** ⏳ (Pending)
 - **Phase 3:** ⏳ (Pending)
@@ -447,7 +447,7 @@ flowchart TD
 
 ### 🚀 PHASE 0: WORKSPACE SETUP, ZERO-CONFLICT VERCEL ROUTING, PWA GUARDRAIL, CODE ARMOR & GIT REMOTE INITIALIZATION (`/goal`)
 
-#### Sub-phase 0.1: Git Repository, Branch Initialization & Living Plan Checkpoint `[PENDING ⏳]`
+#### Sub-phase 0.1: Git Repository, Branch Initialization & Living Plan Checkpoint `[COMPLETED ✅ - 2026-10-20 18:22 - Commit: 906bd69]`
 * 📁 **Target File Paths**: `.git/`, `.gitignore`, `SANATAN_WEB_MASTER_ARCHITECTURE_PLAN.md`, `UI sample/*`
 * 🧩 **Key Components / Exports**: Modern `.gitignore` file configured for Vite, Node, TypeScript, environment variables, build outputs, and IDE logs; ensuring `SANATAN_WEB_MASTER_ARCHITECTURE_PLAN.md` is strictly tracked in repository as Living SSOT, and `UI sample/` directory with all 13 official PNG mockups (`mockup_01_home.png` to `mockup_13_about.png`) is preserved intact as the official golden visual standard.
 * ✅ **Verification Gate**: `git status` displays branch `main`, tracking `SANATAN_WEB_MASTER_ARCHITECTURE_PLAN.md`, all 13 visual benchmark mockups confirmed preserved in `UI sample/`, and clean untracked state.
