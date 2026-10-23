@@ -4,6 +4,7 @@ import CitySelectModal from '../components/common/CitySelectModal';
 import { LiveMuhuratWatchCard } from '../components/watch';
 import QuickServicesStrip from '../components/home/QuickServicesStrip';
 import HomeKundliHeroCard from '../components/home/HomeKundliHeroCard';
+import HomeFourCardsRow from '../components/home/HomeFourCardsRow';
 import { useLocationStore } from '../store/locationStore';
 import { calculatePanchang, getMuhuratsForPanchang } from '../engine';
 import { Navigation, Loader2 } from 'lucide-react';
@@ -498,6 +499,13 @@ export default function Home() {
 
       {/* Vedic Birth Kundli Generation Card (Form Left + Chart Right + 12 Bhavas Below) */}
       <HomeKundliHeroCard onOpenCityModal={() => setIsCityModalOpen(true)} />
+
+      {/* 4 Cards Grid (Hindu Calendar, Shubh Muhurat, Choghadiya, Vrat & Tyohar) */}
+      <HomeFourCardsRow
+        panchang={panchang}
+        abhijitMuhurat={abhijitMuhurat}
+        clockTime={clockTime}
+      />
 
       {/* Main Container for Folds 2, 3 & Footer */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-16 space-y-16">
