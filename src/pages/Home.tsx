@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Navbar from '../components/layout/Navbar';
 import CitySelectModal from '../components/common/CitySelectModal';
-import { AnalogClock } from '../components/watch/AnalogClock';
+import { LiveMuhuratWatchCard } from '../components/watch';
 import { useLocationStore } from '../store/locationStore';
 import { calculatePanchang, getMuhuratsForPanchang } from '../engine';
 import { Navigation, Loader2 } from 'lucide-react';
@@ -484,38 +484,19 @@ export default function Home() {
 
             </div>
 
-            {/* Right Column: Neumorphic 3D Raised Box for Rolex Vedic Watch */}
+            {/* Right Column: Master Vedic Astronomical Watch & Bottom Smart Cards */}
             <div className="lg:col-span-5 flex flex-col items-center justify-center py-4">
-              
-              {/* Neumorphic 3D Raised Floating Box */}
-              <div className="relative rounded-[32px] sm:rounded-[38px] p-5 sm:p-6 bg-gradient-to-br from-white/95 via-[#FAF6F0]/90 to-[#F2E8DC]/85 backdrop-blur-md border border-white/95 shadow-[18px_18px_45px_rgba(139,38,18,0.16),-12px_-12px_32px_rgba(255,255,255,0.95),inset_1px_1px_3px_rgba(255,255,255,0.9)] flex flex-col items-center justify-center transition-all duration-300 hover:scale-[1.01] hover:shadow-[20px_20px_50px_rgba(139,38,18,0.18),-14px_-14px_35px_rgba(255,255,255,0.98)]">
-                
-                {/* Watch Canvas */}
-                <div className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] lg:w-[330px] lg:h-[330px] aspect-square flex items-center justify-center [&_svg]:overflow-visible">
-                  <AnalogClock
-                    time={clockTime}
-                    choghadiyaList={panchang.choghadiya}
-                    activeChoghadiyaIndex={activeChoghadiyaIndex}
-                    activeHora={activeHora}
-                    horaList={panchang.hora}
-                    sunriseTimeStr={panchang.sunrise}
-                    sunsetTimeStr={panchang.sunset}
-                    language="Hindi"
-                  />
-                </div>
-
-                {/* Live Digital Clock & Coordinates Under Watch inside the Neumorphic Card */}
-                <div className="text-center mt-3 space-y-1">
-                  <div className="text-2xl font-mono font-extrabold tracking-widest text-[#1E1B18] tabular-nums">
-                    {currentTimeStr}
-                  </div>
-                  <p className="text-xs text-[#6E6259]">
-                    भारतीय मानक समय (IST) • {currentCity.nameHindi} ({currentCity.latitude.toFixed(2)}° N, {currentCity.longitude.toFixed(2)}° E)
-                  </p>
-                </div>
-
-              </div>
-
+              <LiveMuhuratWatchCard
+                clockTime={clockTime}
+                currentTimeStr={currentTimeStr}
+                choghadiyaList={panchang.choghadiya}
+                activeChoghadiyaIndex={activeChoghadiyaIndex}
+                horaList={panchang.hora}
+                activeHora={activeHora}
+                sunriseTimeStr={panchang.sunrise}
+                sunsetTimeStr={panchang.sunset}
+                currentCity={currentCity}
+              />
             </div>
 
           </div>
