@@ -188,7 +188,7 @@ export const PanchangQuickLook: React.FC<PanchangQuickLookProps> = ({
       </div>
 
       {/* Main Glassmorphic Container for Quick-Look Content */}
-      <div className="bg-[#0e1320]/65 hover:bg-[#0e1320]/75 backdrop-blur-xl rounded-[28px] sm:rounded-[32px] p-4 sm:p-5 lg:p-6 border border-amber-500/25 shadow-[0_25px_60px_rgba(0,0,0,0.6)] space-y-4 transition-all duration-300">
+      <div className="bg-[#060913]/70 hover:bg-[#060913]/80 backdrop-blur-xl rounded-[28px] sm:rounded-[32px] p-4 sm:p-5 lg:p-6 border border-[#1e1b4b]/80 hover:border-amber-500/35 shadow-[0_25px_60px_rgba(6,9,19,0.8)] space-y-4 transition-all duration-300">
         
         {/* ========================================================
             1. SLEEK 5-ANGA HORIZONTAL STRIP

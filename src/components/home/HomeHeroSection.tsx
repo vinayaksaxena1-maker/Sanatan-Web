@@ -85,7 +85,7 @@ export const HomeHeroSection: React.FC<HomeHeroSectionProps> = ({
   }, [panchang.hora, curMin]);
 
   return (
-    <section className="relative w-full overflow-hidden border-b border-[#3D332A] bg-[#070A11] text-white selection:bg-[#EA6A2A]/30">
+    <section className="relative w-full overflow-hidden border-b border-[#1e1b4b]/80 bg-[#060913] text-white selection:bg-[#fbbf24]/30">
       
       {/* 1. Deep Cosmic Celestial Geometry & Constellation Backdrop */}
       <CosmicConstellationBackdrop />
