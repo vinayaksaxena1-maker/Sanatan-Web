@@ -177,27 +177,26 @@ export default function Home() {
         onClose={() => setIsCityModalOpen(false)}
       />
 
-      {/* Main Container */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-16">
+      {/* ========================================================
+          FOLD 1: HERO — FULL-STRETCH TEMPLE PANCHANG & VEDIC WATCH
+         ======================================================== */}
+      <section className="relative w-full overflow-hidden border-b border-[#E6DEC8] bg-[#FAF6F0]">
+        
+        {/* Full-bleed Background Wallpaper across entire Hero width */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-1000"
+          style={{ backgroundImage: `url('/assets/temple_panchang_bg.png')` }}
+        />
+        {/* Ambient Golden Atmosphere & Soft Glass Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF6F0]/92 via-[#FAF6F0]/68 to-[#FAF6F0]/90 backdrop-blur-[0.5px]" />
 
-        {/* ========================================================
-            FOLD 1: HERO — THE LIVING VEDIC WATCH (55% Left / 45% Right)
-           ======================================================== */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch pt-2 sm:pt-4">
+        {/* Content Container (Full Width with generous edge padding) */}
+        <div className="relative max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 py-8 sm:py-12">
           
-          {/* Left Column: Sacred Temple Ghat Panchang Hero Canvas */}
-          <div className="lg:col-span-7 relative rounded-3xl overflow-hidden border border-[#E6DEC8] shadow-[0_16px_50px_rgba(139,38,18,0.12)] bg-[#FAF6F0] flex flex-col justify-between">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
-            {/* Wallpaper Background Image */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-102"
-              style={{ backgroundImage: `url('/assets/temple_panchang_bg.png')` }}
-            />
-            {/* Ambient Lighting & Glass Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#FAF6F0]/85 via-[#FAF6F0]/40 to-[#FAF6F0]/95 backdrop-blur-[1px]" />
-
-            {/* Inner Content Layer */}
-            <div className="relative p-5 sm:p-7 space-y-5 flex flex-col justify-between h-full">
+            {/* Left Column: Heading, City Pill, 9-Element Frosted Card, CTAs */}
+            <div className="lg:col-span-7 space-y-6">
               
               {/* Top Sacred Header */}
               <div className="text-center space-y-1.5 pt-1">
@@ -252,7 +251,7 @@ export default function Home() {
               </div>
 
               {/* 9-Element Frosted Glassmorphism Card */}
-              <div className="bg-white/92 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/80 shadow-md space-y-4">
+              <div className="bg-white/92 backdrop-blur-md rounded-3xl p-5 sm:p-6 border border-white/80 shadow-[0_12px_36px_rgba(139,38,18,0.08)] space-y-4">
                 
                 {/* Row 1: 4 Items (तिथि, वार, नक्षत्र, योग) */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-3.5 pb-3 sm:pb-4 border-b border-[#E6DEC8]/70">
@@ -454,35 +453,48 @@ export default function Home() {
 
             </div>
 
-          </div>
+            {/* Right Column: Neumorphic 3D Raised Box for Rolex Vedic Watch */}
+            <div className="lg:col-span-5 flex flex-col items-center justify-center py-4">
+              
+              {/* Neumorphic 3D Raised Floating Box */}
+              <div className="relative rounded-[32px] sm:rounded-[38px] p-5 sm:p-6 bg-gradient-to-br from-white/95 via-[#FAF6F0]/90 to-[#F2E8DC]/85 backdrop-blur-md border border-white/95 shadow-[18px_18px_45px_rgba(139,38,18,0.16),-12px_-12px_32px_rgba(255,255,255,0.95),inset_1px_1px_3px_rgba(255,255,255,0.9)] flex flex-col items-center justify-center transition-all duration-300 hover:scale-[1.01] hover:shadow-[20px_20px_50px_rgba(139,38,18,0.18),-14px_-14px_35px_rgba(255,255,255,0.98)]">
+                
+                {/* Watch Canvas */}
+                <div className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] lg:w-[330px] lg:h-[330px] aspect-square flex items-center justify-center [&_svg]:overflow-visible">
+                  <AnalogClock
+                    time={clockTime}
+                    choghadiyaList={panchang.choghadiya}
+                    activeChoghadiyaIndex={activeChoghadiyaIndex}
+                    activeHora={activeHora}
+                    horaList={panchang.hora}
+                    sunriseTimeStr={panchang.sunrise}
+                    sunsetTimeStr={panchang.sunset}
+                    language="Hindi"
+                  />
+                </div>
 
-          {/* Right Column: Rolex-Class Master Vedic Astronomical Analog Watch */}
-          <div className="lg:col-span-5 flex flex-col items-center justify-center">
-            <div className="w-full max-w-[420px] aspect-square flex items-center justify-center p-1 sm:p-2 [&_svg]:overflow-visible">
-              <AnalogClock
-                time={clockTime}
-                choghadiyaList={panchang.choghadiya}
-                activeChoghadiyaIndex={activeChoghadiyaIndex}
-                activeHora={activeHora}
-                horaList={panchang.hora}
-                sunriseTimeStr={panchang.sunrise}
-                sunsetTimeStr={panchang.sunset}
-                language="Hindi"
-              />
-            </div>
+                {/* Live Digital Clock & Coordinates Under Watch inside the Neumorphic Card */}
+                <div className="text-center mt-3 space-y-1">
+                  <div className="text-2xl font-mono font-extrabold tracking-widest text-[#1E1B18] tabular-nums">
+                    {currentTimeStr}
+                  </div>
+                  <p className="text-xs text-[#6E6259]">
+                    भारतीय मानक समय (IST) • {currentCity.nameHindi} ({currentCity.latitude.toFixed(2)}° N, {currentCity.longitude.toFixed(2)}° E)
+                  </p>
+                </div>
 
-            {/* Live Digital Clock & Coordinates Under Watch */}
-            <div className="text-center mt-3 sm:mt-5 space-y-1">
-              <div className="text-2xl font-mono font-extrabold tracking-widest text-[#1E1B18] tabular-nums">
-                {currentTimeStr}
               </div>
-              <p className="text-xs text-[#6E6259]">
-                भारतीय मानक समय (IST) • {currentCity.nameHindi} ({currentCity.latitude.toFixed(2)}° N, {currentCity.longitude.toFixed(2)}° E)
-              </p>
+
             </div>
+
           </div>
 
-        </section>
+        </div>
+
+      </section>
+
+      {/* Main Container for Folds 2, 3 & Footer */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-16 space-y-16">
 
 
         {/* ========================================================
