@@ -21,14 +21,14 @@ interface SelectedSlotInfo {
 
 interface LiveMuhuratWatchCardProps {
   clockTime: Date;
-  currentTimeStr: string;
+  currentTimeStr?: string;
   choghadiyaList: ChoghadiyaInterval[];
   activeChoghadiyaIndex: number;
   horaList: HoraInterval[];
   activeHora: HoraInterval | null;
   sunriseTimeStr: string;
   sunsetTimeStr: string;
-  currentCity: CityInfo;
+  currentCity?: CityInfo;
 }
 
 // ---------------------------------------------------------------------------
@@ -145,14 +145,12 @@ const parseTimeToMinutes = (tStr: string): number => {
 
 export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
   clockTime,
-  currentTimeStr,
   choghadiyaList,
   activeChoghadiyaIndex,
   horaList,
   activeHora,
   sunriseTimeStr,
   sunsetTimeStr,
-  currentCity,
 }) => {
   // Selected slot state (Interactive Slot Card on tap/click/hover)
   const [selectedSlot, setSelectedSlot] = useState<SelectedSlotInfo | null>(null);
@@ -226,16 +224,9 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
       <div className="relative rounded-[28px] sm:rounded-[34px] p-4 sm:p-5 bg-gradient-to-br from-white/95 via-[#FAF6F0]/92 to-[#F2E8DC]/90 backdrop-blur-md border border-white/90 shadow-[0_20px_50px_rgba(0,0,0,0.35),inset_1px_1px_3px_rgba(255,255,255,0.9)] flex flex-col items-center justify-center transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_25px_60px_rgba(0,0,0,0.45)] w-full max-w-[460px]">
 
         {/* ========================================================
-            1. TOP SECTION HEADER (सुंदर सी हेडिंग)
+            1. TOP SECTION HEADER
            ======================================================== */}
-        <div className="text-center space-y-0.5 mb-2 border-b border-[#E6DEC8]/60 pb-2 w-full">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-500/10 via-orange-500/15 to-amber-500/10 border border-amber-500/30 shadow-2xs mb-0.5">
-            <span className="text-xs text-amber-700">ॐ</span>
-            <span className="text-[10px] font-mono font-bold tracking-wider text-[#B45309] uppercase">
-              Live Vedic Astrological Time & Muhurat Engine
-            </span>
-            <span className="text-xs text-amber-700">卐</span>
-          </div>
+        <div className="text-center mb-2.5 border-b border-[#E6DEC8]/60 pb-2 w-full">
           <h3 className="text-sm sm:text-base font-serif font-extrabold bg-gradient-to-r from-[#8B2612] via-[#B45309] to-[#78350F] bg-clip-text text-transparent tracking-wide">
             ।। सनातन वैदिक कालचक्र एवं चौघड़िया ।।
           </h3>
@@ -244,7 +235,7 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
         {/* ========================================================
             2. CENTRAL ANALOG DIAL (Interactive Segments)
            ======================================================== */}
-        <div className="w-[230px] h-[230px] sm:w-[250px] sm:h-[250px] lg:w-[260px] lg:h-[260px] aspect-square flex items-center justify-center [&_svg]:overflow-visible">
+        <div className="w-[240px] h-[240px] sm:w-[260px] sm:h-[260px] lg:w-[270px] lg:h-[270px] aspect-square flex items-center justify-center [&_svg]:overflow-visible">
           <AnalogClock
             time={clockTime}
             choghadiyaList={choghadiyaList}
@@ -259,20 +250,10 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
           />
         </div>
 
-        {/* Live Digital Clock & Coordinates */}
-        <div className="text-center mt-2 mb-1 space-y-0.5">
-          <div className="text-xl sm:text-2xl font-mono font-extrabold tracking-widest text-[#1E1B18] tabular-nums">
-            {currentTimeStr}
-          </div>
-          <p className="text-[10.5px] text-[#6E6259]">
-            भारतीय मानक समय (IST) • {currentCity.nameHindi} ({currentCity.latitude.toFixed(2)}° N, {currentCity.longitude.toFixed(2)}° E)
-          </p>
-        </div>
-
         {/* ========================================================
             3. BOTTOM ELEMENTS
            ======================================================== */}
-        <div className="w-full space-y-2.5 mt-1.5">
+        <div className="w-full space-y-2.5 mt-2">
 
           {/* A. INTERACTIVE SELECTED SLOT CARD (ON TAP/CLICK/HOVER) */}
           {selectedSlot && (
