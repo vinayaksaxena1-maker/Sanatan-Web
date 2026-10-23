@@ -22,7 +22,7 @@ export default function Home() {
             <div className="inline-flex items-center space-x-2 bg-[#FFFFFF] px-3.5 py-1.5 rounded-full border border-[#E6DEC8] shadow-sm">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               <span className="text-xs font-medium text-[#6E6259]">
-                शुद्ध वैदिक कालगणना • 100% ऑफलाइन PWA | <span className="text-[#EA6A2A] font-semibold">0 विज्ञापन, 0 ट्रैकर</span>
+                शुद्ध वैदिक कालगणना • आधुनिक वेब पोर्टल | <span className="text-[#EA6A2A] font-semibold">0 विज्ञापन, 0 ट्रैकर</span>
               </span>
             </div>
 
@@ -35,7 +35,7 @@ export default function Home() {
                 </span>
               </h1>
               <p className="text-sm sm:text-base text-[#6E6259] max-w-xl leading-relaxed pt-2">
-                विश्व का प्रथम विज्ञापन-मुक्त, 100% ऑफलाइन वैदिक पंचांग, लग्ज़री रोलेक्स-क्लास एनालॉग घड़ी एवं षोडशवर्ग कुंडली पोर्टल। सूर्य-सिद्धांत एवं नासा JPL DE405 की गणितीय शुद्धता पर आधारित।
+                विश्व का प्रथम विज्ञापन-मुक्त, आधुनिक वेब वैदिक पंचांग, लग्ज़री रोलेक्स-क्लास एनालॉग घड़ी एवं षोडशवर्ग कुंडली पोर्टल। सूर्य-सिद्धांत एवं नासा JPL DE405 की गणितीय शुद्धता पर आधारित।
               </p>
             </div>
 
@@ -88,7 +88,7 @@ export default function Home() {
             {/* Trust Footer Row */}
             <div className="flex items-center space-x-6 text-xs text-[#6E6259] pt-1">
               <span className="flex items-center space-x-1.5"><span>🛡️</span><span>1,902 टेस्ट्स प्रमाणित</span></span>
-              <span className="flex items-center space-x-1.5"><span>✈️</span><span>फ्लाइट मोड में सक्रिय</span></span>
+              <span className="flex items-center space-x-1.5"><span>⚡</span><span>सुपरफास्ट वेब इंजन</span></span>
               <span className="flex items-center space-x-1.5"><span>🗺️</span><span>5,000+ भारतीय नगर</span></span>
             </div>
 
