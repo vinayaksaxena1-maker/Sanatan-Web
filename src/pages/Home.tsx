@@ -198,12 +198,12 @@ export default function Home() {
             {/* Left Column: Heading, City Pill, 9-Element Frosted Card */}
             <div className="lg:col-span-7 flex flex-col justify-center space-y-5 py-2">
               
-              {/* Top Sacred Header (Explicit Font Sizes: 28px, 50px, 22px) */}
+              {/* Top Sacred Header (Explicit Font Sizes: 28px, 70px, 22px) */}
               <div className="text-center space-y-2 py-2 sm:py-3">
                 <p className="text-lg sm:text-xl lg:text-[28px] font-serif font-bold tracking-widest text-amber-300 drop-shadow-md">
                   ॥ सनातन जीवन का डिजिटल साथी ॥
                 </p>
-                <h1 className="text-3xl sm:text-4xl lg:text-[50px] font-black font-serif text-white tracking-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)] leading-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-[70px] font-black font-serif text-white tracking-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)] leading-tight">
                   आज का पंचांग
                 </h1>
                 <p className="text-sm sm:text-base lg:text-[22px] text-amber-100/90 font-serif tracking-wide drop-shadow-sm font-medium">
