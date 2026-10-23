@@ -1,0 +1,22 @@
+# Sanatan Web (सनातन घड़ी) - Project Guidelines & Skills Routing
+
+## 🎯 Task-Specific Autonomous Skills Routing (Mandatory)
+
+Is project me kaam karte samay, task ke domain ke anusar ye skills automatically activate aur follow hongi:
+
+1. **🎨 जब डिज़ाइन / CSS / स्टाइलिंग / UI पर काम हो**:
+   - **Primary**: `ui-ux-pro-max` (Visual hierarchy, sacred color palettes, Chandan cream themes, typography, responsive design, micro-interactions)
+   - **Supporting**: `component-state-craftsman` (5-State component resilience: Default, Hover/Active, Loading Skeleton, Error/Fallback, Empty Data - zero blank screens)
+
+2. **⚛️ जब React कोड / कॉम्पोनेंट / स्टेट लॉजिक लिखना हो**:
+   - **Primary**: `react-clean-modular` (Clean code splitting, 300-line modular limit, TypeScript standards, custom hooks, zero unnecessary re-renders, zero dependency bloat)
+
+3. **🪐 जब पंचांग / मुहूर्त / ज्योतिष / खगोलीय कैलकुलेशन पर काम हो**:
+   - **Primary**: `vedic-astronomy-math` (High-precision astronomical math, JPL bridge, Lahiri ayanamsha, Sripati/Placidus cusps, Shodashvarga D1-D60, Shadbala virupas, Ashtakavarga 337-sum invariant, Dasha systems, classical Parashara/Vrata nirnaya)
+
+---
+
+## 🏛️ Core Project Engineering Principles
+- **Pragmatic Engineering**: YAGNI, native web first, zero dependency bloat.
+- **Engine Decoupling**: `src/engine/` is self-contained and mathematically verified (1,902 passing tests); UI changes must never break calculation purity.
+- **Performance First**: Zero WASM overhead, clean lazy-loading with `React.lazy()` & suspense skeletons, 60 FPS UI.
