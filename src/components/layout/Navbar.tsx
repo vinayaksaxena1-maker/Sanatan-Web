@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export interface NavbarProps {
   onOpenMegaDrawer?: () => void;
 }
 
-export default function Navbar({ onOpenMegaDrawer }: NavbarProps = {}) {
+export default function Navbar({ onOpenMegaDrawer: _onOpenMegaDrawer }: NavbarProps = {}) {
   const [activeTab, setActiveTab] = useState('home');
 
   return (
