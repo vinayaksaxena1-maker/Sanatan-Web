@@ -240,7 +240,7 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
     <div className="w-full flex flex-col items-center">
       
       {/* Luxury Dark Frosted Glass Container (Cockpit Frame) */}
-      <div className="relative rounded-[30px] sm:rounded-[36px] p-4 sm:p-5 lg:p-6 bg-[#0e1320]/85 hover:bg-[#0e1320]/92 backdrop-blur-2xl border border-amber-500/25 shadow-[0_25px_60px_rgba(0,0,0,0.65)] flex flex-col items-center justify-center transition-all duration-300 hover:border-amber-500/40 w-full max-w-[480px]">
+      <div className="relative rounded-[30px] sm:rounded-[36px] p-4 sm:p-5 lg:p-6 bg-[#0e1320]/70 hover:bg-[#0e1320]/80 backdrop-blur-xl border border-amber-500/25 shadow-[0_25px_60px_rgba(0,0,0,0.65)] flex flex-col items-center justify-center transition-all duration-300 hover:border-amber-500/40 w-full max-w-[480px]">
 
         {/* ========================================================
             1. COCKPIT HEADER WITH LIVE VEDIC GHATI COUNTER
