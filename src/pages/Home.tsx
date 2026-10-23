@@ -193,20 +193,20 @@ export default function Home() {
         {/* Content Container (Full Width with generous edge padding) */}
         <div className="relative max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 py-6 sm:py-8">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
-            {/* Left Column: Heading, City Pill, 9-Element Frosted Card, CTAs */}
-            <div className="lg:col-span-7 space-y-5">
+            {/* Left Column: Heading, City Pill, 9-Element Frosted Card */}
+            <div className="lg:col-span-7 flex flex-col justify-center space-y-5 py-2">
               
-              {/* Top Sacred Header */}
-              <div className="text-center space-y-1.5 pt-1">
-                <p className="text-xs font-serif font-bold tracking-widest text-amber-400 uppercase drop-shadow-sm">
+              {/* Top Sacred Header (50% vertical center balance, with 30% : 50% : 20% font ratio) */}
+              <div className="text-center space-y-2 py-2 sm:py-3">
+                <p className="text-base sm:text-lg lg:text-[24px] font-serif font-bold tracking-widest text-amber-300 drop-shadow-md">
                   ॥ सनातन जीवन का डिजिटल साथी ॥
                 </p>
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black font-serif text-white tracking-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
+                <h1 className="text-3xl sm:text-4xl lg:text-[46px] font-black font-serif text-white tracking-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)] leading-tight">
                   आज का पंचांग
                 </h1>
-                <p className="text-xs sm:text-sm text-amber-100/90 font-serif tracking-wide drop-shadow-sm">
+                <p className="text-xs sm:text-sm lg:text-[18px] text-amber-100/90 font-serif tracking-wide drop-shadow-sm font-medium">
                   दिन की सही दिशा, शुभ समय के साथ
                 </p>
               </div>
@@ -251,7 +251,7 @@ export default function Home() {
               </div>
 
               {/* 9-Element Frosted Glassmorphism Grid: Row 1 = 4 Boxes, Row 2 = 5 Boxes */}
-              <div className="bg-white/60 hover:bg-white/70 backdrop-blur-2xl rounded-[30px] sm:rounded-[34px] p-4 sm:p-5 lg:p-6 border border-white/50 shadow-[0_25px_60px_rgba(0,0,0,0.45)] space-y-3.5 mb-5 sm:mb-6 transition-all duration-300">
+              <div className="bg-white/60 hover:bg-white/70 backdrop-blur-2xl rounded-[30px] sm:rounded-[34px] p-4 sm:p-5 lg:p-6 border border-white/50 shadow-[0_25px_60px_rgba(0,0,0,0.45)] space-y-3.5 transition-all duration-300">
                 
                 {/* Row 1: 4 Boxes (तिथि, वार, नक्षत्र, योग) */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3.5">
@@ -466,26 +466,6 @@ export default function Home() {
 
                 </div>
 
-              </div>
-
-              {/* Bottom Action Strip */}
-              <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-                <a 
-                  href="/panchang" 
-                  className="bg-gradient-to-r from-[#EA6A2A] to-[#C84B15] text-white px-5 py-2.5 rounded-full font-bold text-xs shadow-sm hover:brightness-105 active:scale-95 transition-all flex items-center space-x-1.5"
-                >
-                  <span>🧭</span>
-                  <span>संपूर्ण आज का पंचांग देखें</span>
-                  <span>➔</span>
-                </a>
-
-                <a 
-                  href="/kundli" 
-                  className="bg-white/95 hover:bg-white text-[#1E1B18] px-5 py-2.5 rounded-full font-bold text-xs border border-[#E6DEC8] shadow-2xs active:scale-95 transition-all flex items-center space-x-1.5"
-                >
-                  <span>✨</span>
-                  <span>अपनी जन्म कुंडली बनाएं</span>
-                </a>
               </div>
 
             </div>
