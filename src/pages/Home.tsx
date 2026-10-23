@@ -157,7 +157,7 @@ export const Home: React.FC = () => {
             <div className="bg-stone-50 dark:bg-stone-800/50 rounded-xl p-3 border border-stone-200/70 dark:border-stone-700/60">
               <div className="flex items-center justify-between">
                 <span className="text-xs text-stone-500 dark:text-stone-400">
-                  {t('panchang.abhijitMuhurat')}
+                  {t('panchang.abhijit')}
                 </span>
                 <VedicInfoPill
                   term=""
