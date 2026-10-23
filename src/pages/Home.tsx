@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from 'react';
 import Navbar from '../components/layout/Navbar';
 import CitySelectModal from '../components/common/CitySelectModal';
 import { LiveMuhuratWatchCard } from '../components/watch';
+import QuickServicesStrip from '../components/home/QuickServicesStrip';
 import { useLocationStore } from '../store/locationStore';
 import { calculatePanchang, getMuhuratsForPanchang } from '../engine';
 import { Navigation, Loader2 } from 'lucide-react';
@@ -490,6 +491,9 @@ export default function Home() {
         </div>
 
       </section>
+
+      {/* Quick Services Strip (Website Offerings with Scalloped Badges) */}
+      <QuickServicesStrip />
 
       {/* Main Container for Folds 2, 3 & Footer */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-16 space-y-16">
