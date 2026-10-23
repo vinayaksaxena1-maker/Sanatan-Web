@@ -66,7 +66,7 @@ export const HomeFourCardsRow: React.FC<HomeFourCardsRowProps> = ({
   };
 
   return (
-    <section className={`w-full max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8 my-6 sm:my-8 ${className}`}>
+    <section id="home-four-cards-row" className={`w-full max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8 my-6 sm:my-8 ${className}`}>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         
         {/* ========================================================
@@ -378,9 +378,11 @@ export const HomeFourCardsRow: React.FC<HomeFourCardsRowProps> = ({
                   <span className="text-sm font-black text-red-600 dark:text-red-400 leading-none">23</span>
                   <span className="text-[8px] font-bold text-[#6E6259] dark:text-gray-400 leading-tight mt-0.5">अक्टूबर</span>
                 </div>
-                <div className="w-9 h-9 rounded-full bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center text-lg shrink-0">
-                  🪔
-                </div>
+                <img
+                  src="/images/festivals/karwa_chauth.png"
+                  alt="करवा चौथ"
+                  className="w-9 h-9 rounded-xl object-cover shrink-0 shadow-xs border border-amber-200/60 dark:border-amber-900/40"
+                />
                 <div className="min-w-0">
                   <p className="text-xs font-bold text-[#1E1B18] dark:text-white font-serif group-hover:text-[#C45E1A] transition-colors truncate">
                     करवा चौथ
@@ -401,9 +403,11 @@ export const HomeFourCardsRow: React.FC<HomeFourCardsRowProps> = ({
                   <span className="text-sm font-black text-red-600 dark:text-red-400 leading-none">28</span>
                   <span className="text-[8px] font-bold text-[#6E6259] dark:text-gray-400 leading-tight mt-0.5">अक्टूबर</span>
                 </div>
-                <div className="w-9 h-9 rounded-full bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center text-lg shrink-0">
-                  🌺
-                </div>
+                <img
+                  src="/images/festivals/ahoi_ashtami.png"
+                  alt="अहोई अष्टमी"
+                  className="w-9 h-9 rounded-xl object-cover shrink-0 shadow-xs border border-emerald-200/60 dark:border-emerald-900/40"
+                />
                 <div className="min-w-0">
                   <p className="text-xs font-bold text-[#1E1B18] dark:text-white font-serif group-hover:text-[#C45E1A] transition-colors truncate">
                     अहोई अष्टमी
@@ -424,9 +428,11 @@ export const HomeFourCardsRow: React.FC<HomeFourCardsRowProps> = ({
                   <span className="text-sm font-black text-red-600 dark:text-red-400 leading-none">12</span>
                   <span className="text-[8px] font-bold text-[#6E6259] dark:text-gray-400 leading-tight mt-0.5">नवंबर</span>
                 </div>
-                <div className="w-9 h-9 rounded-full bg-yellow-100 dark:bg-yellow-900/40 flex items-center justify-center text-lg shrink-0">
-                  🏺
-                </div>
+                <img
+                  src="/images/festivals/dhanteras.png"
+                  alt="धनतेरस"
+                  className="w-9 h-9 rounded-xl object-cover shrink-0 shadow-xs border border-amber-200/60 dark:border-amber-900/40"
+                />
                 <div className="min-w-0">
                   <p className="text-xs font-bold text-[#1E1B18] dark:text-white font-serif group-hover:text-[#C45E1A] transition-colors truncate">
                     धनतेरस
@@ -447,9 +453,11 @@ export const HomeFourCardsRow: React.FC<HomeFourCardsRowProps> = ({
                   <span className="text-sm font-black text-red-600 dark:text-red-400 leading-none">13</span>
                   <span className="text-[8px] font-bold text-[#6E6259] dark:text-gray-400 leading-tight mt-0.5">नवंबर</span>
                 </div>
-                <div className="w-9 h-9 rounded-full bg-orange-100 dark:bg-orange-900/40 flex items-center justify-center text-lg shrink-0">
-                  ✨
-                </div>
+                <img
+                  src="/images/festivals/diwali.png"
+                  alt="दीपावली"
+                  className="w-9 h-9 rounded-full object-cover shrink-0 shadow-xs border border-orange-300/60 dark:border-orange-900/40"
+                />
                 <div className="min-w-0">
                   <p className="text-xs font-bold text-[#1E1B18] dark:text-white font-serif group-hover:text-[#C45E1A] transition-colors truncate">
                     दीपावली
