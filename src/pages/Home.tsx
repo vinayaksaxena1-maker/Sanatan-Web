@@ -250,21 +250,27 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 9-Element Frosted Glassmorphism Card */}
-              <div className="bg-white/92 backdrop-blur-md rounded-3xl p-5 sm:p-6 border border-white/80 shadow-[0_12px_36px_rgba(139,38,18,0.08)] space-y-4">
+              {/* 9-Element Frosted Glassmorphism Grid */}
+              <div className="bg-white/85 backdrop-blur-xl rounded-3xl p-4 sm:p-5 border border-white/85 shadow-[0_12px_36px_rgba(139,38,18,0.08)]">
                 
-                {/* Row 1: 4 Items (तिथि, वार, नक्षत्र, योग) */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-3.5 pb-3 sm:pb-4 border-b border-[#E6DEC8]/70">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3.5 sm:gap-4">
                   
-                  {/* 1. Tithi */}
-                  <div className="flex items-start space-x-2.5">
-                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A] border border-[#F59E0B]/30 flex items-center justify-center shrink-0 shadow-2xs">
-                      {/* Conch/Crescent Sacred SVG */}
-                      <svg className="w-5 h-5 text-[#B45309]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z" fill="currentColor" fillOpacity="0.2"/>
+                  {/* 1. Tithi (तिथि) */}
+                  <div className="bg-white/75 hover:bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-3.5 border border-white/90 shadow-[0_4px_16px_rgba(139,38,18,0.05)] hover:shadow-[0_8px_24px_rgba(139,38,18,0.12)] hover:-translate-y-0.5 transition-all duration-300 flex items-center space-x-3 group">
+                    <div className="shrink-0 transition-transform duration-300 group-hover:scale-115">
+                      {/* Standalone Colorful Moon & Star (No Circle) */}
+                      <svg className="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-[0_2px_8px_rgba(245,158,11,0.45)]" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z" fill="url(#tithiMoonGrad)" />
+                        <path d="M18.5 4.5l.8 1.6 1.7.8-1.7.8-.8 1.6-.8-1.6-1.7-.8 1.7-.8.8-1.6z" fill="#F59E0B" />
+                        <defs>
+                          <linearGradient id="tithiMoonGrad" x1="3" y1="3" x2="21" y2="21">
+                            <stop stopColor="#F59E0B" />
+                            <stop offset="1" stopColor="#D97706" />
+                          </linearGradient>
+                        </defs>
                       </svg>
                     </div>
-                    <div className="min-w-0">
+                    <div className="min-w-0 flex-1">
                       <p className="text-[11px] font-bold text-[#8B2612] uppercase tracking-wider">तिथि</p>
                       <p className="text-xs sm:text-sm font-extrabold text-[#1E1B18] truncate">
                         {panchang.hinduDate.tithi.hindiName}
@@ -275,17 +281,19 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* 2. Vaar */}
-                  <div className="flex items-start space-x-2.5">
-                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A] border border-[#F59E0B]/30 flex items-center justify-center shrink-0 shadow-2xs">
-                      <svg className="w-5 h-5 text-[#B45309]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                        <line x1="16" y1="2" x2="16" y2="6"/>
-                        <line x1="8" y1="2" x2="8" y2="6"/>
-                        <line x1="3" y1="10" x2="21" y2="10"/>
+                  {/* 2. Vaar (वार) */}
+                  <div className="bg-white/75 hover:bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-3.5 border border-white/90 shadow-[0_4px_16px_rgba(139,38,18,0.05)] hover:shadow-[0_8px_24px_rgba(139,38,18,0.12)] hover:-translate-y-0.5 transition-all duration-300 flex items-center space-x-3 group">
+                    <div className="shrink-0 transition-transform duration-300 group-hover:scale-115">
+                      {/* Standalone Colorful Solar Calendar (No Circle) */}
+                      <svg className="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-[0_2px_8px_rgba(234,88,12,0.45)]" viewBox="0 0 24 24" fill="none">
+                        <rect x="3" y="4" width="18" height="18" rx="3" stroke="#EA580C" strokeWidth="2" fill="#FFEDD5" fillOpacity="0.4" />
+                        <line x1="16" y1="2" x2="16" y2="6" stroke="#C2410C" strokeWidth="2" strokeLinecap="round" />
+                        <line x1="8" y1="2" x2="8" y2="6" stroke="#C2410C" strokeWidth="2" strokeLinecap="round" />
+                        <line x1="3" y1="10" x2="21" y2="10" stroke="#EA580C" strokeWidth="1.75" />
+                        <circle cx="12" cy="15" r="2.5" fill="#F97316" />
                       </svg>
                     </div>
-                    <div className="min-w-0">
+                    <div className="min-w-0 flex-1">
                       <p className="text-[11px] font-bold text-[#8B2612] uppercase tracking-wider">वार</p>
                       <p className="text-xs sm:text-sm font-extrabold text-[#1E1B18] truncate">
                         {currentDayName}
@@ -296,14 +304,23 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* 3. Nakshatra */}
-                  <div className="flex items-start space-x-2.5">
-                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A] border border-[#F59E0B]/30 flex items-center justify-center shrink-0 shadow-2xs">
-                      <svg className="w-5 h-5 text-[#B45309]" viewBox="0 0 24 24" fill="currentColor">
-                        <polygon points="12,2 15,9 22,12 15,15 12,22 9,15 2,12 9,9" />
+                  {/* 3. Nakshatra (नक्षत्र) */}
+                  <div className="bg-white/75 hover:bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-3.5 border border-white/90 shadow-[0_4px_16px_rgba(139,38,18,0.05)] hover:shadow-[0_8px_24px_rgba(139,38,18,0.12)] hover:-translate-y-0.5 transition-all duration-300 flex items-center space-x-3 group">
+                    <div className="shrink-0 transition-transform duration-300 group-hover:scale-115">
+                      {/* Standalone Colorful Cosmic Constellation (No Circle) */}
+                      <svg className="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-[0_2px_8px_rgba(139,92,246,0.45)]" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4L12 2z" fill="url(#nakshatraGrad)" />
+                        <circle cx="19" cy="5" r="1.5" fill="#C084FC" />
+                        <circle cx="5" cy="19" r="1.2" fill="#818CF8" />
+                        <defs>
+                          <linearGradient id="nakshatraGrad" x1="3" y1="2" x2="21" y2="20">
+                            <stop stopColor="#8B5CF6" />
+                            <stop offset="1" stopColor="#6366F1" />
+                          </linearGradient>
+                        </defs>
                       </svg>
                     </div>
-                    <div className="min-w-0">
+                    <div className="min-w-0 flex-1">
                       <p className="text-[11px] font-bold text-[#8B2612] uppercase tracking-wider">नक्षत्र</p>
                       <p className="text-xs sm:text-sm font-extrabold text-[#1E1B18] truncate">
                         {panchang.hinduDate.nakshatra.hindiName}
@@ -314,17 +331,18 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* 4. Yoga */}
-                  <div className="flex items-start space-x-2.5">
-                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A] border border-[#F59E0B]/30 flex items-center justify-center shrink-0 shadow-2xs">
-                      {/* Sacred Lotus SVG */}
-                      <svg className="w-5 h-5 text-[#B45309]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M12 4c1.5 3 4 5 7 6-2 3-5 4-7 4s-5-1-7-4c3-1 5.5-3 7-6z" fill="currentColor" fillOpacity="0.2"/>
-                        <path d="M12 14c-1.5 2.5-3 4-6 4 0-3 2-5 6-4z"/>
-                        <path d="M12 14c1.5 2.5 3 4 6 4 0-3-2-5-6-4z"/>
+                  {/* 4. Yoga (योग) */}
+                  <div className="bg-white/75 hover:bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-3.5 border border-white/90 shadow-[0_4px_16px_rgba(139,38,18,0.05)] hover:shadow-[0_8px_24px_rgba(139,38,18,0.12)] hover:-translate-y-0.5 transition-all duration-300 flex items-center space-x-3 group">
+                    <div className="shrink-0 transition-transform duration-300 group-hover:scale-115">
+                      {/* Standalone Colorful Sacred Lotus (No Circle) */}
+                      <svg className="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-[0_2px_8px_rgba(225,29,72,0.45)]" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 4c1.8 3 4.5 5 7.5 6-2 3-5 4-7.5 4s-5.5-1-7.5-4c3-1 5.7-3 7.5-6z" fill="#FB7185" fillOpacity="0.85" />
+                        <path d="M12 14c-1.8 2.5-3.5 4-7 4 0-3.5 2.5-5.5 7-4z" fill="#E11D48" />
+                        <path d="M12 14c1.8 2.5 3.5 4 7 4 0-3.5-2.5-5.5-7-4z" fill="#BE123C" />
+                        <circle cx="12" cy="10" r="1.5" fill="#FFE4E6" />
                       </svg>
                     </div>
-                    <div className="min-w-0">
+                    <div className="min-w-0 flex-1">
                       <p className="text-[11px] font-bold text-[#8B2612] uppercase tracking-wider">योग</p>
                       <p className="text-xs sm:text-sm font-extrabold text-[#1E1B18] truncate">
                         {getYogaHindi(panchang.hinduDate.yoga.hindiName || panchang.hinduDate.yoga.name)}
@@ -335,94 +353,107 @@ export default function Home() {
                     </div>
                   </div>
 
-                </div>
-
-                {/* Row 2: 5 Items (करण, सूर्योदय, सूर्यास्त, राहु काल, अभिजीत मुहूर्त) */}
-                <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-2 pt-1">
-                  
-                  {/* 5. Karana */}
-                  <div className="flex items-start space-x-2">
-                    <div className="w-8 h-8 rounded-lg bg-[#FAF2E6] border border-[#E6DEC8] flex items-center justify-center shrink-0">
-                      <svg className="w-4 h-4 text-[#EA6A2A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="9" cy="12" r="5" />
-                        <circle cx="15" cy="12" r="5" strokeDasharray="2 2" />
+                  {/* 5. Karana (करण) */}
+                  <div className="bg-white/75 hover:bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-3.5 border border-white/90 shadow-[0_4px_16px_rgba(139,38,18,0.05)] hover:shadow-[0_8px_24px_rgba(139,38,18,0.12)] hover:-translate-y-0.5 transition-all duration-300 flex items-center space-x-3 group">
+                    <div className="shrink-0 transition-transform duration-300 group-hover:scale-115">
+                      {/* Standalone Colorful Dual Moon Orbit (No Circle) */}
+                      <svg className="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-[0_2px_8px_rgba(13,148,136,0.45)]" viewBox="0 0 24 24" fill="none">
+                        <circle cx="9" cy="12" r="6" stroke="#0D9488" strokeWidth="2" fill="#14B8A6" fillOpacity="0.3" />
+                        <path d="M15 6a6 6 0 0 1 0 12c-2.5 0-4.5-2.7-4.5-6s2-6 4.5-6z" fill="#0D9488" />
+                        <circle cx="9" cy="12" r="2" fill="#0F766E" />
                       </svg>
                     </div>
-                    <div className="min-w-0">
-                      <p className="text-[10px] font-bold text-[#8B2612] uppercase">करण</p>
-                      <p className="text-xs font-bold text-[#1E1B18] truncate">
+                    <div className="min-w-0 flex-1">
+                      <p className="text-[11px] font-bold text-[#8B2612] uppercase tracking-wider">करण</p>
+                      <p className="text-xs sm:text-sm font-extrabold text-[#1E1B18] truncate">
                         {getKaranaHindi(panchang.hinduDate.karana.hindiName || panchang.hinduDate.karana.name)}
                       </p>
-                      <p className="text-[9px] text-[#6E6259] truncate font-medium">
+                      <p className="text-[10px] text-[#6E6259] truncate font-medium">
                         {panchang.hinduDate.karana.endTime ? `${panchang.hinduDate.karana.endTime} तक` : 'सक्रिय'}
                       </p>
                     </div>
                   </div>
 
-                  {/* 6. Sunrise */}
-                  <div className="flex items-start space-x-2">
-                    <div className="w-8 h-8 rounded-lg bg-[#FEF3C7] border border-[#F59E0B]/30 flex items-center justify-center shrink-0">
-                      <svg className="w-4 h-4 text-[#D97706]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M12 2v4M4.93 10.93l2.83-2.83M2 18h20M20 18a8 8 0 0 0-16 0" />
+                  {/* 6. Abhijit Muhurat (अभिजीत मुहूर्त) */}
+                  <div className="bg-white/75 hover:bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-3.5 border border-white/90 shadow-[0_4px_16px_rgba(139,38,18,0.05)] hover:shadow-[0_8px_24px_rgba(139,38,18,0.12)] hover:-translate-y-0.5 transition-all duration-300 flex items-center space-x-3 group col-span-2 sm:col-span-1">
+                    <div className="shrink-0 transition-transform duration-300 group-hover:scale-115">
+                      {/* Standalone Colorful Auspicious Swastika (No Circle) */}
+                      <svg className="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-[0_2px_8px_rgba(22,163,74,0.45)]" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 4v16M4 12h16M12 4h6M20 12v6M12 20H6M4 12V6" stroke="#16A34A" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                        <circle cx="8" cy="8" r="1.3" fill="#15803D" />
+                        <circle cx="16" cy="8" r="1.3" fill="#15803D" />
+                        <circle cx="16" cy="16" r="1.3" fill="#15803D" />
+                        <circle cx="8" cy="16" r="1.3" fill="#15803D" />
                       </svg>
                     </div>
-                    <div className="min-w-0">
-                      <p className="text-[10px] font-bold text-[#8B2612] uppercase">सूर्योदय</p>
-                      <p className="text-xs font-mono font-bold text-[#1E1B18] truncate">
-                        {panchang.sunrise}
-                      </p>
-                      <p className="text-[9px] text-[#6E6259]">प्रातः काल</p>
-                    </div>
-                  </div>
-
-                  {/* 7. Sunset */}
-                  <div className="flex items-start space-x-2">
-                    <div className="w-8 h-8 rounded-lg bg-[#FFEDD5] border border-[#EA580C]/30 flex items-center justify-center shrink-0">
-                      <svg className="w-4 h-4 text-[#C2410C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M12 10V2M4.93 4.93l2.83 2.83M2 18h20M20 18a8 8 0 0 0-16 0" />
-                        <polyline points="16 6 12 10 8 6" />
-                      </svg>
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-[10px] font-bold text-[#8B2612] uppercase">सूर्यास्त</p>
-                      <p className="text-xs font-mono font-bold text-[#1E1B18] truncate">
-                        {panchang.sunset}
-                      </p>
-                      <p className="text-[9px] text-[#6E6259]">सायं काल</p>
-                    </div>
-                  </div>
-
-                  {/* 8. Rahu Kaal */}
-                  <div className="flex items-start space-x-2">
-                    <div className="w-8 h-8 rounded-lg bg-[#FEE2E2] border border-[#EF4444]/30 flex items-center justify-center shrink-0">
-                      <svg className="w-4 h-4 text-[#B91C1C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="12" cy="12" r="9"/>
-                        <polyline points="12 6 12 12 15 15"/>
-                      </svg>
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-[10px] font-bold text-[#B91C1C] uppercase">राहु काल</p>
-                      <p className="text-xs font-mono font-bold text-[#991B1B] truncate">
-                        {panchang.rahuKaal.start}
-                      </p>
-                      <p className="text-[9px] text-[#B91C1C] truncate">
-                        {panchang.rahuKaal.end} तक
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* 9. Abhijit Muhurat */}
-                  <div className="flex items-start space-x-2">
-                    <div className="w-8 h-8 rounded-lg bg-[#DCFCE7] border border-[#22C55E]/30 flex items-center justify-center shrink-0">
-                      <span className="text-sm font-bold text-[#15803D]">卐</span>
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-[10px] font-bold text-[#15803D] uppercase">अभिजीत</p>
-                      <p className="text-xs font-mono font-bold text-[#166534] truncate">
+                    <div className="min-w-0 flex-1">
+                      <p className="text-[11px] font-bold text-[#15803D] uppercase tracking-wider">अभिजीत मुहूर्त</p>
+                      <p className="text-xs sm:text-sm font-mono font-extrabold text-[#166534] truncate">
                         {abhijitMuhurat.startTime}
                       </p>
-                      <p className="text-[9px] text-[#15803D] truncate">
+                      <p className="text-[10px] text-[#15803D] truncate font-medium">
                         {abhijitMuhurat.endTime} तक
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* 7. Sunrise (सूर्योदय) */}
+                  <div className="bg-white/75 hover:bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-3.5 border border-white/90 shadow-[0_4px_16px_rgba(139,38,18,0.05)] hover:shadow-[0_8px_24px_rgba(139,38,18,0.12)] hover:-translate-y-0.5 transition-all duration-300 flex items-center space-x-3 group">
+                    <div className="shrink-0 transition-transform duration-300 group-hover:scale-115">
+                      {/* Standalone Colorful Rising Sun (No Circle) */}
+                      <svg className="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-[0_2px_8px_rgba(234,179,8,0.5)]" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2v4M4.93 7.93l2.83 2.83M19.07 7.93l-2.83 2.83" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" />
+                        <path d="M2 18h20" stroke="#D97706" strokeWidth="2" strokeLinecap="round" />
+                        <path d="M6 18a6 6 0 0 1 12 0" fill="#FDE047" stroke="#F59E0B" strokeWidth="1.6" />
+                        <path d="M5 21h14" stroke="#B45309" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="3 2" />
+                      </svg>
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-[11px] font-bold text-[#8B2612] uppercase tracking-wider">सूर्योदय</p>
+                      <p className="text-xs sm:text-sm font-mono font-extrabold text-[#1E1B18] truncate">
+                        {panchang.sunrise}
+                      </p>
+                      <p className="text-[10px] text-[#6E6259] truncate font-medium">प्रातः काल</p>
+                    </div>
+                  </div>
+
+                  {/* 8. Sunset (सूर्यास्त) */}
+                  <div className="bg-white/75 hover:bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-3.5 border border-white/90 shadow-[0_4px_16px_rgba(139,38,18,0.05)] hover:shadow-[0_8px_24px_rgba(139,38,18,0.12)] hover:-translate-y-0.5 transition-all duration-300 flex items-center space-x-3 group">
+                    <div className="shrink-0 transition-transform duration-300 group-hover:scale-115">
+                      {/* Standalone Colorful Setting Sun (No Circle) */}
+                      <svg className="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-[0_2px_8px_rgba(234,88,12,0.5)]" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 9V3M4.93 6.93l2.83 2.83M19.07 6.93l-2.83 2.83" stroke="#EA580C" strokeWidth="2" strokeLinecap="round" />
+                        <path d="M2 18h20" stroke="#C2410C" strokeWidth="2" strokeLinecap="round" />
+                        <path d="M6 18a6 6 0 0 1 12 0" fill="#FB923C" stroke="#EA580C" strokeWidth="1.6" />
+                        <path d="M12 11l-2-2m4 0l-2 2" stroke="#9A3412" strokeWidth="1.5" strokeLinecap="round" />
+                      </svg>
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-[11px] font-bold text-[#8B2612] uppercase tracking-wider">सूर्यास्त</p>
+                      <p className="text-xs sm:text-sm font-mono font-extrabold text-[#1E1B18] truncate">
+                        {panchang.sunset}
+                      </p>
+                      <p className="text-[10px] text-[#6E6259] truncate font-medium">सायं काल</p>
+                    </div>
+                  </div>
+
+                  {/* 9. Rahu Kaal (राहु काल) */}
+                  <div className="bg-white/75 hover:bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-3.5 border border-white/90 shadow-[0_4px_16px_rgba(139,38,18,0.05)] hover:shadow-[0_8px_24px_rgba(139,38,18,0.12)] hover:-translate-y-0.5 transition-all duration-300 flex items-center space-x-3 group">
+                    <div className="shrink-0 transition-transform duration-300 group-hover:scale-115">
+                      {/* Standalone Colorful Rahu Alert Dial (No Circle) */}
+                      <svg className="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-[0_2px_8px_rgba(220,38,38,0.45)]" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="9" stroke="#DC2626" strokeWidth="2" fill="#FEE2E2" fillOpacity="0.45" />
+                        <path d="M12 7v5l3 3" stroke="#B91C1C" strokeWidth="2" strokeLinecap="round" />
+                        <circle cx="12" cy="12" r="1.5" fill="#7F1D1D" />
+                      </svg>
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-[11px] font-bold text-[#B91C1C] uppercase tracking-wider">राहु काल</p>
+                      <p className="text-xs sm:text-sm font-mono font-extrabold text-[#991B1B] truncate">
+                        {panchang.rahuKaal.start}
+                      </p>
+                      <p className="text-[10px] text-[#B91C1C] truncate font-medium">
+                        {panchang.rahuKaal.end} तक
                       </p>
                     </div>
                   </div>
