@@ -260,20 +260,20 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
       )}
 
       {/* Neumorphic 3D Raised Floating Box */}
-      <div className="relative rounded-[32px] sm:rounded-[38px] p-5 sm:p-6 bg-gradient-to-br from-white/95 via-[#FAF6F0]/90 to-[#F2E8DC]/85 backdrop-blur-md border border-white/95 shadow-[18px_18px_45px_rgba(139,38,18,0.16),-12px_-12px_32px_rgba(255,255,255,0.95),inset_1px_1px_3px_rgba(255,255,255,0.9)] flex flex-col items-center justify-center transition-all duration-300 w-full max-w-[500px]">
+      <div className="relative rounded-[28px] sm:rounded-[34px] p-4 sm:p-5 bg-gradient-to-br from-white/95 via-[#FAF6F0]/90 to-[#F2E8DC]/85 backdrop-blur-md border border-white/95 shadow-[14px_14px_35px_rgba(139,38,18,0.14),-10px_-10px_25px_rgba(255,255,255,0.95),inset_1px_1px_3px_rgba(255,255,255,0.9)] flex flex-col items-center justify-center transition-all duration-300 w-full max-w-[460px]">
 
         {/* ========================================================
             1. TOP SECTION HEADER (सुंदर सी हेडिंग)
            ======================================================== */}
-        <div className="text-center space-y-1 mb-3 pt-1 border-b border-[#E6DEC8]/60 pb-3 w-full">
-          <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-gradient-to-r from-amber-500/10 via-orange-500/15 to-amber-500/10 border border-amber-500/30 shadow-2xs mb-1">
+        <div className="text-center space-y-0.5 mb-2 border-b border-[#E6DEC8]/60 pb-2 w-full">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-500/10 via-orange-500/15 to-amber-500/10 border border-amber-500/30 shadow-2xs mb-0.5">
             <span className="text-xs text-amber-700">ॐ</span>
-            <span className="text-[10.5px] font-mono font-bold tracking-wider text-[#B45309] uppercase">
+            <span className="text-[10px] font-mono font-bold tracking-wider text-[#B45309] uppercase">
               Live Vedic Astrological Time & Muhurat Engine
             </span>
             <span className="text-xs text-amber-700">卐</span>
           </div>
-          <h3 className="text-base sm:text-lg font-serif font-extrabold bg-gradient-to-r from-[#8B2612] via-[#B45309] to-[#78350F] bg-clip-text text-transparent tracking-wide">
+          <h3 className="text-sm sm:text-base font-serif font-extrabold bg-gradient-to-r from-[#8B2612] via-[#B45309] to-[#78350F] bg-clip-text text-transparent tracking-wide">
             ।। सनातन वैदिक कालचक्र एवं चौघड़िया ।।
           </h3>
         </div>
@@ -281,7 +281,7 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
         {/* ========================================================
             2. CENTRAL ANALOG DIAL (Interactive Segments)
            ======================================================== */}
-        <div className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] lg:w-[330px] lg:h-[330px] aspect-square flex items-center justify-center [&_svg]:overflow-visible">
+        <div className="w-[230px] h-[230px] sm:w-[250px] sm:h-[250px] lg:w-[260px] lg:h-[260px] aspect-square flex items-center justify-center [&_svg]:overflow-visible">
           <AnalogClock
             time={clockTime}
             choghadiyaList={choghadiyaList}
@@ -297,11 +297,11 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
         </div>
 
         {/* Live Digital Clock & Coordinates */}
-        <div className="text-center mt-2.5 mb-1 space-y-0.5">
-          <div className="text-2xl font-mono font-extrabold tracking-widest text-[#1E1B18] tabular-nums">
+        <div className="text-center mt-2 mb-1 space-y-0.5">
+          <div className="text-xl sm:text-2xl font-mono font-extrabold tracking-widest text-[#1E1B18] tabular-nums">
             {currentTimeStr}
           </div>
-          <p className="text-[11px] text-[#6E6259]">
+          <p className="text-[10.5px] text-[#6E6259]">
             भारतीय मानक समय (IST) • {currentCity.nameHindi} ({currentCity.latitude.toFixed(2)}° N, {currentCity.longitude.toFixed(2)}° E)
           </p>
         </div>
@@ -309,11 +309,11 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
         {/* ========================================================
             3. BOTTOM ELEMENTS
            ======================================================== */}
-        <div className="w-full space-y-3 mt-2">
+        <div className="w-full space-y-2.5 mt-1.5">
 
           {/* A. INTERACTIVE SELECTED SLOT CARD (ON TAP/CLICK) */}
           {selectedSlot && (
-            <div className="w-full p-3.5 bg-gradient-to-r from-amber-50/95 via-white/95 to-orange-50/95 border border-[#FF9933]/50 rounded-2xl shadow-md flex items-center justify-between gap-2.5 animate-fadeIn transition-all">
+            <div className="w-full p-3 bg-gradient-to-r from-amber-50/95 via-white/95 to-orange-50/95 border border-[#FF9933]/50 rounded-2xl shadow-sm flex items-center justify-between gap-2 animate-fadeIn transition-all">
               <div className="flex items-start gap-2.5 overflow-hidden text-left min-w-0 flex-1">
                 <span className="text-2xl select-none shrink-0 mt-0.5">{selectedSlot.dot}</span>
                 <div className="min-w-0">
@@ -393,7 +393,7 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
           </div>
 
           {/* D. UNIFIED SMART LIVE CARD (SINGLE POWERHOUSE GLASSMORPHIC CARD) */}
-          <div className="w-full p-3.5 sm:p-4 rounded-3xl border border-[#ff9933]/50 bg-white/80 backdrop-blur-md shadow-sm space-y-2 text-left">
+          <div className="w-full p-3 sm:p-3.5 rounded-2xl border border-[#ff9933]/50 bg-white/85 backdrop-blur-md shadow-xs space-y-1.5 text-left">
             
             {/* 1. Header Row: Current Choghadiya & Live Countdown */}
             <div className="flex items-center justify-between gap-2 pb-2 border-b border-orange-100/80 flex-wrap">

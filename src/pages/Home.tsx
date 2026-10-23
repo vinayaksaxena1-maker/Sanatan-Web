@@ -191,9 +191,9 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#FAF6F0]/92 via-[#FAF6F0]/68 to-[#FAF6F0]/90 backdrop-blur-[0.5px]" />
 
         {/* Content Container (Full Width with generous edge padding) */}
-        <div className="relative max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 py-8 sm:py-12">
+        <div className="relative max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 py-6 sm:py-8">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
             {/* Left Column: Heading, City Pill, 9-Element Frosted Card, CTAs */}
             <div className="lg:col-span-7 space-y-6">
