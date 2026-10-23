@@ -8,7 +8,7 @@ import React, { useState, useCallback, type ReactNode } from 'react';
 import { Navbar } from './Navbar';
 import { BottomTabBar } from './BottomTabBar';
 import { MegaDrawer } from './MegaDrawer';
-import { Link } from '../../routes/AppRoutes';
+import { useRouter, Link } from '../../routes/AppRoutes';
 import { useTranslation } from '../../i18n/i18nContext';
 
 export interface LayoutProps {
@@ -16,6 +16,7 @@ export interface LayoutProps {
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const { currentPath } = useRouter();
   const [isMegaDrawerOpen, setIsMegaDrawerOpen] = useState<boolean>(false);
   const { t } = useTranslation();
 
@@ -26,6 +27,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const handleCloseMegaDrawer = useCallback(() => {
     setIsMegaDrawerOpen(false);
   }, []);
+
+  // For the root home page, Home.tsx provides its own full-width luxury editorial layout
+  if (currentPath === '/') {
+    return <>{children}</>;
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-[#faf7f2] dark:bg-[#1a1614] text-stone-900 dark:text-stone-100 transition-colors duration-200">
@@ -60,17 +66,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         </div>
       </footer>
 
-      {/* 5-Tab Mobile Bottom Navigation Dock */}
-      <BottomTabBar
-        onOpenMegaDrawer={handleOpenMegaDrawer}
-        isMegaDrawerOpen={isMegaDrawerOpen}
-      />
+      {/* Mobile 5-Tab Floating Bottom Bar */}
+      <BottomTabBar onOpenMegaDrawer={handleOpenMegaDrawer} />
 
-      {/* Smooth Slide-up Mega-Drawer */}
-      <MegaDrawer
-        isOpen={isMegaDrawerOpen}
-        onClose={handleCloseMegaDrawer}
-      />
+      {/* Mega Drawer Modal Overlay */}
+      <MegaDrawer isOpen={isMegaDrawerOpen} onClose={handleCloseMegaDrawer} />
     </div>
   );
 };

@@ -35,11 +35,13 @@ export type HubRoute =
   | '/'
   | '/panchang'
   | '/choghadiya'
+  | '/choghadiya-hora'
   | '/hora'
   | '/muhurat'
   | '/kundli'
   | '/calendar'
   | '/utilities'
+  | '/matchmaking'
   | '/cities'
   | '/settings'
   | '/privacy-policy'
@@ -166,6 +168,7 @@ export const AppRoutes: React.FC = () => {
       case '/panchang':
         return <PanchangHub />;
       case '/choghadiya':
+      case '/choghadiya-hora':
         return <ChoghadiyaHub />;
       case '/hora':
         return <HoraHub />;
@@ -176,6 +179,7 @@ export const AppRoutes: React.FC = () => {
       case '/calendar':
         return <CalendarHub />;
       case '/utilities':
+      case '/matchmaking':
         return <UtilitiesHub />;
       case '/cities':
         return <CitiesHub />;
