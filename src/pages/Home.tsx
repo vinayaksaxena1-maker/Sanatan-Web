@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Navbar from '../components/layout/Navbar';
 import CitySelectModal from '../components/common/CitySelectModal';
+import { AnalogClock } from '../components/watch/AnalogClock';
 import { useLocationStore } from '../store/locationStore';
 import { calculatePanchang, getMuhuratsForPanchang } from '../engine';
 import { Navigation, Loader2 } from 'lucide-react';
@@ -76,6 +77,27 @@ function getKaranaHindi(str: string): string {
   return KARANA_HINDI_MAP[clean] || str;
 }
 
+function parseTimeToMinutes(timeStr: string): number {
+  if (!timeStr) return 0;
+  const parts = timeStr.split(' ');
+  if (parts.length < 2) return 0;
+  const [time, ampm] = parts;
+  let [hrs, mins] = time.split(':').map(Number);
+  if (isNaN(hrs) || isNaN(mins)) return 0;
+  if (ampm === 'PM' && hrs !== 12) hrs += 12;
+  if (ampm === 'AM' && hrs === 12) hrs = 0;
+  return hrs * 60 + mins;
+}
+
+function isTimeInInterval(curMin: number, startStr: string, endStr: string): boolean {
+  const start = parseTimeToMinutes(startStr);
+  const end = parseTimeToMinutes(endStr);
+  if (end < start) {
+    return curMin >= start || curMin < end;
+  }
+  return curMin >= start && curMin < end;
+}
+
 export default function Home() {
   const { currentCity, isLocating, detectDeviceLocation } = useLocationStore();
   const [isCityModalOpen, setIsCityModalOpen] = useState(false);
@@ -98,7 +120,8 @@ export default function Home() {
     return { startTime: '11:43 AM', endTime: '12:28 PM' };
   }, [panchang]);
 
-  // Live Digital Clock Ticker
+  // Live Clock & Ticker
+  const [clockTime, setClockTime] = useState(() => new Date());
   const [currentTimeStr, setCurrentTimeStr] = useState(() => {
     return new Date().toLocaleTimeString('en-US', {
       hour: '2-digit',
@@ -110,8 +133,10 @@ export default function Home() {
 
   useEffect(() => {
     const timer = setInterval(() => {
+      const now = new Date();
+      setClockTime(now);
       setCurrentTimeStr(
-        new Date().toLocaleTimeString('en-US', {
+        now.toLocaleTimeString('en-US', {
           hour: '2-digit',
           minute: '2-digit',
           second: '2-digit',
@@ -121,6 +146,19 @@ export default function Home() {
     }, 1000);
     return () => clearInterval(timer);
   }, []);
+
+  const activeChoghadiyaIndex = useMemo(() => {
+    if (!panchang.choghadiya || panchang.choghadiya.length === 0) return 0;
+    const curMin = clockTime.getHours() * 60 + clockTime.getMinutes();
+    const idx = panchang.choghadiya.findIndex((ch) => isTimeInInterval(curMin, ch.startTime, ch.endTime));
+    return idx !== -1 ? idx : 0;
+  }, [panchang.choghadiya, clockTime]);
+
+  const activeHora = useMemo(() => {
+    if (!panchang.hora || panchang.hora.length === 0) return null;
+    const curMin = clockTime.getHours() * 60 + clockTime.getMinutes();
+    return panchang.hora.find((h) => isTimeInInterval(curMin, h.startTime, h.endTime)) || panchang.hora[0];
+  }, [panchang.hora, clockTime]);
 
   const currentDayIndex = today.getDay();
   const currentDayName = HINDI_DAYS[currentDayIndex];
@@ -418,45 +456,23 @@ export default function Home() {
 
           </div>
 
-          {/* Right Column: Rolex-Class Luxury Vedic Watch */}
+          {/* Right Column: Rolex-Class Master Vedic Astronomical Analog Watch */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center">
-            <div className="relative w-[340px] h-[340px] sm:w-[380px] sm:h-[380px] rounded-full bg-gradient-to-br from-[#FFFFFF] via-[#FAF6F0] to-[#EBDDC8] p-4 shadow-[0_24px_60px_rgba(124,29,29,0.12),inset_0_2px_8px_rgba(255,255,255,0.9)] border-2 border-[#D9A74A]/40 flex items-center justify-center">
-              
-              {/* Outer Golden Bezel Ring */}
-              <div className="absolute inset-4 rounded-full border-4 border-[#C88A2B]/40 flex items-center justify-center shadow-inner">
-                
-                {/* Watch Dial Face */}
-                <div className="w-full h-full rounded-full bg-[#FAF6F0] relative flex items-center justify-center shadow-inner">
-                  
-                  {/* Roman Numerals */}
-                  <span className="absolute top-3 font-serif font-bold text-xs text-[#6E6259] tracking-wider">XII</span>
-                  <span className="absolute right-3.5 font-serif font-bold text-xs text-[#6E6259] tracking-wider">III</span>
-                  <span className="absolute bottom-3 font-serif font-bold text-xs text-[#6E6259] tracking-wider">VI</span>
-                  <span className="absolute left-3.5 font-serif font-bold text-xs text-[#6E6259] tracking-wider">IX</span>
-
-                  {/* Center Branding Crest */}
-                  <div className="text-center z-10 bg-[#FFFFFF]/90 px-4 py-1.5 rounded-full border border-[#E6DEC8] shadow-xs">
-                    <p className="text-[11px] uppercase font-bold tracking-widest text-[#8B2612]">सनातन</p>
-                    <p className="text-[8px] text-[#6E6259] tracking-widest uppercase">VEDIC HOROLOGY</p>
-                  </div>
-
-                  {/* Watch Hands */}
-                  <div className="absolute w-1 h-28 bg-[#8B2612] rounded-full origin-bottom bottom-1/2 transform rotate-45 shadow-md"></div>
-                  <div className="absolute w-0.5 h-32 bg-[#EA6A2A] rounded-full origin-bottom bottom-1/2 transform -rotate-12"></div>
-                  <div className="absolute w-3.5 h-3.5 rounded-full bg-[#8B2612] z-20 shadow-sm border-2 border-white"></div>
-
-                  {/* Bottom Dial Status Pill */}
-                  <div className="absolute bottom-10 bg-[#FAF2E6] px-3.5 py-0.5 rounded-full border border-[#C88A2B]/40 text-[10px] font-bold text-[#8B2612] shadow-2xs">
-                    शुभ चौघड़िया • शुक्र होरा
-                  </div>
-
-                </div>
-              </div>
-
+            <div className="w-full max-w-[420px] aspect-square flex items-center justify-center p-1 sm:p-2 [&_svg]:overflow-visible">
+              <AnalogClock
+                time={clockTime}
+                choghadiyaList={panchang.choghadiya}
+                activeChoghadiyaIndex={activeChoghadiyaIndex}
+                activeHora={activeHora}
+                horaList={panchang.hora}
+                sunriseTimeStr={panchang.sunrise}
+                sunsetTimeStr={panchang.sunset}
+                language="Hindi"
+              />
             </div>
 
             {/* Live Digital Clock & Coordinates Under Watch */}
-            <div className="text-center mt-5 space-y-1">
+            <div className="text-center mt-3 sm:mt-5 space-y-1">
               <div className="text-2xl font-mono font-extrabold tracking-widest text-[#1E1B18] tabular-nums">
                 {currentTimeStr}
               </div>
