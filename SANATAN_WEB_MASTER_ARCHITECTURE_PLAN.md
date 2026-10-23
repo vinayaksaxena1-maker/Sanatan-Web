@@ -10,6 +10,14 @@
 
 ---
 
+> [!WARNING]
+> **UI DESIGN TRACK CURRENT STATUS: PAUSED ⏸️ (User Override Active)**
+> User ke aadesh anusar is plan ka purana UI/Design aur UI sample/ mockup track abhi pause kar diya gaya hai.
+> Agla sara UI/Design kaam 100% user ke direct naye instructions ke mutabik hoga. Jab user bolega tabhi ye resume hoga.
+> (Note: Mathematical Core Engine src/engine/ fully active aur pure rahega).
+
+---
+
 ## 1. Executive Summary & Skill Pipeline Alignment
 
 ```

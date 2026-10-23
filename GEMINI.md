@@ -17,6 +17,7 @@ Is project me kaam karte samay, task ke domain ke anusar ye skills automatically
 ---
 
 ## 🏛️ Core Project Engineering Principles
+- **UI Design Status (User Override)**: `SANATAN_WEB_MASTER_ARCHITECTURE_PLAN.md` ka purana UI/Design plan abhi **PAUSE ⏸️** par hai. Naya design 100% user ke live naye instructions ke anusar banega. Jab user explicitly bolega tabhi purana plan resume hoga.
 - **Pragmatic Engineering**: YAGNI, native web first, zero dependency bloat.
 - **Engine Decoupling**: `src/engine/` is self-contained and mathematically verified (1,902 passing tests); UI changes must never break calculation purity.
 - **Performance First**: Zero WASM overhead, clean lazy-loading with `React.lazy()` & suspense skeletons, 60 FPS UI.
