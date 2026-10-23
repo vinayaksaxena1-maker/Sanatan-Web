@@ -15,4 +15,6 @@ export interface AnalogClockProps {
   language?: 'English' | 'Hindi';
   onSelectChoghadiya?: (segment: ChoghadiyaInterval) => void;
   onSelectHora?: (hora: HoraInterval) => void;
+  onHoverChoghadiya?: (segment: ChoghadiyaInterval | null) => void;
+  onHoverHora?: (hora: HoraInterval | null) => void;
 }

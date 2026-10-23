@@ -16,7 +16,9 @@ export function AnalogClock({
   sunsetTimeStr = '',
   language = 'Hindi',
   onSelectChoghadiya,
-  onSelectHora
+  onSelectHora,
+  onHoverChoghadiya,
+  onHoverHora: _onHoverHora
 }: AnalogClockProps) {
   const currentTime = time;
   const activeIndex = activeChoghadiyaIndex;
@@ -231,6 +233,7 @@ export function AnalogClock({
           currentTime={currentTime}
           language={language}
           onSelectSegment={onSelectChoghadiya}
+          onHoverSegment={onHoverChoghadiya}
         />
 
         {/* Simple Outer Information Ring Complication with 16px Gap */}

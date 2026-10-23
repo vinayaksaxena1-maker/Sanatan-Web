@@ -9,6 +9,7 @@ interface ChaughadiyaRingProps {
   currentTime: Date;
   language?: 'English' | 'Hindi';
   onSelectSegment?: (segment: ChoghadiyaInterval) => void;
+  onHoverSegment?: (segment: ChoghadiyaInterval | null) => void;
 }
 
 export function ChaughadiyaRing({
@@ -18,7 +19,8 @@ export function ChaughadiyaRing({
   displayEndTime: _displayEndTime = '',
   currentTime,
   language = 'Hindi',
-  onSelectSegment
+  onSelectSegment,
+  onHoverSegment
 }: ChaughadiyaRingProps) {
   const [blurEnabled, setBlurEnabled] = useState(false);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
@@ -305,8 +307,14 @@ export function ChaughadiyaRing({
         key={segment.name + originalIndex}
         className="cursor-pointer transition-all duration-200"
         onClick={() => onSelectSegment?.(segment)}
-        onMouseEnter={() => setHoveredIdx(originalIndex)}
-        onMouseLeave={() => setHoveredIdx(null)}
+        onMouseEnter={() => {
+          setHoveredIdx(originalIndex);
+          onHoverSegment?.(segment);
+        }}
+        onMouseLeave={() => {
+          setHoveredIdx(null);
+          onHoverSegment?.(null);
+        }}
         style={{
           transformOrigin: '200px 200px',
           transform: isHovered ? 'scale(1.025)' : 'scale(1)',
@@ -418,8 +426,14 @@ export function ChaughadiyaRing({
         key={segment.name + "_label_" + originalIndex}
         className="cursor-pointer select-none"
         onClick={() => onSelectSegment?.(segment)}
-        onMouseEnter={() => setHoveredIdx(originalIndex)}
-        onMouseLeave={() => setHoveredIdx(null)}
+        onMouseEnter={() => {
+          setHoveredIdx(originalIndex);
+          onHoverSegment?.(segment);
+        }}
+        onMouseLeave={() => {
+          setHoveredIdx(null);
+          onHoverSegment?.(null);
+        }}
         style={{
           transformOrigin: `${x}px ${y}px`,
           transform: isHovered ? 'scale(1.12)' : 'scale(1)',
@@ -526,8 +540,14 @@ export function ChaughadiyaRing({
               key={segment.name + activeIdx}
               className="cursor-pointer transition-all duration-200"
               onClick={() => onSelectSegment?.(segment)}
-              onMouseEnter={() => setHoveredIdx(activeIdx)}
-              onMouseLeave={() => setHoveredIdx(null)}
+              onMouseEnter={() => {
+                setHoveredIdx(activeIdx);
+                onHoverSegment?.(segment);
+              }}
+              onMouseLeave={() => {
+                setHoveredIdx(null);
+                onHoverSegment?.(null);
+              }}
               style={{
                 transformOrigin: '200px 200px',
                 transform: isActiveHovered ? 'scale(1.025)' : 'scale(1)',
