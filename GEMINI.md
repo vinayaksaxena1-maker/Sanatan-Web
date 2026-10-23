@@ -1,5 +1,11 @@
 # Sanatan Web (सनातन घड़ी) - Project Guidelines & Skills Routing
 
+## 🌐 Platform Identity (Strict Web-First Directive)
+- **100% Pure Website**: Yeh project kisi bhi roop me mobile app ya hybrid app nahi hai. Yeh ek **Pure Web Application / Website** hai.
+- **Pure Web Standards**: Testing, performance, routing aur design sabhi pure website ke rules (Desktop/Tablet/Mobile browsers, Clean URLs, SEO, Core Web Vitals, Responsive Web Layouts, Browser Back/Forward navigation) ke mutabik honge.
+
+---
+
 ## 🎯 Task-Specific Autonomous Skills Routing (Mandatory)
 
 Is project me kaam karte samay, task ke domain ke anusar ye skills automatically activate aur follow hongi:
