@@ -5,6 +5,7 @@ import { LiveMuhuratWatchCard } from '../components/watch';
 import QuickServicesStrip from '../components/home/QuickServicesStrip';
 import HomeKundliHeroCard from '../components/home/HomeKundliHeroCard';
 import HomeFourCardsRow from '../components/home/HomeFourCardsRow';
+import SanatanFooter from '../components/layout/SanatanFooter';
 import { useLocationStore } from '../store/locationStore';
 import { calculatePanchang, getMuhuratsForPanchang } from '../engine';
 import { Navigation, Loader2 } from 'lucide-react';
@@ -747,22 +748,9 @@ export default function Home() {
 
       </main>
 
-      {/* Minimal Serverless Status Footer */}
-      <footer className="mt-20 border-t border-[#E6DEC8] py-8 px-6 bg-[#FAF2E6]/40">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between text-xs text-[#6E6259] space-y-3 sm:space-y-0">
-          <div className="flex items-center space-x-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-            <span>सर्वरलेस शुद्ध गणितीय इंजन: 0ms लेटेंसी, शून्य नेटवर्क ट्रैफ़िक</span>
-          </div>
-          <div className="flex items-center space-x-4">
-            <a href="/privacy-policy" className="hover:text-[#8B2612]">गोपनीयता नीति</a>
-            <span>•</span>
-            <a href="/terms" className="hover:text-[#8B2612]">शर्तें एवं नियम</a>
-            <span>•</span>
-            <span>सनातन घड़ी © 2026</span>
-          </div>
-        </div>
-      </footer>
+      {/* Sacred Twilight Temple River Ghat Footer (1:1 Reference Design) */}
+      <SanatanFooter className="mt-16 sm:mt-24" />
+      
 
     </div>
   );
