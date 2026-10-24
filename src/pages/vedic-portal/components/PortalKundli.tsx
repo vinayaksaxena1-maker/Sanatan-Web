@@ -30,6 +30,7 @@ export const PortalKundli: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         {/* BOX 1: कुण्डली निर्माण फॉर्म (5 Cols) with Brackets */}
         <div className="lg:col-span-5 glass-panel-warm rounded-3xl p-6 sm:p-7 flex flex-col justify-between border-[#dec9ab] shadow-xs relative overflow-hidden">
+          <SacredGeometryWatermark className="opacity-15" />
           <GoldenCornerBrackets size="md" />
 
           <div className="space-y-5 relative z-10">
@@ -139,7 +140,7 @@ export const PortalKundli: React.FC = () => {
 
         {/* BOX 2: तात्कालिक कुण्डली फलादेश एवं लग्न विवरण (7 Cols) with Sacred Watermark & Brackets */}
         <div className="lg:col-span-7 glass-panel rounded-3xl p-6 sm:p-7 flex flex-col justify-between border-[#dec9ab] shadow-xs bg-gradient-to-br from-[#fffbf5] to-[#fbf2e3] relative overflow-hidden">
-          <SacredGeometryWatermark className="opacity-[0.035]" />
+          <SacredGeometryWatermark className="opacity-25" />
           <GoldenCornerBrackets size="lg" />
 
           <div className="space-y-5 relative z-10">

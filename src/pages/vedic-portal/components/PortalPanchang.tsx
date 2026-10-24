@@ -5,7 +5,7 @@ import { SacredGeometryWatermark } from './SacredGeometryWatermark';
 export const PortalPanchang: React.FC = () => {
   return (
     <section className="glass-panel rounded-3xl p-6 sm:p-8 space-y-6 font-serif relative overflow-hidden" id="panchang">
-      <SacredGeometryWatermark className="opacity-[0.032]" />
+      <SacredGeometryWatermark className="opacity-25" />
       <GoldenCornerBrackets size="lg" />
 
       {/* Header */}

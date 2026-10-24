@@ -31,10 +31,10 @@ export const PortalRashifal: React.FC = () => {
     <section className="space-y-4 font-serif" id="rashifal">
       <div className="flex items-center justify-between border-b border-[#dec9ab]/60 pb-2">
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-[#b8860b]"></span>
+          <span className="w-3 h-3 rounded-full bg-[#b8860b] shadow-[0_0_8px_#b8860b]"></span>
           <h2 className="text-2xl font-bold text-[#26150b]">आज का राशिफल (चन्द्र गोचर फल)</h2>
         </div>
-        <span className="text-xs text-[#735641]">चन्द्रमा: कन्या राशि में संचाररत</span>
+        <span className="text-xs text-[#735641] font-semibold">चन्द्रमा: कन्या राशि में संचाररत</span>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -45,33 +45,35 @@ export const PortalRashifal: React.FC = () => {
           return (
             <div
               key={r.name}
-              className={`p-3.5 rounded-2xl glass-inner bg-white/85 border space-y-1.5 transition-all duration-300 ease-out cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_28px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37] hover:ring-1 hover:ring-[#d4af37]/40 relative group overflow-hidden ${
+              className={`p-3.5 rounded-2xl glass-inner bg-white/85 border space-y-1.5 transition-all duration-300 ease-out cursor-pointer hover:-translate-y-2 hover:scale-[1.03] hover:shadow-[0_16px_32px_-6px_rgba(217,119,6,0.38)] hover:border-[#d4af37] hover:bg-[#fffdf8] relative group overflow-hidden ${
                 r.isHighlight
-                  ? 'border-[#ea580c] ring-1 ring-[#ea580c]/50 shadow-xs'
-                  : 'border-[#dec9ab]/60'
+                  ? 'border-[#ea580c] ring-2 ring-[#ea580c]/50 shadow-sm'
+                  : 'border-[#dec9ab]/70'
               }`}
             >
-              {/* Subtle Corner Pip on Hover */}
-              <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-[#d4af37] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              {/* Luminous Golden Corner Accent on Hover */}
+              <div className="absolute top-0 right-0 w-8 h-8 pointer-events-none overflow-hidden">
+                <div className="absolute top-0 right-0 w-4 h-4 bg-gradient-to-bl from-[#d4af37] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </div>
 
               <div className="flex items-center justify-between">
-                <span className={`text-sm font-bold ${r.isHighlight ? 'text-[#c2410c]' : 'text-[#26150b]'}`}>
+                <span className={`text-sm font-bold ${r.isHighlight ? 'text-[#c2410c]' : 'text-[#26150b] group-hover:text-[#c2410c] transition-colors'}`}>
                   {r.icon} {r.name}
                 </span>
                 <span
                   className={`text-[10px] font-bold px-1.5 py-0.5 rounded shadow-xs ${
                     isUttam
-                      ? 'text-emerald-700 bg-emerald-50'
+                      ? 'text-emerald-700 bg-emerald-50 border border-emerald-200'
                       : isMadhyam
-                      ? 'text-amber-700 bg-amber-50'
-                      : 'text-emerald-700 bg-emerald-50'
+                      ? 'text-amber-700 bg-amber-50 border border-amber-200'
+                      : 'text-emerald-700 bg-emerald-50 border border-emerald-200'
                   }`}
                 >
                   {r.percent} {r.status}
                 </span>
               </div>
               <p className="text-[11px] text-[#5a3822] leading-snug">{r.desc}</p>
-              <div className="text-[10px] text-[#b8860b] font-semibold">
+              <div className="text-[10px] text-[#b8860b] font-semibold pt-0.5">
                 शुभ रंग: {r.color} • अंक: {r.num}
               </div>
             </div>

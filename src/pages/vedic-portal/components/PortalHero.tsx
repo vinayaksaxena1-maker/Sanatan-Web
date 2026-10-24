@@ -51,6 +51,7 @@ export const PortalHero: React.FC = () => {
       {/* Elegant Warm Chandan Frosted Glass Overlay for Contrast and Hindi Readability */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#fff9f0]/95 via-[#fff8ed]/88 to-[#fbeecc]/82 backdrop-blur-[7px]"></div>
       <div className="absolute -right-20 -top-20 w-80 h-80 rounded-full ambient-glow-gold pointer-events-none opacity-80"></div>
+      <SacredGeometryWatermark className="opacity-20" />
       <GoldenCornerBrackets size="lg" />
 
       <div className="relative z-10 w-full p-6 sm:p-10 lg:p-12 space-y-6">
@@ -170,7 +171,7 @@ export const PortalHero: React.FC = () => {
 
           {/* Right Column: Sanatan Ghadi Live Dial with Brackets & Watermark */}
           <div className="lg:col-span-5 glass-panel-warm rounded-3xl p-5 sm:p-6 border border-[#dec9ab] shadow-xs flex flex-col justify-between space-y-4 bg-gradient-to-br from-[#fffbf5] to-[#fbeecc]/82 relative overflow-hidden">
-            <SacredGeometryWatermark className="opacity-[0.035]" />
+            <SacredGeometryWatermark className="opacity-25" />
             <GoldenCornerBrackets size="md" />
 
             <div className="flex items-center justify-between border-b border-[#dec9ab]/70 pb-3 relative z-10">

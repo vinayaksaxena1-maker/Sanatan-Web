@@ -6,7 +6,7 @@ export interface SacredGeometryWatermarkProps {
 }
 
 export const SacredGeometryWatermark: React.FC<SacredGeometryWatermarkProps> = ({
-  className = '',
+  className = 'opacity-20',
   variant = 'yantra'
 }) => {
   return (
@@ -15,53 +15,55 @@ export const SacredGeometryWatermark: React.FC<SacredGeometryWatermarkProps> = (
       aria-hidden="true"
     >
       <svg
-        className="w-full h-full max-w-[440px] max-h-[440px] text-[#b8860b] opacity-[0.038] stroke-current fill-none stroke-[1.2]"
+        className="w-full h-full max-w-[480px] max-h-[480px] text-[#b8860b] stroke-current fill-none stroke-[1.8]"
         viewBox="0 0 400 400"
       >
         {/* Outer Square Bhupura Gates */}
-        <rect x="30" y="30" width="340" height="340" strokeWidth="1.5" />
-        <rect x="45" y="45" width="310" height="310" strokeWidth="0.8" />
+        <rect x="25" y="25" width="350" height="350" strokeWidth="2" />
+        <rect x="42" y="42" width="316" height="316" strokeWidth="1" strokeDasharray="4 2" />
 
         {/* Concentric Mekhala Circles */}
-        <circle cx="200" cy="200" r="145" strokeWidth="1.2" />
-        <circle cx="200" cy="200" r="135" strokeWidth="0.8" />
-        <circle cx="200" cy="200" r="125" strokeWidth="0.8" />
+        <circle cx="200" cy="200" r="148" strokeWidth="1.6" />
+        <circle cx="200" cy="200" r="136" strokeWidth="1" />
+        <circle cx="200" cy="200" r="124" strokeWidth="1" />
 
-        {/* 16 Petals Ring */}
+        {/* 16 Petals Ring (Shodasha Dala Padma) */}
         {Array.from({ length: 16 }).map((_, i) => (
           <path
             key={`petal16-${i}`}
-            d="M 200 75 Q 212 95 200 115 Q 188 95 200 75 Z"
+            d="M 200 75 Q 214 95 200 115 Q 186 95 200 75 Z"
             transform={`rotate(${i * 22.5} 200 200)`}
+            strokeWidth="1.2"
           />
         ))}
 
-        {/* 8 Petals Ring */}
+        {/* 8 Petals Ring (Ashta Dala Padma) */}
         {Array.from({ length: 8 }).map((_, i) => (
           <path
             key={`petal8-${i}`}
-            d="M 200 95 Q 216 112 200 130 Q 184 112 200 95 Z"
+            d="M 200 95 Q 218 112 200 130 Q 182 112 200 95 Z"
             transform={`rotate(${i * 45} 200 200)`}
+            strokeWidth="1.2"
           />
         ))}
 
         {variant === 'yantra' && (
           <>
             {/* 4 Shiva Triangles (Pointing Up) */}
-            <polygon points="200,85 105,250 295,250" />
-            <polygon points="200,105 125,235 275,235" />
-            <polygon points="200,125 140,225 260,225" />
-            <polygon points="200,140 155,215 245,215" />
+            <polygon points="200,80 100,255 300,255" strokeWidth="1.8" />
+            <polygon points="200,102 120,240 280,240" strokeWidth="1.5" />
+            <polygon points="200,122 136,230 264,230" strokeWidth="1.4" />
+            <polygon points="200,138 152,220 248,220" strokeWidth="1.2" />
 
             {/* 5 Shakti Triangles (Pointing Down) */}
-            <polygon points="200,315 105,150 295,150" />
-            <polygon points="200,295 120,165 280,165" />
-            <polygon points="200,275 135,175 265,175" />
-            <polygon points="200,255 148,185 252,185" />
-            <polygon points="200,235 160,195 240,195" />
+            <polygon points="200,320 100,145 300,145" strokeWidth="1.8" />
+            <polygon points="200,298 116,160 284,160" strokeWidth="1.5" />
+            <polygon points="200,278 132,170 268,170" strokeWidth="1.4" />
+            <polygon points="200,258 145,180 255,180" strokeWidth="1.2" />
+            <polygon points="200,238 158,190 242,190" strokeWidth="1" />
 
-            {/* Central Bindu */}
-            <circle cx="200" cy="200" r="3.5" fill="currentColor" />
+            {/* Central Bindu (Center Point) */}
+            <circle cx="200" cy="200" r="4.5" fill="currentColor" />
           </>
         )}
       </svg>
