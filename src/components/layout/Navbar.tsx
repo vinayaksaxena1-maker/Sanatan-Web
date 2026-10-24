@@ -58,6 +58,12 @@ export default function Navbar({ onOpenMegaDrawer: _onOpenMegaDrawer }: NavbarPr
           >
             व्रत कैलेंडर
           </a>
+          <a 
+            href="/portal" 
+            className="px-3.5 py-1.5 rounded-full text-sm font-bold text-[#c2410c] hover:bg-[#fde8d7]/60 transition-all"
+          >
+            वेद पोर्टल ✦
+          </a>
         </nav>
 
         {/* Right: Location & CTA Button */}

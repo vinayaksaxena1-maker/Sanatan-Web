@@ -28,8 +28,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     setIsMegaDrawerOpen(false);
   }, []);
 
-  // For the root home page, Home.tsx provides its own full-width luxury editorial layout
-  if (currentPath === '/') {
+  // For home and Vedic Portal, they provide their own full-width luxury editorial layouts
+  if (currentPath === '/' || currentPath === '/portal' || currentPath === '/vedic-portal') {
     return <>{children}</>;
   }
 

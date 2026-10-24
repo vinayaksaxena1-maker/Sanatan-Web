@@ -30,6 +30,7 @@ const PrivacyPolicy = lazy(() => import('../pages/legal/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('../pages/legal/TermsOfService'));
 const AboutUs = lazy(() => import('../pages/legal/AboutUs'));
 const EngineSandbox = lazy(() => import('../pages/sandbox/EngineSandbox'));
+const VedicPortalPage = lazy(() => import('../pages/vedic-portal/VedicPortalPage'));
 
 export type HubRoute =
   | '/'
@@ -48,7 +49,9 @@ export type HubRoute =
   | '/terms'
   | '/about-us'
   | '/sandbox'
-  | '/engine-sandbox';
+  | '/engine-sandbox'
+  | '/portal'
+  | '/vedic-portal';
 
 interface RouterContextValue {
   currentPath: string;
@@ -194,6 +197,9 @@ export const AppRoutes: React.FC = () => {
       case '/sandbox':
       case '/engine-sandbox':
         return <EngineSandbox />;
+      case '/portal':
+      case '/vedic-portal':
+        return <VedicPortalPage />;
       default:
         return <Home />;
     }

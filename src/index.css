@@ -250,4 +250,44 @@
     .tithi-meditation-grid p { font-size: .78rem; }
   }
   @media (prefers-reduced-motion: reduce) { .watch-toggle, .watch-hand, .watch-ring-segment, .tithi-paksha-tabs button, .tithi-step-button { transition: none; } .watch-second, .choghadiya-active { animation: none; } }
+
+  /* Vedic Astrology Portal Glassmorphism & Sacred Tokens */
+  .glass-panel {
+    background: rgba(254, 250, 244, 0.88);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(217, 93, 15, 0.18);
+    border-top: 1px solid rgba(255, 255, 255, 0.95);
+    border-left: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 12px 32px -6px rgba(180, 110, 60, 0.08), 0 4px 12px -2px rgba(60, 30, 10, 0.04), inset 0 1px 1px 0 rgba(255, 255, 255, 0.95);
+  }
+  .glass-panel-warm {
+    background: rgba(255, 252, 246, 0.92);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(200, 134, 43, 0.22);
+    border-top: 1px solid rgba(255, 255, 255, 0.98);
+    box-shadow: 0 14px 34px -4px rgba(194, 65, 12, 0.09), inset 0 1px 1px 0 rgba(255, 255, 255, 0.95);
+  }
+  .glass-inner {
+    background: rgba(246, 238, 226, 0.76);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(217, 180, 140, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.8);
+  }
+  .glass-pill {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(217, 93, 15, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 6px rgba(120, 60, 20, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+  .ambient-glow-saffron {
+    background: radial-gradient(circle, rgba(234, 88, 12, 0.14) 0%, rgba(247, 242, 230, 0) 70%);
+  }
+  .ambient-glow-gold {
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.16) 0%, rgba(247, 242, 230, 0) 70%);
+  }
 }
