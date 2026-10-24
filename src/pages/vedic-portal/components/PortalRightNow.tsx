@@ -1,4 +1,6 @@
 import React from 'react';
+import { GoldenCornerBrackets } from './GoldenCornerBrackets';
+import { SacredGeometryWatermark } from './SacredGeometryWatermark';
 
 export const PortalRightNow: React.FC = () => {
   return (
@@ -6,11 +8,13 @@ export const PortalRightNow: React.FC = () => {
       className="glass-panel-warm rounded-3xl p-5 sm:p-7 border-2 border-emerald-300 shadow-[0_12px_36px_-6px_rgba(42,103,76,0.14)] space-y-5 bg-gradient-to-br from-[#fffdfa] via-[#f7fff9] to-[#edfcf2] relative overflow-hidden font-serif"
       id="right-now-status"
     >
-      {/* Decorative Luminous Aura */}
+      {/* Decorative Luminous Aura & Corner Brackets */}
       <div className="absolute -right-16 -top-16 w-52 h-52 rounded-full bg-emerald-100/60 blur-2xl pointer-events-none -z-10"></div>
-      
+      <SacredGeometryWatermark className="opacity-[0.03]" />
+      <GoldenCornerBrackets size="lg" />
+
       {/* Header Row */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#dec9ab]/60 pb-3.5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#dec9ab]/60 pb-3.5 relative z-10">
         <div className="flex items-center gap-2.5">
           <div className="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-xs">
             <span className="material-symbols-outlined text-[22px]">traffic</span>
@@ -18,8 +22,12 @@ export const PortalRightNow: React.FC = () => {
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-lg sm:text-xl font-bold text-[#26150b]">राइट नाउ (Right Now) • तात्कालिक काल निर्णय</h2>
-              <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-300 flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
+              <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-300 flex items-center gap-1.5 shadow-xs">
+                {/* Radar Wave Pulse */}
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
+                </span>
                 लाइव स्थिति
               </span>
             </div>
@@ -27,15 +35,15 @@ export const PortalRightNow: React.FC = () => {
           </div>
         </div>
         <div className="flex items-center gap-2 self-start sm:self-center">
-          <span className="px-3 py-1 rounded-xl bg-white/90 border border-[#dec9ab] text-xs font-bold text-[#26150b] shadow-xs flex items-center gap-1.5">
+          <span className="px-3 py-1 rounded-xl bg-white/90 border border-[#dec9ab] text-xs font-bold text-[#26150b] shadow-xs flex items-center gap-1.5 hover:border-[#ea580c] transition-colors">
             <span className="material-symbols-outlined text-[#ea580c] text-[16px]">timelapse</span>
             शेष समय: <span className="text-[#c2410c] font-mono font-bold">१ घंटा ४२ मिनट</span>
           </span>
         </div>
       </div>
 
-      {/* Active Live Traffic Signal Banner */}
-      <div className="p-4 sm:p-5 rounded-2xl bg-white/90 border border-emerald-300 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4 relative overflow-hidden">
+      {/* Active Live Traffic Signal Banner with Subtle Gold Rim Glow */}
+      <div className="p-4 sm:p-5 rounded-2xl bg-white/90 border border-emerald-300 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4 relative overflow-hidden z-10 hover:shadow-[0_8px_24px_-4px_rgba(16,185,129,0.2)] transition-shadow">
         <div className="flex items-start sm:items-center gap-3.5">
           <div className="w-12 h-12 rounded-2xl bg-emerald-50 border-2 border-emerald-300 flex items-center justify-center shrink-0 text-emerald-700 shadow-inner">
             <span className="material-symbols-outlined text-[32px]">check_circle</span>
@@ -43,7 +51,9 @@ export const PortalRightNow: React.FC = () => {
           <div className="space-y-1">
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-lg sm:text-2xl font-bold text-emerald-900">🟢 अभी शुभ समय चल रहा है (अमृत काल)</span>
-              <span className="px-2 py-0.5 rounded bg-emerald-600 text-white text-[10px] font-bold tracking-wide">अति उत्तम</span>
+              <span className="px-2 py-0.5 rounded bg-emerald-600 text-white text-[10px] font-bold tracking-wide shadow-xs">
+                अति उत्तम
+              </span>
             </div>
             <p className="text-xs sm:text-sm text-emerald-800 leading-relaxed font-medium">
               अमृत चौघड़िया (शाम ०४:३० तक प्रभावी) • नया कार्य, दुकान उद्घाटन, नवीन अनुबंध, सोना-भूमि खरीदारी या मांगलिक निर्णय आरंभ करने हेतु प्रशस्त।
@@ -61,13 +71,16 @@ export const PortalRightNow: React.FC = () => {
         </div>
       </div>
 
-      {/* 3-State Traffic Signal Comparison Strip */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+      {/* 3-State Traffic Signal Comparison Strip with Hover Elevation */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 relative z-10">
         {/* Green Signal */}
-        <div className="p-3.5 rounded-2xl bg-emerald-50/90 border-2 border-emerald-300 space-y-1 relative shadow-xs">
+        <div className="p-3.5 rounded-2xl bg-emerald-50/90 border-2 border-emerald-300 space-y-1 relative shadow-xs hover:-translate-y-1 hover:shadow-[0_10px_22px_-4px_rgba(16,185,129,0.25)] transition-all duration-300 cursor-pointer">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-emerald-900 flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse"></span>
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-600"></span>
+              </span>
               हरा संकेत (सक्रिय)
             </span>
             <span className="text-[10px] px-2 py-0.2 rounded-full bg-emerald-100 text-emerald-800 font-bold">शुभ व अमृत</span>
@@ -77,7 +90,7 @@ export const PortalRightNow: React.FC = () => {
         </div>
 
         {/* Yellow Signal */}
-        <div className="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200 space-y-1 hover:border-amber-400 transition-all">
+        <div className="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200 space-y-1 hover:-translate-y-1 hover:shadow-[0_10px_22px_-4px_rgba(217,119,6,0.25)] hover:border-amber-400 transition-all duration-300 cursor-pointer">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-amber-900 flex items-center gap-1.5">
               <span className="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
@@ -90,7 +103,7 @@ export const PortalRightNow: React.FC = () => {
         </div>
 
         {/* Red Signal Warning */}
-        <div className="p-3.5 rounded-2xl bg-red-50/70 border border-red-200 space-y-1 hover:border-red-400 transition-all">
+        <div className="p-3.5 rounded-2xl bg-red-50/70 border border-red-200 space-y-1 hover:-translate-y-1 hover:shadow-[0_10px_22px_-4px_rgba(220,38,38,0.25)] hover:border-red-400 transition-all duration-300 cursor-pointer">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-red-900 flex items-center gap-1.5">
               <span className="w-2.5 h-2.5 rounded-full bg-red-600"></span>

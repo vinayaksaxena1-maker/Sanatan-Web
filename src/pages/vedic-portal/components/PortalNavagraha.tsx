@@ -1,4 +1,6 @@
 import React from 'react';
+import { GoldenCornerBrackets } from './GoldenCornerBrackets';
+import { SacredGeometryWatermark } from './SacredGeometryWatermark';
 
 interface GrahaItem {
   name: string;
@@ -46,8 +48,11 @@ const GRAHAS: GrahaItem[] = [
 
 export const PortalNavagraha: React.FC = () => {
   return (
-    <section className="glass-panel rounded-3xl p-6 space-y-4 font-serif">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <section className="glass-panel rounded-3xl p-6 space-y-4 font-serif relative overflow-hidden">
+      <SacredGeometryWatermark className="opacity-[0.035]" />
+      <GoldenCornerBrackets size="lg" />
+
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 relative z-10">
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-full bg-[#ea580c]"></span>
           <div>
@@ -56,36 +61,36 @@ export const PortalNavagraha: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-2 text-xs text-[#735641] font-semibold">
-          <span className="px-2.5 py-0.5 rounded-full bg-white/80 border border-[#dec9ab] flex items-center gap-1.5">
+          <span className="px-2.5 py-0.5 rounded-full bg-white/80 border border-[#dec9ab] flex items-center gap-1.5 shadow-xs">
             <span className="w-2 h-2 rounded-full bg-emerald-600"></span>उच्च ग्रह
           </span>
-          <span className="px-2.5 py-0.5 rounded-full bg-white/80 border border-[#dec9ab] flex items-center gap-1.5">
+          <span className="px-2.5 py-0.5 rounded-full bg-white/80 border border-[#dec9ab] flex items-center gap-1.5 shadow-xs">
             <span className="w-2 h-2 rounded-full bg-amber-600"></span>स्वक्षेत्रीय
           </span>
-          <span className="px-2.5 py-0.5 rounded-full bg-white/80 border border-[#dec9ab] flex items-center gap-1.5">
+          <span className="px-2.5 py-0.5 rounded-full bg-white/80 border border-[#dec9ab] flex items-center gap-1.5 shadow-xs">
             <span className="w-2 h-2 rounded-full bg-red-600"></span>वक्री ग्रह
           </span>
         </div>
       </div>
 
-      {/* 9 Graha Bento Strip */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-2.5">
+      {/* 9 Graha Bento Strip with Golden Rim Elevation */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-2.5 relative z-10">
         {GRAHAS.map((g) => (
           <div
             key={g.name}
-            className={`glass-inner p-3 rounded-2xl flex flex-col justify-between relative overflow-hidden transition-all ${
+            className={`glass-inner p-3 rounded-2xl flex flex-col justify-between relative overflow-hidden transition-all duration-300 ease-out cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37] ${
               g.statusBadge?.label === 'वक्री'
                 ? 'bg-red-50/50 border-red-200'
                 : g.statusBadge?.label === 'उच्च'
                 ? 'bg-emerald-50/50 border-emerald-200'
                 : g.statusBadge?.label === 'स्वगृही'
                 ? 'bg-amber-50/50 border-amber-200'
-                : 'hover:border-[#ea580c]/50 bg-white/80 border-[#dec9ab]/60'
+                : 'bg-white/80 border-[#dec9ab]/60'
             }`}
           >
             {g.statusBadge && (
               <div
-                className={`absolute top-0 right-0 px-1 py-0.2 rounded-bl text-[8px] font-bold ${g.statusBadge.bg} ${g.statusBadge.text}`}
+                className={`absolute top-0 right-0 px-1 py-0.2 rounded-bl text-[8px] font-bold shadow-xs ${g.statusBadge.bg} ${g.statusBadge.text}`}
               >
                 {g.statusBadge.label}
               </div>

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { GoldenCornerBrackets } from './GoldenCornerBrackets';
+import { SacredGeometryWatermark } from './SacredGeometryWatermark';
 
 export const PortalKundli: React.FC = () => {
   const [userName, setUserName] = useState<string>('राहुल शर्मा');
@@ -20,15 +22,17 @@ export const PortalKundli: React.FC = () => {
           <span className="w-3 h-3 rounded-full bg-[#ea580c]"></span>
           <h2 className="text-2xl font-bold text-[#26150b]">जन्म कुण्डली निर्माण एवं तात्कालिक फलादेश</h2>
         </div>
-        <span className="text-xs px-3 py-1 rounded-full bg-[#fff2e8] text-[#c2410c] font-bold border border-[#ffd8bf]">
+        <span className="text-xs px-3 py-1 rounded-full bg-[#fff2e8] text-[#c2410c] font-bold border border-[#ffd8bf] shadow-xs">
           बृहत् पराशर होरा शास्त्र आधारित
         </span>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-        {/* BOX 1: कुण्डली निर्माण फॉर्म (5 Cols) */}
-        <div className="lg:col-span-5 glass-panel-warm rounded-3xl p-6 sm:p-7 flex flex-col justify-between border-[#dec9ab] shadow-xs">
-          <div className="space-y-5">
+        {/* BOX 1: कुण्डली निर्माण फॉर्म (5 Cols) with Brackets */}
+        <div className="lg:col-span-5 glass-panel-warm rounded-3xl p-6 sm:p-7 flex flex-col justify-between border-[#dec9ab] shadow-xs relative overflow-hidden">
+          <GoldenCornerBrackets size="md" />
+
+          <div className="space-y-5 relative z-10">
             <div className="flex items-center justify-between border-b border-[#e5d5be]/70 pb-3">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-xl bg-[#ea580c]/15 text-[#ea580c] flex items-center justify-center">
@@ -39,7 +43,7 @@ export const PortalKundli: React.FC = () => {
                   <p className="text-[11px] text-[#735641]">सटीक जन्म विवरण अंकित करें</p>
                 </div>
               </div>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">१००% निःशुल्क</span>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 shadow-xs">१००% निःशुल्क</span>
             </div>
 
             <form className="space-y-3.5" onSubmit={handleSubmit}>
@@ -102,10 +106,10 @@ export const PortalKundli: React.FC = () => {
                       key={g}
                       type="button"
                       onClick={() => setGender(g)}
-                      className={`py-2 text-center rounded-xl border text-xs font-bold transition-all ${
+                      className={`py-2 text-center rounded-xl border text-xs font-bold transition-all cursor-pointer ${
                         gender === g
-                          ? 'bg-[#ea580c] text-white border-[#ea580c]'
-                          : 'border-[#dec9ab] bg-white/80 text-[#26150b]'
+                          ? 'bg-[#ea580c] text-white border-[#ea580c] shadow-xs'
+                          : 'border-[#dec9ab] bg-white/80 text-[#26150b] hover:border-[#ea580c]'
                       }`}
                     >
                       {g}
@@ -125,7 +129,7 @@ export const PortalKundli: React.FC = () => {
             </form>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-[#dec9ab]/50 flex items-center justify-between text-[11px] text-[#735641]">
+          <div className="mt-4 pt-3 border-t border-[#dec9ab]/50 flex items-center justify-between text-[11px] text-[#735641] relative z-10">
             <span className="flex items-center gap-1">
               <span className="material-symbols-outlined text-[14px] text-emerald-700">lock</span> सुरक्षित एवं गोपनीय
             </span>
@@ -133,42 +137,45 @@ export const PortalKundli: React.FC = () => {
           </div>
         </div>
 
-        {/* BOX 2: तात्कालिक कुण्डली फलादेश एवं लग्न विवरण (7 Cols) */}
-        <div className="lg:col-span-7 glass-panel rounded-3xl p-6 sm:p-7 flex flex-col justify-between border-[#dec9ab] shadow-xs bg-gradient-to-br from-[#fffbf5] to-[#fbf2e3]">
-          <div className="space-y-5">
+        {/* BOX 2: तात्कालिक कुण्डली फलादेश एवं लग्न विवरण (7 Cols) with Sacred Watermark & Brackets */}
+        <div className="lg:col-span-7 glass-panel rounded-3xl p-6 sm:p-7 flex flex-col justify-between border-[#dec9ab] shadow-xs bg-gradient-to-br from-[#fffbf5] to-[#fbf2e3] relative overflow-hidden">
+          <SacredGeometryWatermark className="opacity-[0.035]" />
+          <GoldenCornerBrackets size="lg" />
+
+          <div className="space-y-5 relative z-10">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#dec9ab]/70 pb-3">
               <div>
                 <span className="text-[11px] font-bold text-[#c2410c] uppercase tracking-wider block">तात्कालिक लग्न एवं ग्रह स्थिति</span>
                 <h3 className="text-xl font-bold text-[#26150b]">जातक: {analyzedName} (सिंह लग्न)</h3>
               </div>
               <div className="flex items-center gap-2">
-                <span className="px-2.5 py-1 rounded-full bg-[#fde8d7] text-[#c2410c] text-xs font-bold border border-[#f7c29e]">
+                <span className="px-2.5 py-1 rounded-full bg-[#fde8d7] text-[#c2410c] text-xs font-bold border border-[#f7c29e] shadow-xs">
                   लग्न: सिंह (०८° १९')
                 </span>
-                <span className="px-2.5 py-1 rounded-full bg-emerald-100 text-[#065f46] text-xs font-bold border border-emerald-300">
+                <span className="px-2.5 py-1 rounded-full bg-emerald-100 text-[#065f46] text-xs font-bold border border-emerald-300 shadow-xs">
                   शुभ वर्ग
                 </span>
               </div>
             </div>
 
-            {/* Coordinates Cards */}
+            {/* Coordinates Cards with Micro-Elevation */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-              <div className="p-3 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/60">
+              <div className="p-3 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/60 hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
                 <div className="text-[11px] text-[#735641]">चन्द्र राशि</div>
                 <div className="text-sm font-bold text-[#26150b] mt-0.5">कर्क राशि</div>
                 <div className="text-[10px] text-[#b8860b]">पुष्य नक्षत्र • पद ३</div>
               </div>
-              <div className="p-3 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/60">
+              <div className="p-3 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/60 hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
                 <div className="text-[11px] text-[#735641]">सूर्य राशि</div>
                 <div className="text-sm font-bold text-[#26150b] mt-0.5">तुला (नीच भंग)</div>
                 <div className="text-[10px] text-[#c2410c]">स्वाति नक्षत्र • पद १</div>
               </div>
-              <div className="p-3 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/60">
+              <div className="p-3 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/60 hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
                 <div className="text-[11px] text-[#735641]">वर्तमान महादशा</div>
                 <div className="text-sm font-bold text-[#c2410c] mt-0.5">गुरु - शुक्र</div>
                 <div className="text-[10px] text-[#735641]">२०२७ तक प्रभावी</div>
               </div>
-              <div className="p-3 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/60">
+              <div className="p-3 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/60 hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
                 <div className="text-[11px] text-[#735641]">शुभ रत्न / धातु</div>
                 <div className="text-sm font-bold text-[#b8860b] mt-0.5">माणिक्य / सुवर्ण</div>
                 <div className="text-[10px] text-emerald-700">अनामिका अंगुली</div>
@@ -178,7 +185,7 @@ export const PortalKundli: React.FC = () => {
             {/* Vedic Kundli Diamond Visual & Predictions Side-by-Side */}
             <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
               {/* Diamond Lagna Kundali Chart */}
-              <div className="sm:col-span-5 flex flex-col items-center justify-center p-2 rounded-2xl bg-white/90 border border-[#dec9ab]/70">
+              <div className="sm:col-span-5 flex flex-col items-center justify-center p-2 rounded-2xl bg-white/90 border border-[#dec9ab]/70 shadow-xs hover:border-[#ea580c] transition-colors">
                 <div className="w-full max-w-[210px] aspect-square relative">
                   <svg className="w-full h-full text-[#c8b59b] fill-none stroke-current" strokeWidth="1.4" viewBox="0 0 300 300">
                     <rect className="stroke-[#b89b64]" height="280" width="280" x="10" y="10" />
@@ -217,7 +224,7 @@ export const PortalKundli: React.FC = () => {
 
               {/* Core Falam & Guidance */}
               <div className="sm:col-span-7 space-y-2.5">
-                <div className="p-3 rounded-xl bg-white/70 border border-[#dec9ab]/60 space-y-1">
+                <div className="p-3 rounded-xl bg-white/70 border border-[#dec9ab]/60 space-y-1 hover:border-[#ea580c] transition-colors">
                   <div className="flex items-center gap-1.5 text-xs font-bold text-[#c2410c]">
                     <span className="material-symbols-outlined text-[16px]">psychology</span>
                     <span>व्यक्तित्व एवं मानसिक स्वभाव</span>
@@ -226,7 +233,7 @@ export const PortalKundli: React.FC = () => {
                     सिंह लग्न के प्रभाव से आपमें स्वाभाविक नेतृत्व क्षमता, स्पष्टवादिता और दृढ़ संकल्प रहेगा। कर्क राशि के चंद्रमा से कल्पनाशक्ति व संवेदनशीलता प्रखर है।
                   </p>
                 </div>
-                <div className="p-3 rounded-xl bg-white/70 border border-[#dec9ab]/60 space-y-1">
+                <div className="p-3 rounded-xl bg-white/70 border border-[#dec9ab]/60 space-y-1 hover:border-[#b8860b] transition-colors">
                   <div className="flex items-center gap-1.5 text-xs font-bold text-[#b8860b]">
                     <span className="material-symbols-outlined text-[16px]">trending_up</span>
                     <span>वर्तमान गोचर एवं कार्यक्षेत्र</span>
@@ -239,12 +246,12 @@ export const PortalKundli: React.FC = () => {
             </div>
           </div>
 
-          <div className="pt-3 border-t border-[#dec9ab]/60 flex flex-wrap items-center justify-between gap-2">
+          <div className="pt-3 border-t border-[#dec9ab]/60 flex flex-wrap items-center justify-between gap-2 relative z-10">
             <div className="text-xs text-[#735641]">
               विस्तृत ३२ पृष्ठीय कुण्डली, नवमांश (D9) व वर्षफल उपलब्ध
             </div>
             <button
-              className="px-4 py-2 rounded-xl bg-[#f0e5d1] hover:bg-[#ea580c] hover:text-white text-[#26150b] text-xs font-bold border border-[#dec9ab] transition-all flex items-center gap-1.5 cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-[#f0e5d1] hover:bg-[#ea580c] hover:text-white text-[#26150b] text-xs font-bold border border-[#dec9ab] transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
               type="button"
             >
               <span className="material-symbols-outlined text-[16px]">download</span>

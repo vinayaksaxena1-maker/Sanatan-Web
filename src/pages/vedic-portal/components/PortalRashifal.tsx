@@ -45,18 +45,21 @@ export const PortalRashifal: React.FC = () => {
           return (
             <div
               key={r.name}
-              className={`p-3.5 rounded-2xl glass-inner bg-white/85 border space-y-1.5 transition-all ${
+              className={`p-3.5 rounded-2xl glass-inner bg-white/85 border space-y-1.5 transition-all duration-300 ease-out cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_28px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37] hover:ring-1 hover:ring-[#d4af37]/40 relative group overflow-hidden ${
                 r.isHighlight
-                  ? 'border-[#ea580c] ring-1 ring-[#ea580c]/50'
-                  : 'border-[#dec9ab]/60 hover:border-[#ea580c]'
+                  ? 'border-[#ea580c] ring-1 ring-[#ea580c]/50 shadow-xs'
+                  : 'border-[#dec9ab]/60'
               }`}
             >
+              {/* Subtle Corner Pip on Hover */}
+              <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-[#d4af37] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
               <div className="flex items-center justify-between">
                 <span className={`text-sm font-bold ${r.isHighlight ? 'text-[#c2410c]' : 'text-[#26150b]'}`}>
                   {r.icon} {r.name}
                 </span>
                 <span
-                  className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
+                  className={`text-[10px] font-bold px-1.5 py-0.5 rounded shadow-xs ${
                     isUttam
                       ? 'text-emerald-700 bg-emerald-50'
                       : isMadhyam

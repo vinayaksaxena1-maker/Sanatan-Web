@@ -1,10 +1,15 @@
 import React from 'react';
+import { GoldenCornerBrackets } from './GoldenCornerBrackets';
+import { SacredGeometryWatermark } from './SacredGeometryWatermark';
 
 export const PortalPanchang: React.FC = () => {
   return (
-    <section className="glass-panel rounded-3xl p-6 sm:p-8 space-y-6 font-serif" id="panchang">
+    <section className="glass-panel rounded-3xl p-6 sm:p-8 space-y-6 font-serif relative overflow-hidden" id="panchang">
+      <SacredGeometryWatermark className="opacity-[0.032]" />
+      <GoldenCornerBrackets size="lg" />
+
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#dec9ab]/60 pb-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#dec9ab]/60 pb-4 relative z-10">
         <div className="space-y-1">
           <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#c2410c] uppercase tracking-wider">
             <span className="material-symbols-outlined text-[16px]">calendar_today</span>
@@ -14,77 +19,77 @@ export const PortalPanchang: React.FC = () => {
           <p className="text-xs sm:text-sm text-[#735641]">काशीस्थ सूर्योदय कालीन स्पष्ट पंचांग • शुद्ध काल निर्णय</p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <span className="px-3 py-1.5 rounded-xl glass-inner text-xs font-bold text-[#26150b] border border-[#dec9ab]">
+          <span className="px-3 py-1.5 rounded-xl glass-inner text-xs font-bold text-[#26150b] border border-[#dec9ab] shadow-xs">
             संवत्सर: क्रोधी (२०८१)
           </span>
-          <span className="px-3 py-1.5 rounded-xl glass-inner text-xs font-bold text-[#c2410c] border border-[#dec9ab]">
+          <span className="px-3 py-1.5 rounded-xl glass-inner text-xs font-bold text-[#c2410c] border border-[#dec9ab] shadow-xs">
             मास: चैत्र (शुक्ल पक्ष)
           </span>
         </div>
       </div>
 
-      {/* 5 Key Limbs of Panchang */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+      {/* 5 Key Limbs of Panchang with Golden Hover Elevation */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 relative z-10">
         {/* 1. Tithi */}
-        <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:border-[#ea580c]/50 transition-all">
+        <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#c2410c]">१. तिथि</span>
             <span className="material-symbols-outlined text-[#ea580c] text-[18px]">brightness_medium</span>
           </div>
           <div className="text-lg font-bold text-[#26150b]">शुक्ल त्रयोदशी</div>
           <div className="text-[11px] text-[#735641]">सायं ०७:१४ बजे तक, तदुपरांत चतुर्दशी</div>
-          <span className="inline-block mt-1 px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 text-[10px] font-bold">शुभ तिथि</span>
+          <span className="inline-block mt-1 px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 text-[10px] font-bold shadow-xs">शुभ तिथि</span>
         </div>
 
         {/* 2. Vaar */}
-        <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:border-[#ea580c]/50 transition-all">
+        <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#b8860b]">२. वार</span>
             <span className="material-symbols-outlined text-[#b8860b] text-[18px]">wb_sunny</span>
           </div>
           <div className="text-lg font-bold text-[#26150b]">गुरुवार (बृहस्पतिवार)</div>
           <div className="text-[11px] text-[#735641]">स्वामी: देवगुरु बृहस्पति</div>
-          <span className="inline-block mt-1 px-2 py-0.5 rounded bg-amber-50 text-amber-800 text-[10px] font-bold">विद्या व धर्म हेतु उत्तम</span>
+          <span className="inline-block mt-1 px-2 py-0.5 rounded bg-amber-50 text-amber-800 text-[10px] font-bold shadow-xs">विद्या व धर्म हेतु उत्तम</span>
         </div>
 
         {/* 3. Nakshatra */}
-        <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:border-[#ea580c]/50 transition-all">
+        <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#c2410c]">३. नक्षत्र</span>
             <span className="material-symbols-outlined text-[#c2410c] text-[18px]">flare</span>
           </div>
           <div className="text-lg font-bold text-[#26150b]">उत्तर फाल्गुनी</div>
           <div className="text-[11px] text-[#735641]">द्वितीय पद (स्वामी: सूर्य) रात्रि ०३:२१ तक</div>
-          <span className="inline-block mt-1 px-2 py-0.5 rounded bg-blue-50 text-blue-800 text-[10px] font-bold">ध्रुव संज्ञक नक्षत्र</span>
+          <span className="inline-block mt-1 px-2 py-0.5 rounded bg-blue-50 text-blue-800 text-[10px] font-bold shadow-xs">ध्रुव संज्ञक नक्षत्र</span>
         </div>
 
         {/* 4. Yoga */}
-        <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:border-[#ea580c]/50 transition-all">
+        <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#2a674c]">४. योग</span>
             <span className="material-symbols-outlined text-[#2a674c] text-[18px]">self_improvement</span>
           </div>
           <div className="text-lg font-bold text-[#26150b]">हर्षण योग</div>
           <div className="text-[11px] text-[#735641]">दोपहर ०१:४५ तक, पश्चात वज्र</div>
-          <span className="inline-block mt-1 px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 text-[10px] font-bold">हर्ष व सिद्धि प्रदाता</span>
+          <span className="inline-block mt-1 px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 text-[10px] font-bold shadow-xs">हर्ष व सिद्धि प्रदाता</span>
         </div>
 
         {/* 5. Karana */}
-        <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:border-[#ea580c]/50 transition-all">
+        <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#735641]">५. करण</span>
             <span className="material-symbols-outlined text-[#735641] text-[18px]">hourglass_bottom</span>
           </div>
           <div className="text-lg font-bold text-[#26150b]">तैतिल करण</div>
           <div className="text-[11px] text-[#735641]">प्रातः ०८:२२ तक, तदुपरांत गर</div>
-          <span className="inline-block mt-1 px-2 py-0.5 rounded bg-stone-100 text-stone-800 text-[10px] font-bold">चर करण</span>
+          <span className="inline-block mt-1 px-2 py-0.5 rounded bg-stone-100 text-stone-800 text-[10px] font-bold shadow-xs">चर करण</span>
         </div>
       </div>
 
       {/* Sun / Moon & Timings Bento */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 relative z-10">
         {/* सूर्योदय एवं सूर्यास्त */}
-        <div className="p-5 rounded-2xl glass-panel-warm border border-[#ea580c]/30 shadow-xs relative overflow-hidden bg-gradient-to-br from-[#fffdf9] to-[#fff3e5]">
+        <div className="p-5 rounded-2xl glass-panel-warm border border-[#ea580c]/30 shadow-xs relative overflow-hidden bg-gradient-to-br from-[#fffdf9] to-[#fff3e5] hover:shadow-[0_10px_24px_-4px_rgba(234,88,12,0.18)] transition-all">
           <div className="flex items-start justify-between border-b border-[#dec9ab]/70 pb-3">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#ea580c] to-[#c2410c] text-white flex items-center justify-center shadow-xs">
@@ -104,7 +109,7 @@ export const PortalPanchang: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-2 gap-3 pt-3">
-            <div className="p-3 rounded-xl bg-white/85 border border-[#dec9ab]/70 space-y-1">
+            <div className="p-3 rounded-xl bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1 hover:border-[#ea580c] transition-all">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-[#c2410c] flex items-center gap-1">
                   <span className="w-2 h-2 rounded-full bg-[#ea580c]"></span>
@@ -118,7 +123,7 @@ export const PortalPanchang: React.FC = () => {
               <div className="text-[10px] text-[#735641]">अर्घ्य, गायत्री जप व सूर्य उपासना</div>
             </div>
 
-            <div className="p-3 rounded-xl bg-white/85 border border-[#dec9ab]/70 space-y-1">
+            <div className="p-3 rounded-xl bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1 hover:border-[#b8860b] transition-all">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-[#b8860b] flex items-center gap-1">
                   <span className="w-2 h-2 rounded-full bg-[#b8860b]"></span>
@@ -143,7 +148,7 @@ export const PortalPanchang: React.FC = () => {
         </div>
 
         {/* चंद्रोदय एवं चंद्रास्त */}
-        <div className="p-5 rounded-2xl glass-panel-warm border border-[#dec9ab] shadow-xs relative overflow-hidden bg-gradient-to-br from-[#fffdf9] to-[#f4f7fa]">
+        <div className="p-5 rounded-2xl glass-panel-warm border border-[#dec9ab] shadow-xs relative overflow-hidden bg-gradient-to-br from-[#fffdf9] to-[#f4f7fa] hover:shadow-[0_10px_24px_-4px_rgba(42,103,76,0.18)] transition-all">
           <div className="flex items-start justify-between border-b border-[#dec9ab]/70 pb-3">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#2a674c] to-[#1e4a36] text-white flex items-center justify-center shadow-xs">
@@ -163,7 +168,7 @@ export const PortalPanchang: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-2 gap-3 pt-3">
-            <div className="p-3 rounded-xl bg-white/85 border border-[#dec9ab]/70 space-y-1">
+            <div className="p-3 rounded-xl bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1 hover:border-[#2a674c] transition-all">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-[#2a674c] flex items-center gap-1">
                   <span className="w-2 h-2 rounded-full bg-[#2a674c]"></span>
@@ -177,7 +182,7 @@ export const PortalPanchang: React.FC = () => {
               <div className="text-[10px] text-[#735641]">सायं चंद्र दर्शन व अर्घ्य अर्पण</div>
             </div>
 
-            <div className="p-3 rounded-xl bg-white/85 border border-[#dec9ab]/70 space-y-1">
+            <div className="p-3 rounded-xl bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1 hover:border-[#735641] transition-all">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-[#735641] flex items-center gap-1">
                   <span className="w-2 h-2 rounded-full bg-slate-500"></span>
@@ -202,16 +207,16 @@ export const PortalPanchang: React.FC = () => {
         </div>
       </div>
 
-      {/* Shubh & Ashubh Muhurat Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* Shubh & Ashubh Muhurat Cards with Micro-Elevation */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
         {/* शुभ मुहूर्त */}
-        <div className="p-4 rounded-2xl glass-inner space-y-3 bg-white/75 border-[#2e7d32]/30">
+        <div className="p-4 rounded-2xl glass-inner space-y-3 bg-white/75 border-[#2e7d32]/30 hover:border-[#2e7d32] hover:shadow-[0_8px_20px_-3px_rgba(46,125,50,0.2)] transition-all">
           <div className="flex items-center gap-2 border-b border-[#dec9ab]/50 pb-2">
             <span className="material-symbols-outlined text-[#2e7d32] text-[20px]">verified</span>
             <h4 className="text-sm font-bold text-[#26150b]">शुभ मुहूर्त चक्र</h4>
           </div>
           <div className="space-y-2 text-xs">
-            <div className="flex justify-between items-center p-1.5 rounded-lg bg-emerald-50/80 border border-emerald-200">
+            <div className="flex justify-between items-center p-1.5 rounded-lg bg-emerald-50/80 border border-emerald-200 shadow-xs">
               <span className="text-emerald-900 font-bold">अभिजित मुहूर्त:</span>
               <span className="font-bold text-emerald-800 font-mono">११:५८ – १२:४९ अपराह्न</span>
             </div>
@@ -231,13 +236,13 @@ export const PortalPanchang: React.FC = () => {
         </div>
 
         {/* अशुभ काल चेतावनी */}
-        <div className="p-4 rounded-2xl glass-inner space-y-3 bg-gradient-to-br from-[#fee2e2]/40 to-white border-[#fca5a5]/70">
+        <div className="p-4 rounded-2xl glass-inner space-y-3 bg-gradient-to-br from-[#fee2e2]/40 to-white border-[#fca5a5]/70 hover:border-[#ba1a1a] hover:shadow-[0_8px_20px_-3px_rgba(186,26,26,0.2)] transition-all">
           <div className="flex items-center gap-2 border-b border-[#fca5a5]/50 pb-2">
             <span className="material-symbols-outlined text-[#ba1a1a] text-[20px]">warning</span>
             <h4 className="text-sm font-bold text-[#ba1a1a]">अशुभ काल (त्याज्य समय)</h4>
           </div>
           <div className="space-y-2 text-xs">
-            <div className="flex justify-between items-center p-1.5 rounded-lg bg-red-100/70 border border-red-300">
+            <div className="flex justify-between items-center p-1.5 rounded-lg bg-red-100/70 border border-red-300 shadow-xs">
               <span className="text-red-900 font-bold">राहु काल (वर्ज्य):</span>
               <span className="font-bold text-red-800 font-mono">०४:३० – ०६:०० अपराह्न</span>
             </div>

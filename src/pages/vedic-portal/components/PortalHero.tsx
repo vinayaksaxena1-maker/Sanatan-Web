@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { GoldenCornerBrackets } from './GoldenCornerBrackets';
+import { SacredGeometryWatermark } from './SacredGeometryWatermark';
 
 export const PortalHero: React.FC = () => {
   const [timeStr, setTimeStr] = useState<string>('११:४२:०८');
@@ -49,6 +51,7 @@ export const PortalHero: React.FC = () => {
       {/* Elegant Warm Chandan Frosted Glass Overlay for Contrast and Hindi Readability */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#fff9f0]/95 via-[#fff8ed]/88 to-[#fbeecc]/82 backdrop-blur-[7px]"></div>
       <div className="absolute -right-20 -top-20 w-80 h-80 rounded-full ambient-glow-gold pointer-events-none opacity-80"></div>
+      <GoldenCornerBrackets size="lg" />
 
       <div className="relative z-10 w-full p-6 sm:p-10 lg:p-12 space-y-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
@@ -58,7 +61,7 @@ export const PortalHero: React.FC = () => {
             <div className="space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#dec9ab]/70 pb-3">
                 <div className="space-y-1">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass-pill text-[#c2410c] text-xs font-bold tracking-wide border border-[#ea580c]/30">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass-pill text-[#c2410c] text-xs font-bold tracking-wide border border-[#ea580c]/30 shadow-xs">
                     <span className="material-symbols-outlined text-[16px] text-[#ea580c]">temple_hindu</span>
                     <span>श्री गणेशाय नमः • आज का दैनिक पंचांग</span>
                   </div>
@@ -66,16 +69,16 @@ export const PortalHero: React.FC = () => {
                   <p className="text-xs text-[#735641] font-medium">काशीस्थ सूर्योदय कालीन वैदिक काल गणना • विक्रम संवत २०८१ (क्रोधी संवत्सर)</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="px-3 py-1.5 rounded-xl glass-inner bg-white/85 border border-[#dec9ab] shadow-xs text-right">
+                  <div className="px-3 py-1.5 rounded-xl glass-inner bg-white/85 border border-[#dec9ab] shadow-xs text-right hover:border-[#ea580c] transition-colors">
                     <div className="text-[10px] text-[#735641] font-semibold">ऋतु एवं अयन</div>
                     <div className="text-xs font-bold text-[#b8860b]">वसन्त ऋतु • उत्तरायण</div>
                   </div>
                 </div>
               </div>
 
-              {/* 4 Quick Limb Cards */}
+              {/* 4 Quick Limb Cards with Micro-Elevation */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                <div className="p-3 rounded-2xl glass-inner bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:border-[#ea580c]/50 transition-all">
+                <div className="p-3 rounded-2xl glass-inner bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
                   <div className="flex items-center justify-between text-xs font-bold text-[#c2410c]">
                     <span>१. तिथि</span>
                     <span className="material-symbols-outlined text-[15px]">brightness_medium</span>
@@ -85,7 +88,7 @@ export const PortalHero: React.FC = () => {
                   <span className="inline-block px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-800 text-[9px] font-bold">शुभ (जयदा)</span>
                 </div>
 
-                <div className="p-3 rounded-2xl glass-inner bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:border-[#ea580c]/50 transition-all">
+                <div className="p-3 rounded-2xl glass-inner bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
                   <div className="flex items-center justify-between text-xs font-bold text-[#b8860b]">
                     <span>२. वार</span>
                     <span className="material-symbols-outlined text-[15px]">wb_sunny</span>
@@ -95,7 +98,7 @@ export const PortalHero: React.FC = () => {
                   <span className="inline-block px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 text-[9px] font-bold">ज्ञान संवर्धक</span>
                 </div>
 
-                <div className="p-3 rounded-2xl glass-inner bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:border-[#ea580c]/50 transition-all">
+                <div className="p-3 rounded-2xl glass-inner bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
                   <div className="flex items-center justify-between text-xs font-bold text-[#c2410c]">
                     <span>३. नक्षत्र</span>
                     <span className="material-symbols-outlined text-[15px]">flare</span>
@@ -105,7 +108,7 @@ export const PortalHero: React.FC = () => {
                   <span className="inline-block px-1.5 py-0.5 rounded bg-blue-50 text-blue-800 text-[9px] font-bold">ध्रुव संज्ञक</span>
                 </div>
 
-                <div className="p-3 rounded-2xl glass-inner bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:border-[#ea580c]/50 transition-all">
+                <div className="p-3 rounded-2xl glass-inner bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
                   <div className="flex items-center justify-between text-xs font-bold text-[#2a674c]">
                     <span>४. योग</span>
                     <span className="material-symbols-outlined text-[15px]">self_improvement</span>
@@ -116,9 +119,9 @@ export const PortalHero: React.FC = () => {
                 </div>
               </div>
 
-              {/* 3 Quick Muhurat Cards */}
+              {/* 3 Quick Muhurat Cards with Micro-Elevation */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
-                <div className="p-3 rounded-2xl glass-inner bg-emerald-50/80 border border-emerald-300 space-y-1">
+                <div className="p-3 rounded-2xl glass-inner bg-emerald-50/80 border border-emerald-300 space-y-1 hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(16,185,129,0.25)] transition-all duration-300 cursor-pointer">
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] font-bold text-emerald-900 flex items-center gap-1">
                       <span className="material-symbols-outlined text-[14px] text-emerald-700">verified</span>
@@ -130,7 +133,7 @@ export const PortalHero: React.FC = () => {
                   <div className="text-[10px] text-emerald-800">सर्वोत्तम विजयप्रद समय</div>
                 </div>
 
-                <div className="p-3 rounded-2xl glass-inner bg-red-50/80 border border-red-300 space-y-1">
+                <div className="p-3 rounded-2xl glass-inner bg-red-50/80 border border-red-300 space-y-1 hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(220,38,38,0.25)] transition-all duration-300 cursor-pointer">
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] font-bold text-red-900 flex items-center gap-1">
                       <span className="material-symbols-outlined text-[14px] text-red-700">warning</span>
@@ -142,7 +145,7 @@ export const PortalHero: React.FC = () => {
                   <div className="text-[10px] text-red-800">नवीन कार्य त्याज्य</div>
                 </div>
 
-                <div className="p-3 rounded-2xl glass-inner bg-amber-50/80 border border-amber-200 space-y-1">
+                <div className="p-3 rounded-2xl glass-inner bg-amber-50/80 border border-amber-200 space-y-1 hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(217,119,6,0.25)] transition-all duration-300 cursor-pointer">
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] font-bold text-amber-900 flex items-center gap-1">
                       <span className="material-symbols-outlined text-[14px] text-amber-700">schedule</span>
@@ -165,9 +168,12 @@ export const PortalHero: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Sanatan Ghadi Live Dial */}
-          <div className="lg:col-span-5 glass-panel-warm rounded-3xl p-5 sm:p-6 border border-[#dec9ab] shadow-xs flex flex-col justify-between space-y-4 bg-gradient-to-br from-[#fffbf5] to-[#fbeecc]/82">
-            <div className="flex items-center justify-between border-b border-[#dec9ab]/70 pb-3">
+          {/* Right Column: Sanatan Ghadi Live Dial with Brackets & Watermark */}
+          <div className="lg:col-span-5 glass-panel-warm rounded-3xl p-5 sm:p-6 border border-[#dec9ab] shadow-xs flex flex-col justify-between space-y-4 bg-gradient-to-br from-[#fffbf5] to-[#fbeecc]/82 relative overflow-hidden">
+            <SacredGeometryWatermark className="opacity-[0.035]" />
+            <GoldenCornerBrackets size="md" />
+
+            <div className="flex items-center justify-between border-b border-[#dec9ab]/70 pb-3 relative z-10">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-xl bg-[#ea580c]/15 text-[#ea580c] flex items-center justify-center">
                   <span className="material-symbols-outlined text-[20px]">schedule</span>
@@ -177,12 +183,16 @@ export const PortalHero: React.FC = () => {
                   <p className="text-[11px] text-[#735641]">वैदिक कालमान • घटी-पल-विपल गणना</p>
                 </div>
               </div>
-              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#fde8d7] text-[#c2410c] border border-[#f7c29e]">
+              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#fde8d7] text-[#c2410c] border border-[#f7c29e] flex items-center gap-1.5 shadow-xs">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ea580c] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#ea580c]"></span>
+                </span>
                 लाईव काल चक्र
               </span>
             </div>
 
-            <div className="flex flex-col items-center justify-center py-2">
+            <div className="flex flex-col items-center justify-center py-2 relative z-10">
               <div className="relative w-48 h-48 sm:w-52 sm:h-52 aspect-square flex items-center justify-center">
                 <svg className="w-full h-full drop-shadow-md" viewBox="0 0 200 200">
                   <circle cx="100" cy="100" r="96" fill="#fffbf5" stroke="#b8860b" strokeWidth="4" />
@@ -213,7 +223,7 @@ export const PortalHero: React.FC = () => {
                   <circle cx="100" cy="100" r="4.5" fill="#c2410c" stroke="#ffffff" strokeWidth="1.5" />
                 </svg>
                 <div className="absolute bottom-2 inset-x-0 text-center">
-                  <span className="text-[9px] font-bold text-[#b8860b] px-2 py-0.5 rounded-full bg-white/90 border border-[#dec9ab]">
+                  <span className="text-[9px] font-bold text-[#b8860b] px-2 py-0.5 rounded-full bg-white/90 border border-[#dec9ab] shadow-xs">
                     ६० घटी = २४ होरा
                   </span>
                 </div>
@@ -221,18 +231,18 @@ export const PortalHero: React.FC = () => {
 
               {/* Time Readout Box */}
               <div className="mt-3 w-full grid grid-cols-2 gap-2 text-center">
-                <div className="p-2 rounded-xl bg-white/80 border border-[#dec9ab]/70">
+                <div className="p-2 rounded-xl bg-white/80 border border-[#dec9ab]/70 shadow-xs hover:border-[#ea580c] transition-colors">
                   <div className="text-[10px] text-[#735641] font-semibold">भारतीय मानक समय (IST)</div>
                   <div className="text-sm font-bold text-[#c2410c] font-mono">{timeStr}</div>
                 </div>
-                <div className="p-2 rounded-xl bg-white/80 border border-[#dec9ab]/70">
+                <div className="p-2 rounded-xl bg-white/80 border border-[#dec9ab]/70 shadow-xs hover:border-[#ea580c] transition-colors">
                   <div className="text-[10px] text-[#735641] font-semibold">सनातन वैदिक कालमान</div>
                   <div className="text-sm font-bold text-[#26150b] font-mono">{ghatiStr}</div>
                 </div>
               </div>
             </div>
 
-            <div className="pt-2 border-t border-[#dec9ab]/60 flex items-center justify-between text-[11px] text-[#735641]">
+            <div className="pt-2 border-t border-[#dec9ab]/60 flex items-center justify-between text-[11px] text-[#735641] relative z-10">
               <span className="flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
                 अभिजित स्पर्श काल
