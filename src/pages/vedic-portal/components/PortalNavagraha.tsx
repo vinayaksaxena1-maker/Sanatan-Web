@@ -64,7 +64,7 @@ const getGrahaOrbClass = (name: string) => {
 export const PortalNavagraha: React.FC = () => {
   return (
     <section className="glass-panel rounded-3xl p-6 space-y-4 font-serif relative overflow-hidden">
-      <SacredGeometryWatermark className="opacity-20" />
+      <SacredGeometryWatermark variant="swastik" className="opacity-18" />
       <GoldenCornerBrackets size="lg" />
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 relative z-10">

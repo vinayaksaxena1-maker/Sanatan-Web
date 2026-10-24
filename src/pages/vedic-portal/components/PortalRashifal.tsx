@@ -1,4 +1,6 @@
 import React from 'react';
+import { GoldenCornerBrackets } from './GoldenCornerBrackets';
+import { SacredGeometryWatermark } from './SacredGeometryWatermark';
 
 interface RashiItem {
   icon: string;
@@ -28,8 +30,11 @@ const RASHIS: RashiItem[] = [
 
 export const PortalRashifal: React.FC = () => {
   return (
-    <section className="space-y-4 font-serif" id="rashifal">
-      <div className="flex items-center justify-between border-b border-[#dec9ab]/60 pb-2">
+    <section className="glass-panel rounded-3xl p-6 sm:p-7 space-y-4 font-serif relative overflow-hidden" id="rashifal">
+      <SacredGeometryWatermark variant="swastik" className="opacity-15" />
+      <GoldenCornerBrackets size="lg" />
+
+      <div className="flex items-center justify-between border-b border-[#dec9ab]/60 pb-3 relative z-10">
         <div className="flex items-center gap-2">
           <span className="w-3 h-3 rounded-full bg-[#b8860b] shadow-[0_0_8px_#b8860b]"></span>
           <h2 className="text-2xl font-bold text-[#26150b]">आज का राशिफल (चन्द्र गोचर फल)</h2>
@@ -37,7 +42,7 @@ export const PortalRashifal: React.FC = () => {
         <span className="text-xs text-[#735641] font-semibold">चन्द्रमा: कन्या राशि में संचाररत</span>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 relative z-10">
         {RASHIS.map((r) => {
           const isUttam = r.status === 'उत्तम';
           const isMadhyam = r.status === 'मध्यम';
