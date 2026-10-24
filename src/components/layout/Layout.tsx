@@ -28,8 +28,13 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     setIsMegaDrawerOpen(false);
   }, []);
 
-  // For home and Vedic Portal, they provide their own full-width luxury editorial layouts
-  if (currentPath === '/' || currentPath === '/portal' || currentPath === '/vedic-portal') {
+  // For home, portal and luxury hubs, they provide their own full-width luxury editorial layouts
+  if (
+    currentPath === '/' ||
+    currentPath === '/portal' ||
+    currentPath === '/vedic-portal' ||
+    currentPath === '/panchang'
+  ) {
     return <>{children}</>;
   }
 
