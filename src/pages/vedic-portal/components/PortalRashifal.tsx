@@ -1,9 +1,10 @@
 import React from 'react';
 import { GoldenCornerBrackets } from './GoldenCornerBrackets';
 import { SacredGeometryWatermark } from './SacredGeometryWatermark';
+import { VedicRashiGoldIcon, type RashiKey } from './VedicRashiGoldIcon';
 
 interface RashiItem {
-  icon: string;
+  rashiKey: RashiKey;
   name: string;
   percent: string;
   status: 'शुभ' | 'मध्यम' | 'उत्तम';
@@ -14,18 +15,18 @@ interface RashiItem {
 }
 
 const RASHIS: RashiItem[] = [
-  { icon: '♈', name: 'मेष', percent: '८८%', status: 'शुभ', desc: 'कार्यक्षेत्र में प्रशंसा मिलेगी। धन लाभ के नवीन अवसर बनेंगे।', color: 'लाल', num: '९' },
-  { icon: '♉', name: 'वृषभ', percent: '७२%', status: 'मध्यम', desc: 'पारिवारिक सामंजस्य बना रहेगा। स्वास्थ्य में हल्का सुधार संभव।', color: 'श्वेत', num: '६' },
-  { icon: '♊', name: 'मिथुन', percent: '९१%', status: 'उत्तम', desc: 'रुके कार्य पूर्ण होंगे। व्यापारिक यात्रा अत्यंत लाभदायक सिद्ध होगी।', color: 'हरा', num: '५', isHighlight: true },
-  { icon: '♋', name: 'कर्क', percent: '८४%', status: 'शुभ', desc: 'मानसिक शांति व आध्यात्मिक रुचि में वृद्धि। परिजनों का सहयोग मिलेगा।', color: 'दूधिया', num: '२' },
-  { icon: '♌', name: 'सिंह', percent: '८९%', status: 'शुभ', desc: 'आत्मविश्वास चरम पर रहेगा। उच्चाधिकारियों से सम्मान प्राप्त होगा।', color: 'केसरिया', num: '१' },
-  { icon: '♍', name: 'कन्या', percent: '८६%', status: 'शुभ', desc: 'चन्द्रमा का गोचर आपके आत्मबल को बढ़ाएगा। नवीन योजनाएं सफल होंगी।', color: 'पीतांबरी', num: '५' },
-  { icon: '♎', name: 'तुला', percent: '७५%', status: 'मध्यम', desc: 'व्यय पर संयम रखें। साझेदारी के कार्यों में पारदर्शिता बरतना हितकर।', color: 'क्रीम', num: '७' },
-  { icon: '♏', name: 'वृश्चिक', percent: '८२%', status: 'शुभ', desc: 'पराक्रम में वृद्धि होगी। मित्रों के सहयोग से जटिल समस्याएं सुलझेंगी।', color: 'सिन्दूरी', num: '३' },
-  { icon: '♐', name: 'धनु', percent: '९०%', status: 'उत्तम', desc: 'गुरु की शुभ दृष्टि से अध्ययन व धार्मिक अनुष्ठानों में मन लगेगा।', color: 'पीला', num: '३' },
-  { icon: '♑', name: 'मकर', percent: '७८%', status: 'मध्यम', desc: 'परिश्रम का उचित फल मिलेगा। भूमि या वाहन के मामलों में प्रगति होगी।', color: 'नीला', num: '८' },
-  { icon: '♒', name: 'कुंभ', percent: '८५%', status: 'शुभ', desc: 'स्वक्षेत्रीय शनि का बल मिलेगा। नए निवेश के लिए शुभ दिन।', color: 'जामुनी', num: '४' },
-  { icon: '♓', name: 'मीन', percent: '९२%', status: 'उत्तम', desc: 'उच्च के शुक्र से सुख-सुविधाओं में वृद्धि। दांपत्य जीवन मधुर रहेगा।', color: 'स्वर्णिम', num: '७' }
+  { rashiKey: 'mesh', name: 'मेष', percent: '८८%', status: 'शुभ', desc: 'कार्यक्षेत्र में प्रशंसा मिलेगी। धन लाभ के नवीन अवसर बनेंगे।', color: 'लाल', num: '९' },
+  { rashiKey: 'vrishabh', name: 'वृषभ', percent: '७२%', status: 'मध्यम', desc: 'पारिवारिक सामंजस्य बना रहेगा। स्वास्थ्य में हल्का सुधार संभव।', color: 'श्वेत', num: '६' },
+  { rashiKey: 'mithun', name: 'मिथुन', percent: '९१%', status: 'उत्तम', desc: 'रुके कार्य पूर्ण होंगे। व्यापारिक यात्रा अत्यंत लाभदायक सिद्ध होगी।', color: 'हरा', num: '५', isHighlight: true },
+  { rashiKey: 'kark', name: 'कर्क', percent: '८४%', status: 'शुभ', desc: 'मानसिक शांति व आध्यात्मिक रुचि में वृद्धि। परिजनों का सहयोग मिलेगा।', color: 'दूधिया', num: '२' },
+  { rashiKey: 'singh', name: 'सिंह', percent: '८९%', status: 'शुभ', desc: 'आत्मविश्वास चरम पर रहेगा। उच्चाधिकारियों से सम्मान प्राप्त होगा।', color: 'केसरिया', num: '१' },
+  { rashiKey: 'kanya', name: 'कन्या', percent: '८६%', status: 'शुभ', desc: 'चन्द्रमा का गोचर आपके आत्मबल को बढ़ाएगा। नवीन योजनाएं सफल होंगी।', color: 'पीतांबरी', num: '५' },
+  { rashiKey: 'tula', name: 'तुला', percent: '७५%', status: 'मध्यम', desc: 'व्यय पर संयम रखें। साझेदारी के कार्यों में पारदर्शिता बरतना हितकर।', color: 'क्रीम', num: '७' },
+  { rashiKey: 'vrishchik', name: 'वृश्चिक', percent: '८२%', status: 'शुभ', desc: 'पराक्रम में वृद्धि होगी। मित्रों के सहयोग से जटिल समस्याएं सुलझेंगी।', color: 'सिन्दूरी', num: '३' },
+  { rashiKey: 'dhanu', name: 'धनु', percent: '९०%', status: 'उत्तम', desc: 'गुरु की शुभ दृष्टि से अध्ययन व धार्मिक अनुष्ठानों में मन लगेगा।', color: 'पीला', num: '३' },
+  { rashiKey: 'makar', name: 'मकर', percent: '७८%', status: 'मध्यम', desc: 'परिश्रम का उचित फल मिलेगा। भूमि या वाहन के मामलों में प्रगति होगी।', color: 'नीला', num: '८' },
+  { rashiKey: 'kumbh', name: 'कुंभ', percent: '८५%', status: 'शुभ', desc: 'स्वक्षेत्रीय शनि का बल मिलेगा। नए निवेश के लिए शुभ दिन।', color: 'जामुनी', num: '४' },
+  { rashiKey: 'meen', name: 'मीन', percent: '९२%', status: 'उत्तम', desc: 'उच्च के शुक्र से सुख-सुविधाओं में वृद्धि। दांपत्य जीवन मधुर रहेगा।', color: 'स्वर्णिम', num: '७' }
 ];
 
 export const PortalRashifal: React.FC = () => {
@@ -62,11 +63,9 @@ export const PortalRashifal: React.FC = () => {
               </div>
 
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-6 h-6 rounded-lg bg-gradient-to-br from-[#fef08a] via-[#f59e0b] to-[#b45309] text-white text-xs font-bold flex items-center justify-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_2px_4px_rgba(180,83,9,0.3)] shrink-0">
-                    {r.icon}
-                  </span>
-                  <span className={`text-sm font-bold ${r.isHighlight ? 'text-[#c2410c]' : 'text-[#26150b] group-hover:text-[#c2410c] transition-colors'}`}>
+                <div className="flex items-center gap-2">
+                  <VedicRashiGoldIcon rashi={r.rashiKey} size="md" />
+                  <span className={`text-base font-bold ${r.isHighlight ? 'text-[#c2410c]' : 'text-[#26150b] group-hover:text-[#c2410c] transition-colors'}`}>
                     {r.name}
                   </span>
                 </div>
