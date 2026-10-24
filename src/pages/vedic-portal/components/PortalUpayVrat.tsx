@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { GoldenCornerBrackets } from './GoldenCornerBrackets';
 import { SacredGeometryWatermark } from './SacredGeometryWatermark';
+import { VedicIcon3D } from './VedicIcon3D';
 
 const HINDI_NUMERALS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९', '१०', '११', '१२'];
 
@@ -25,10 +26,8 @@ export const PortalUpayVrat: React.FC = () => {
 
         <div className="space-y-3 relative z-10">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-amber-100 flex items-center justify-center text-[#c2410c] shadow-xs">
-                <span className="material-symbols-outlined text-[18px]">light_mode</span>
-              </div>
+            <div className="flex items-center gap-3">
+              <VedicIcon3D name="upay" size="md" />
               <h3 className="text-lg font-bold text-[#26150b]">दैनिक वैदिक उपाय एवं सूर्य अर्घ्य विधि</h3>
             </div>
             <span className="text-xs px-2.5 py-0.5 rounded-full glass-pill text-[#b8860b] font-bold shadow-xs">आत्मकारक बल</span>
@@ -95,10 +94,8 @@ export const PortalUpayVrat: React.FC = () => {
 
         <div className="space-y-3 relative z-10">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-amber-100 flex items-center justify-center text-[#b8860b] shadow-xs">
-                <span className="material-symbols-outlined text-[18px]">event_upcoming</span>
-              </div>
+            <div className="flex items-center gap-3">
+              <VedicIcon3D name="vrat" size="md" />
               <h3 className="text-lg font-bold text-[#26150b]">आगामी व्रत एवं पर्व सारणी</h3>
             </div>
             <span className="text-xs text-[#735641] font-semibold">शुक्ल पक्ष</span>

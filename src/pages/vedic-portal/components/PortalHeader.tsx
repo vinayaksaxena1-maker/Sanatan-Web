@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from '../../../routes/AppRoutes';
+import { VedicIcon3D } from './VedicIcon3D';
 
 export const PortalHeader: React.FC = () => {
   return (
@@ -43,8 +44,8 @@ export const PortalHeader: React.FC = () => {
       <div className="h-18 lg:h-20 w-full px-4 sm:px-8 lg:px-12 flex items-center justify-between gap-4">
         <div className="flex items-center gap-6 xl:gap-8">
           <Link href="/" className="flex items-center gap-3 cursor-pointer group no-underline">
-            <div className="p-1 rounded-xl bg-white/80 border border-[#dec9ab] shadow-xs group-hover:scale-105 transition-transform flex items-center justify-center w-11 h-11">
-              <span className="text-2xl text-[#ea580c] font-bold">🕉️</span>
+            <div className="p-1 rounded-xl bg-white/90 border border-[#dec9ab] shadow-sm group-hover:scale-105 transition-transform flex items-center justify-center w-11 h-11">
+              <VedicIcon3D name="om" size="sm" />
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-1.5">
@@ -66,16 +67,16 @@ export const PortalHeader: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl glass-pill text-xs text-[#684d3b] border border-[#dec9ab]">
-            <span className="material-symbols-outlined text-[16px] text-[#ea580c]">calendar_month</span>
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl glass-pill text-xs text-[#684d3b] border border-[#dec9ab]">
+            <VedicIcon3D name="tithi" size="sm" />
             <span className="font-bold text-[#c2410c]">विक्रम संवत २०८१</span>
             <span className="text-[#8c7166]">• क्रोधी संवत्सर</span>
           </div>
           <a
             href="#kundli"
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#ea580c] to-[#c2410c] hover:brightness-110 text-white font-bold text-xs sm:text-sm shadow-md transition-all flex items-center gap-1.5 no-underline"
+            className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#ea580c] to-[#c2410c] hover:brightness-110 text-white font-bold text-xs sm:text-sm shadow-md transition-all flex items-center gap-2 no-underline"
           >
-            <span className="material-symbols-outlined text-[16px]">menu_book</span>
+            <VedicIcon3D name="kundli" size="sm" />
             <span>निःशुल्क कुण्डली</span>
           </a>
         </div>

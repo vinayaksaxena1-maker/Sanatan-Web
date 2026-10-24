@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { GoldenCornerBrackets } from './GoldenCornerBrackets';
 import { SacredGeometryWatermark } from './SacredGeometryWatermark';
+import { VedicIcon3D } from './VedicIcon3D';
 
 export const PortalHero: React.FC = () => {
   const [timeStr, setTimeStr] = useState<string>('११:४२:०८');
@@ -63,7 +64,7 @@ export const PortalHero: React.FC = () => {
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#dec9ab]/70 pb-3">
                 <div className="space-y-1">
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass-pill text-[#c2410c] text-xs font-bold tracking-wide border border-[#ea580c]/30 shadow-xs">
-                    <span className="material-symbols-outlined text-[16px] text-[#ea580c]">temple_hindu</span>
+                    <VedicIcon3D name="temple" size="sm" />
                     <span>श्री गणेशाय नमः • आज का दैनिक पंचांग</span>
                   </div>
                   <h1 className="text-2xl sm:text-3xl font-bold text-[#26150b] tracking-tight">दैनिक पंचांग एवं विशिष्ट मुहूर्त</h1>
@@ -77,12 +78,12 @@ export const PortalHero: React.FC = () => {
                 </div>
               </div>
 
-              {/* 4 Quick Limb Cards with Micro-Elevation */}
+              {/* 4 Quick Limb Cards with Micro-Elevation & 3D Icons */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 <div className="p-3 rounded-2xl glass-inner bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
                   <div className="flex items-center justify-between text-xs font-bold text-[#c2410c]">
                     <span>१. तिथि</span>
-                    <span className="material-symbols-outlined text-[15px]">brightness_medium</span>
+                    <VedicIcon3D name="tithi" size="sm" />
                   </div>
                   <div className="text-sm font-bold text-[#26150b]">शुक्ल त्रयोदशी</div>
                   <div className="text-[10px] text-[#735641]">सायं ०७:१४ तक</div>
@@ -92,7 +93,7 @@ export const PortalHero: React.FC = () => {
                 <div className="p-3 rounded-2xl glass-inner bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
                   <div className="flex items-center justify-between text-xs font-bold text-[#b8860b]">
                     <span>२. वार</span>
-                    <span className="material-symbols-outlined text-[15px]">wb_sunny</span>
+                    <VedicIcon3D name="sun" size="sm" />
                   </div>
                   <div className="text-sm font-bold text-[#26150b]">गुरुवार</div>
                   <div className="text-[10px] text-[#735641]">देवगुरु बृहस्पति स्वामी</div>
@@ -102,7 +103,7 @@ export const PortalHero: React.FC = () => {
                 <div className="p-3 rounded-2xl glass-inner bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
                   <div className="flex items-center justify-between text-xs font-bold text-[#c2410c]">
                     <span>३. नक्षत्र</span>
-                    <span className="material-symbols-outlined text-[15px]">flare</span>
+                    <VedicIcon3D name="nakshatra" size="sm" />
                   </div>
                   <div className="text-sm font-bold text-[#26150b]">उत्तर फाल्गुनी</div>
                   <div className="text-[10px] text-[#735641]">द्वितीय पद (सूर्य)</div>
@@ -112,7 +113,7 @@ export const PortalHero: React.FC = () => {
                 <div className="p-3 rounded-2xl glass-inner bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
                   <div className="flex items-center justify-between text-xs font-bold text-[#2a674c]">
                     <span>४. योग</span>
-                    <span className="material-symbols-outlined text-[15px]">self_improvement</span>
+                    <VedicIcon3D name="yoga" size="sm" />
                   </div>
                   <div className="text-sm font-bold text-[#26150b]">हर्षण योग</div>
                   <div className="text-[10px] text-[#735641]">दोपहर ०१:४५ तक</div>
@@ -175,10 +176,8 @@ export const PortalHero: React.FC = () => {
             <GoldenCornerBrackets size="md" />
 
             <div className="flex items-center justify-between border-b border-[#dec9ab]/70 pb-3 relative z-10">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-xl bg-[#ea580c]/15 text-[#ea580c] flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[20px]">schedule</span>
-                </div>
+              <div className="flex items-center gap-2.5">
+                <VedicIcon3D name="clock" size="md" />
                 <div>
                   <h3 className="text-lg font-bold text-[#26150b]">सनातन घड़ी (Sanatan Ghadi)</h3>
                   <p className="text-[11px] text-[#735641]">वैदिक कालमान • घटी-पल-विपल गणना</p>

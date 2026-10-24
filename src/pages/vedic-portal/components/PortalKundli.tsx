@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { GoldenCornerBrackets } from './GoldenCornerBrackets';
 import { SacredGeometryWatermark } from './SacredGeometryWatermark';
+import { VedicIcon3D } from './VedicIcon3D';
 
 export const PortalKundli: React.FC = () => {
   const [userName, setUserName] = useState<string>('राहुल शर्मा');
@@ -35,10 +36,8 @@ export const PortalKundli: React.FC = () => {
 
           <div className="space-y-5 relative z-10">
             <div className="flex items-center justify-between border-b border-[#e5d5be]/70 pb-3">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-xl bg-[#ea580c]/15 text-[#ea580c] flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[20px]">edit_note</span>
-                </div>
+              <div className="flex items-center gap-2.5">
+                <VedicIcon3D name="kundli" size="md" />
                 <div>
                   <h3 className="text-lg font-bold text-[#26150b]">मुफ्त जन्म कुण्डली निर्माण</h3>
                   <p className="text-[11px] text-[#735641]">सटीक जन्म विवरण अंकित करें</p>

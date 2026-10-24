@@ -1,6 +1,7 @@
 import React from 'react';
 import { GoldenCornerBrackets } from './GoldenCornerBrackets';
 import { SacredGeometryWatermark } from './SacredGeometryWatermark';
+import { VedicIcon3D } from './VedicIcon3D';
 
 export const PortalRightNow: React.FC = () => {
   return (
@@ -15,10 +16,8 @@ export const PortalRightNow: React.FC = () => {
 
       {/* Header Row */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#dec9ab]/70 pb-3.5 relative z-10">
-        <div className="flex items-center gap-2.5">
-          <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-md">
-            <span className="material-symbols-outlined text-[24px]">traffic</span>
-          </div>
+        <div className="flex items-center gap-3">
+          <VedicIcon3D name="signal" size="md" />
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-lg sm:text-xl font-bold text-[#26150b]">राइट नाउ (Right Now) • तात्कालिक काल निर्णय</h2>
@@ -36,7 +35,7 @@ export const PortalRightNow: React.FC = () => {
         </div>
         <div className="flex items-center gap-2 self-start sm:self-center">
           <span className="px-3.5 py-1.5 rounded-xl bg-white/95 border border-[#dec9ab] text-xs font-bold text-[#26150b] shadow-xs flex items-center gap-1.5 hover:border-[#ea580c] transition-colors">
-            <span className="material-symbols-outlined text-[#ea580c] text-[18px]">timelapse</span>
+            <VedicIcon3D name="clock" size="sm" />
             शेष समय: <span className="text-[#c2410c] font-mono font-bold text-sm">१ घंटा ४२ मिनट</span>
           </span>
         </div>
@@ -45,9 +44,7 @@ export const PortalRightNow: React.FC = () => {
       {/* Active Live Traffic Signal Banner with Subtle Gold Rim Glow */}
       <div className="p-4 sm:p-5 rounded-2xl bg-white/95 border-2 border-emerald-400 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4 relative overflow-hidden z-10 hover:shadow-[0_12px_28px_-4px_rgba(16,185,129,0.25)] transition-shadow">
         <div className="flex items-start sm:items-center gap-3.5">
-          <div className="w-12 h-12 rounded-2xl bg-emerald-50 border-2 border-emerald-300 flex items-center justify-center shrink-0 text-emerald-700 shadow-inner">
-            <span className="material-symbols-outlined text-[32px]">check_circle</span>
-          </div>
+          <VedicIcon3D name="shubh" size="lg" />
           <div className="space-y-1">
             <div className="flex flex-wrap items-center gap-3">
               <span className="relative flex h-4 w-4 shrink-0">

@@ -57,9 +57,14 @@ export const PortalRashifal: React.FC = () => {
               </div>
 
               <div className="flex items-center justify-between">
-                <span className={`text-sm font-bold ${r.isHighlight ? 'text-[#c2410c]' : 'text-[#26150b] group-hover:text-[#c2410c] transition-colors'}`}>
-                  {r.icon} {r.name}
-                </span>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-6 h-6 rounded-lg bg-gradient-to-br from-[#fef08a] via-[#f59e0b] to-[#b45309] text-white text-xs font-bold flex items-center justify-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_2px_4px_rgba(180,83,9,0.3)] shrink-0">
+                    {r.icon}
+                  </span>
+                  <span className={`text-sm font-bold ${r.isHighlight ? 'text-[#c2410c]' : 'text-[#26150b] group-hover:text-[#c2410c] transition-colors'}`}>
+                    {r.name}
+                  </span>
+                </div>
                 <span
                   className={`text-[10px] font-bold px-1.5 py-0.5 rounded shadow-xs ${
                     isUttam

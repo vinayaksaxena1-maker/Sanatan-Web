@@ -1,6 +1,7 @@
 import React from 'react';
 import { GoldenCornerBrackets } from './GoldenCornerBrackets';
 import { SacredGeometryWatermark } from './SacredGeometryWatermark';
+import { VedicIcon3D } from './VedicIcon3D';
 
 export const PortalPanchang: React.FC = () => {
   return (
@@ -11,8 +12,8 @@ export const PortalPanchang: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#dec9ab]/60 pb-4 relative z-10">
         <div className="space-y-1">
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#c2410c] uppercase tracking-wider">
-            <span className="material-symbols-outlined text-[16px]">calendar_today</span>
+          <div className="inline-flex items-center gap-2 text-xs font-bold text-[#c2410c] uppercase tracking-wider">
+            <VedicIcon3D name="temple" size="sm" />
             <span>द्रिक पंचांग गणना • सूर्य-सिद्धांत अनुगामी</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-[#26150b]">आज का विस्तृत दैनिक पंचांग</h2>
@@ -28,13 +29,13 @@ export const PortalPanchang: React.FC = () => {
         </div>
       </div>
 
-      {/* 5 Key Limbs of Panchang with Golden Hover Elevation */}
+      {/* 5 Key Limbs of Panchang with 3D Icons & Golden Hover Elevation */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 relative z-10">
         {/* 1. Tithi */}
         <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#c2410c]">१. तिथि</span>
-            <span className="material-symbols-outlined text-[#ea580c] text-[18px]">brightness_medium</span>
+            <VedicIcon3D name="tithi" size="sm" />
           </div>
           <div className="text-lg font-bold text-[#26150b]">शुक्ल त्रयोदशी</div>
           <div className="text-[11px] text-[#735641]">सायं ०७:१४ बजे तक, तदुपरांत चतुर्दशी</div>
@@ -45,7 +46,7 @@ export const PortalPanchang: React.FC = () => {
         <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#b8860b]">२. वार</span>
-            <span className="material-symbols-outlined text-[#b8860b] text-[18px]">wb_sunny</span>
+            <VedicIcon3D name="sun" size="sm" />
           </div>
           <div className="text-lg font-bold text-[#26150b]">गुरुवार (बृहस्पतिवार)</div>
           <div className="text-[11px] text-[#735641]">स्वामी: देवगुरु बृहस्पति</div>
@@ -56,7 +57,7 @@ export const PortalPanchang: React.FC = () => {
         <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#c2410c]">३. नक्षत्र</span>
-            <span className="material-symbols-outlined text-[#c2410c] text-[18px]">flare</span>
+            <VedicIcon3D name="nakshatra" size="sm" />
           </div>
           <div className="text-lg font-bold text-[#26150b]">उत्तर फाल्गुनी</div>
           <div className="text-[11px] text-[#735641]">द्वितीय पद (स्वामी: सूर्य) रात्रि ०३:२१ तक</div>
@@ -67,7 +68,7 @@ export const PortalPanchang: React.FC = () => {
         <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#2a674c]">४. योग</span>
-            <span className="material-symbols-outlined text-[#2a674c] text-[18px]">self_improvement</span>
+            <VedicIcon3D name="yoga" size="sm" />
           </div>
           <div className="text-lg font-bold text-[#26150b]">हर्षण योग</div>
           <div className="text-[11px] text-[#735641]">दोपहर ०१:४५ तक, पश्चात वज्र</div>
@@ -78,7 +79,7 @@ export const PortalPanchang: React.FC = () => {
         <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#735641]">५. करण</span>
-            <span className="material-symbols-outlined text-[#735641] text-[18px]">hourglass_bottom</span>
+            <VedicIcon3D name="karana" size="sm" />
           </div>
           <div className="text-lg font-bold text-[#26150b]">तैतिल करण</div>
           <div className="text-[11px] text-[#735641]">प्रातः ०८:२२ तक, तदुपरांत गर</div>
@@ -91,10 +92,8 @@ export const PortalPanchang: React.FC = () => {
         {/* सूर्योदय एवं सूर्यास्त */}
         <div className="p-5 rounded-2xl glass-panel-warm border border-[#ea580c]/30 shadow-xs relative overflow-hidden bg-gradient-to-br from-[#fffdf9] to-[#fff3e5] hover:shadow-[0_10px_24px_-4px_rgba(234,88,12,0.18)] transition-all">
           <div className="flex items-start justify-between border-b border-[#dec9ab]/70 pb-3">
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#ea580c] to-[#c2410c] text-white flex items-center justify-center shadow-xs">
-                <span className="material-symbols-outlined text-[22px]">wb_sunny</span>
-              </div>
+            <div className="flex items-center gap-3">
+              <VedicIcon3D name="sun" size="lg" />
               <div>
                 <div className="flex items-center gap-1.5">
                   <h4 className="text-base font-bold text-[#26150b]">सूर्योदय एवं सूर्यास्त</h4>
@@ -105,7 +104,7 @@ export const PortalPanchang: React.FC = () => {
                 <p className="text-[11px] text-[#735641]">पूजा, सूर्य अर्घ्य एवं त्रिकाल संध्या वंदन का पावन समय</p>
               </div>
             </div>
-            <span className="material-symbols-outlined text-amber-600 text-[22px]">routine</span>
+            <VedicIcon3D name="clock" size="sm" />
           </div>
 
           <div className="grid grid-cols-2 gap-3 pt-3">
@@ -150,10 +149,8 @@ export const PortalPanchang: React.FC = () => {
         {/* चंद्रोदय एवं चंद्रास्त */}
         <div className="p-5 rounded-2xl glass-panel-warm border border-[#dec9ab] shadow-xs relative overflow-hidden bg-gradient-to-br from-[#fffdf9] to-[#f4f7fa] hover:shadow-[0_10px_24px_-4px_rgba(42,103,76,0.18)] transition-all">
           <div className="flex items-start justify-between border-b border-[#dec9ab]/70 pb-3">
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#2a674c] to-[#1e4a36] text-white flex items-center justify-center shadow-xs">
-                <span className="material-symbols-outlined text-[22px]">nightlight</span>
-              </div>
+            <div className="flex items-center gap-3">
+              <VedicIcon3D name="moon" size="lg" />
               <div>
                 <div className="flex items-center gap-1.5">
                   <h4 className="text-base font-bold text-[#26150b]">चंद्रोदय एवं चंद्रास्त</h4>
@@ -164,7 +161,7 @@ export const PortalPanchang: React.FC = () => {
                 <p className="text-[11px] text-[#735641]">व्रत खोलने, चंद्र अर्घ्य एवं रात्रि साधना हेतु</p>
               </div>
             </div>
-            <span className="material-symbols-outlined text-[#2a674c] text-[22px]">bedtime</span>
+            <VedicIcon3D name="tithi" size="sm" />
           </div>
 
           <div className="grid grid-cols-2 gap-3 pt-3">
@@ -212,7 +209,7 @@ export const PortalPanchang: React.FC = () => {
         {/* शुभ मुहूर्त */}
         <div className="p-4 rounded-2xl glass-inner space-y-3 bg-white/75 border-[#2e7d32]/30 hover:border-[#2e7d32] hover:shadow-[0_8px_20px_-3px_rgba(46,125,50,0.2)] transition-all">
           <div className="flex items-center gap-2 border-b border-[#dec9ab]/50 pb-2">
-            <span className="material-symbols-outlined text-[#2e7d32] text-[20px]">verified</span>
+            <VedicIcon3D name="shubh" size="sm" />
             <h4 className="text-sm font-bold text-[#26150b]">शुभ मुहूर्त चक्र</h4>
           </div>
           <div className="space-y-2 text-xs">
@@ -238,7 +235,7 @@ export const PortalPanchang: React.FC = () => {
         {/* अशुभ काल चेतावनी */}
         <div className="p-4 rounded-2xl glass-inner space-y-3 bg-gradient-to-br from-[#fee2e2]/40 to-white border-[#fca5a5]/70 hover:border-[#ba1a1a] hover:shadow-[0_8px_20px_-3px_rgba(186,26,26,0.2)] transition-all">
           <div className="flex items-center gap-2 border-b border-[#fca5a5]/50 pb-2">
-            <span className="material-symbols-outlined text-[#ba1a1a] text-[20px]">warning</span>
+            <VedicIcon3D name="ashubh" size="sm" />
             <h4 className="text-sm font-bold text-[#ba1a1a]">अशुभ काल (त्याज्य समय)</h4>
           </div>
           <div className="space-y-2 text-xs">
