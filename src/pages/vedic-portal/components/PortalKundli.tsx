@@ -139,7 +139,7 @@ export const PortalKundli: React.FC = () => {
 
         {/* BOX 2: तात्कालिक कुण्डली फलादेश एवं लग्न विवरण (7 Cols) with Sacred Watermark & Brackets */}
         <div className="lg:col-span-7 glass-panel rounded-3xl p-6 sm:p-7 flex flex-col justify-between border-[#dec9ab] shadow-xs bg-gradient-to-br from-[#fffbf5] to-[#fbf2e3] relative overflow-hidden">
-          <SacredGeometryWatermark className="opacity-25" />
+          <SacredGeometryWatermark variant="kalash" className="opacity-25" />
           <GoldenCornerBrackets size="lg" />
 
           <div className="space-y-5 relative z-10">

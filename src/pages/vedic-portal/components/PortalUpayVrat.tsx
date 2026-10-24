@@ -37,9 +37,9 @@ export const PortalUpayVrat: React.FC = () => {
             आज के दिन तांबे के पात्र में शुद्ध जल, रक्तचन्दन व अक्षत मिलाकर भगवान सूर्य नारायण को अर्घ्य प्रदान करें। इससे पितृदोष की शांति एवं आरोग्यता की प्राप्ति होती है।
           </p>
 
-          {/* Sacred Mantra Chant Display with Sri Yantra Watermark */}
+          {/* Sacred Mantra Chant Display with Mangal Kalash Watermark */}
           <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#ea580c]/30 text-center space-y-1 relative overflow-hidden shadow-xs hover:border-[#ea580c] transition-colors">
-            <SacredGeometryWatermark className="opacity-20" />
+            <SacredGeometryWatermark variant="kalash" className="opacity-25" />
             <div className="relative z-10">
               <span className="text-[11px] font-bold text-[#c2410c] tracking-wider uppercase">मूल सूर्य बीज मन्त्र (१२ आवृत्ति जप)</span>
               <div className="text-2xl sm:text-3xl font-bold text-[#c2410c] py-1 tracking-wide">
