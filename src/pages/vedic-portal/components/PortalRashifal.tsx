@@ -31,7 +31,7 @@ const RASHIS: RashiItem[] = [
 export const PortalRashifal: React.FC = () => {
   return (
     <section className="glass-panel rounded-3xl p-6 sm:p-7 space-y-4 font-serif relative overflow-hidden" id="rashifal">
-      <SacredGeometryWatermark variant="swastik" className="opacity-15" />
+      <SacredGeometryWatermark variant="swastik" className="opacity-[0.07]" />
       <GoldenCornerBrackets size="lg" />
 
       <div className="flex items-center justify-between border-b border-[#dec9ab]/60 pb-3 relative z-10">

@@ -11,7 +11,7 @@ export const PortalRightNow: React.FC = () => {
     >
       {/* Decorative Luminous Aura & Corner Brackets */}
       <div className="absolute -right-16 -top-16 w-52 h-52 rounded-full bg-emerald-100/70 blur-2xl pointer-events-none -z-10"></div>
-      <SacredGeometryWatermark variant="swastik" className="opacity-18" />
+      <SacredGeometryWatermark variant="swastik" className="opacity-[0.07]" />
       <GoldenCornerBrackets size="lg" />
 
       {/* Header Row */}

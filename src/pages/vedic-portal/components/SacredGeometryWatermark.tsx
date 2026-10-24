@@ -8,7 +8,7 @@ export interface SacredGeometryWatermarkProps {
 }
 
 export const SacredGeometryWatermark: React.FC<SacredGeometryWatermarkProps> = ({
-  className = 'opacity-[0.15]',
+  className = 'opacity-[0.07]',
   variant = 'swastik',
 }) => {
   return (
