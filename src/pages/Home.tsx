@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { PortalHeader } from './vedic-portal/components/PortalHeader';
-import { PortalHero } from './vedic-portal/components/PortalHero';
+import { QuickServicesStrip } from '../components/home/QuickServicesStrip';
 import { PortalRightNow } from './vedic-portal/components/PortalRightNow';
 import { PortalKundli } from './vedic-portal/components/PortalKundli';
 import { PortalPanchang } from './vedic-portal/components/PortalPanchang';
@@ -27,8 +27,8 @@ export const Home: React.FC = () => {
 
       {/* Main Command Surface */}
       <main className="w-full pt-32 pb-16 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto space-y-8" id="mukhya">
-        {/* Hero Section */}
-        <PortalHero />
+        {/* 12 Core Services Quick Strip */}
+        <QuickServicesStrip />
 
         {/* 1-Second Actionable Live Status Card */}
         <PortalRightNow />

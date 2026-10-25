@@ -10,6 +10,8 @@ import { useLocationStore } from '../../store/locationStore';
 import { searchCitiesDatabase, getBundledMajorCities } from '../../engine/citiesDatabase';
 import { getTimezoneOffsetWithDST } from '../../engine/timezoneAdapter';
 import type { CityLocation } from '../../types/location';
+import { PortalHeader } from '../vedic-portal/components/PortalHeader';
+import { PortalFooter } from '../vedic-portal/components/PortalFooter';
 
 export const CitiesHub: React.FC = () => {
   const { t } = useTranslation();
@@ -59,8 +61,11 @@ export const CitiesHub: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-4xl mx-auto">
-      <header className="space-y-1">
+    <div className="bg-[#f7f2e6] text-[#26150b] antialiased selection:bg-[#ea580c] selection:text-white relative min-h-screen overflow-x-hidden font-serif">
+      <PortalHeader />
+
+      <main className="w-full pt-32 pb-16 px-4 sm:px-8 lg:px-12 max-w-4xl mx-auto space-y-6">
+        <header className="space-y-1">
         <div className="flex items-center gap-2">
           <MapPin className="w-6 h-6 text-amber-600" />
           <h1 className="text-2xl sm:text-3xl font-bold text-stone-900 font-serif">
@@ -187,6 +192,9 @@ export const CitiesHub: React.FC = () => {
           <p className="text-sm">कोई नगर या तहसील नहीं मिला। कृपया वर्तनी जांचें या ओपनस्ट्रीटमैप खोज का उपयोग करें।</p>
         </div>
       )}
+      </main>
+
+      <PortalFooter />
     </div>
   );
 };

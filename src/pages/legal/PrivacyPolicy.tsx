@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { Link } from '../../routes/AppRoutes';
 import { PortalHeader } from '../vedic-portal/components/PortalHeader';
 import { PortalFooter } from '../vedic-portal/components/PortalFooter';
 import { GoldenCornerBrackets } from '../vedic-portal/components/GoldenCornerBrackets';
@@ -36,9 +37,9 @@ export const PrivacyPolicy: React.FC = () => {
         {/* Breadcrumb & Navigation */}
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-amber-900/10 pb-4">
           <nav className="flex items-center gap-2 text-xs sm:text-sm text-stone-600 font-sans" aria-label="Breadcrumb">
-            <a href="/" className="hover:text-amber-800 transition-colors flex items-center gap-1">
+            <Link href="/" className="hover:text-amber-800 transition-colors flex items-center gap-1 no-underline">
               <ArrowLeft className="w-3.5 h-3.5" /> मुख्य पृष्ठ
-            </a>
+            </Link>
             <ChevronRight className="w-3.5 h-3.5 text-stone-400" />
             <span className="text-stone-400">वैधानिक नीतियां</span>
             <ChevronRight className="w-3.5 h-3.5 text-stone-400" />

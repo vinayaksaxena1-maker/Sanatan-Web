@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { Home, Sparkles, Printer, UserPlus, Compass } from 'lucide-react';
+import { Link } from '../../../routes/AppRoutes';
 import { CompleteHoroscopeResult } from '../../../engine/facade/horoscopeFacade';
 
 interface KundliTopBarProps {
@@ -29,13 +30,13 @@ export const KundliTopBar: React.FC<KundliTopBarProps> = ({
       {/* Breadcrumb & Ayanamsha Badge */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-stone-500 dark:text-stone-400">
-          <a
+          <Link
             href="/"
-            className="hover:text-amber-700 dark:hover:text-amber-400 transition-colors flex items-center gap-1 font-medium"
+            className="hover:text-amber-700 dark:hover:text-amber-400 transition-colors flex items-center gap-1 font-medium no-underline"
           >
             <Home className="w-3.5 h-3.5" />
             <span>मुख्य पृष्ठ</span>
-          </a>
+          </Link>
           <span className="text-stone-300 dark:text-stone-700">/</span>
           <span className="text-amber-800 dark:text-amber-300 font-semibold flex items-center gap-1">
             <Compass className="w-3.5 h-3.5 text-amber-600" />

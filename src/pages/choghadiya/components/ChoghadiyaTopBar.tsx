@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { Link } from '../../../routes/AppRoutes';
 import { SacredGeometryWatermark } from '../../vedic-portal/components/SacredGeometryWatermark';
 import { VedicIcon3D } from '../../vedic-portal/components/VedicIcon3D';
 import type { UseChoghadiyaDataResult } from '../hooks/useChoghadiyaData';
@@ -31,9 +32,9 @@ export const ChoghadiyaTopBar: React.FC<ChoghadiyaTopBarProps> = ({
           {/* Top Row: Breadcrumb */}
           <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-[#735641]">
             <div className="flex items-center gap-1.5">
-              <a href="/" className="hover:text-[#c2410c] transition-colors flex items-center gap-1 font-semibold">
+              <Link href="/" className="hover:text-[#c2410c] transition-colors flex items-center gap-1 font-semibold no-underline">
                 <span>मुख्य पृष्ठ</span>
-              </a>
+              </Link>
               <span>/</span>
               <span className="text-[#c2410c] font-bold">चौघड़िया एवं होरा चक्र</span>
             </div>

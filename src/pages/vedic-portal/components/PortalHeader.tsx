@@ -1,8 +1,19 @@
 import React from 'react';
-import { Link } from '../../../routes/AppRoutes';
+import { Link, useRouter } from '../../../routes/AppRoutes';
 import { VedicIcon3D } from './VedicIcon3D';
 
 export const PortalHeader: React.FC = () => {
+  const { currentPath } = useRouter();
+
+  const navItems = [
+    { label: 'मुख्य पृष्ठ', href: '/' },
+    { label: 'दैनिक पंचांग', href: '/panchang' },
+    { label: 'जन्म कुण्डली', href: '/kundli' },
+    { label: 'चौघड़िया व होरा', href: '/choghadiya', match: ['/choghadiya', '/choghadiya-hora', '/hora'] },
+    { label: 'शुभ मुहूर्त', href: '/muhurat' },
+    { label: 'व्रत कैलेंडर', href: '/calendar' },
+  ];
+
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-[#fbf7ee]/90 backdrop-blur-2xl border-b border-[#d95d0f]/15 shadow-[0_4px_24px_rgba(77,51,34,0.06)] font-serif">
       {/* Ephemeris Mini Strip (सूक्ष्म पंचांग पट्टी) */}
@@ -56,13 +67,25 @@ export const PortalHeader: React.FC = () => {
             </div>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-5 xl:gap-6 text-sm font-semibold">
-            <a href="#mukhya" className="text-[#c2410c] font-bold border-b-2 border-[#c2410c] pb-1 no-underline">मुख्य पृष्ठ</a>
-            <a href="#panchang" className="text-[#684d3b] hover:text-[#c2410c] transition-colors no-underline">दैनिक पंचांग</a>
-            <a href="#rashifal" className="text-[#684d3b] hover:text-[#c2410c] transition-colors no-underline">आज का राशिफल</a>
-            <a href="#kundli" className="text-[#684d3b] hover:text-[#c2410c] transition-colors no-underline">कुण्डली निर्माण</a>
-            <a href="#right-now-status" className="text-[#684d3b] hover:text-[#c2410c] transition-colors no-underline">शुभ मुहूर्त</a>
-            <Link href="/" className="text-[#8b2612] hover:text-[#ea580c] transition-colors no-underline font-bold">सनातन घड़ी होम ➔</Link>
+          <nav className="hidden lg:flex items-center gap-4 xl:gap-5 text-sm font-semibold">
+            {navItems.map((item) => {
+              const isActive = item.match
+                ? item.match.includes(currentPath)
+                : currentPath === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`transition-colors no-underline font-semibold pb-1 border-b-2 ${
+                    isActive
+                      ? 'text-[#c2410c] border-[#c2410c] font-bold'
+                      : 'text-[#684d3b] hover:text-[#c2410c] border-transparent'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
         </div>
 
@@ -72,13 +95,13 @@ export const PortalHeader: React.FC = () => {
             <span className="font-bold text-[#c2410c]">विक्रम संवत २०८१</span>
             <span className="text-[#8c7166]">• क्रोधी संवत्सर</span>
           </div>
-          <a
-            href="#kundli"
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#ea580c] to-[#c2410c] hover:brightness-110 text-white font-bold text-xs sm:text-sm shadow-md transition-all flex items-center gap-2 no-underline"
+          <Link
+            href="/kundli"
+            className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#ea580c] to-[#c2410c] hover:brightness-110 text-white font-bold text-xs sm:text-sm shadow-md transition-all flex items-center gap-2 no-underline cursor-pointer"
           >
             <VedicIcon3D name="kundli" size="sm" />
             <span>निःशुल्क कुण्डली</span>
-          </a>
+          </Link>
         </div>
       </div>
     </header>

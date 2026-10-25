@@ -9,6 +9,10 @@ import { useRouter } from '../../routes/AppRoutes';
 import { useTranslation } from '../../i18n/i18nContext';
 import {
   X,
+  Calendar,
+  Shield,
+  Sparkles,
+  Heart,
   Clock,
   Compass,
   Wrench,
@@ -64,6 +68,42 @@ export const MegaDrawer: React.FC<MegaDrawerProps> = ({ isOpen, onClose }) => {
   }, [isOpen, handleKeyDown]);
 
   const hubItems: HubItem[] = [
+    {
+      path: '/panchang',
+      labelKey: 'nav.panchang',
+      hindiTitle: 'दैनिक पंचांग हब',
+      englishTitle: 'Daily Panchang',
+      subtitleHindi: 'तिथि, वार, नक्षत्र, योग, करण एवं सूर्य-चन्द्र स्थिति',
+      icon: Calendar,
+      colorClass: 'bg-amber-100 text-amber-800',
+    },
+    {
+      path: '/kundli',
+      labelKey: 'nav.kundli',
+      hindiTitle: 'जन्म कुण्डली (D1-D60)',
+      englishTitle: 'Kundli & Horoscope',
+      subtitleHindi: 'षोडशवर्ग चक्र, अष्टकवर्ग, विंशोत्तरी महादशा व ग्रह स्पष्ट',
+      icon: Shield,
+      colorClass: 'bg-indigo-100 text-indigo-800',
+    },
+    {
+      path: '/muhurat',
+      labelKey: 'nav.muhurat',
+      hindiTitle: 'शुभ मुहूर्त हब',
+      englishTitle: 'Auspicious Timings',
+      subtitleHindi: 'विवाह, मुंडन, गृह प्रवेश व सर्वार्थ सिद्धि मुहूर्त',
+      icon: Sparkles,
+      colorClass: 'bg-rose-100 text-rose-800',
+    },
+    {
+      path: '/matchmaking',
+      labelKey: 'nav.matchmaking',
+      hindiTitle: '३६ गुण मिलान (विवाह)',
+      englishTitle: 'Kundli Matchmaking',
+      subtitleHindi: 'अष्टकूट मिलान, मांगलिक विचार व भकूट-नाड़ी दोष निवारण',
+      icon: Heart,
+      colorClass: 'bg-pink-100 text-pink-800',
+    },
     {
       path: '/choghadiya',
       labelKey: 'nav.choghadiya',

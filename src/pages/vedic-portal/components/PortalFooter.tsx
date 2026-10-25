@@ -40,35 +40,34 @@ export const PortalFooter: React.FC = () => {
         </div>
 
         <div className="space-y-3">
-          <h4 className="text-base font-bold text-[#f2ca50]">कुण्डली एवं दोष निवारण</h4>
+          <h4 className="text-base font-bold text-[#f2ca50]">पंचांग एवं काल गणना</h4>
           <ul className="space-y-2 text-xs text-[#d9c5b2]">
-            <li><a className="hover:text-[#ea580c] transition-colors no-underline" href="#kundli">जन्म कुण्डली निर्माण</a></li>
-            <li><a className="hover:text-[#ea580c] transition-colors no-underline" href="#kundli">शनि साढ़ेसाती विचार</a></li>
-            <li><a className="hover:text-[#ea580c] transition-colors no-underline" href="#kundli">मांगलिक दोष निवारण</a></li>
-            <li><a className="hover:text-[#ea580c] transition-colors no-underline" href="#kundli">कालसर्प योग शांति</a></li>
-            <li><a className="hover:text-[#ea580c] transition-colors no-underline" href="#kundli">विंशोत्तरी महादशा फल</a></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/panchang">आज का दैनिक पंचांग</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/choghadiya">दिन व रात्रि चौघड़िया</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/hora">२४-घंटे होरा चक्र</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/muhurat">शुभ मुहूर्त एवं संस्कार</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/calendar">व्रत एवं एकादशी सारणी</Link></li>
           </ul>
         </div>
 
         <div className="space-y-3">
-          <h4 className="text-base font-bold text-[#f2ca50]">पंचांग एवं शुभ मुहूर्त</h4>
+          <h4 className="text-base font-bold text-[#f2ca50]">कुण्डली एवं ज्योतिष</h4>
           <ul className="space-y-2 text-xs text-[#d9c5b2]">
-            <li><a className="hover:text-[#ea580c] transition-colors no-underline" href="#panchang">आज का दैनिक पंचांग</a></li>
-            <li><a className="hover:text-[#ea580c] transition-colors no-underline" href="#right-now-status">दिन व रात्रि चौघड़िया</a></li>
-            <li><a className="hover:text-[#ea580c] transition-colors no-underline" href="#panchang">अभिजित एवं विजय मुहूर्त</a></li>
-            <li><a className="hover:text-[#ea580c] transition-colors no-underline" href="#panchang">विवाह एवं गृह प्रवेश मुहूर्त</a></li>
-            <li><a className="hover:text-[#ea580c] transition-colors no-underline" href="#panchang">व्रत एवं एकादशी सारणी</a></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/kundli">जन्म कुण्डली (D1-D60)</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/matchmaking">कुण्डली मिलान (३६ गुण)</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/utilities">१९ वैदिक सुविधाएं व उपाय</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/cities">नगर / शहर एटलस (५,०००+)</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/settings">अयनांश एवं सेटिंग्स</Link></li>
           </ul>
         </div>
 
         <div className="space-y-3">
-          <h4 className="text-base font-bold text-[#f2ca50]">सनातन वेब नेविगेशन</h4>
+          <h4 className="text-base font-bold text-[#f2ca50]">संस्था एवं नीतियां</h4>
           <ul className="space-y-2 text-xs text-[#d9c5b2]">
             <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/">सनातन घड़ी मुख्य पृष्ठ</Link></li>
-            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/panchang">विस्तृत पंचांग हब</Link></li>
-            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/choghadiya-hora">चौघड़िया एवं होरा</Link></li>
-            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/kundli">वैदिक कुण्डली (D1-D60)</Link></li>
-            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/about-us">हमारे बारे में</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/about-us">हमारे बारे में व परंपरा</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/privacy-policy">गोपनीयता नीति</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/terms">नियम व शर्तें</Link></li>
           </ul>
         </div>
       </div>

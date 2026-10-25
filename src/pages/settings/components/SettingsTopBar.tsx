@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { Link } from '../../../routes/AppRoutes';
 import { SacredGeometryWatermark } from '../../vedic-portal/components/SacredGeometryWatermark';
 import { Sparkles, RotateCcw, CheckCircle2, Info } from 'lucide-react';
 
@@ -26,9 +27,9 @@ export const SettingsTopBar: React.FC<SettingsTopBarProps> = ({
         {/* Breadcrumb & Authority Badge */}
         <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-[#735641]">
           <div className="flex items-center gap-1.5 font-medium">
-            <a href="/" className="hover:text-[#c2410c] transition-colors flex items-center gap-1">
+            <Link href="/" className="hover:text-[#c2410c] transition-colors flex items-center gap-1 no-underline">
               <span>मुख्य पृष्ठ</span>
-            </a>
+            </Link>
             <span>/</span>
             <span className="text-[#c2410c] font-bold">सिस्टम सेटिंग्स</span>
             <span>/</span>
