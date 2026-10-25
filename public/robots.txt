@@ -1,0 +1,34 @@
+# -------------------------------------------------------------------------
+# Sanatan Ghadi (सनातन घड़ी) - Official Robots Policy
+# https://sanatan-web.vercel.app
+# -------------------------------------------------------------------------
+
+User-agent: *
+Allow: /
+Allow: /panchang
+Allow: /choghadiya
+Allow: /hora
+Allow: /muhurat
+Allow: /kundli
+Allow: /calendar
+Allow: /matchmaking
+Allow: /utilities
+Allow: /settings
+Allow: /privacy-policy
+Allow: /terms
+Allow: /about-us
+
+# Programmatic SEO Route Directories
+Allow: /panchang/*
+Allow: /festival/*
+Allow: /nakshatra/*
+Allow: /rashi/*
+Allow: /choghadiya/*
+Allow: /hora/*
+
+# LLM & AI Discoverability
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# Sitemaps
+Sitemap: https://sanatan-web.vercel.app/sitemap.xml

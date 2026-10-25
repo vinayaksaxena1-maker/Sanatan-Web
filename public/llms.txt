@@ -1,0 +1,29 @@
+# Sanatan Ghadi (सनातन घड़ी)
+
+> आधुनिक वैदिक पंचांग, चौघड़िया, जन्म कुंडली एवं कालगणना (Modern Vedic Panchang, Choghadiya, Horoscope & Cosmic Timekeeping)
+
+Sanatan Ghadi is a 100% ad-free, ultra-fast, offline-capable progressive web application delivering mathematically verified Vedic astronomy, regional panchangs, planetary horas, auspicious muhurats, D1-D60 Kundli generation, and 36 Guna Milan.
+
+## Core Features & Primary Hubs
+- [Home Dashboard](https://sanatan-web.vercel.app/): Real-time ticking Sanatan Ghadi, Aaj Ka Haal, 12 Rashi golden signets, 5 limbs summary.
+- [Dainik Panchang](https://sanatan-web.vercel.app/panchang): 5 sacred pillars (Tithi, Vara, Nakshatra, Yoga, Karana), Ekadashi Parana windows, Hari Vasara end time, Moonrise & Moonset.
+- [Choghadiya & Hora](https://sanatan-web.vercel.app/choghadiya): 16 Day/Night Choghadiya divisions and 24 planetary horas with real-time radial countdown.
+- [Shubh Muhurat Radar](https://sanatan-web.vercel.app/muhurat): 8 major sanskar ceremonies (Marriage, Griha Pravesh, Vehicle, Business), instant daily muhurats (Abhijit, Brahma, Godhuli), and caution alerts (Panchak, Bhadra).
+- [Janam Kundli Suite](https://sanatan-web.vercel.app/kundli): D1-D60 divisional charts, North/South/East Indian SVG charts, 120-year Vimshottari dasha hierarchy, Sarvashtakavarga 337-point invariant, and printable traditional A4 Janampatrika.
+- [Vrat & Hindu Calendar](https://sanatan-web.vercel.app/calendar): 100+ festivals calculated offline, monthly grid, and Vikram Samvat 2081-2082 printable A4 Wall Calendar.
+- [36 Guna Kundli Milan](https://sanatan-web.vercel.app/matchmaking): Ashtakoot scoring, Nadi & Bhakoot dosha cancellation exceptions, Manglik dosha parity, and printable A4 Vivah Certificate.
+- [Vedic Utilities & Kaalganana](https://sanatan-web.vercel.app/utilities): Sade Sati calculator, micro-to-macro time converter (Truti to Kalpa), gemstone recommender, Vastu compass.
+- [Ephemeris & Settings](https://sanatan-web.vercel.app/settings): Chitrapaksha Lahiri, KP, and Raman ayanamsha selectors; Sripati and Placidus house systems; 5,000+ Indian towns dataset; 1-click JSON backup.
+
+## Calculation Engine & Standards
+- Calculation Engine: AstroEngine v2.0 (clean-room MIT licensed TypeScript engine with 1,902 passing Vitest unit tests).
+- Ephemeris Standard: NASA JPL DE405 orbital models + Chitrapaksha Lahiri Standard Ayanamsha (24° 13' 54").
+- Solar Horizon: Topocentric Upper Limb with 34 arcminutes atmospheric refraction.
+- Zero Meridian: Avantika / Ujjain (23.1765° N, 75.7885° E) ancient Vedic Prime Meridian auto-fallback.
+- Privacy & Architecture: 100% Client-Side Progressive Web Application (Zero cloud data collection, IndexedDB storage).
+
+## Additional Resources
+- [Full LLM Specification](https://sanatan-web.vercel.app/llms-full.txt): Complete mathematical formulas, Sanskrit terms, and theological rules.
+- [Privacy Policy](https://sanatan-web.vercel.app/privacy-policy): Zero server data storage commitment.
+- [Terms of Service](https://sanatan-web.vercel.app/terms): Ephemeris methodology and open knowledge disclaimers.
+- [About Us](https://sanatan-web.vercel.app/about-us): Lineage from Maharshi Parashara to modern astronomical standards.

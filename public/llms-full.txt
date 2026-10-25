@@ -1,0 +1,62 @@
+# Sanatan Ghadi (सनातन घड़ी) - Complete Vedic Astrological & Astronomical Specification
+
+## 1. Identity & Theological Mission
+Sanatan Ghadi is an open, non-commercial, advertisement-free web platform designed to restore absolute mathematical purity and traditional dignity to Hindu timekeeping.
+- Domain: https://sanatan-web.vercel.app
+- Codebase Architecture: React 19, Vite 6, Tailwind CSS 4, Pure Client-Side SPA + PWA.
+- Core Engine: Self-contained AstroEngine v2.0 inside `src/engine/` executing under an MIT License.
+
+## 2. Ephemeris & Astronomical Formula Baseline
+All calculations are based on high-precision numerical algorithms:
+- Ephemeris Standard: NASA Jet Propulsion Laboratory (JPL) DE405 planetary coefficients.
+- Ayanamsha: Chitrapaksha (Lahiri) Standard: Ayanamsha = 23° 51' 25.53" + 50.290966" * T + 0.000222" * T^2 (where T is Julian centuries from J2000.0).
+- Solar Time: Local Apparent Solar Time calculated at the topocentric observer coordinates (latitude, longitude, elevation).
+- Sunrise / Sunset: Computed when the upper limb of the Sun touches the true astronomical horizon, accounting for 34 arcminutes of mean atmospheric refraction and 16 arcminutes of solar semi-diameter (zenith distance 90° 50').
+- Prime Meridian: Avantika / Ujjain (23.1765° N, 75.7885° E), established as the prime meridian of ancient Jyotish astronomy (Siddhantic zero longitude).
+
+## 3. Panchang (Five Sacred Limbs) Calculation Rules
+1. Tithi: Longitudinal angular separation between the Moon and the Sun:
+   - Tithi Index = floor((Moon_Lon - Sun_Lon) mod 360° / 12°) + 1
+   - Shukla Paksha: Tithis 1 to 15 (Purnima)
+   - Krishna Paksha: Tithis 16 to 30 (Amavasya)
+2. Nakshatra: Sidereal longitude of the Moon divided into 27 equal arcs of 13° 20' (800 arcminutes):
+   - Nakshatra Index = floor((Moon_Lon - Ayanamsha) mod 360° / 13° 20')
+   - Each Nakshatra contains 4 Padas of 3° 20' each.
+3. Yoga: Sum of the sidereal longitudes of the Sun and the Moon:
+   - Yoga Index = floor(((Sun_Lon + Moon_Lon - 2 * Ayanamsha) mod 360°) / 13° 20') + 1 (27 Yogas from Vishkambha to Vaidhriti).
+4. Karana: Half of a Tithi (6° of Sun-Moon angular distance):
+   - 4 Fixed Karanas: Shakuni, Chatushpada, Naga, Kintughna (occurring once per lunar month).
+   - 7 Repeating Karanas: Bava, Balava, Kaulava, Taitila, Gara, Vanija, Vishti (Bhadra).
+5. Vara: Seven weekdays ruled by the seven classical Grahas (Ravivara to Shanivara), counted from local sunrise.
+
+## 4. Special Theological Moats
+1. Ekadashi Parana Engine:
+   - Parana must occur on Dwadashi tithi after sunrise.
+   - If Dwadashi ends after sunrise, the Parana window opens at Sunrise and closes at Dwadashi end time.
+   - Hari Vasara Exclusion: The first 25% (first quarter) of Dwadashi is Hari Vasara; Parana is prohibited during this interval. The engine computes `calculateHariVasaraEnd()` and postpones the Parana start time accordingly.
+2. Smarta vs Vaishnava Dual Nirnaya:
+   - Smarta (Grihastha) fasts on the day when Ekadashi prevails at local Arunodaya (approx. 96 minutes before sunrise).
+   - Vaishnava (Sannyasis / ISKCON) observe Viddha-Ekadashi prohibition and fast on Dwadashi-yukta Ekadashi (Maha-Dwadashi).
+3. Moonrise Engine:
+   - City-specific topocentric Moonrise calculated for Karwa Chauth and Sankashti Chaturthi with local elevation correction.
+
+## 5. Choghadiya & Planetary Hora
+1. Dinamana (Day span) is divided into 8 equal parts; Ratrimana (Night span) is divided into 8 equal parts.
+2. 7 Choghadiya types: Shubh, Amrit, Labh (Auspicious), Char (Neutral), Rog, Kaal, Udveg (Inauspicious).
+3. Planetary Hora: The day is divided into 24 equal planetary hours. The ruler of the first hora after sunrise is the lord of the weekday, followed by the Chaldean planetary order (Saturn, Jupiter, Mars, Sun, Venus, Mercury, Moon).
+
+## 6. Dharmic Kundli Suite (Horoscope)
+- Ascendant (Lagna): The exact degree of the eastern horizon intersecting the ecliptic at the local topocentric latitude, longitude, and civil time.
+- Divisional Charts: 16 Parashari Shodashvargas (D1 Rashi, D2 Hora, D3 Drekkana, D7 Saptamsha, D9 Navamsha, D10 Dashamsha, D12 Dwadashamsha, D16 Shodashamsha, D20 Vimshamsha, D24 Chaturvimshamsha, D27 Saptavimshamsha, D30 Trimshamsha, D40 Khavedamsha, D45 Akshavedamsha, D60 Shashtiamsha).
+- Sarvashtakavarga Invariant: The sum of bindus across all 12 houses strictly equals 337 (`sum(SAV) === 337`).
+- Vimshottari Dasha: 120-year cycle starting from the Moon's natal nakshatra ruler (Ketu 7y, Venus 20y, Sun 6y, Moon 10y, Mars 7y, Rahu 18y, Jupiter 16y, Saturn 19y, Mercury 17y).
+
+## 7. Ashtakoot 36 Guna Milan (Kundli Matching)
+- Varna (1 Guna), Vashya (2 Gunas), Tara (3 Gunas), Yoni (4 Gunas), Graha Maitri (5 Gunas), Gana (6 Gunas), Bhakoot (7 Gunas), Nadi (8 Gunas).
+- Classical Exception Protocols:
+  - Bhakoot Dosha Cancellation: When both Moon signs share the same planetary ruler (e.g. Aries-Scorpio ruled by Mars, or Taurus-Libra ruled by Venus).
+  - Nadi Dosha Cancellation: When the bride and groom belong to the same Nakshatra but different Padas, or have different Moon signs under the same Nakshatra.
+
+## 8. Data Sovereignty & Offline Standards
+- Client Storage: IndexedDB via Dexie.js (Zero server telemetry).
+- Offline Mode: Two-Stage PWA Lifecycle (App shell cached under 1.5 MB; full ephemeris computations execute client-side in offline flight mode).
