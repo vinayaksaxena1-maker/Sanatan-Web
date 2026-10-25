@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from '../../../routes/AppRoutes';
 import { GoldenCornerBrackets } from './GoldenCornerBrackets';
 import { SacredGeometryWatermark } from './SacredGeometryWatermark';
 import { VedicIcon3D } from './VedicIcon3D';
@@ -256,6 +257,30 @@ export const PortalPanchang: React.FC = () => {
               <span className="font-bold text-[#ba1a1a]">दक्षिण दिशा (परिहार: दही ग्रहण)</span>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Panchang Hub & 5000+ Cities Atlas Discovery Bar */}
+      <div className="pt-4 border-t border-[#dec9ab]/60 flex flex-wrap items-center justify-between gap-3 relative z-10 text-xs">
+        <span className="text-[#735641] font-semibold flex items-center gap-1.5">
+          <span className="material-symbols-outlined text-[16px] text-[#b8860b]">location_on</span>
+          काशी विश्वनाथ सहित भारत के समस्त नगरों का प्रामाणिक पंचांग:
+        </span>
+        <div className="flex flex-wrap items-center gap-2">
+          <Link
+            href="/cities"
+            className="px-3.5 py-1.5 rounded-xl bg-[#fdf8ee] hover:bg-[#b8860b] hover:text-white text-[#8b6508] font-bold border border-[#e2cfb4] shadow-xs transition-all flex items-center gap-1.5 no-underline"
+          >
+            <span>📍 ५,०००+ नगर एवं प्रमुख तीर्थ दर्शन</span>
+            <span className="text-[10px]">➔</span>
+          </Link>
+          <Link
+            href="/panchang"
+            className="px-3.5 py-1.5 rounded-xl bg-[#fff2e8] hover:bg-[#ea580c] hover:text-white text-[#c2410c] font-bold border border-[#ffd8bf] shadow-xs transition-all flex items-center gap-1.5 no-underline"
+          >
+            <span>सम्पूर्ण वार्षिक पंचांग देखें</span>
+            <span className="text-[10px]">➔</span>
+          </Link>
         </div>
       </div>
     </section>

@@ -45,22 +45,22 @@ export const PortalFooter: React.FC = () => {
         <div className="space-y-3">
           <h4 className="text-base font-bold text-[#f2ca50]">पंचांग एवं काल गणना</h4>
           <ul className="space-y-2 text-xs text-[#d9c5b2]">
-            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/panchang">आज का दैनिक पंचांग</Link></li>
-            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/choghadiya">दिन व रात्रि चौघड़िया</Link></li>
-            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/hora">२४-घंटे होरा चक्र</Link></li>
-            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/muhurat">शुभ मुहूर्त एवं संस्कार</Link></li>
-            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/calendar">व्रत एवं एकादशी सारणी</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/panchang">आज का दैनिक पंचांग (तिथि, नक्षत्र)</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/choghadiya">दिन व रात्रि चौघड़िया (१६ काल)</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/hora">२४-घंटे होरा चक्र (ग्रह काल)</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/muhurat">शुभ मुहूर्त हब (विवाह, गृहप्रवेश)</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/calendar">व्रत, पर्व एवं एकादशी सारणी</Link></li>
           </ul>
         </div>
 
         <div className="space-y-3">
           <h4 className="text-base font-bold text-[#f2ca50]">कुण्डली एवं ज्योतिष</h4>
           <ul className="space-y-2 text-xs text-[#d9c5b2]">
-            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/kundli">जन्म कुण्डली (D1-D60)</Link></li>
-            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/matchmaking">कुण्डली मिलान (३६ गुण)</Link></li>
-            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/utilities">१९ वैदिक सुविधाएं व उपाय</Link></li>
-            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/cities">नगर / शहर एटलस (५,०००+)</Link></li>
-            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/settings">अयनांश एवं सेटिंग्स</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/kundli">जन्म कुण्डली (D1-D60 पराशर)</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/matchmaking">विवाह कुण्डली मिलान (३६ गुण)</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/utilities">वैदिक साधना, मन्त्र व स्तोत्र संग्रह</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/cities">५,०००+ नगर एवं प्रमुख तीर्थ दर्शन</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/settings">अयनांश एवं खगोलीय सेटिंग्स</Link></li>
           </ul>
         </div>
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from '../../../routes/AppRoutes';
 import { GoldenCornerBrackets } from './GoldenCornerBrackets';
 import { SacredGeometryWatermark } from './SacredGeometryWatermark';
 import { VedicIcon3D } from './VedicIcon3D';
@@ -114,6 +115,37 @@ export const PortalRightNow: React.FC = () => {
           </div>
           <div className="text-sm font-bold text-red-900">नया काम व खरीदारी टालें</div>
           <p className="text-[11px] text-red-800 leading-snug">सायं ०४:३० से ०६:०० बजे तक राहु काल रहेगा। इस अवधि में शुभ संकल्प स्थगित रखें।</p>
+        </div>
+      </div>
+
+      {/* Actionable Deep Links to Remaining Features (चौघड़िया, होरा चक्र, शुभ मुहूर्त) */}
+      <div className="pt-3 border-t border-[#dec9ab]/60 flex flex-wrap items-center justify-between gap-3 relative z-10 text-xs">
+        <span className="text-[#735641] font-semibold flex items-center gap-1.5">
+          <span className="material-symbols-outlined text-[16px] text-[#b8860b]">schedule</span>
+          दिन व रात के तात्कालिक काल चक्र:
+        </span>
+        <div className="flex flex-wrap items-center gap-2">
+          <Link
+            href="/choghadiya"
+            className="px-3 py-1.5 rounded-xl bg-white/90 hover:bg-[#ea580c] hover:text-white text-[#26150b] font-bold border border-[#dec9ab] shadow-xs transition-all flex items-center gap-1 no-underline"
+          >
+            <span>दिन-रात्रि चौघड़िया तालिका</span>
+            <span className="text-[10px]">➔</span>
+          </Link>
+          <Link
+            href="/hora"
+            className="px-3 py-1.5 rounded-xl bg-white/90 hover:bg-[#16a34a] hover:text-white text-[#26150b] font-bold border border-[#dec9ab] shadow-xs transition-all flex items-center gap-1 no-underline"
+          >
+            <span>२४-होरा चक्र</span>
+            <span className="text-[10px]">➔</span>
+          </Link>
+          <Link
+            href="/muhurat"
+            className="px-3 py-1.5 rounded-xl bg-[#fff2e8] hover:bg-[#c2410c] hover:text-white text-[#c2410c] font-bold border border-[#ffd8bf] shadow-xs transition-all flex items-center gap-1 no-underline"
+          >
+            <span>विवाह व गृहप्रवेश मुहूर्त</span>
+            <span className="text-[10px]">➔</span>
+          </Link>
         </div>
       </div>
     </section>

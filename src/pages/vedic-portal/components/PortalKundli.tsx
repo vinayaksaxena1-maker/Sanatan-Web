@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from '../../../routes/AppRoutes';
 import { GoldenCornerBrackets } from './GoldenCornerBrackets';
 import { SacredGeometryWatermark } from './SacredGeometryWatermark';
 import { VedicIcon3D } from './VedicIcon3D';
@@ -246,9 +247,22 @@ export const PortalKundli: React.FC = () => {
             </div>
           </div>
 
-          <div className="pt-3 border-t border-[#dec9ab]/60 flex flex-wrap items-center justify-between gap-2 relative z-10">
-            <div className="text-xs text-[#735641]">
-              विस्तृत ३२ पृष्ठीय कुण्डली, नवमांश (D9) व वर्षफल उपलब्ध
+          <div className="pt-3 border-t border-[#dec9ab]/60 flex flex-wrap items-center justify-between gap-3 relative z-10">
+            <div className="flex flex-wrap items-center gap-2">
+              <Link
+                href="/matchmaking"
+                className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-rose-50 to-pink-50 hover:from-rose-500 hover:to-pink-600 hover:text-white text-[#e11d48] text-xs font-bold border border-rose-300 shadow-xs transition-all flex items-center gap-1.5 no-underline"
+              >
+                <span>💑 विवाह कुण्डली मिलान (३६ गुण)</span>
+                <span className="text-[10px]">➔</span>
+              </Link>
+              <Link
+                href="/kundli"
+                className="px-3 py-1.5 rounded-xl bg-white/80 hover:bg-[#c2410c] hover:text-white text-[#c2410c] text-xs font-bold border border-[#dec9ab] shadow-xs transition-all flex items-center gap-1 no-underline"
+              >
+                <span>D1-D60 षोडशवर्ग चक्र</span>
+                <span className="text-[10px]">➔</span>
+              </Link>
             </div>
             <button
               className="px-4 py-2 rounded-xl bg-[#f0e5d1] hover:bg-[#ea580c] hover:text-white text-[#26150b] text-xs font-bold border border-[#dec9ab] transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"

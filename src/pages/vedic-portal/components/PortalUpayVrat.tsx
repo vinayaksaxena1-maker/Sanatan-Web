@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from '../../../routes/AppRoutes';
 import { GoldenCornerBrackets } from './GoldenCornerBrackets';
 import { SacredGeometryWatermark } from './SacredGeometryWatermark';
 import { VedicIcon3D } from './VedicIcon3D';
@@ -85,6 +86,16 @@ export const PortalUpayVrat: React.FC = () => {
             <span>गाय को गुड़ व गेहूं खिलाएं</span>
           </div>
         </div>
+
+        <div className="pt-2 border-t border-[#dec9ab]/60 relative z-10">
+          <Link
+            href="/utilities"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#c2410c] hover:underline no-underline"
+          >
+            <span>🪔 सम्पूर्ण वैदिक साधना, स्तोत्र एवं मन्त्र संग्रह देखें</span>
+            <span className="text-[10px]">➔</span>
+          </Link>
+        </div>
       </div>
 
       {/* आगामी व्रत एवं पर्व (5 Cols) with Golden Brackets */}
@@ -129,13 +140,22 @@ export const PortalUpayVrat: React.FC = () => {
           </div>
         </div>
 
-        <button
-          className="w-full py-2.5 rounded-xl bg-[#f0e5d1] hover:bg-[#b8860b] hover:text-white text-[#26150b] text-xs font-bold border border-[#dec9ab] transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs relative z-10"
-          type="button"
-        >
-          <span className="material-symbols-outlined text-[16px]">menu_book</span>
-          <span>विक्रम संवत २०८१ हिन्दू पंचांग विवरण (PDF)</span>
-        </button>
+        <div className="space-y-2 relative z-10">
+          <Link
+            href="/calendar"
+            className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#ea580c] to-[#c2410c] hover:brightness-110 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md no-underline"
+          >
+            <span className="material-symbols-outlined text-[16px]">calendar_month</span>
+            <span>सम्पूर्ण वर्ष २०२६ व्रत एवं एकादशी कैलेंडर देखें ➔</span>
+          </Link>
+          <button
+            className="w-full py-2 rounded-xl bg-[#f0e5d1] hover:bg-[#b8860b] hover:text-white text-[#26150b] text-[11px] font-bold border border-[#dec9ab] transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
+            type="button"
+          >
+            <span className="material-symbols-outlined text-[15px]">menu_book</span>
+            <span>विक्रम संवत २०८१ हिन्दू पंचांग विवरण (PDF)</span>
+          </button>
+        </div>
       </div>
     </div>
   );
