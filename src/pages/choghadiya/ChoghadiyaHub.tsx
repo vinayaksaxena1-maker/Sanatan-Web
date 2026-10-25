@@ -1,52 +1,63 @@
 /**
- * Sanatan Ghadi (सनातन घड़ी)
- * Hub 03: Dynamic Choghadiya Matrix & Live Radial Countdown
+ * Sanatan Web (सनातन घड़ी)
+ * Hub 03: Vedic Choghadiya & 24 Planetary Hora Hub (चौघड़िया एवं होरा हब)
+ * Official Luxury Redesign based on Stitch Screen 2f10997a070d415da90ac806c23805cb
+ * Pure Web, React 19, Strict < 300 lines modular standard
  */
 
-import React from 'react';
-import { useTranslation } from '../../i18n/i18nContext';
-import { Clock, Activity } from 'lucide-react';
+import React, { useState } from 'react';
+import { PortalHeader } from '../vedic-portal/components/PortalHeader';
+import { PortalFooter } from '../vedic-portal/components/PortalFooter';
+import CitySelectModal from '../../components/common/CitySelectModal';
+import { useChoghadiyaData } from './hooks/useChoghadiyaData';
+import { ChoghadiyaTopBar } from './components/ChoghadiyaTopBar';
+import { ChoghadiyaLiveHero } from './components/ChoghadiyaLiveHero';
+import { ChoghadiyaLegend } from './components/ChoghadiyaLegend';
+import { ChoghadiyaDayNightGrid } from './components/ChoghadiyaDayNightGrid';
+import { HoraTable } from './components/HoraTable';
 
 export const ChoghadiyaHub: React.FC = () => {
-  const { t } = useTranslation();
+  const choghadiyaData = useChoghadiyaData();
+  const [isCityModalOpen, setIsCityModalOpen] = useState<boolean>(false);
 
   return (
-    <div className="space-y-6">
-      <header className="space-y-1">
-        <div className="flex items-center gap-2">
-          <Clock className="w-6 h-6 text-amber-600" />
-          <h1 className="text-2xl sm:text-3xl font-bold text-stone-900 font-serif">
-            {t('choghadiya.title')}
-          </h1>
-        </div>
-        <p className="text-sm text-stone-600">
-          8 दिन + 8 रात के चौघड़िया कालखंड, लाइव रेडियल टाइमर व सरल कार्य मार्गदर्शन
-        </p>
-      </header>
+    <div className="bg-[#f7f2e6] text-[#26150b] antialiased selection:bg-[#ea580c] selection:text-white relative min-h-screen overflow-x-hidden font-serif">
+      {/* Ambient Saffron & Chandan Radial Luminous Glows */}
+      <div className="fixed top-0 left-1/4 w-[700px] h-[700px] ambient-glow-saffron pointer-events-none -z-10 blur-3xl opacity-75"></div>
+      <div className="fixed top-1/3 right-[-100px] w-[600px] h-[600px] ambient-glow-gold pointer-events-none -z-10 blur-3xl opacity-60"></div>
 
-      {/* Live Active Choghadiya Highlight Card */}
-      <div className="bg-gradient-to-br from-amber-500 to-amber-600 text-white rounded-2xl p-6 shadow-md space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 text-xs font-semibold backdrop-blur-xs">
-            <Activity className="w-3.5 h-3.5 animate-pulse" />
-            <span>लाइव सक्रिय चौघड़िया</span>
-          </div>
-          <span className="text-xs bg-emerald-700/80 px-2.5 py-0.5 rounded-full font-bold">
-            अमृत (सर्वोत्तम)
-          </span>
-        </div>
+      {/* Top Header */}
+      <PortalHeader />
 
-        <div className="flex items-baseline justify-between">
-          <div>
-            <h2 className="text-3xl font-extrabold tracking-tight">अमृत चौघड़िया</h2>
-            <p className="text-xs text-amber-100 pt-1">स्वामी: चंद्र | सभी मांगलिक कार्यों के लिए श्रेष्ठ</p>
-          </div>
-          <div className="text-right">
-            <span className="text-2xl font-bold tabular-nums">34:12</span>
-            <span className="text-xs text-amber-100 block">मिनट शेष</span>
-          </div>
-        </div>
-      </div>
+      {/* Main Command Surface */}
+      <main className="w-full pt-32 pb-16 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto space-y-8" id="choghadiya-hub">
+        {/* 1. Header Banner, Location Chips, Date Controller & Solar Metrics */}
+        <ChoghadiyaTopBar
+          data={choghadiyaData}
+          onOpenCityModal={() => setIsCityModalOpen(true)}
+        />
+
+        {/* 2. Live Active Choghadiya Hero & Radar Pulse with Live Countdown */}
+        <ChoghadiyaLiveHero data={choghadiyaData} />
+
+        {/* 3. 7-Choghadiya Legend & Auspicious Nature Guide */}
+        <ChoghadiyaLegend />
+
+        {/* 4. 8 Day + 8 Night Choghadiya Bento Grid with Active Highlighting */}
+        <ChoghadiyaDayNightGrid data={choghadiyaData} />
+
+        {/* 5. 24 Planetary Hora Matrix with Beej Mantras & Real-time Indicator */}
+        <HoraTable data={choghadiyaData} />
+      </main>
+
+      {/* 6. City Selector Modal */}
+      <CitySelectModal
+        isOpen={isCityModalOpen}
+        onClose={() => setIsCityModalOpen(false)}
+      />
+
+      {/* Scriptural Vedic Footer */}
+      <PortalFooter />
     </div>
   );
 };
