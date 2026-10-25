@@ -1,57 +1,63 @@
 /**
- * Sanatan Ghadi (सनातन घड़ी)
- * Hub 08: 19 Vedic Astrology & Life Utilities Suite
+ * Sanatan Web (सनातन घड़ी)
+ * Hub 07: Sanatan Kaalganana & Vedic Utilities Hub (सनातन कालगणना एवं वैदिक टूल्स हब)
+ * Official Luxury Redesign based on Stitch Screen a95b0eb6852d4bde8f8cda293121691b
+ * Pure Web, React 19, Strict < 300 lines modular standard
  */
 
 import React from 'react';
-import { useTranslation } from '../../i18n/i18nContext';
-import { Wrench, Compass, Shield, Gem, Users, Star } from 'lucide-react';
+import { PortalHeader } from '../vedic-portal/components/PortalHeader';
+import { PortalFooter } from '../vedic-portal/components/PortalFooter';
+import { useUtilitiesData } from './hooks/useUtilitiesData';
+import { UtilitiesTopBar } from './components/UtilitiesTopBar';
+import { SadeSatiCalculator } from './components/SadeSatiCalculator';
+import { VedicTimeConverter } from './components/VedicTimeConverter';
+import { GemstoneRudrakshaAdvisor } from './components/GemstoneRudrakshaAdvisor';
+import { VastuCompassSection } from './components/VastuCompassSection';
 
 export const UtilitiesHub: React.FC = () => {
-  const { t } = useTranslation();
-
-  const utilitiesList = [
-    { id: 'sade-sati', title: 'साढ़े साती गणक', icon: Star, desc: 'शनि की साढ़े साती के चरण व वैदिक शांति उपाय' },
-    { id: 'guna-milan', title: '36 गुण मिलान', icon: Users, desc: 'वर-वधू की कुंडली का अष्टकूट मिलान व नाड़ी दोष जांच' },
-    { id: 'ratna', title: 'रत्न परामर्श', icon: Gem, desc: 'लग्न व भाग्येश अनुसार धारण योग्य रत्न एवं विधि' },
-    { id: 'vastu', title: 'वास्तु कंपास', icon: Compass, desc: 'अष्टदिशा दिशाशूल, ऊर्जा संतुलन व गृह वास्तु' },
-    { id: 'manglik', title: 'मांगलिक दोष', icon: Shield, desc: 'मंगल दोष तीव्रता, परिहार व विवाह मार्गदर्शन' },
-  ];
+  const utilitiesData = useUtilitiesData();
+  const { activeTab, setActiveTab } = utilitiesData;
 
   return (
-    <div className="space-y-6">
-      <header className="space-y-1">
-        <div className="flex items-center gap-2">
-          <Wrench className="w-6 h-6 text-amber-600" />
-          <h1 className="text-2xl sm:text-3xl font-bold text-stone-900 font-serif">
-            {t('nav.utilities')}
-          </h1>
-        </div>
-        <p className="text-sm text-stone-600">
-          19 वैदिक ज्योतिषीय एवं आध्यात्मिक जीवन सुविधाएं (साढ़े साती, 36 गुण मिलान, रत्न, वास्तु आदि)
-        </p>
-      </header>
+    <div className="bg-[#f7f2e6] text-[#26150b] antialiased selection:bg-[#ea580c] selection:text-white relative min-h-screen overflow-x-hidden font-serif">
+      {/* Ambient Saffron & Chandan Radial Luminous Glows */}
+      <div className="fixed top-0 left-1/4 w-[700px] h-[700px] ambient-glow-saffron pointer-events-none -z-10 blur-3xl opacity-75"></div>
+      <div className="fixed top-1/3 right-[-100px] w-[600px] h-[600px] ambient-glow-gold pointer-events-none -z-10 blur-3xl opacity-60"></div>
 
-      {/* Utilities Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        {utilitiesList.map((util) => {
-          const Icon = util.icon;
-          return (
-            <div
-              key={util.id}
-              className="p-4 rounded-2xl bg-white border border-amber-200/80 hover:border-amber-400 hover:shadow-xs transition-all space-y-2"
-            >
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center text-amber-800">
-                  <Icon className="w-4 h-4" />
-                </div>
-                <h3 className="font-bold text-sm text-stone-900">{util.title}</h3>
-              </div>
-              <p className="text-xs text-stone-600 leading-relaxed">{util.desc}</p>
-            </div>
-          );
-        })}
-      </div>
+      {/* Top Header */}
+      <PortalHeader />
+
+      {/* Main Command Surface */}
+      <main className="w-full pt-32 pb-16 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto space-y-8" id="utilities-hub">
+        {/* 1. Header Hero Banner, Breadcrumb & 4 Suite Switcher Navigation */}
+        <UtilitiesTopBar
+          activeTab={activeTab}
+          onSelectTab={setActiveTab}
+        />
+
+        {/* 2. Active Specialized Suite Surface */}
+        <div className="transition-all duration-300">
+          {activeTab === 'sade_sati' && (
+            <SadeSatiCalculator data={utilitiesData} />
+          )}
+
+          {activeTab === 'time_converter' && (
+            <VedicTimeConverter data={utilitiesData} />
+          )}
+
+          {activeTab === 'gemstone_rudraksha' && (
+            <GemstoneRudrakshaAdvisor data={utilitiesData} />
+          )}
+
+          {activeTab === 'vastu_compass' && (
+            <VastuCompassSection data={utilitiesData} />
+          )}
+        </div>
+      </main>
+
+      {/* Global Footer */}
+      <PortalFooter />
     </div>
   );
 };
