@@ -979,11 +979,11 @@ flowchart TD
 * ✅ **Verification Gate**: Modal searches and sets location state across all hubs in $<10\text{ ms}$.
 * 🛑 **MICRO-AUDIT & HALT**: City search modal & lazy-loading verified $\rightarrow$ **COMPLETED ✅**.
 
-#### Sub-phase 7.4: Legal, Compliance & Methodology Pages `[PENDING ⏳]`
+#### Sub-phase 7.4: Legal, Compliance & Methodology Pages `[COMPLETED ✅]`
 * 📁 **Target File Paths**: `src/pages/legal/PrivacyPolicy.tsx`, `src/pages/legal/TermsOfService.tsx`, `src/pages/legal/AboutUs.tsx`
-* 🧩 **Key Components / Exports**: Clean compliance pages documenting JPL calculation methodology, zero personal data tracking pledge, and open terms.
-* ✅ **Verification Gate**: Navigation test: all three legal routes render clean typography without 404s.
-* 🛑 **MICRO-AUDIT & HALT**: Pending execution when required.
+* 🧩 **Key Components / Exports**: Clean compliance pages documenting JPL calculation methodology, zero personal data tracking pledge, Indian DPDPA 2023 compliance, open terms, and Vedic lineage with Stitch Neo-Vedic luxury layout, `PortalHeader`, and `PortalFooter`.
+* ✅ **Verification Gate**: Navigation test: all three legal routes (`/privacy-policy`, `/terms`, `/about-us`) render clean typography without 404s; Puppeteer visual screenshots verified.
+* 🛑 **MICRO-AUDIT & HALT**: Legal pages verified $\rightarrow$ **COMPLETED ✅**.
 
 #### Sub-phase 7.5: Zero-Conflict Programmatic SEO Generator (500–1,000 Pre-rendered Routes) & GEO Suite `[PENDING ⏳]`
 * 📁 **Target File Paths**: 
