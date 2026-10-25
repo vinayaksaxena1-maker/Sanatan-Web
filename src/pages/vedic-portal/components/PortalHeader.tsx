@@ -55,15 +55,15 @@ export const PortalHeader: React.FC = () => {
       <div className="h-18 lg:h-20 w-full px-4 sm:px-8 lg:px-12 flex items-center justify-between gap-4">
         <div className="flex items-center gap-6 xl:gap-8">
           <Link href="/" className="flex items-center gap-3 cursor-pointer group no-underline">
-            <div className="p-1 rounded-xl bg-white/90 border border-[#dec9ab] shadow-sm group-hover:scale-105 transition-transform flex items-center justify-center w-11 h-11">
-              <VedicIcon3D name="om" size="sm" />
+            <div className="p-1 rounded-xl bg-white/95 border border-[#dec9ab] shadow-sm group-hover:scale-105 transition-transform flex items-center justify-center w-11 h-11 overflow-hidden">
+              <img src="/App1.png" alt="Sanatan Ghadi Vedic Logo" className="w-full h-full object-contain rounded-lg" />
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-1.5">
-                <span className="text-xl sm:text-2xl font-bold tracking-wide text-[#c2410c]">वेद ज्योतिष केंद्र</span>
-                <span className="text-[11px] px-1.5 py-0.5 rounded-md bg-[#f3e6cf] border border-[#dfccb0] text-[#7b5800] font-bold">वैदिक</span>
+                <span className="text-xl sm:text-2xl font-bold tracking-wide text-[#c2410c]">सनातन घड़ी वैदिक</span>
+                <span className="text-[11px] px-1.5 py-0.5 rounded-md bg-[#f3e6cf] border border-[#dfccb0] text-[#7b5800] font-bold">Vedic</span>
               </div>
-              <span className="text-[10px] tracking-widest text-[#735641] font-semibold">प्रामाणिक वैदिक ज्योतिष एवं काल गणना</span>
+              <span className="text-[10px] tracking-widest text-[#735641] font-semibold">SANATAN GHADI VEDIC • कालगणना यंत्र</span>
             </div>
           </Link>
 

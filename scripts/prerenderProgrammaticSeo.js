@@ -344,6 +344,8 @@ function renderStaticHtml({ title, description, canonicalUrl, keywords, h1, cate
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#ea580c" />
+    <link rel="icon" type="image/png" href="/App1.png" />
+    <link rel="apple-touch-icon" href="/app_icon_512x512.png" />
     <title>${title}</title>
     <meta name="description" content="${description}" />
     <meta name="keywords" content="${keywords.join(', ')}" />
@@ -355,7 +357,7 @@ function renderStaticHtml({ title, description, canonicalUrl, keywords, h1, cate
     <meta property="og:description" content="${description}" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="${canonicalUrl}" />
-    <meta property="og:site_name" content="सनातन घड़ी (Sanatan Ghadi)" />
+    <meta property="og:site_name" content="Sanatan Ghadi Vedic (सनातन घड़ी वैदिक)" />
     <meta property="og:image" content="${SITE_URL}/images/og-panchang-banner.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${title}" />
@@ -430,7 +432,7 @@ ${JSON.stringify(jsonLd, null, 2)}
         </main>
 
         <footer class="w-full bg-[#26160e] text-[#f7f2e6] border-t-2 border-[#b8860b] py-6 px-6 text-center text-xs space-y-2">
-          <div>© २०२६ सनातन घड़ी (Sanatan Ghadi) • NASA JPL DE405 एवं चित्रपक्षीय लाहिड़ी अयनांश मानक</div>
+          <div>© २०२६ सनातन घड़ी वैदिक (Sanatan Ghadi Vedic) • NASA JPL DE405 एवं चित्रपक्षीय लाहिड़ी अयनांश मानक</div>
           <div class="text-stone-400">१००% विज्ञापन-मुक्त • १००% ऑफ़लाइन PWA • पूर्ण डेटा संप्रभुता</div>
         </footer>
       </div>

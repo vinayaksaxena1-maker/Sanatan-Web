@@ -27,9 +27,9 @@ export const MetaTags: React.FC<MetaTagsProps> = ({
 }) => {
   useEffect(() => {
     // 1. Title
-    const formattedTitle = title.includes('सनातन घड़ी')
+    const formattedTitle = title.includes('Sanatan Ghadi Vedic') || title.includes('सनातन घड़ी वैदिक')
       ? title
-      : `${title} | सनातन घड़ी (Sanatan Ghadi)`;
+      : `${title} | Sanatan Ghadi Vedic (सनातन घड़ी वैदिक)`;
     document.title = formattedTitle;
 
     // Helper to create or update meta tag

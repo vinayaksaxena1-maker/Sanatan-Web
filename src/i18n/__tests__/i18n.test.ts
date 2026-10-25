@@ -4,8 +4,8 @@ import enTranslations from '../locales/en.json';
 
 describe('Multilingual i18n Engine & Locales', () => {
   it('should ensure both Hindi and English translation keys match on primary hubs', () => {
-    expect(hiTranslations.brand.name).toBe('सनातन घड़ी');
-    expect(enTranslations.brand.name).toBe('Sanatan Ghadi');
+    expect(hiTranslations.brand.name).toBe('सनातन घड़ी वैदिक');
+    expect(enTranslations.brand.name).toBe('Sanatan Ghadi Vedic');
 
     expect(hiTranslations.panchang.tithi).toBe('तिथि');
     expect(enTranslations.panchang.tithi).toBe('Tithi');

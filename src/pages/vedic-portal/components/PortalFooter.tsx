@@ -18,10 +18,13 @@ export const PortalFooter: React.FC = () => {
       <div className="w-full px-4 sm:px-8 lg:px-12 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 max-w-7xl mx-auto text-sm">
         <div className="lg:col-span-2 space-y-4">
           <div className="flex items-center gap-3">
-            <div className="p-1.5 rounded-xl bg-[#382012] border border-[#523320] text-2xl text-[#f2ca50]">
-              🕉️
+            <div className="p-1 rounded-xl bg-white/95 border border-[#523320] w-10 h-10 overflow-hidden flex items-center justify-center shrink-0 shadow-sm">
+              <img src="/App1.png" alt="Sanatan Ghadi Vedic Logo" className="w-full h-full object-contain rounded-lg" />
             </div>
-            <span className="text-xl font-bold text-[#f2ca50]">वेद ज्योतिष केंद्र</span>
+            <div className="flex flex-col">
+              <span className="text-xl font-bold text-[#f2ca50]">सनातन घड़ी वैदिक</span>
+              <span className="text-[10px] tracking-wider text-[#d4af37]/80 uppercase">Sanatan Ghadi Vedic</span>
+            </div>
           </div>
           <p className="text-xs text-[#d9c5b2] leading-relaxed max-w-md">
             प्रामाणिक वैदिक ज्योतिष एवं सनातन खगोलीय गणनाओं को समर्पित संस्थान। सूर्य-सिद्धांत, द्रिक गणित एवं महर्षि पराशर की कालजयी संहिताओं पर आधारित शुद्ध भविष्यफल।
@@ -74,7 +77,7 @@ export const PortalFooter: React.FC = () => {
 
       {/* Copyright & Dharmic Disclaimers */}
       <div className="w-full px-4 sm:px-8 lg:px-12 py-4 bg-[#1d1009] border-t border-[#382012] flex flex-col md:flex-row items-center justify-between text-[#a8907f] text-xs gap-3">
-        <div>© २०२६ वेद ज्योतिष केंद्र • सर्वधर्म सद्भाव एवं सनातन वैदिक न्यास। सर्वाधिकार सुरक्षित।</div>
+        <div>© २०२६ सनातन घड़ी वैदिक (Sanatan Ghadi Vedic) • सर्वधर्म सद्भाव एवं वैदिक कालगणना। सर्वाधिकार सुरक्षित।</div>
         <div className="flex items-center gap-6">
           <a className="hover:text-[#f2ca50] transition-colors no-underline" href="#">मूल संस्कृत ग्रंथ</a>
           <a className="hover:text-[#f2ca50] transition-colors no-underline" href="#">खगोलीय शुद्धता</a>

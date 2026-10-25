@@ -13,13 +13,13 @@ export default function Navbar({ onOpenMegaDrawer: _onOpenMegaDrawer }: NavbarPr
         
         {/* Left: Brand Logo & Subtitle */}
         <div className="flex items-center space-x-3 cursor-pointer">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#EA6A2A] to-[#8B2612] flex items-center justify-center shadow-[0_4px_12px_rgba(234,106,42,0.3)] text-white font-bold text-xl">
-            ॐ
+          <div className="w-10 h-10 rounded-xl bg-white border border-[#dec9ab] flex items-center justify-center shadow-sm overflow-hidden shrink-0">
+            <img src="/App1.png" alt="Sanatan Ghadi Vedic Logo" className="w-full h-full object-contain" />
           </div>
           <div>
             <div className="flex items-center space-x-2">
-              <span className="font-bold text-[#1E1B18] text-lg tracking-tight">SANATAN</span>
-              <span className="text-[#8B2612] font-semibold text-sm">सनातन घड़ी</span>
+              <span className="font-bold text-[#1E1B18] text-lg tracking-tight">SANATAN GHADI VEDIC</span>
+              <span className="text-[#8B2612] font-semibold text-sm">सनातन घड़ी वैदिक</span>
             </div>
             <p className="text-[11px] text-[#6E6259] tracking-wider uppercase">खगोलीय कालगणना यंत्र • 2026</p>
           </div>
