@@ -1,24 +1,22 @@
 # 🏛️ SANATAN GHADI (सनातन घड़ी): MASTER ARCHITECTURE & PRODUCT SPECIFICATION
 ### Tagline: आधुनिक वैदिक पंचांग, चौघड़िया, जन्म कुंडली एवं कालगणना
 **Official Brand Name:** Sanatan Ghadi (सनातन घड़ी)  
-**Version:** 19.0 (Sanatan Ghadi Brand Identity, Codex Handover Milestone & 13-Hub Visual Benchmark Edition)  
+**Version:** 19.1 (Sanatan Ghadi Brand Identity & Vertical Slice UI Integration Edition)  
 **Target Directory:** `d:\Sanatan Web`  
-**Living Plan File:** `d:\Sanatan Web\SANATAN_WEB_MASTER_ARCHITECTURE_PLAN.md`  
+**Living Master Architecture Plan:** `d:\Sanatan Web\SANATAN_WEB_MASTER_ARCHITECTURE_PLAN.md`  
+**Living UI Implementation Plan:** `d:\Sanatan Web\sanatan_web_vertical_slice_master_plan.md` (100% Completed Stitch Neo-Vedic Luxury UI)  
 **Visual Benchmark Suite:** `d:\Sanatan Web\UI sample\` (13 Official Page Mockups)  
 **GitHub Remote:** `https://github.com/vinayaksaxena1-maker/Sanatan-Web`  
 **Tech Stack:** React 19 · Vite 6 · Tailwind CSS 4 · TypeScript · Lucide React · AstroEngine v2.0 (NASA JPL Bridge) · Web Workers · D3.js · Dexie.js (IndexedDB) · vite-plugin-pwa · Vercel Edge
 
 ---
 
-> [!NOTE]
-> **UI IMPLEMENTATION MILESTONE: COMPLETED VIA VERTICAL SLICE MASTER PLAN (`sanatan_web_vertical_slice_master_plan.md`) ✅**
-> **महत्वपूर्ण सूचना (भविष्य के एजेंट्स एवं डेवलपर्स के लिए):**
-> इस मास्टर आर्किटेक्चर प्लान (`SANATAN_WEB_MASTER_ARCHITECTURE_PLAN.md`) के पुराने UI सैंपल ट्रैक को यूज़र के निर्देशानुसार अपग्रेड करके **Vertical Slice Master Plan (`sanatan_web_vertical_slice_master_plan.md`)** के तहत Stitch Neo-Vedic Luxury Design System के साथ 100% पूरा कर लिया गया है।
-> सभी 9 मुख्य हब्स (`/`, `/panchang`, `/choghadiya`, `/hora`, `/kundli`, `/muhurat`, `/calendar`, `/matchmaking`, `/utilities`, `/settings`) पूर्णतः लाइव, फंक्शनल, और `src/engine/` (1,902 tests passing) से सीधे कनेक्टेड हैं।
-> जब भी कोई नया एजेंट आए, वह यह समझे कि:
-> 1. Core Mathematical Engine (`src/engine/`) पूरी तरह इंटैक्ट और वेरीफाइड है (1,902 Vitest tests 100% GREEN)।
-> 2. UI के सभी प्राथमिक हब्स `sanatan_web_vertical_slice_master_plan.md` के अनुरूप तैयार और कमिट हो चुके हैं।
-> 3. नीचे दी गई फेज़ लिस्ट में सभी कम्पलीटेड फेज़ को उनके संबंधित Vertical Slice फेज़, कमिट हैश, और फ़ाइल पाथ्स के साथ सिंक किया गया है।
+> [!IMPORTANT]
+> **MANDATORY DIRECTIVE: UI IMPLEMENTATION SOURCED 100% FROM SECOND PLAN (`sanatan_web_vertical_slice_master_plan.md`) ✅**
+> **भविष्य के सभी AI एजेंट्स एवं डेवलपर्स के लिए अनिवार्य दिशानिर्देश:**
+> 1. **UI का सम्पूर्ण निर्माण दूसरे प्लान से हुआ है:** इस मास्टर आर्किटेक्चर प्लान (`SANATAN_WEB_MASTER_ARCHITECTURE_PLAN.md`) के सभी UI फेज़ (Phase 4: Home Dashboard, Phase 5: Panchang/Choghadiya/Hora/Muhurat, Phase 6: Kundli Suite, Phase 7: Calendar/Utilities/Matchmaking, Phase 8: Settings) का **संपूर्ण विज़ुअल लेआउट, स्टाइलिंग, और कंपोनेंट कोड हमारे दूसरे प्लान `sanatan_web_vertical_slice_master_plan.md` (Stitch Neo-Vedic Luxury Design System) द्वारा 100% पूरा किया गया है**।
+> 2. **UI रीसेट या ओवरराइट पूर्णतः वर्जित है:** कोई भी नया एजेंट इन तैयार 9 हब्स के UI को पुराने `UI sample/` मॉकअप्स से दोबारा बनाने या ओवरराइट करने की भूल न करे।
+> 3. **बचे हुए फेज़ निष्पादित करने पर सुरक्षा गारंटी (Zero-Risk):** इस प्लान में बचे हुए अंतिम कार्य (Sub-phase 7.4 Legal Pages, Sub-phase 7.5 Programmatic SEO Script, Sub-phase 8.4 Launch Video, Sub-phase 8.5 Release Freeze) को यहाँ से चलाने पर वर्तमान UI और कोर एस्ट्रोनॉमिकल इंजन (`src/engine/` - 1,902 tests) में **कोई भी रुकावट या खराबी नहीं आएगी**, क्योंकि वे पूरी तरह आइसोलेटेड (स्वतंत्र) हैं। विस्तृत सुरक्षा विश्लेषण अनुभाग 2.12 में दिया गया है।
 
 ---
 
@@ -398,6 +396,32 @@
 
 ---
 
+## 2.12 Remaining Phases Execution Safety & Zero-Risk Impact Analysis (बचे हुए फेज़ चलाने पर UI व इंजन की सुरक्षा)
+
+> [!NOTE]
+> **क्या यहाँ से बचे हुए फेज़ (Sub-phase 7.4, 7.5, 8.4, 8.5) चलाने पर वर्तमान UI या इंजन में कोई समस्या आ सकती है?**  
+> **उत्तर: बिल्कुल नहीं (0% Risk)।** आर्किटेक्चरल दृष्टि से बचे हुए फेज़ को चलाने पर मौजूदा सिस्टम पर कोई नकारात्मक प्रभाव नहीं पड़ेगा। इसका तकनीकी विश्लेषण नीचे दिया गया है:
+
+### 1. कोर खगोलीय इंजन (`src/engine/`) की सुरक्षा (100% Isolated & Pure)
+* **अछूता और डीकपल्ड:** हमारा कोर इंजन (`src/engine/`) पूरी तरह सेल्फ-कंटेन्ड और शुद्ध गणितीय है। इसमें 1,902 विटेस्ट (Vitest) टेस्ट्स पूरी तरह पास हैं।
+* **रीड-ओनली उपयोग:** बचे हुए किसी भी कार्य (लीगल पेज, एसईओ स्क्रिप्ट, रिलीज़ टैग) को इंजन का कोड बदलने की ज़रूरत नहीं है। एसईओ प्री-रेंडर स्क्रिप्ट (`scripts/prerenderProgrammaticSeo.ts`) केवल सूर्योदय और तिथि की गणना के लिए इंजन को सिर्फ एक यूटिलिटी फंक्शन की तरह कॉल करेगी; इंजन के आंतरिक सूत्रों या लॉजिक में एक अक्षर भी नहीं बदला जाएगा।
+* **इंजन इनवेरिएंट्स सुरक्षित:** Lahiri Ayanamsha, Sarvashtakavarga 337-sum invariant, 7.41 ms लेटेंसी, और नासा JPL डेल्टा-T पूरी तरह सुरक्षित रहेंगे।
+
+### 2. वर्तमान 9 UI हब्स की सुरक्षा (Zero Regressions on Live Hubs)
+* **स्वतंत्र पेजेस (No Overlap):** 
+  - **Sub-phase 7.4 (Legal Pages: Privacy, Terms, AboutUs):** यह केवल 3 नए अलग यूआरएल रूट्स (`/privacy-policy`, `/terms`, `/about-us`) हैं। ये हमारे मुख्य 9 हब्स (`/`, `/panchang`, `/kundli`, आदि) के किसी भी कंपोनेंट या स्टेट स्टोर को छुए बिना अलग से जोड़े जाएंगे।
+  - **Sub-phase 7.5 (Programmatic SEO Generator):** यह एक बिल्ड-टाइम स्क्रिप्ट है जो सिर्फ `dist/` फोल्डर के अंदर स्टैटिक HTML फाइल्स (`dist/panchang/[city]/index.html`) जनरेट करती है। यह रिएक्ट ऐप के लाइव कंपोनेंट्स या क्लाइंट-साइड स्टेट को बिल्कुल मॉडिफाई नहीं करती।
+  - **Sub-phase 8.4 (Launch Video):** यह वीडियो जनरेशन का कार्य है जो `artifacts/` फोल्डर में चलेगा, सोर्स कोड से इसका कोई ताल्लुक नहीं है।
+  - **Sub-phase 8.5 (Release Freeze):** यह केवल `git tag` और फ़ाइनल बिल्ड वेरिफिकेशन है।
+
+### 3. नए एजेंट के लिए 3 अनिवार्य सुरक्षा नियम (Mandatory Execution Guardrails)
+जब भी कोई नया एजेंट इस प्लान से बचे हुए फेज़ को क्रियान्वित करे, उसे केवल ये 3 नियम याद रखने होंगे:
+1. **गार्डरेल १ (Design Consistency):** जब Sub-phase 7.4 (Legal Pages) बनाएं, तो वे हमारे नए Neo-Vedic डिज़ाइन सिस्टम के कंपोनेंट्स ([`PortalHeader.tsx`](file:///d:/Sanatan%20Web/src/pages/vedic-portal/components/PortalHeader.tsx) और [`PortalFooter.tsx`](file:///d:/Sanatan%20Web/src/pages/vedic-portal/components/PortalFooter.tsx)) का उपयोग करके बनाए जाएं, ताकि पूरी वेबसाइट का प्रीमियम लुक एक समान रहे।
+2. **गार्डरेल २ (PWA Precache Shield):** Sub-phase 7.5 की एसईओ स्क्रिप्ट चलाते समय [`vite.config.ts`](file:///d:/Sanatan%20Web/vite.config.ts) के `workbox.globIgnores` में कोई बदलाव न करें, ताकि PWA प्री-कैश साइज हमेशा ~1.5 MB ही रहे और लो-रैम फ़ोन्स पर हैंग न हो।
+3. **गार्डरेल ३ (Vercel Routing Integrity):** [`vercel.json`](file:///d:/Sanatan%20Web/vercel.json) में `"cleanUrls": true` और `"trailingSlash": false` को बरकरार रखें ताकि स्टैटिक प्री-रेंडर्ड फाइल्स और एसपीए रूट्स आपस में न टकराएं।
+
+---
+
 ## 3. Database Architecture: 3-Tier Embedded Client-Side Database
 
 ```mermaid
@@ -758,7 +782,7 @@ flowchart TD
 ### ☀️ PHASE 4: HOME DASHBOARD, SURYA CHAKRA, 1-CLICK WHATSAPP SHARE & VIRAL STATUS PNG CARD [COMPLETED ✅ - Commit a7ad9c2 via Vertical Slice Phase 0]
 
 > [!NOTE]
-> **Vertical Slice Implementation Reference**: Phase 4 का सम्पूर्ण कार्य `sanatan_web_vertical_slice_master_plan.md` के **चरण 0: होम पेज (`/`) का कायाकल्प** द्वारा पूरा किया गया है (Commit `a7ad9c2`).
+> 📌 **UI EXECUTION SOURCE OF TRUTH**: इस फेज़ का सम्पूर्ण UI कार्य हमारे दूसरे प्लान `sanatan_web_vertical_slice_master_plan.md` के **चरण 0: होम पेज (`/`) का कायाकल्प** (Commit `a7ad9c2`) द्वारा Stitch Neo-Vedic लक्ज़री डिज़ाइन सिस्टम के साथ 100% पूरा किया गया है।
 
 #### Sub-phase 4.1: Above-the-Fold "Aaj Ka Haal" Smart Status Card & Vedic Info Pills `[COMPLETED ✅ - Commit a7ad9c2]`
 * 📁 **Target File Paths**: `src/pages/vedic-portal/components/TodayStatusCard.tsx`, `src/pages/vedic-portal/components/PanchangPillsGrid.tsx`, `src/pages/vedic-portal/components/VedicInfoModal.tsx`
@@ -856,7 +880,7 @@ flowchart TD
 ### 🔮 PHASE 6: DHARMIC KUNDLI SUITE, FOOLPROOF 3-DROPDOWN TIME PICKER, SARAL PHALADESH & LAL KITAB UPAY [COMPLETED ✅ - Commit 82c26db via Vertical Slice Phase 3]
 
 > [!NOTE]
-> **Vertical Slice Implementation Reference**: Phase 6 का सम्पूर्ण कार्य `sanatan_web_vertical_slice_master_plan.md` के **चरण 3: विस्तृत जन्म कुण्डली हब (`/kundli`) + A4 पंडित जन्मपत्रिका** द्वारा पूरा किया गया है (Commit `82c26db`).
+> 📌 **UI EXECUTION SOURCE OF TRUTH**: इस फेज़ का सम्पूर्ण UI कार्य हमारे दूसरे प्लान `sanatan_web_vertical_slice_master_plan.md` के **चरण 3: विस्तृत जन्म कुण्डली हब (`/kundli`) + A4 पंडित जन्मपत्रिका** (Commit `82c26db`) द्वारा Stitch Neo-Vedic लक्ज़री डिज़ाइन सिस्टम के साथ 100% पूरा किया गया है।
 
 #### Sub-phase 6.1: Birth Details Form with Foolproof 3-Dropdown Time Picker & Live Akash `[COMPLETED ✅ - Commit 82c26db via Vertical Slice Phase 3]`
 * 📁 **Target File Paths**: `src/pages/kundli/components/KundliInputBar.tsx`, `src/pages/kundli/hooks/useKundliData.ts`, `src/components/common/CitySelectModal.tsx`
@@ -993,7 +1017,7 @@ flowchart TD
 ### 🏆 PHASE 8: FINAL VERIFICATION, SYSTEM SETTINGS HUB, TWO-STAGE PWA OFFLINE AUDIT & RELEASE FREEZE [PARTIALLY COMPLETED 🔄]
 
 > [!NOTE]
-> **Vertical Slice Implementation Reference**: Phase 8 का कोर सेटिंग्स हब `sanatan_web_vertical_slice_master_plan.md` के **चरण 8: स्थान, अयनांश एवं सिस्टम सेटिंग्स (`/settings`)** द्वारा पूरा किया गया है (Commit `5027856`)।
+> 📌 **UI EXECUTION SOURCE OF TRUTH**: इस फेज़ का सम्पूर्ण सिस्टम सेटिंग्स एवं अयनांश हब UI हमारे दूसरे प्लान `sanatan_web_vertical_slice_master_plan.md` के **चरण 8: स्थान, अयनांश एवं सिस्टम सेटिंग्स (`/settings`)** (Commit `5027856`) द्वारा पूरा किया गया है।
 
 #### System Settings & Preferences Hub `[COMPLETED ✅ - Commit 5027856 via Vertical Slice Phase 8]`
 * 📁 **Target File Paths**: `src/pages/settings/SettingsHub.tsx`, `src/engine/planetary/ayanamsha.ts`, `src/context/LocationContext.tsx`
