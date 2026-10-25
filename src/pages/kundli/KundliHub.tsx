@@ -1,77 +1,116 @@
 /**
  * Sanatan Ghadi (सनातन घड़ी)
- * Hub 06: Royal Dharmic Kundli Suite (D1-D60, 3-Dropdown Time Picker)
+ * Hub 03: विस्तृत जन्म कुण्डली एवं पराशरीय ग्रह विश्लेषण (/kundli)
+ * Stitch Screens: 9c7b3d8b44c2406193e1125fed7b8b2a & 9d061687a2514b508e50d8af42e4bbb1
  */
 
-import React from 'react';
-import { useTranslation } from '../../i18n/i18nContext';
-import { Shield } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { PortalHeader } from '../vedic-portal/components/PortalHeader';
+import { PortalFooter } from '../vedic-portal/components/PortalFooter';
+import CitySelectModal from '../../components/common/CitySelectModal';
+import { useLocationStore } from '../../store/locationStore';
+import { useKundliData } from './hooks/useKundliData';
+import { KundliTopBar } from './components/KundliTopBar';
+import { KundliInputBar } from './components/KundliInputBar';
+import { AvakahadaChakraSection } from './components/AvakahadaChakraSection';
+import { KundliChakraViewerSection } from './components/KundliChakraViewerSection';
+import { PlanetaryTableSection } from './components/PlanetaryTableSection';
+import { VimshottariDashaSection } from './components/VimshottariDashaSection';
+import { HousesAshtakavargaSection } from './components/HousesAshtakavargaSection';
+import { PanditConsultationBanner } from './components/PanditConsultationBanner';
+import { TraditionalA4PatrikaModal } from './components/TraditionalA4PatrikaModal';
 
 export const KundliHub: React.FC = () => {
-  const { t } = useTranslation();
+  const {
+    input,
+    handleInputChange,
+    selectedVarga,
+    setSelectedVarga,
+    chartStyle,
+    setChartStyle,
+    isPrintModalOpen,
+    setIsPrintModalOpen,
+    isCityModalOpen,
+    setIsCityModalOpen,
+    horoscope,
+    resetToSample
+  } = useKundliData();
+
+  const { selectedCity } = useLocationStore();
+
+  // Sync city selection from modal
+  useEffect(() => {
+    if (selectedCity) {
+      handleInputChange('cityName', selectedCity.nameHindi || selectedCity.name);
+      handleInputChange('latitude', selectedCity.latitude);
+      handleInputChange('longitude', selectedCity.longitude);
+    }
+  }, [selectedCity, handleInputChange]);
 
   return (
-    <div className="space-y-6">
-      <header className="space-y-1">
-        <div className="flex items-center gap-2">
-          <Shield className="w-6 h-6 text-amber-600" />
-          <h1 className="text-2xl sm:text-3xl font-bold text-stone-900 font-serif">
-            {t('kundli.title')}
-          </h1>
-        </div>
-        <p className="text-sm text-stone-600">
-          षोडशवर्ग (D1-D60), त्रि-शैली (उत्तर, दक्षिण, पूर्व) चार्ट, विंशोत्तरी दशा व लाल किताब उपाय
-        </p>
-      </header>
+    <div className="min-h-screen bg-[#faf7f2] dark:bg-[#121826] text-stone-900 dark:text-stone-100 transition-colors duration-200">
+      {/* Universal Luxury Navigation Header */}
+      <PortalHeader />
 
-      {/* Birth Input Details Card Preview */}
-      <div className="bg-white rounded-2xl p-5 border border-amber-200/80 shadow-xs space-y-4">
-        <h3 className="font-bold text-stone-900 border-b border-amber-100 pb-2">
-          जन्म विवरण प्रविष्टि (Foolproof 3-Dropdown Time Safe)
-        </h3>
+      {/* Main Kundli Surface */}
+      <main className="w-full pt-32 pb-16 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto space-y-8" id="kundli-hub">
+        {/* 1. Breadcrumb, Ayanamsha Badge, Header & Actions */}
+        <KundliTopBar
+          horoscope={horoscope}
+          onOpenPrintModal={() => setIsPrintModalOpen(true)}
+          onReset={resetToSample}
+        />
 
-        <div className="space-y-3">
-          <div>
-            <label className="block text-xs font-semibold text-stone-700 mb-1">
-              {t('kundli.name')}
-            </label>
-            <input
-              type="text"
-              placeholder="नाम दर्ज करें..."
-              className="w-full px-3 py-2 text-sm rounded-lg border border-stone-300 focus:outline-none focus:border-amber-600"
-            />
-          </div>
+        {/* 2. Interactive Birth Details Input Bar */}
+        <KundliInputBar
+          input={input}
+          onChange={handleInputChange}
+          onOpenCityModal={() => setIsCityModalOpen(true)}
+        />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1">
-                {t('kundli.birthDate')}
-              </label>
-              <input
-                type="date"
-                className="w-full px-3 py-2 text-sm rounded-lg border border-stone-300 focus:outline-none focus:border-amber-600"
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1">
-                {t('kundli.birthPlace')}
-              </label>
-              <input
-                type="text"
-                placeholder="शहर या नगर का नाम..."
-                className="w-full px-3 py-2 text-sm rounded-lg border border-stone-300 focus:outline-none focus:border-amber-600"
-              />
-            </div>
-          </div>
-        </div>
+        {/* 3. Avakahada Chakra & Birth Panchang 6-Card Bento Grid */}
+        <AvakahadaChakraSection horoscope={horoscope} />
 
-        <button
-          type="button"
-          className="w-full py-2.5 px-4 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-semibold text-sm transition-colors cursor-pointer shadow-xs"
-        >
-          {t('kundli.generateKundli')}
-        </button>
-      </div>
+        {/* 4. Kundli Chakra Viewer (D1 to D60), Chart Style Switcher & Yogas */}
+        <KundliChakraViewerSection
+          horoscope={horoscope}
+          selectedVarga={selectedVarga}
+          onSelectVarga={setSelectedVarga}
+          chartStyle={chartStyle}
+          onSelectChartStyle={setChartStyle}
+        />
+
+        {/* 5. Comprehensive Planetary Longitude Table */}
+        <PlanetaryTableSection horoscope={horoscope} />
+
+        {/* 6. Vimshottari Mahadasha Timeline (120-Year Timeline) */}
+        <VimshottariDashaSection horoscope={horoscope} />
+
+        {/* 7. 12 Houses Analysis & Sarvashtakavarga 337 Invariant Grid */}
+        <HousesAshtakavargaSection horoscope={horoscope} />
+
+        {/* 8. Astrologer Consultation & A4 Print Banner */}
+        <PanditConsultationBanner
+          onOpenPrintModal={() => setIsPrintModalOpen(true)}
+        />
+      </main>
+
+      {/* Traditional A4 Pandit Janampatrika Modal (Screen 9d061687) */}
+      <TraditionalA4PatrikaModal
+        isOpen={isPrintModalOpen}
+        onClose={() => setIsPrintModalOpen(false)}
+        input={input}
+        horoscope={horoscope}
+      />
+
+      {/* 5,000+ Town City Selection Modal */}
+      <CitySelectModal
+        isOpen={isCityModalOpen}
+        onClose={() => setIsCityModalOpen(false)}
+      />
+
+      {/* Universal Luxury Vedic Footer */}
+      <PortalFooter />
     </div>
   );
 };
