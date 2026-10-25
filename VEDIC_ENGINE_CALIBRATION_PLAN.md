@@ -1,174 +1,122 @@
-# 📜 Vedic Astronomical Engine: 11-Benchmark Calibration & Triple Ground-Truth Verification Plan
+# 📜 Vedic Astronomical Engine: 11-Benchmark Calibration & Deep Audit Addendum Plan
 
 > **Project:** Sanatan Web (`D:\Sanatan Web`)  
-> **Target:** 100% Mathematical Rigour, Zero-Drift vs Official Government & Global Standards  
-> **Status:** APPROVED & LOCKED FOR EXECUTION  
+> **Target:** 100% Mathematical Rigour, Metrological Error Distribution & Zero-Drift vs Global Standards  
+> **Status:** APPROVED & AUDIT-LOCKED  
 
 ---
 
-## 🎯 1. Triple Ground-Truth Verification Protocol (Teeno Independent Sources)
+## 🎯 1. Triple Ground-Truth Verification Protocol & Source Provenance
 
-Har ek benchmark ko test aur verify karne ke liye **3 independent external sources** use kiye jayenge taaki kisi ek private ya public system ke bias ka risk na rahe:
+Har ek benchmark ko test aur verify karne ke liye **3 independent external sources** use kiye jayenge. Har source ke sath uska **version, coordinate frame, time scale, aur calculation flags** record karna mandatory hai:
 
-| Layer / Parameter | Ground Truth Source 1 (Private Gold Standard) | Ground Truth Source 2 (Govt of India Official) | Ground Truth Source 3 (Global Scientific Standard) |
+| Layer / Parameter | Ground Truth Source 1 (Consumer & Jyotish Standard) | Ground Truth Source 2 (Govt of India Official) | Ground Truth Source 3 (Scientific Ephemeris Standard) |
 |---|---|---|---|
-| **Ayanamsha & Precession** | **Drik Panchang** (`drikpanchang.com`) | **PAC Kolkata Digital Portal** (`packolkata.imd.gov.in/panchang/en`) | **Swiss Ephemeris** (`astro.com/swisseph`) |
-| **Panchang Angas (Tithi, Nakshatra, etc.)** | **Drik Panchang** | **Rashtriya Panchang** (Saka 1948 / 2026-27 via PAC Portal) | **NASA JPL Horizons** (Ecliptic angular delta) |
-| **Sunrise / Sunset / Refraction** | **Drik Panchang** (Civil Topocentric) | **PAC Kolkata** (Official Indian Standard Horizon & Refraction) | **NOAA Solar Calculator** (USNO Zenith $90.833^\circ$) |
-| **Planetary Longitudes & True Nodes**| **Drik Panchang** (Grah Sthiti - True Node) | **PAC Kolkata** (Nirayana Longitudes Table) | **NASA JPL Horizons** (DE441 State Vectors) |
-| **Rahu Kaal & Choghadiya** | **Drik Panchang** Dynamic Muhurta | **Rashtriya Panchang** Dinamana Standards | **BPHS Astronomical Slicer** |
-| **Bhava Chalit (House Cusps)** | **Drik Panchang Kundali** (Sripati Mode) | **PAC Kolkata** (City Lagnas & Midday) | **Jagannatha Hora** (Sripati Engine Reference) |
+| **Ayanamsha & Precession** | **Drik Panchang** (`drikpanchang.com` - Chitrapaksha Lahiri) | **PAC Kolkata Digital Portal** (`packolkata.imd.gov.in/panchang/en` - Saka 1948) | **Swiss Ephemeris** (`astro.com/swisseph` via `-sid1` flag) |
+| **Panchang Angas (Tithi, Nakshatra, etc.)** | **Drik Panchang** (Udayatithi & Dynamic Boundary) | **Rashtriya Panchang** (PAC Published Standards) | **NASA JPL Horizons** (DE440 for 2000-2050, DE441 for historical) |
+| **Sunrise / Sunset / Refraction** | **Drik Panchang** (Civil Topocentric) | **PAC Kolkata** (Indian Standard Horizon & Refraction) | **NOAA Solar Calculator** (USNO Zenith $90.833^\circ$ baseline) |
+| **Planetary Longitudes & True Nodes**| **Drik Panchang** (Grah Sthiti - True Node view) | **PAC Kolkata** (Nirayana Longitudes Table) | **NASA JPL Horizons** (ICRF / Ecliptic of-date conversion) |
+| **Rahu Kaal & Choghadiya** | **Drik Panchang** (Dynamic Dinamana Slicer) | **Rashtriya Panchang** (Dinamana 8-part division) | **BPHS Astronomical Slicer** |
+| **Bhava Chalit (House Cusps)** | **Drik Panchang Kundali** (Sripati Mode) | **PAC Kolkata** (City Lagnas & Midday) | **Jagannatha Hora** (Sripati Quadrant Trisecting Reference) |
+
+> ⚠️ **Metrological Rule:** Do sources ka aapas me match hona tabhi "Independent Confirmation" maana jayega jab unke underlying ephemeris (DE440 vs VSOP87 vs ELP2000) aur coordinate frames documented hon.
 
 ---
 
-## 📏 2. Acceptance Tolerance Thresholds (Pass/Fail Gates)
+## 📏 2. Acceptance Tolerance Metrology (Provisional Gates)
 
-| Parameter Type | Maximum Allowable Delta | Verification Verdict |
-|---|---|---|
-| **Suryodaya / Suryast** | $\le \pm 30\text{ to } 45\text{ seconds}$ | **PASS** (Otherwise FAIL) |
-| **Sun / Moon Longitudes** | $\le \pm 0^\circ\ 00'\ 30"\ (30\text{ arcseconds})$ | **PASS** (Otherwise FAIL) |
-| **Planetary Longitudes (Mars..Saturn)** | $\le \pm 0^\circ\ 01'\ 30"\ (90\text{ arcseconds})$ | **PASS** (Otherwise FAIL) |
-| **True Rahu / Ketu Longitude** | $\le \pm 0^\circ\ 01'\ 00"\ (1\text{ arcminute})$ | **PASS** (Otherwise FAIL) |
-| **Tithi / Nakshatra End Moments** | $\le \pm 1\text{ to } 2\text{ minutes}$ | **PASS** (Otherwise FAIL) |
-| **Ahoratra Day Boundary (Night births)** | Exact Match ($0\text{ drift}$ in Vaar / Dina-Lord) | **PASS** (Otherwise FAIL) |
-| **High Latitude / Polar Behaviour** | Zero crash, zero `NaN`, graceful polar fallback | **PASS** (Otherwise FAIL) |
+Universal constant limits ke bajaye parameter-wise thresholds set kiye gaye hain:
+
+| Parameter Type | Provisional Max Delta | Target P95 Error | Verification Verdict |
+|---|---|---|---|
+| **Suryodaya / Suryast** | $\le \pm 45\text{ seconds}$ | $\le 15\text{ seconds}$ | **PASS** (Otherwise FAIL) |
+| **Sun / Moon Longitudes** | $\le \pm 0^\circ\ 00'\ 30"\ (30")$ | $\le 10"$ | **PASS** (Otherwise FAIL) |
+| **Planetary Longitudes (Mars..Saturn)** | $\le \pm 0^\circ\ 01'\ 30"\ (90")$ | $\le 30"$ | **PASS** (Otherwise FAIL) |
+| **True Rahu / Ketu Longitude** | $\le \pm 0^\circ\ 01'\ 00"\ (60")$ | $\le 20"$ | **PASS** (Otherwise FAIL) |
+| **Tithi / Nakshatra End Moments** | $\le \pm 2\text{ minutes}$ | $\le 45\text{ seconds}$ | **PASS** (Otherwise FAIL) |
+| **Ahoratra Day Boundary (Night births)** | Exact Match ($0\text{ drift}$ in Vaar / Dina-Lord) | $0\text{ drift}$ | **PASS** (Otherwise FAIL) |
+| **High Latitude / Polar Behaviour** | Zero crash, zero `NaN`, explicit status code | Zero crash | **PASS** (Otherwise FAIL) |
+
+---
+
+## 🔬 3. Deep Audit Correction Addendum (6 Critical Verification Pillars)
+
+Yeh addendum engine ki buniyadi accuracy ko zameeni kasauti par parkhta hai:
+
+### Pillar A: Mathematical Invariants (Priority: Very High)
+* **Tithi Angular Invariant:** Har sample point par $\text{Tithi} = \lfloor (\lambda_{\text{Moon}} - \lambda_{\text{Sun}} \pmod{360^\circ}) / 12^\circ \rfloor + 1$ mathematically 100% hold hona chahiye.
+* **Nakshatra / Yoga / Karana Invariant:**
+  * Nakshatra $= \lfloor \lambda_{\text{Moon}} / 13^\circ\ 20' \rfloor + 1$
+  * Yoga $= \lfloor (\lambda_{\text{Sun}} + \lambda_{\text{Moon}} \pmod{360^\circ}) / 13^\circ\ 20' \rfloor + 1$
+  * Karana $= \text{Half-Tithi } (6^\circ \text{ segment})$
+* **Circular Angle Normalization:** $0^\circ / 360^\circ$ wrap-around boundary par negative angles ya $>360^\circ$ angles ka zero-error normalization ($[-1^\circ \to 359^\circ]$).
+
+### Pillar B: Time Engine & Calendar Integrity (Priority: Very High)
+* **Time Scale Transformations:** UTC $\leftrightarrow$ TT (Terrestrial Time) $\leftrightarrow$ TDB $\leftrightarrow$ Local Civil Time / IST ($+5:30$) ka precision conversion.
+* **Julian Day & Date Boundary:** Leap year (century/non-century), Julian $\to$ Gregorian calendar transition, Kali Ahargana alignment.
+* **Midnight vs Suryodaya Boundary:** Raat `00:00:00` se `Suryodaya` ke beech civil date change hoti hai, lekin Vedic Ahoratra Vaar aur Dina-Lord pichhle din ke sunrise se locked rehte hain.
+* **Historical Timezone Jumps:** Historical charts ke liye DST (Daylight Saving) aur historical timezone changes ($+5:21:14 \to +5:30$) ka handling.
+
+### Pillar C: Boundary & Event-Solving Accuracy (Priority: Very High)
+* **Continuous Root-Finding:** Linear interpolation ki jagah Newton-Raphson ya Brent's Method ka use.
+* **3-Point Boundary Stress Test:**
+  * Exact Boundary se **1 second pehle** ($T - 1\text{s}$)
+  * Exact Boundary moment par ($T$)
+  * Exact Boundary se **1 second baad** ($T + 1\text{s}$)
+  * Test: Kya tithi/nakshatra index expected sequence me change hota hai bina oscillation ya jitter ke?
+* **Residual Error Measurement:** Calculate kiye gaye event time $T$ par planetary position dobara evaluate karke residual error $(\epsilon < 0.001")$ verify karna.
+
+### Pillar D: Geography & Observer Model (Priority: High)
+* **Topocentric vs Geocentric Separation:** Tithi/Nakshatra ke liye Geocentric Nirayana longitudes, jabki Moonrise/Moonset/Eclipse ke liye Topocentric Horizontal Parallax ($~1^\circ$) apply karna.
+* **Elevation Dip & Refraction:** Standard horizon ($h_0 = -0.8333^\circ$) me observer elevation ($h$ meters) dip add karte waqt double-counting avoid karna:
+  $$\text{True Zenith} = 90^\circ + 0.8333^\circ + 0.0293^\circ \sqrt{h}$$
+* **Polar Strict Contracts (>55° / Polar Circles):** Jab suraj 24 ghante na doobey (Midnight Sun) ya na ugey (Polar Night), engine koi artificial/fake sunrise time generate nahi karega; balki strictly `{ status: 'POLAR_DAY', sunrise: null, sunset: null }` ya `{ status: 'POLAR_NIGHT' }` return karega.
+
+### Pillar E: Panchang Rules & Tradition Consistency (Priority: High)
+* **Udayatithi vs Instant-based Selection:** Vrat aur dynamic muhurta ke beech udayatithi niyam vs instantaneous tithi ka clear architectural separation.
+* **Kshaya & Vriddhi Tithi Lifecycle:** Sunrise-to-sunrise ke beech aane-jaane wali Kshaya Tithi ko continuous scanner se detect karna taaki festival determination fail na ho.
+* **Rahu Kaal Weekday Sequence:** Dinamana ke 8 hisso me weekday ke hisaab se correct slot pick karna (Mon: 2nd, Sat: 3rd, Fri: 4th, Wed: 5th, Thu: 6th, Tue: 7th, Sun: 8th), zero fixed-duration assumptions.
+* **Sripati House Trisector Geometry:** Lagna aur MC (Midheaven) nikal kar quadrant ko 3 barabar hisson me baantna (No fixed 15° Equal house assumption).
+
+### Pillar F: Regression, Reproducibility & Failure Logging (Priority: High)
+* **Deterministic Runs:** Seeded random dates aur historical dates ko repeat run karne par exact bit-level identical output aana chahiye.
+* **Cache Integrity:** Panchang cache se nikla result aur fresh calculation ka result $100\%$ identical hona chahiye.
+* **Silent Fallback & NaN Detection:** Invalid coordinates (e.g. Lat $>90^\circ$) par engine silent wrong calculation nahi karega; structured validation error throw karega.
+* **Failure Telemetry:** Har test failure par `{ inputDate, coordinates, expected, actual, signedDelta, failureCategory }` JSON format me log hoga.
 
 ---
 
-## 🏗️ 3. Execution Roadmap: Phase-by-Phase Plan
+## 📊 4. Scientific Error Metrology (No Fake 99% Blanket Scores)
+
+Report me koi single misleading accuracy percentage nahi aayega. Engine ka scorecard 6 alag metrological metrics me bat-ta hai:
+
+1. **Numerical Accuracy:** Mean Error, Median Error, Maximum Error, aur P95 Error (arcseconds & seconds).
+2. **Boundary Accuracy:** Event timing error (seconds me) aur transition classification accuracy.
+3. **Functional Correctness:** Category-wise Pass / Total tests ($N \ge 10,000$ automated test vectors).
+4. **Robustness:** Invalid inputs, polar edge-cases, aur zero crash rate.
+5. **Reproducibility:** Repeat calculation runs me zero divergence ($100\%$ determinism).
+6. **Reference Agreement:** Har external source ke sath **Signed Delta ($\Delta = \text{Actual} - \text{Expected}$)** aur **Absolute Delta ($|\Delta|$)** report hoga taaki systematic bias detect ho sake.
 
 ---
+
+## 🏗️ 5. Phase-by-Phase Execution Roadmap
 
 ### 🪐 PHASE 1: Core Astronomy & Ephemeris Layer
-**Target Files:**  
-* `src/engine/astronomicalEngine.ts`  
-* `src/engine/core/sanatan_jpl_bridge.ts`  
-* `src/engine/types.ts`
-
-#### Benchmarks Covered:
-* **Benchmark 4:** Ayanamsha Precision (Chitrapaksha Lahiri Drift)
-* **Benchmark 7:** True Node vs Mean Node (Rahu/Ketu 1° 45' Gap)
-* **Benchmark 5:** Coordinate Truncation (VSOP87 Planetary Accuracy)
-* **Benchmark 6:** Topocentric vs Geocentric (Lunar Parallax Separation)
-* **Benchmark 11:** Vakri (Retrograde) Stationing & Sankranti Ingress (Root-Finding)
-
-#### Implementation Steps:
-1. **B4:** Precession polynomial me IAU nutation in longitude add karna; PAC Kolkata (`packolkata.imd.gov.in/panchang/en`) ke official Lahiri Ayanamsha se calibrate karna.
-2. **B7:** `astronomicalEngine.ts` me True Node algorithm implement karna; default view ko **True Rahu** par set karna (Drik Panchang aur JPL se match karne ke liye).
-3. **B5 & B6:** Geocentric longitudes Tithi ke liye aur Topocentric parallax Moonrise/Moonset ke liye isolate karna.
-4. **B11:** Linear interpolation ki jagah Newton-Raphson/Brent method se 0-velocity stationing aur Sankranti ingress calculate karna.
-
-#### Triple-Source Testing Vectors:
-* **Test Vector 1:** Today's Live Date (`2026-10-25`), New Delhi coordinates (`28.6139° N, 77.2090° E`).
-* **Test Vector 2:** Solar Ingress / Sankranti moment.
-
-#### Mandatory Phase 1 Delta Report Format:
-```markdown
-### 📋 Phase 1 Completion & Delta Verification Report
-- **Files Modified:** [list of files and exact math changes]
-- **Delta Matrix:**
-| Metric | Source 1 (Drik) | Source 2 (PAC Govt) | Source 3 (JPL/Swiss) | Sanatan Web | Delta vs S1 | Delta vs S2 | Status |
-|---|---|---|---|---|---|---|---|
-| Lahiri Ayanamsha | 24° 13' 48" | 24° 13' 48" | 24° 13' 46" | 24° 13' 47" | -1" | -1" | PASS |
-| True Rahu Degree | 22° 14' 10" | 22° 14' 11" | 22° 14' 08" | 22° 14' 10" | 0" | -1" | PASS |
-| Sun Longitude | ... | ... | ... | ... | ... | ... | PASS |
-| Moon Longitude | ... | ... | ... | ... | ... | ... | PASS |
-```
-
----
+* **Benchmarks:** B4 (Ayanamsha), B7 (True Node vs Mean Node), B5 (Coordinate Truncations), B6 (Lunar Parallax), B11 (Stationing/Ingress).
+* **Target Files:** `src/engine/astronomicalEngine.ts`, `src/engine/core/sanatan_jpl_bridge.ts`, `src/engine/types.ts`.
+* **Testing:** Triple Ground-Truth (Drik, PAC Saka 1948, Swiss Ephemeris DE440/441).
 
 ### ☀️ PHASE 2: Solar Horizon, Ahoratra & Temporal Foundation
-**Target Files:**  
-* `src/engine/astronomicalEngine.ts`  
-* `src/engine/panchangCalc.ts`  
-* `src/engine/muhuratRules.ts`  
-* `src/engine/facade/inputResolver.ts`
-
-#### Benchmarks Covered:
-* **Benchmark 1:** Suryodaya & Suryast (Refraction -50' arcmin + Altitude Dip Angle)
-* **Benchmark 2:** Ahoratra Bug (Midnight 00:00 to Sunrise Day Boundary)
-* **Benchmark 3:** Dinamana / Ratrimana (Dynamic 1/8th Division vs Flat 90-min)
-
-#### Implementation Steps:
-1. **B1:** Standard Refraction (`-0.8333°`) ke sath atmospheric elevation dip formula jodna:
-   $$\text{Dip} = 0.0293^\circ \times \sqrt{h \text{ (meters)}}$$
-   Aur PAC Kolkata ke metro sunrise standards se cross-verify karna.
-2. **B2:** `inputResolver.ts` me temporal interceptor lagana: Agar `birthTime < localSunrise`, to `vedicDate = calendarDate - 1 day` set ho, Vaar aur Dina-Lord automatic pichhle din map ho.
-3. **B3:** Verify karna ki Rahu Kaal, Yamaganda aur 8 Choghadiya Dinamana (`Sunset - Sunrise`) aur Ratrimana (`NextSunrise - Sunset`) se dynamically slice ho rahe hain.
-
-#### Triple-Source Testing Vectors:
-* **Test Vector 1 (Plains):** New Delhi (`28.6139° N, 77.2090° E`, elevation 216m).
-* **Test Vector 2 (High Altitude):** Shimla (`31.1048° N, 77.1734° E`, elevation 2200m).
-* **Test Vector 3 (Ahoratra Night Birth):** Date `26-Oct-2026`, Time `02:30 AM` (Expected Vaar: Ravivar, not Somwar).
-* **Test Vector 4 (Seasonal Extremes):** Summer Solstice (`21 June`) aur Winter Solstice (`22 December`).
-
-#### Mandatory Phase 2 Delta Report Format:
-```markdown
-### 📋 Phase 2 Completion & Delta Verification Report
-- **Files Modified:** [list of files and exact changes]
-- **Delta Matrix:**
-| Metric | Source 1 (Drik) | Source 2 (PAC Govt) | Source 3 (NOAA/USNO) | Sanatan Web | Delta vs S1 | Delta vs S2 | Status |
-|---|---|---|---|---|---|---|---|
-| Sunrise (Delhi) | 06:28:15 | 06:28:00 | 06:28:10 | 06:28:12 | -3s | +12s | PASS |
-| Sunrise (Shimla) | 06:24:30 | 06:24:20 | 06:24:25 | 06:24:28 | -2s | +8s | PASS |
-| 02:30 AM Vaar | Ravivar | Ravivar | Ravivar | Ravivar | 0 | 0 | PASS |
-| Rahu Kaal (June 21)| 102 mins | 102 mins | 102 mins | 102 mins | 0m | 0m | PASS |
-```
-
----
+* **Benchmarks:** B1 (Sunrise Refraction & Elevation Dip), B2 (Ahoratra 00:00 Boundary), B3 (Dynamic Dinamana).
+* **Target Files:** `src/engine/astronomicalEngine.ts`, `src/engine/panchangCalc.ts`, `src/engine/muhuratRules.ts`, `src/engine/facade/inputResolver.ts`.
+* **Testing:** Delhi, Shimla (elevation), 02:30 AM night birth, Summer/Winter Solstices.
 
 ### 🏛️ PHASE 3: Angas, Bhavas & Edge-Cases
-**Target Files:**  
-* `src/engine/panchangCalc.ts`  
-* `src/engine/kundli/houseCusps.ts`  
-* `src/engine/vrataNirnaya.ts`
+* **Benchmarks:** B8 (Kshaya/Vriddhi Scanner), B9 (Sripati Quadrant Trisector), B10 (Polar Safeguards & Contracts).
+* **Target Files:** `src/engine/panchangCalc.ts`, `src/engine/kundli/houseCusps.ts`, `src/engine/vrataNirnaya.ts`.
+* **Testing:** Known Kshaya Tithi, Jagannatha Hora Sripati comparison, Tromsø Norway polar contract.
 
-#### Benchmarks Covered:
-* **Benchmark 8:** Kshaya & Vriddhi Tithi (Continuous Boundary Scanner)
-* **Benchmark 9:** Bhava Chalit House Systems (Sripati Parashari 15° Standard)
-* **Benchmark 10:** High-Latitude & Polar Singularity (>55° Latitude Safeguards)
-
-#### Implementation Steps:
-1. **B8:** Discrete daily loop ki jagah continuous event scanner lagana jo sunrise-to-sunrise ke beech aane-jaane wali Kshaya Tithi ko record kare aur PAC/Drik festival rules se align kare.
-2. **B9:** `houseCusps.ts` me Parashari Sripati padhati me Lagna ko 1st house ka Madhya lock karna aur PAC local midday & Jagannatha Hora standard se verify karna.
-3. **B10:** High latitude ($|\text{lat}| > 55^\circ$) ke liye guards lagana jahan polar day/night me trigonometric functions crash na hon aur standard polar fallback enable ho.
-
-#### Testing Vectors:
-* **Test Vector 1 (Kshaya Tithi):** Historical / upcoming Kshaya tithi date.
-* **Test Vector 2 (Bhava Chalit):** Borderline Lagna (`28° Mesh`) tested against Jagannatha Hora & Drik Sripati mode.
-* **Test Vector 3 (Polar Region):** Tromsø, Norway (`69.6492° N, 18.9553° E`) in June/December.
-
-#### Mandatory Phase 3 Delta Report Format:
-```markdown
-### 📋 Phase 3 Completion & Delta Verification Report
-- **Files Modified:** [list of files and exact changes]
-- **Delta Matrix:**
-| Metric | Source 1 (Drik) | Source 2 (PAC Govt) | Source 3 (J.Hora) | Sanatan Web | Delta vs S1 | Delta vs S2 | Status |
-|---|---|---|---|---|---|---|---|
-| Kshaya Tithi Detected | Yes (Pratipada) | Yes (Pratipada) | Yes (Pratipada) | Yes (Pratipada) | Match | Match | PASS |
-| 1st House Cusp (Sripati) | 13° 15' | 13° 15' (Lagna) | 13° 15' | 13° 15' | 0' | 0' | PASS |
-| Polar Day Run (Tromsø) | Non-crash | Non-crash | Non-crash | Non-crash | Clean | Clean | PASS |
-```
-
----
-
-### 🧪 PHASE 4: Final 5-Vector Master Stress Test & Deployment
-* **Objective:** Comprehensive end-to-end verification and certification. Zero architectural changes.
-* **5 Universal Test Vectors:**
-  1. Plain City (Delhi)
-  2. High Elevation (Shimla)
-  3. Ahoratra Night Birth (02:30 AM)
-  4. Ingress / Eclipse Day
-  5. High Latitude (London / Oslo)
-* **Action:**
-  * Run `npm run test` (confirm 1,902+ engine tests pass).
-  * Run `npm run build` (confirm 0 TypeScript/Vite errors).
-  * Generate master certificate report.
-  * Git commit & live production deployment.
-
----
-
-## 📌 Rules of Engagement for Execution:
-1. **Never Skip Ahead:** Phase 1 complete hokar verify hoga, tabhi Phase 2 chalu hoga.
-2. **Triple-Check Mandatory:** Drik Panchang, PAC Kolkata Govt Portal, aur Swiss/JPL teeno ke reference ke sath delta report har phase ke turant baad aayegi.
-3. **Transparent Reporting:** Jahan bhi difference permissible threshold se zyada hoga, wahan turant **FAIL** likha jayega aur root-cause fix kiya jayega.
+### 🧪 PHASE 4: Invariant-Driven 10,000-Vector Master Stress Test & Deployment
+* Automated invariant test suite run.
+* P95, Mean, Max error distribution scorecard generation.
+* Zero-regression validation, clean build, and production deployment.
