@@ -55,8 +55,8 @@ export const PortalHeader: React.FC = () => {
       <div className="h-18 lg:h-20 w-full px-4 sm:px-8 lg:px-12 flex items-center justify-between gap-4">
         <div className="flex items-center gap-6 xl:gap-8">
           <Link href="/" className="flex items-center gap-3 cursor-pointer group no-underline">
-            <div className="p-1 rounded-xl bg-white/95 border border-[#dec9ab] shadow-sm group-hover:scale-105 transition-transform flex items-center justify-center w-11 h-11 overflow-hidden">
-              <img src="/App1.png" alt="Sanatan Ghadi Vedic Logo" className="w-full h-full object-contain rounded-lg" />
+            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden flex items-center justify-center shrink-0 border-2 border-[#d4af37]/80 shadow-[0_2px_12px_rgba(212,175,55,0.3)] group-hover:scale-105 group-hover:border-[#ea580c] transition-all duration-300 bg-white">
+              <img src="/App1.png" alt="Sanatan Ghadi Vedic Logo" className="w-full h-full object-cover rounded-full" />
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-1.5">

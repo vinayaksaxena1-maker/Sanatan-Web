@@ -17,13 +17,13 @@ export const PortalFooter: React.FC = () => {
       {/* Main Footer Columns */}
       <div className="w-full px-4 sm:px-8 lg:px-12 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 max-w-7xl mx-auto text-sm">
         <div className="lg:col-span-2 space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="p-1 rounded-xl bg-white/95 border border-[#523320] w-10 h-10 overflow-hidden flex items-center justify-center shrink-0 shadow-sm">
-              <img src="/App1.png" alt="Sanatan Ghadi Vedic Logo" className="w-full h-full object-contain rounded-lg" />
+          <div className="flex items-center gap-3.5">
+            <div className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(212,175,55,0.35)] border-2 border-[#d4af37]/80 bg-[#1d1009] hover:scale-105 transition-transform duration-300">
+              <img src="/App1.png" alt="Sanatan Ghadi Vedic Logo" className="w-full h-full object-cover rounded-full" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-bold text-[#f2ca50]">सनातन घड़ी वैदिक</span>
-              <span className="text-[10px] tracking-wider text-[#d4af37]/80 uppercase">Sanatan Ghadi Vedic</span>
+              <span className="text-xl sm:text-2xl font-bold text-[#f2ca50] tracking-wide font-serif">सनातन घड़ी वैदिक</span>
+              <span className="text-[10px] tracking-widest text-[#d4af37]/85 uppercase font-sans font-semibold">SANATAN GHADI VEDIC</span>
             </div>
           </div>
           <p className="text-xs text-[#d9c5b2] leading-relaxed max-w-md">

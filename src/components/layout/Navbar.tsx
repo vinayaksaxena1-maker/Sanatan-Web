@@ -13,8 +13,8 @@ export default function Navbar({ onOpenMegaDrawer: _onOpenMegaDrawer }: NavbarPr
         
         {/* Left: Brand Logo & Subtitle */}
         <div className="flex items-center space-x-3 cursor-pointer">
-          <div className="w-10 h-10 rounded-xl bg-white border border-[#dec9ab] flex items-center justify-center shadow-sm overflow-hidden shrink-0">
-            <img src="/App1.png" alt="Sanatan Ghadi Vedic Logo" className="w-full h-full object-contain" />
+          <div className="w-11 h-11 rounded-full bg-white border-2 border-[#d4af37]/80 flex items-center justify-center shadow-[0_2px_12px_rgba(212,175,55,0.3)] overflow-hidden shrink-0">
+            <img src="/App1.png" alt="Sanatan Ghadi Vedic Logo" className="w-full h-full object-cover rounded-full" />
           </div>
           <div>
             <div className="flex items-center space-x-2">

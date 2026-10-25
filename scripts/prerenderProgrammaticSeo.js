@@ -344,6 +344,7 @@ function renderStaticHtml({ title, description, canonicalUrl, keywords, h1, cate
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#ea580c" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" href="/App1.png" />
     <link rel="apple-touch-icon" href="/app_icon_512x512.png" />
     <title>${title}</title>
