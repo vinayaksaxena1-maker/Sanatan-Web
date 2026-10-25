@@ -941,10 +941,10 @@ flowchart TD
 
 ---
 
-### 🕉️ PHASE 7: 15 CALENDARS, 19 UTILITIES, PROGRAMMATIC SEO (514 PRE-RENDERED STATIC ROUTES) & EDGE DEFENSE [COMPLETED ✅]
+### 🕉️ PHASE 7: 15 CALENDARS, 19 UTILITIES, PROGRAMMATIC SEO & AEO/E-E-A-T SUITE [IN PROGRESS 🔄]
 
 > [!NOTE]
-> 📌 **UI & SEO IMPLEMENTATION COMPLETE**: Phase 7 के सभी प्राथमिक हब्स (Calendar, Matchmaking, Utilities, Settings) हमारे दूसरे प्लान `sanatan_web_vertical_slice_master_plan.md` से 100% पूरे किए गए हैं। सब-फेज़ 7.4 (लीगल पेजेस) और सब-फेज़ 7.5 (प्रोग्रामेटिक एसईओ स्क्रिप्ट — 514 स्टैटिक रूट्स + 527 साइटमैप यूआरएल + LLM Suite) भी 100% पूरे, सत्यापित और कमिट हो चुके हैं।
+> 📌 **PHASE 7 SCOPE & STATUS**: Phase 7 के प्राथमिक हब्स (Calendar, Matchmaking, Utilities, Settings) हमारे दूसरे प्लान `sanatan_web_vertical_slice_master_plan.md` से 100% पूरे किए गए हैं। सब-फेज़ 7.4 (लीगल पेजेस) और 7.5 (प्रोग्रामेटिक एसईओ स्क्रिप्ट — 514 स्टैटिक रूट्स + 527 साइटमैप यूआरएल + LLM Suite) भी 100% पूरे, सत्यापित और कमिट हो चुके हैं। अब लाइव डोमेन डिप्लॉयमेंट (`VITE_SITE_URL`), कीवर्ड्स, और AI-एरा एसईओ (Schema Markup, AEO, E-E-A-T, Voice Search) हेतु **सब-फेज़ 7.8** जोड़ा गया है।
 
 #### Sub-phase 7.1: 15 Regional & Festival Calendars Hub `[COMPLETED ✅ - Commit 944725c via Vertical Slice Phase 5]`
 * 📁 **Target File Paths**: `src/pages/calendar/CalendarHub.tsx`, `src/pages/calendar/components/A4WallCalendarModal.tsx`
@@ -1016,8 +1016,29 @@ flowchart TD
 * 🧩 **Key Components / Exports**: All primary hubs, legal pages, and programmatic SEO generator committed and pushed to `origin/main`.
 * ✅ **Verification Gate**: `npm run build` succeeds; 514 pre-rendered static routes live; pushed to GitHub remote.
 
-🛑 **APPROVAL GATE 7: [MAIN PHASE DEEP AUDIT]** `[PASSED ✅]`  
-*Full Build Check (`npm run build` exit code 0) + 514 pre-rendered static routes + 527 URLs indexed in sitemap.xml + Zero type/lint errors + Git push confirmed. Living plan updated.*
+#### Sub-phase 7.8: Dynamic Production Domain, Brand Keywords & AEO/E-E-A-T Schema Suite (Voice Search + Rich FAQs + WebApplication Microdata) `[PENDING ⏳]`
+* 📁 **Target File Paths**: 
+  - `src/config/siteConfig.ts` (Centralized domain, site name, social tags, keyword matrices)
+  - `scripts/prerenderProgrammaticSeo.js` & `scripts/prerenderProgrammaticSeo.ts` (Dynamic `VITE_SITE_URL` / `SITE_URL` injection, FAQPage schema, WebApplication schema, Voice Search conversational queries)
+  - `src/components/seo/MetaTags.tsx` & `src/components/seo/JsonLd.tsx` (Dynamic runtime base URL fallback & FAQPage / WebApplication microdata support)
+  - `public/robots.txt` & `public/sitemap.xml` (Dynamic live domain base)
+  - `src/pages/legal/AboutUs.tsx` (Enhanced E-E-A-T authoritativeness & astronomical methodology credentials)
+* 🧩 **Key Components / Exports**: 
+  - **Dynamic Live URL Engine**: When deploying to a custom domain (e.g. `https://sanatanghadi.com`), setting `VITE_SITE_URL` or `SITE_URL` in `.env` / Vercel auto-configures all canonical tags, sitemap entries, and JSON-LD URLs with zero manual hardcoding.
+  - **Central Brand & Keyword Master**: Unified `siteConfig.ts` holding official brand titles (`सनातन घड़ी | Sanatan Ghadi`), core high-intent keywords (Panchang, Kundli, Choghadiya, Horas, Muhurat, Vrats, Vedic Astrology).
+  - **AEO (Answer Engine Optimization) & Voice Search**: 40-50 word direct conversational Q&A snippets formatted for Google AI Overviews (SGE) and voice assistants (Google Assistant/Siri/Alexa) covering daily Panchang, Rahu Kaal, Abhijit Muhurat, Nakshatras, and Choghadiya.
+  - **E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness) Framework**: Methodological proof for Google's YMYL (Your Money or Your Life) standards — NASA JPL DE440 ephemeris, Chitrapaksha Lahiri Ayanamsha, Drik Ganita vs Surya Siddhanta mathematical transparency, and Vedic scholar review lineage.
+  - **Rich JSON-LD Schema Suite**: `WebApplication` / `SoftwareApplication` on interactive calculators + `FAQPage` + `BreadcrumbList` + `Organization` passing Google Rich Results tests with zero warnings.
+  - **Native Client-Side AI Personalization Protection**: Pure client-side 0ms personalized Vedic calculation engine, completely free, private, offline PWA compatible without costly/fragile third-party LLM API dependencies.
+* ✅ **Verification Gate**: 
+  - Changing `VITE_SITE_URL` immediately updates all generated static HTML canonical links, sitemaps, and Schema IDs without breaking build.
+  - Google Rich Results test validation on generated schema (0 errors).
+  - Voice-friendly conversational FAQ snippets verified in static pre-rendered routes.
+  - `npm run build` succeeds, `npm test` passes 100%.
+* 🛑 **MICRO-AUDIT & HALT**: Implementation verified $\rightarrow$ **READY FOR IMPLEMENTATION**.
+
+🛑 **APPROVAL GATE 7: [MAIN PHASE DEEP AUDIT]** `[SUB-PHASES 7.1-7.7 VERIFIED ✅ / SUB-PHASE 7.8 PENDING ⏳]`  
+*Sub-phases 7.1-7.7 live and verified. Sub-phase 7.8 ready for dynamic domain, brand keywords, and AEO/E-E-A-T schema execution.*
 
 ---
 
