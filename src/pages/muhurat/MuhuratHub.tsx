@@ -1,55 +1,71 @@
 /**
- * Sanatan Ghadi (सनातन घड़ी)
- * Hub 05: Shubh Muhurat Radar & Purpose Finder
+ * Sanatan Web (सनातन घड़ी)
+ * Hub 04: Shubh Muhurat Hub (शुभ मुहूर्त एवं संस्कार काल निर्णय)
+ * Official Luxury Redesign based on Stitch Screen 00a4fbd9a3d7401e9fc1844ab2285418
+ * Pure Web, React 19, Strict < 300 lines modular standard
  */
 
-import React from 'react';
-import { useTranslation } from '../../i18n/i18nContext';
-import { Sparkles, Car, Home, Heart, Briefcase, Baby } from 'lucide-react';
+import React, { useState } from 'react';
+import { PortalHeader } from '../vedic-portal/components/PortalHeader';
+import { PortalFooter } from '../vedic-portal/components/PortalFooter';
+import CitySelectModal from '../../components/common/CitySelectModal';
+import { useMuhuratData } from './hooks/useMuhuratData';
+import { MuhuratTopBar } from './components/MuhuratTopBar';
+import { MuhuratInstantCards } from './components/MuhuratInstantCards';
+import { MuhuratCautionAlerts } from './components/MuhuratCautionAlerts';
+import { MuhuratCategoryTabs } from './components/MuhuratCategoryTabs';
+import { MuhuratCategoryCards } from './components/MuhuratCategoryCards';
+import { MuhuratSanskarTable } from './components/MuhuratSanskarTable';
+import { MuhuratWisdomSection } from './components/MuhuratWisdomSection';
 
 export const MuhuratHub: React.FC = () => {
-  const { t } = useTranslation();
-
-  const categories = [
-    { id: 'vivah', label: t('muhurat.vivah'), icon: Heart },
-    { id: 'grihaPravesh', label: t('muhurat.grihaPravesh'), icon: Home },
-    { id: 'vehicle', label: t('muhurat.vehicle'), icon: Car },
-    { id: 'vyapar', label: t('muhurat.vyapar'), icon: Briefcase },
-    { id: 'namkaran', label: t('muhurat.namkaran'), icon: Baby },
-  ];
+  const muhuratData = useMuhuratData();
+  const [isCityModalOpen, setIsCityModalOpen] = useState<boolean>(false);
 
   return (
-    <div className="space-y-6">
-      <header className="space-y-1">
-        <div className="flex items-center gap-2">
-          <Sparkles className="w-6 h-6 text-amber-600" />
-          <h1 className="text-2xl sm:text-3xl font-bold text-stone-900 font-serif">
-            {t('muhurat.title')}
-          </h1>
-        </div>
-        <p className="text-sm text-stone-600">
-          विवाह, गृह प्रवेश, वाहन क्रय, नामकरण व व्यापार शुभारंभ का वैदिक मुहूर्त स्कैनर
-        </p>
-      </header>
+    <div className="bg-[#f7f2e6] text-[#26150b] antialiased selection:bg-[#ea580c] selection:text-white relative min-h-screen overflow-x-hidden font-serif">
+      {/* Ambient Saffron & Chandan Radial Luminous Glows */}
+      <div className="fixed top-0 left-1/4 w-[700px] h-[700px] ambient-glow-saffron pointer-events-none -z-10 blur-3xl opacity-75"></div>
+      <div className="fixed top-1/3 right-[-100px] w-[600px] h-[600px] ambient-glow-gold pointer-events-none -z-10 blur-3xl opacity-60"></div>
 
-      {/* Purpose Filter Chips */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-        {categories.map((cat) => {
-          const Icon = cat.icon;
-          return (
-            <button
-              key={cat.id}
-              type="button"
-              className="flex items-center gap-2 p-3 rounded-xl bg-white border border-amber-200/80 hover:border-amber-400 hover:bg-amber-50/50 transition-all text-left cursor-pointer shadow-xs"
-            >
-              <div className="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center text-amber-800">
-                <Icon className="w-4 h-4" />
-              </div>
-              <span className="text-xs font-semibold text-stone-900">{cat.label}</span>
-            </button>
-          );
-        })}
-      </div>
+      {/* Top Header */}
+      <PortalHeader />
+
+      {/* Main Command Surface */}
+      <main className="w-full pt-32 pb-16 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto space-y-8" id="muhurat-hub">
+        {/* 1. Top Heritage Hero Scrim, Breadcrumb & Context Ribbon */}
+        <MuhuratTopBar
+          data={muhuratData}
+          onOpenCityModal={() => setIsCityModalOpen(true)}
+        />
+
+        {/* 2. Today's Instant & Actionable Muhurats (Abhijit, Vijaya, Godhuli, Brahma) */}
+        <MuhuratInstantCards data={muhuratData} />
+
+        {/* 3. Caution Periods & Inauspicious Alert Ribbon (Panchak, Bhadra, Kharmas, Rahu Kaal) */}
+        <MuhuratCautionAlerts data={muhuratData} />
+
+        {/* 4. Category Tabs Navigation & Month/Paksha Toolbar */}
+        <MuhuratCategoryTabs data={muhuratData} />
+
+        {/* 5. Detailed Astrological Ceremony Cards for Selected Category */}
+        <MuhuratCategoryCards data={muhuratData} />
+
+        {/* 6. High-Density Responsive Table for All 16 Major Vedic Ceremonies */}
+        <MuhuratSanskarTable data={muhuratData} />
+
+        {/* 7. Scriptural Wisdom & Guidelines (Tribala Shuddhi, 10 Mahadoshas, Choghadiya vs Muhurat) */}
+        <MuhuratWisdomSection />
+      </main>
+
+      {/* 8. City Selector Modal */}
+      <CitySelectModal
+        isOpen={isCityModalOpen}
+        onClose={() => setIsCityModalOpen(false)}
+      />
+
+      {/* Scriptural Vedic Footer */}
+      <PortalFooter />
     </div>
   );
 };
