@@ -37,7 +37,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     currentPath === '/choghadiya' ||
     currentPath === '/choghadiya-hora' ||
     currentPath === '/hora' ||
-    currentPath === '/muhurat'
+    currentPath === '/muhurat' ||
+    currentPath === '/calendar'
   ) {
     return <>{children}</>;
   }

@@ -1,41 +1,89 @@
 /**
- * Sanatan Ghadi (सनातन घड़ी)
- * Hub 07: 15 Regional & Festival Calendars Hub
+ * Sanatan Web (सनातन घड़ी)
+ * Hub 05: Hindu & Regional Calendar Hub (हिन्दू कैलेंडर, सम्पूर्ण व्रत निर्णय एवं A4 वॉल कैलेंडर)
+ * Official Luxury Redesign based on Stitch Screens 3d6cdc605d334ebdbd7da24b738d7867 & af8f5397cba344409cc0ea0c0a5d0af7
+ * Pure Web, React 19, Strict < 300 lines modular standard
  */
 
-import React from 'react';
-import { useTranslation } from '../../i18n/i18nContext';
-import { CalendarRange } from 'lucide-react';
+import React, { useState } from 'react';
+import { PortalHeader } from '../vedic-portal/components/PortalHeader';
+import { PortalFooter } from '../vedic-portal/components/PortalFooter';
+import CitySelectModal from '../../components/common/CitySelectModal';
+import { useCalendarData } from './hooks/useCalendarData';
+import { CalendarTopBar } from './components/CalendarTopBar';
+import { CalendarMonthSwitcher } from './components/CalendarMonthSwitcher';
+import { CalendarFilterChips } from './components/CalendarFilterChips';
+import { CalendarMonthlyGrid } from './components/CalendarMonthlyGrid';
+import { CalendarDayDrawer } from './components/CalendarDayDrawer';
+import { WallCalendarA4Modal } from './components/WallCalendarA4Modal';
 
 export const CalendarHub: React.FC = () => {
-  const { t } = useTranslation();
+  const calendarData = useCalendarData();
+  const [isCityModalOpen, setIsCityModalOpen] = useState<boolean>(false);
 
   return (
-    <div className="space-y-6">
-      <header className="space-y-1">
-        <div className="flex items-center gap-2">
-          <CalendarRange className="w-6 h-6 text-amber-600" />
-          <h1 className="text-2xl sm:text-3xl font-bold text-stone-900 font-serif">
-            {t('nav.calendar')}
-          </h1>
-        </div>
-        <p className="text-sm text-stone-600">
-          15 प्रमुख वैदिक व क्षेत्रीय कैलेंडर प्रणालियां (दिवाली, दुर्गा पूजा, नवरात्रि, तमिल, बंगाली आदि)
-        </p>
-      </header>
+    <div className="bg-[#f7f2e6] text-[#26150b] antialiased selection:bg-[#ea580c] selection:text-white relative min-h-screen overflow-x-hidden font-serif">
+      {/* Ambient Saffron & Chandan Radial Luminous Glows */}
+      <div className="fixed top-0 left-1/4 w-[700px] h-[700px] ambient-glow-saffron pointer-events-none -z-10 blur-3xl opacity-75"></div>
+      <div className="fixed top-1/3 right-[-100px] w-[600px] h-[600px] ambient-glow-gold pointer-events-none -z-10 blur-3xl opacity-60"></div>
 
-      {/* Month View Placeholder */}
-      <div className="bg-white rounded-2xl p-5 border border-amber-200/80 shadow-xs space-y-3">
-        <div className="flex items-center justify-between border-b border-amber-100 pb-2">
-          <h3 className="font-bold text-stone-900">चैत्र शुक्ल पक्ष माह ग्रिड</h3>
-          <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 font-medium">
-            विक्रम संवत 2083
-          </span>
+      {/* Top Header */}
+      <PortalHeader />
+
+      {/* Main Command Surface */}
+      <main className="w-full pt-32 pb-16 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto space-y-8" id="calendar-hub">
+        {/* 1. Header Banner, Breadcrumb & A4 Wall Calendar Action */}
+        <CalendarTopBar
+          data={calendarData}
+          onOpenA4Modal={() => calendarData.setIsA4ModalOpen(true)}
+          onOpenCityModal={() => setIsCityModalOpen(true)}
+        />
+
+        {/* 2. Interactive Month Switcher & Samvat Metadata Metrics */}
+        <CalendarMonthSwitcher data={calendarData} />
+
+        {/* 3. Fast Filter Chips for Vrat Categories */}
+        <CalendarFilterChips
+          selectedFilter={calendarData.selectedFilter}
+          onSelectFilter={calendarData.setSelectedFilter}
+        />
+
+        {/* 4. 2-Column Responsive Matrix (Left 8 Cols Grid + Right 4 Cols Day Drawer) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Monthly 7-Column Grid (8 Columns on desktop) */}
+          <div className="lg:col-span-8 w-full">
+            <CalendarMonthlyGrid
+              gridCells={calendarData.calendarGrid}
+              selectedDayNumber={calendarData.selectedDayNumber}
+              onSelectDay={calendarData.setSelectedDayNumber}
+              selectedFilter={calendarData.selectedFilter}
+            />
+          </div>
+
+          {/* Right Inspector Drawer (4 Columns on desktop) */}
+          <div className="lg:col-span-4 w-full">
+            <CalendarDayDrawer
+              selectedDayDetails={calendarData.selectedDayDetails}
+              onSelectDay={calendarData.setSelectedDayNumber}
+              onOpenA4Modal={() => calendarData.setIsA4ModalOpen(true)}
+            />
+          </div>
         </div>
-        <p className="text-xs text-stone-600">
-          माह के सभी एकादशी, पूर्णिमा, अमावस्या, प्रदोष व्रत व प्रमुख सनातन त्योहारों की संपूर्ण सूची।
-        </p>
-      </div>
+      </main>
+
+      {/* Global Modals */}
+      <WallCalendarA4Modal
+        isOpen={calendarData.isA4ModalOpen}
+        onClose={() => calendarData.setIsA4ModalOpen(false)}
+      />
+
+      <CitySelectModal
+        isOpen={isCityModalOpen}
+        onClose={() => setIsCityModalOpen(false)}
+      />
+
+      {/* Global Footer */}
+      <PortalFooter />
     </div>
   );
 };
