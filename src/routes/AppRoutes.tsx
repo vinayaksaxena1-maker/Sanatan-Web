@@ -23,6 +23,7 @@ const HoraHub = lazy(() => import('../pages/hora/HoraHub'));
 const MuhuratHub = lazy(() => import('../pages/muhurat/MuhuratHub'));
 const KundliHub = lazy(() => import('../pages/kundli/KundliHub'));
 const CalendarHub = lazy(() => import('../pages/calendar/CalendarHub'));
+const MatchmakingHub = lazy(() => import('../pages/matchmaking/MatchmakingHub'));
 const UtilitiesHub = lazy(() => import('../pages/utilities/UtilitiesHub'));
 const CitiesHub = lazy(() => import('../pages/cities/CitiesHub'));
 const SettingsHub = lazy(() => import('../pages/settings/SettingsHub'));
@@ -182,8 +183,9 @@ export const AppRoutes: React.FC = () => {
       case '/calendar':
         return <CalendarHub />;
       case '/utilities':
-      case '/matchmaking':
         return <UtilitiesHub />;
+      case '/matchmaking':
+        return <MatchmakingHub />;
       case '/cities':
         return <CitiesHub />;
       case '/settings':
