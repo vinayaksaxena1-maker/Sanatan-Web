@@ -19,7 +19,7 @@ export type VedicIcon3DType =
 
 export interface VedicIcon3DProps {
   name: VedicIcon3DType;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | number;
   className?: string;
 }
 
@@ -28,14 +28,26 @@ export const VedicIcon3D: React.FC<VedicIcon3DProps> = ({
   size = 'md',
   className = '',
 }) => {
-  const sizeMap = {
-    sm: 'w-7 h-7 min-w-[28px]',
-    md: 'w-10 h-10 min-w-[40px]',
-    lg: 'w-12 h-12 min-w-[48px]',
-    xl: 'w-16 h-16 min-w-[64px]',
+  const isNumeric = typeof size === 'number';
+  const sizeMap: Record<string, string> = {
+    xs: 'w-4 h-4 min-w-[16px] max-w-[16px]',
+    sm: 'w-7 h-7 min-w-[28px] max-w-[28px]',
+    md: 'w-10 h-10 min-w-[40px] max-w-[40px]',
+    lg: 'w-12 h-12 min-w-[48px] max-w-[48px]',
+    xl: 'w-16 h-16 min-w-[64px] max-w-[64px]',
   };
 
-  const dim = sizeMap[size];
+  const dim = isNumeric ? '' : (sizeMap[size] || sizeMap.md);
+  const inlineStyle: React.CSSProperties | undefined = isNumeric
+    ? {
+        width: `${size}px`,
+        height: `${size}px`,
+        minWidth: `${size}px`,
+        maxWidth: `${size}px`,
+        minHeight: `${size}px`,
+        maxHeight: `${size}px`,
+      }
+    : undefined;
 
   // Render authentic 3D Vector Objects with Lighting, Specular Highlights & Bevels
   const renderIconContent = () => {
@@ -404,6 +416,7 @@ export const VedicIcon3D: React.FC<VedicIcon3DProps> = ({
 
   return (
     <div
+      style={inlineStyle}
       className={`inline-flex items-center justify-center shrink-0 transition-transform duration-300 ease-out hover:scale-110 select-none ${dim} ${className}`}
       aria-hidden="true"
     >
