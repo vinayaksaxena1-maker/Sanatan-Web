@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link, useRouter } from '../../../routes/AppRoutes';
 import { VedicIcon3D } from './VedicIcon3D';
+import { useLocationStore } from '../../../store/locationStore';
+import { calculatePanchang } from '../../../engine';
+import {
+  formatTimeToHindi,
+  formatTimeRangeToHindi,
+  cleanHindiName,
+  toHindiDigits
+} from '../../../components/watch';
 
 export const PortalHeader: React.FC = () => {
   const { currentPath } = useRouter();
+  const { currentCity } = useLocationStore();
+
+  const panchang = useMemo(() => {
+    return calculatePanchang(currentCity.latitude, currentCity.longitude, new Date());
+  }, [currentCity.latitude, currentCity.longitude]);
 
   const navItems = [
     { label: 'मुख्य पृष्ठ', href: '/' },
@@ -14,6 +27,22 @@ export const PortalHeader: React.FC = () => {
     { label: 'व्रत कैलेंडर', href: '/calendar' },
   ];
 
+  const cityDisplay = `${currentCity.nameHindi || currentCity.name} (${Math.abs(currentCity.latitude).toFixed(2)}° ${currentCity.latitude >= 0 ? 'उ' : 'द'}, ${Math.abs(currentCity.longitude).toFixed(2)}° ${currentCity.longitude >= 0 ? 'पू' : 'प'})`;
+  const sunriseStr = panchang?.sunrise ? formatTimeToHindi(panchang.sunrise) : '०६:०४ पूर्वाह्न';
+  const sunsetStr = panchang?.sunset ? formatTimeToHindi(panchang.sunset) : '०५:४३ अपराह्न';
+  const tithiName = panchang?.hinduDate?.tithi?.hindiName
+    ? cleanHindiName(panchang.hinduDate.tithi.hindiName)
+    : 'शुक्ल पक्ष';
+  const nakshatraName = panchang?.hinduDate?.nakshatra?.hindiName
+    ? `${cleanHindiName(panchang.hinduDate.nakshatra.hindiName)} (पद ${toHindiDigits(panchang.hinduDate.nakshatra.pada || 1)})`
+    : 'नक्षत्र';
+  const rahuKaalStr = panchang?.rahuKaal?.start && panchang?.rahuKaal?.end
+    ? formatTimeRangeToHindi(panchang.rahuKaal.start, panchang.rahuKaal.end)
+    : 'वर्ज्य काल';
+  const samvatYear = panchang?.hinduDate?.samvatVikram
+    ? toHindiDigits(panchang.hinduDate.samvatVikram)
+    : '२०८१';
+
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-[#fbf7ee]/90 backdrop-blur-2xl border-b border-[#d95d0f]/15 shadow-[0_4px_24px_rgba(77,51,34,0.06)] font-serif">
       {/* Ephemeris Mini Strip (सूक्ष्म पंचांग पट्टी) */}
@@ -21,28 +50,28 @@ export const PortalHeader: React.FC = () => {
         <div className="flex items-center gap-4 text-[#735641] overflow-x-auto whitespace-nowrap">
           <div className="flex items-center gap-1.5 text-[#b8860b] font-medium">
             <span className="material-symbols-outlined text-[14px]">temple_hindu</span>
-            <span>वाराणसी (काशी 25.31° उ, 82.97° पू)</span>
+            <span>{cityDisplay}</span>
           </div>
           <span className="text-[#d8c5ad]">•</span>
           <div className="flex items-center gap-1.5">
             <span className="material-symbols-outlined text-[#ea580c] text-[14px]">wb_twilight</span>
-            <span className="text-[#382012] font-semibold">सूर्योदय: ०६:१४ पूर्वाह्न | सूर्यास्त: ०६:४१ अपराह्न</span>
+            <span className="text-[#382012] font-semibold">सूर्योदय: {sunriseStr} | सूर्यास्त: {sunsetStr}</span>
           </div>
           <span className="text-[#d8c5ad]">•</span>
           <div className="flex items-center gap-1">
             <span className="text-[#c2410c] font-bold">तिथि:</span>
-            <span className="text-[#382012]">शुक्ल त्रयोदशी</span>
+            <span className="text-[#382012]">{tithiName}</span>
           </div>
           <span className="text-[#d8c5ad]">•</span>
           <div className="flex items-center gap-1">
             <span className="text-[#c2410c] font-bold">नक्षत्र:</span>
-            <span className="text-[#382012]">उत्तर फाल्गुनी (द्वितीय पद)</span>
+            <span className="text-[#382012]">{nakshatraName}</span>
           </div>
         </div>
         <div className="hidden md:flex items-center gap-3">
           <div className="px-2.5 py-0.5 rounded-full bg-[#ea580c]/12 text-[#c2410c] border border-[#ea580c]/25 flex items-center gap-1.5 font-bold text-[11px]">
             <span className="w-1.5 h-1.5 rounded-full bg-[#ea580c] animate-pulse"></span>
-            <span>राहु काल: ०४:३० – ०६:०० अपराह्न (वर्ज्य काल)</span>
+            <span>राहु काल: {rahuKaalStr} (वर्ज्य काल)</span>
           </div>
           <div className="hidden xl:flex items-center gap-1 text-[#735641] text-[11px]">
             <span className="material-symbols-outlined text-[13px] text-[#b8860b]">auto_awesome</span>
@@ -92,7 +121,7 @@ export const PortalHeader: React.FC = () => {
         <div className="flex items-center gap-3">
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl glass-pill text-xs text-[#684d3b] border border-[#dec9ab]">
             <VedicIcon3D name="tithi" size="sm" />
-            <span className="font-bold text-[#c2410c]">विक्रम संवत २०८१</span>
+            <span className="font-bold text-[#c2410c]">विक्रम संवत {samvatYear}</span>
             <span className="text-[#8c7166]">• क्रोधी संवत्सर</span>
           </div>
           <Link

@@ -1,8 +1,17 @@
-import React from 'react';
+/**
+ * Sanatan Web (सनातन घड़ी)
+ * Component: PortalNavagraha
+ * Navagraha Real-Time Planetary Positions & Motion
+ * Connected directly to NASA JPL Bridge / Sanatan AstroEngine
+ */
+
+import React, { useMemo } from 'react';
 import { GoldenCornerBrackets } from './GoldenCornerBrackets';
 import { SacredGeometryWatermark } from './SacredGeometryWatermark';
+import { calculatePlanets } from '../../../engine';
+import { toHindiDigits } from '../../../components/watch';
 
-interface GrahaItem {
+interface GrahaDisplay {
   name: string;
   alias: string;
   degree: string;
@@ -12,39 +21,61 @@ interface GrahaItem {
   isHighlight?: boolean;
 }
 
-const GRAHAS: GrahaItem[] = [
-  { name: 'सूर्य', alias: 'रवि', degree: "२८°४१'", rashi: 'मीन राशि', pada: 'रेवती • पद ४' },
-  { name: 'चन्द्र', alias: 'सोम', degree: "१४°१२'", rashi: 'कन्या राशि', pada: 'हस्त • पद २' },
-  { name: 'मंगल', alias: 'भौम', degree: "०६°२२'", rashi: 'कुंभ राशि', pada: 'धनिष्ठा • पद ४' },
-  {
-    name: 'बुध',
-    alias: 'सौम्य',
-    degree: "०२°१८'",
-    rashi: 'मेष राशि',
-    pada: 'अश्विनी • वक्री',
-    statusBadge: { label: 'वक्री', bg: 'bg-red-100', text: 'text-red-700' },
-    isHighlight: true
-  },
-  { name: 'गुरु', alias: 'बृहस्पति', degree: "२७°५४'", rashi: 'वृषभ राशि', pada: 'रोहिणी • पद ३' },
-  {
-    name: 'शुक्र',
-    alias: 'भार्गव',
-    degree: "१८°३०'",
-    rashi: 'मीन राशि',
-    pada: 'रेवती • परम उच्च',
-    statusBadge: { label: 'उच्च', bg: 'bg-emerald-100', text: 'text-emerald-800' }
-  },
-  {
-    name: 'शनि',
-    alias: 'मंद',
-    degree: "१९°०५'",
-    rashi: 'कुंभ राशि',
-    pada: 'शतभिषा • पद १',
-    statusBadge: { label: 'स्वगृही', bg: 'bg-amber-100', text: 'text-amber-800' }
-  },
-  { name: 'राहु', alias: 'तम', degree: "१६°४२'", rashi: 'मीन राशि', pada: 'उ० भाद्रपद • पद ४' },
-  { name: 'केतु', alias: 'ध्वज', degree: "१६°४२'", rashi: 'कन्या राशि', pada: 'हस्त • पद २' }
+const GRAHA_ALIASES: Record<string, string> = {
+  'सूर्य': 'रवि',
+  'चन्द्र': 'सोम',
+  'मंगल': 'भौम',
+  'बुध': 'सौम्य',
+  'गुरु': 'बृहस्पति',
+  'शुक्र': 'भार्गव',
+  'शनि': 'मंद',
+  'राहु': 'तम',
+  'केतु': 'ध्वज'
+};
+
+const NAKSHATRAS = [
+  'अश्विनी', 'भरणी', 'कृत्तिका', 'रोहिणी', 'मृगशिरा', 'आर्द्रा',
+  'पुनर्वसु', 'पुष्य', 'अश्लेषा', 'मघा', 'पू० फाल्गुनी', 'उ० फाल्गुनी',
+  'हस्त', 'चित्रा', 'स्वाति', 'विशाखा', 'अनुराधा', 'ज्येष्ठा',
+  'मूल', 'पूर्वाषाढ़ा', 'उत्तराषाढ़ा', 'श्रवण', 'धनिष्ठा', 'शतभिषा',
+  'पू० भाद्रपद', 'उ० भाद्रपद', 'रेवती'
 ];
+
+const EXALTATION_SIGNS: Record<string, string> = {
+  'सूर्य': 'मेष',
+  'चन्द्र': 'वृषभ',
+  'मंगल': 'मकर',
+  'बुध': 'कन्या',
+  'गुरु': 'कर्क',
+  'शुक्र': 'मीन',
+  'शनि': 'तुला',
+  'राहु': 'वृषभ',
+  'केतु': 'वृश्चिक'
+};
+
+const DEBILITATION_SIGNS: Record<string, string> = {
+  'सूर्य': 'तुला',
+  'चन्द्र': 'वृश्चिक',
+  'मंगल': 'कर्क',
+  'बुध': 'मीन',
+  'गुरु': 'मकर',
+  'शुक्र': 'कन्या',
+  'शनि': 'मेष',
+  'राहु': 'वृश्चिक',
+  'केतु': 'वृषभ'
+};
+
+const OWN_SIGNS: Record<string, string[]> = {
+  'सूर्य': ['सिंह'],
+  'चन्द्र': ['कर्क'],
+  'मंगल': ['मेष', 'वृश्चिक'],
+  'बुध': ['मिथुन', 'कन्या'],
+  'गुरु': ['धनु', 'मीन'],
+  'शुक्र': ['वृषभ', 'तुला'],
+  'शनि': ['मकर', 'कुम्भ'],
+  'राहु': [],
+  'केतु': []
+};
 
 const getGrahaOrbClass = (name: string) => {
   switch (name) {
@@ -62,6 +93,66 @@ const getGrahaOrbClass = (name: string) => {
 };
 
 export const PortalNavagraha: React.FC = () => {
+  const grahas: GrahaDisplay[] = useMemo(() => {
+    try {
+      const positions = calculatePlanets(new Date());
+      const standardOrder = ['सूर्य', 'चन्द्र', 'मंगल', 'बुध', 'गुरु', 'शुक्र', 'शनि', 'राहु', 'केतु'];
+
+      return standardOrder.map((name) => {
+        const found = positions.planets.find((p) => p.hindiName === name);
+        if (!found) {
+          return {
+            name,
+            alias: GRAHA_ALIASES[name] || name,
+            degree: '००°००\'',
+            rashi: 'मेष राशि',
+            pada: 'अश्विनी • पद १'
+          };
+        }
+
+        const degInSign = found.longitude % 30;
+        const deg = Math.floor(degInSign);
+        const min = Math.floor((degInSign - deg) * 60);
+        const degreeStr = `${toHindiDigits(String(deg).padStart(2, '0'))}°${toHindiDigits(String(min).padStart(2, '0'))}'`;
+
+        const nakIdx = Math.floor(found.longitude / (360 / 27));
+        const nakName = NAKSHATRAS[nakIdx % 27] || 'अश्विनी';
+        const padaNum = Math.floor((found.longitude % (360 / 27)) / (360 / 108)) + 1;
+        const padaStr = `${nakName} • पद ${toHindiDigits(padaNum)}`;
+
+        const rashiName = `${found.signHindi} राशि`;
+
+        // Determine Dignity / Retrograde
+        let statusBadge: { label: string; bg: string; text: string } | undefined;
+        let isHighlight = false;
+
+        if (found.isRetrograde && name !== 'राहु' && name !== 'केतु') {
+          statusBadge = { label: 'वक्री', bg: 'bg-red-100', text: 'text-red-700' };
+          isHighlight = true;
+        } else if (EXALTATION_SIGNS[name] === found.signHindi) {
+          statusBadge = { label: 'उच्च', bg: 'bg-emerald-100', text: 'text-emerald-800' };
+        } else if (DEBILITATION_SIGNS[name] === found.signHindi) {
+          statusBadge = { label: 'नीच', bg: 'bg-stone-100', text: 'text-stone-700' };
+        } else if (OWN_SIGNS[name]?.includes(found.signHindi)) {
+          statusBadge = { label: 'स्वगृही', bg: 'bg-amber-100', text: 'text-amber-800' };
+        }
+
+        return {
+          name,
+          alias: GRAHA_ALIASES[name] || name,
+          degree: degreeStr,
+          rashi: rashiName,
+          pada: padaStr,
+          statusBadge,
+          isHighlight
+        };
+      });
+    } catch {
+      // Clean fallback if error occurs
+      return [];
+    }
+  }, []);
+
   return (
     <section className="glass-panel rounded-3xl p-6 space-y-4 font-serif relative overflow-hidden">
       <SacredGeometryWatermark variant="swastik" className="opacity-[0.07]" />
@@ -90,7 +181,7 @@ export const PortalNavagraha: React.FC = () => {
 
       {/* 9 Graha Bento Strip with Golden Rim Elevation */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-2.5 relative z-10">
-        {GRAHAS.map((g) => (
+        {grahas.map((g) => (
           <div
             key={g.name}
             className={`glass-inner p-3 rounded-2xl flex flex-col justify-between relative overflow-hidden transition-all duration-300 ease-out cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37] ${
@@ -118,26 +209,22 @@ export const PortalNavagraha: React.FC = () => {
                     g.name === 'सूर्य'
                       ? 'text-[#c2410c]'
                       : g.name === 'मंगल'
-                      ? 'text-[#ea580c]'
-                      : g.name === 'बुध'
-                      ? 'text-red-700'
-                      : g.name === 'गुरु'
-                      ? 'text-[#b8860b]'
-                      : g.name === 'शुक्र'
-                      ? 'text-emerald-800'
+                      ? 'text-[#ba1a1a]'
                       : 'text-[#26150b]'
                   }`}
                 >
                   {g.name}
                 </span>
               </div>
-              <span className="text-[10px] text-[#735641]">{g.alias}</span>
+              <span className="text-[10px] text-[#735641] font-serif">({g.alias})</span>
             </div>
-            <div className="my-1.5">
-              <div className="text-base font-bold text-[#26150b] font-mono">{g.degree}</div>
-              <div className="text-[11px] text-[#735641]">{g.rashi}</div>
+            <div className="my-2">
+              <div className="text-base font-bold text-[#26150b] font-mono tracking-tight">{g.degree}</div>
+              <div className="text-[11px] font-semibold text-[#8b6508]">{g.rashi}</div>
             </div>
-            <span className="text-[10px] text-[#9c806f]">{g.pada}</span>
+            <div className="text-[9px] text-[#735641] border-t border-[#dec9ab]/60 pt-1 font-serif">
+              {g.pada}
+            </div>
           </div>
         ))}
       </div>
