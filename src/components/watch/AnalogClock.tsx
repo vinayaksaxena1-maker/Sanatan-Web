@@ -1,5 +1,6 @@
 import { ChaughadiyaRing } from './ChaughadiyaRing';
 import { HoraRing } from './HoraRing';
+import { formatTimeRangeToHindi, cleanHindiName } from './timeHindiFormat';
 import type { AnalogClockProps } from './watchTypes';
 
 export type { AnalogClockProps };
@@ -288,8 +289,8 @@ export function AnalogClock({
           <text fontSize="26" fontWeight="bold" letterSpacing="0.1em" className="fill-[#3B2314] dark:fill-white select-none">
             <textPath href="#outerTextPathBottom" startOffset="50%" textAnchor="middle">
               {language === 'Hindi'
-                ? (activeHora ? `।। ⌛ सक्रिय होरा: ${activeHora.lordHindi} (${activeHora.startTime} - ${activeHora.endTime}) ।।` : "।। ⌛ सक्रिय होरा ।।")
-                : (activeHora ? `|| ⌛ Active Hora: ${activeHora.lord} (${activeHora.startTime} - ${activeHora.endTime}) ||` : "|| ⌛ Active Hora ||")}
+                ? (activeHora ? `।। ⌛ सक्रिय होरा: ${activeHora.lordHindi} (${formatTimeRangeToHindi(activeHora.startTime, activeHora.endTime)}${activeHora.endTime}) ।।` : "।। ⌛ सक्रिय होरा ।।")
+                : (activeHora ? `|| ⌛ Active Hora: ${activeHora.lord} (${formatTimeRangeToHindi(activeHora.startTime, activeHora.endTime)}${activeHora.endTime}) ||` : "|| ⌛ Active Hora ||")}
             </textPath>
           </text>
         </g>

@@ -7,20 +7,11 @@
  */
 
 import React, { useState, useMemo } from 'react';
-import { X, Bell } from 'lucide-react';
 import { AnalogClock } from './AnalogClock';
 import { ScheduleTableModal } from './ScheduleTableModal';
+import { SlotDetailModal, SelectedSlotInfo } from './SlotDetailModal';
+import { formatTimeRangeToHindi, formatTimeToHindi, toHindiDigits } from './timeHindiFormat';
 import type { ChoghadiyaInterval, HoraInterval } from '../../engine/types';
-
-export interface SelectedSlotInfo {
-  type: 'choghadiya' | 'hora';
-  name: string;
-  startTime: string;
-  endTime: string;
-  quality: string;
-  desc: string;
-  dot: string;
-}
 
 export interface LiveMuhuratWatchCardProps {
   clockTime: Date;
@@ -33,27 +24,22 @@ export interface LiveMuhuratWatchCardProps {
   sunsetTimeStr: string;
 }
 
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-
 export const getChoghadiyaStatusInfo = (type?: string) => {
   switch (type) {
     case 'Amrit':
-      return { dot: '🟢', label: 'शुभ', badgeBg: 'bg-emerald-500/15 text-emerald-800 border-emerald-500/30' };
     case 'Shubh':
-      return { dot: '🟢', label: 'शुभ', badgeBg: 'bg-emerald-500/15 text-emerald-800 border-emerald-500/30' };
+      return { dot: '🟢', label: 'शुभ', badgeBg: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' };
     case 'Labh':
-      return { dot: '🟢', label: 'शुभ (लाभ)', badgeBg: 'bg-emerald-500/15 text-emerald-800 border-emerald-500/30' };
+      return { dot: '🟢', label: 'शुभ (लाभ)', badgeBg: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' };
     case 'Chal':
     case 'Char':
-      return { dot: '🟡', label: 'सामान्य', badgeBg: 'bg-amber-500/15 text-amber-800 border-amber-500/30' };
+      return { dot: '🟡', label: 'सामान्य', badgeBg: 'bg-amber-500/20 text-amber-300 border-amber-500/40' };
     case 'Rog':
     case 'Kaal':
     case 'Udveg':
-      return { dot: '🔴', label: 'अशुभ', badgeBg: 'bg-rose-500/15 text-rose-800 border-rose-500/30' };
+      return { dot: '🔴', label: 'अशुभ', badgeBg: 'bg-rose-500/20 text-rose-300 border-rose-500/40' };
     default:
-      return { dot: '🟡', label: 'सामान्य', badgeBg: 'bg-slate-500/15 text-slate-800 border-slate-500/30' };
+      return { dot: '🟡', label: 'सामान्य', badgeBg: 'bg-slate-500/20 text-slate-300 border-slate-500/40' };
   }
 };
 
@@ -137,10 +123,6 @@ const parseTimeToMinutes = (tStr: string): number => {
   return h * 60 + m;
 };
 
-// ---------------------------------------------------------------------------
-// Main Component
-// ---------------------------------------------------------------------------
-
 export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
   clockTime,
   choghadiyaList,
@@ -153,17 +135,6 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
   const [selectedSlot, setSelectedSlot] = useState<SelectedSlotInfo | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalTab, setModalTab] = useState<'choghadiya' | 'hora'>('choghadiya');
-  const [activeReminders, setActiveReminders] = useState<Record<string, boolean>>({});
-  const [reminderToast, setReminderToast] = useState<string | null>(null);
-
-  const toggleReminder = (id: string, title: string) => {
-    setActiveReminders((prev) => {
-      const nextState = !prev[id];
-      setReminderToast(nextState ? `🔔 "${title}" का स्मरण सक्रिय किया गया!` : `🔕 "${title}" का स्मरण हटाया गया`);
-      setTimeout(() => setReminderToast(null), 3000);
-      return { ...prev, [id]: nextState };
-    });
-  };
 
   const handleSelectChoghadiya = (seg: ChoghadiyaInterval) => {
     const status = getChoghadiyaStatusInfo(seg.type);
@@ -219,28 +190,26 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
   const nextStatusInfo = getChoghadiyaStatusInfo(nextChoghadiya?.type);
   const isNightTime = currentChoghadiya ? !currentChoghadiya.isDay : clockTime.getHours() >= 19 || clockTime.getHours() < 6;
 
-  const selectedSlotReminderKey = selectedSlot ? `slot_${selectedSlot.name}_${selectedSlot.startTime}` : '';
-  const nextChogReminderKey = nextChoghadiya ? `next_${nextChoghadiya.name}_${nextChoghadiya.startTime}` : '';
+  const currentTimingHindi = currentChoghadiya
+    ? formatTimeRangeToHindi(currentChoghadiya.startTime, currentChoghadiya.endTime)
+    : '—';
 
   return (
-    <div className="w-full flex flex-col items-center select-none font-serif text-[#26150B]">
+    <div className="w-full flex flex-col items-center select-none font-serif text-white">
       
-      {/* 1. TOP SECTION HEADER (सुंदर सी हेडिंग) */}
-      <div className="w-full text-center mb-3 p-3 rounded-2xl bg-white/75 backdrop-blur-md border border-[#D4AF37]/50 shadow-[0_4px_16px_rgba(212,175,55,0.12)]">
+      {/* 1. TOP SECTION HEADER (सुंदर सी हेडिंग - केवल शीर्षक, सबटाइटल निष्कासित) */}
+      <div className="w-full text-center mb-3 p-3 rounded-2xl bg-black/40 backdrop-blur-md border border-[#D4AF37]/50 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
         <div className="flex items-center justify-center gap-2">
-          <span className="text-amber-600 font-bold text-base select-none">ॐ</span>
-          <h3 className="text-sm sm:text-base font-serif font-extrabold bg-gradient-to-r from-[#9A3412] via-[#C2410C] to-[#B45309] bg-clip-text text-transparent tracking-wide">
+          <span className="text-amber-400 font-bold text-base select-none">ॐ</span>
+          <h3 className="text-sm sm:text-base font-serif font-extrabold bg-gradient-to-r from-[#FDE047] via-[#F59E0B] to-[#EA580C] bg-clip-text text-transparent tracking-wide">
             ।। सनातन वैदिक कालचक्र एवं चौघड़िया ।।
           </h3>
-          <span className="text-amber-600 font-bold text-base select-none">ॐ</span>
+          <span className="text-amber-400 font-bold text-base select-none">ॐ</span>
         </div>
-        <p className="text-[10px] sm:text-[11px] text-[#78350F]/85 font-sans tracking-wider uppercase font-semibold mt-0.5">
-          Live Vedic Astrological Time &amp; Muhurat Engine
-        </p>
       </div>
 
       {/* 2. CENTRAL ANALOG DIAL (4-Layer Vedic Analog Clock) */}
-      <div className="w-[260px] h-[260px] sm:w-[280px] sm:h-[280px] lg:w-[290px] lg:h-[290px] aspect-square flex items-center justify-center [&_svg]:overflow-visible drop-shadow-md">
+      <div className="w-[260px] h-[260px] sm:w-[280px] sm:h-[280px] lg:w-[290px] lg:h-[290px] aspect-square flex items-center justify-center [&_svg]:overflow-visible drop-shadow-[0_10px_25px_rgba(0,0,0,0.7)]">
         <AnalogClock
           time={clockTime}
           choghadiyaList={choghadiyaList}
@@ -258,115 +227,46 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
       {/* 3. BOTTOM ELEMENTS (Under the Dial) */}
       <div className="w-full space-y-2.5 mt-3">
 
-        {/* Reminder Feedback Toast */}
-        {reminderToast && (
-          <div className="w-full py-1.5 px-3 rounded-xl bg-amber-500 text-white text-xs font-bold text-center shadow-md animate-fadeIn">
-            {reminderToast}
-          </div>
-        )}
-
-        {/* A. INTERACTIVE SELECTED SLOT CARD (ON TAP) */}
-        {selectedSlot && (
-          <div className="w-full p-3 bg-gradient-to-r from-amber-50/95 via-white/95 to-orange-50/95 border border-[#FF9933]/60 rounded-2xl shadow-md flex items-start justify-between gap-2.5 animate-fadeIn transition-all">
-            <div className="flex items-start gap-2.5 overflow-hidden text-left min-w-0 flex-1">
-              <span className="text-2xl select-none shrink-0 mt-0.5">{selectedSlot.dot}</span>
-              <div className="min-w-0">
-                <div className="text-[10px] font-mono font-bold text-orange-700 flex items-center gap-1 mb-0.5">
-                  🔍 {selectedSlot.type === 'choghadiya' ? 'चयनित चौघड़िया विवरण' : 'चयनित होरा विवरण'}
-                </div>
-                <div className="flex items-center gap-1.5 flex-wrap">
-                  <span className="text-[13.5px] font-black font-serif text-slate-900">
-                    {selectedSlot.name}
-                  </span>
-                  <span className="text-[10.5px] px-2 py-0.5 rounded-full font-mono font-bold bg-amber-100 text-amber-900 border border-amber-300/60">
-                    {selectedSlot.startTime} – {selectedSlot.endTime}
-                  </span>
-                </div>
-                <p className="text-xs text-slate-700 font-serif mt-1 leading-snug">
-                  <span className="font-bold">{selectedSlot.quality}</span> • {selectedSlot.desc}
-                </p>
-              </div>
-            </div>
-
-            {/* Action Buttons: याद दिलाएं, तालिका 📋, ✕ */}
-            <div className="flex items-center gap-1.5 shrink-0 self-start">
-              <button
-                type="button"
-                onClick={() => toggleReminder(selectedSlotReminderKey, selectedSlot.name)}
-                className={`text-[10.5px] font-bold px-2 py-1 rounded-xl transition-all cursor-pointer flex items-center gap-1 border ${
-                  activeReminders[selectedSlotReminderKey]
-                    ? 'bg-amber-500 text-white border-amber-600 shadow-xs'
-                    : 'text-amber-800 bg-amber-500/10 hover:bg-amber-500/20 border-amber-400/50'
-                }`}
-                title={activeReminders[selectedSlotReminderKey] ? 'स्मरण बंद करें' : 'इस समय का स्मरण सेट करें'}
-              >
-                <Bell className={`w-3 h-3 ${activeReminders[selectedSlotReminderKey] ? 'fill-current' : ''}`} />
-                <span>{activeReminders[selectedSlotReminderKey] ? 'सक्रिय' : 'याद दिलाएं'}</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setModalTab(selectedSlot.type);
-                  setIsModalOpen(true);
-                }}
-                className="text-[10.5px] font-bold text-orange-700 hover:text-orange-950 bg-orange-500/15 hover:bg-orange-500/25 border border-orange-300/60 px-2.5 py-1 rounded-xl transition-all cursor-pointer whitespace-nowrap"
-              >
-                तालिका 📋
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setSelectedSlot(null)}
-                className="text-slate-500 hover:text-slate-900 w-6 h-6 rounded-full bg-orange-100/70 hover:bg-orange-200/80 flex items-center justify-center cursor-pointer transition-all border border-orange-200/60"
-                title="बंद करें"
-              >
-                <X className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* C. 3-COLOR INTUITIVE LEGEND */}
+        {/* 3-COLOR INTUITIVE LEGEND */}
         <div className="flex items-center justify-center gap-3 sm:gap-4 text-[11px] font-bold font-serif flex-wrap pt-0.5">
-          <span className="flex items-center gap-1 text-emerald-700">
+          <span className="flex items-center gap-1 text-emerald-400 drop-shadow-xs">
             🟢 शुभ (अमृत/शुभ/लाभ)
           </span>
-          <span className="flex items-center gap-1 text-amber-700">
+          <span className="flex items-center gap-1 text-amber-300 drop-shadow-xs">
             🟡 सामान्य (चर)
           </span>
-          <span className="flex items-center gap-1 text-rose-700">
+          <span className="flex items-center gap-1 text-rose-400 drop-shadow-xs">
             🔴 अशुभ (रोग/काल/उद्वेग)
           </span>
         </div>
 
-        {/* D. UNIFIED SMART LIVE CARD (POWERHOUSE GLASSMORPHIC CARD) */}
-        <div className="w-full p-3.5 rounded-2xl border border-[#ff9933]/50 bg-white/85 backdrop-blur-md shadow-xs space-y-2 text-left">
+        {/* UNIFIED SMART LIVE CARD (POWERHOUSE GLASSMORPHIC CARD - DARK TEMPLE THEME) */}
+        <div className="w-full p-3.5 rounded-2xl border border-[#ff9933]/60 bg-black/60 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.6)] space-y-2 text-left text-white">
           
           {/* 1. वर्तमान स्थिति & लाइव काउंटडाउन */}
-          <div className="flex items-center justify-between gap-2 pb-1.5 border-b border-orange-100/80 flex-wrap">
+          <div className="flex items-center justify-between gap-2 pb-1.5 border-b border-amber-500/20 flex-wrap">
             <div className="flex items-center gap-2">
               <span className="text-base select-none">{currentStatusInfo.dot}</span>
               <div>
-                <h4 className="text-[13.5px] sm:text-[14px] font-black text-slate-900 font-serif leading-tight">
+                <h4 className="text-[13.5px] sm:text-[14px] font-black text-amber-100 font-serif leading-tight">
                   अभी: {currentChoghadiya ? (currentChoghadiya.hindiName || currentChoghadiya.name) : 'लाभ'} चौघड़िया ({currentStatusInfo.label})
                 </h4>
-                <div className="text-[10.5px] text-slate-500 font-mono mt-0.5">
-                  समय: {currentChoghadiya ? `${currentChoghadiya.startTime} - ${currentChoghadiya.endTime}` : '—'}
+                <div className="text-[10.5px] text-amber-200/80 font-mono mt-0.5">
+                  समय: {currentTimingHindi}
                 </div>
               </div>
             </div>
 
             {/* Live Countdown Badge */}
-            <div className={`px-2 py-0.5 rounded-full border text-[10.5px] font-mono font-black shrink-0 ${currentStatusInfo.badgeBg}`}>
-              ⏳ {choghadiyaRemainingMinutes > 0 ? `${choghadiyaRemainingMinutes} मिनट शेष` : 'समय समाप्त'}
+            <div className={`px-2.5 py-0.5 rounded-full border text-[10.5px] font-mono font-black shrink-0 ${currentStatusInfo.badgeBg}`}>
+              ⏳ {choghadiyaRemainingMinutes > 0 ? `${toHindiDigits(choghadiyaRemainingMinutes)} मिनट शेष` : 'समय समाप्त'}
             </div>
           </div>
 
           {/* 2. सक्रिय होरा स्थिति पट्टी (Active Hora Status Bar) */}
-          <div className="flex items-center justify-between text-xs py-1.5 px-3 bg-orange-500/10 rounded-xl border border-orange-200/40">
-            <span className="font-bold text-slate-700 whitespace-nowrap">सक्रिय होरा:</span>
-            <span className="font-bold font-serif text-[#78350F] text-[11.5px] leading-relaxed text-right pl-2">
+          <div className="flex items-center justify-between text-xs py-1.5 px-3 bg-amber-500/15 rounded-xl border border-amber-400/30">
+            <span className="font-bold text-amber-300 whitespace-nowrap">सक्रिय होरा:</span>
+            <span className="font-bold font-serif text-amber-100 text-[11.5px] leading-relaxed text-right pl-2">
               {activeHora ? getHoraPracticalNuance(activeHora.lordHindi, activeHora.lord) : 'सूर्य होरा: प्रशासनिक व महत्वपूर्ण कार्यों हेतु श्रेष्ठ'}
             </span>
           </div>
@@ -374,48 +274,43 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
           {/* 3. ✅ क्या करें (मार्गदर्शन - Recommended Action) */}
           {currentChoghadiya && (
             <div className="text-xs space-y-0.5 pt-0.5">
-              <span className="font-black text-slate-900 block">
+              <span className="font-black text-amber-300 block">
                 ✅ क्या करें (मार्गदर्शन):
               </span>
-              <p className="text-slate-700 font-medium leading-relaxed">
+              <p className="text-amber-100/90 font-medium leading-relaxed">
                 {getChoghadiyaUpyuktKarya(currentChoghadiya.type, isNightTime)}
               </p>
             </div>
           )}
 
-          {/* 4. ⏭️ अगला चौघड़िया (Next Upcoming Preview) */}
+          {/* 4. ⏭️ अगला चौघड़िया (Next Upcoming Preview - बिना किसी अलार्म बटन के) */}
           {nextChoghadiya && (
-            <div className="pt-1.5 border-t border-orange-100/80 flex items-center justify-between text-xs flex-wrap gap-1.5">
+            <div className="pt-1.5 border-t border-amber-500/20 flex items-center justify-between text-xs flex-wrap gap-1.5">
               <div className="flex items-center gap-1.5 flex-wrap">
-                <span className="font-bold text-slate-500">⏭️ अगला चौघड़िया:</span>
-                <span className="font-bold font-serif text-slate-900">
-                  {nextStatusInfo.dot} {nextChoghadiya.hindiName || nextChoghadiya.name} ({nextChoghadiya.startTime} से)
+                <span className="font-bold text-amber-300/80">⏭️ अगला चौघड़िया:</span>
+                <span className="font-bold font-serif text-white">
+                  {nextStatusInfo.dot} {nextChoghadiya.hindiName || nextChoghadiya.name} ({formatTimeToHindi(nextChoghadiya.startTime)} से)
                 </span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <span className={`text-[9.5px] font-bold font-mono px-2 py-0.5 rounded-md border ${nextStatusInfo.badgeBg}`}>
-                  {nextStatusInfo.label}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => toggleReminder(nextChogReminderKey, `${nextChoghadiya.hindiName || nextChoghadiya.name} चौघड़िया`)}
-                  className={`text-[9.5px] font-bold px-1.5 py-0.5 rounded-md border flex items-center gap-1 cursor-pointer transition-all ${
-                    activeReminders[nextChogReminderKey]
-                      ? 'bg-amber-500 text-white border-amber-600'
-                      : 'text-amber-800 bg-amber-500/10 hover:bg-amber-500/20 border-amber-400/40'
-                  }`}
-                  title="अगले चौघड़िया का स्मरण सेट करें"
-                >
-                  <Bell className={`w-2.5 h-2.5 ${activeReminders[nextChogReminderKey] ? 'fill-current' : ''}`} />
-                  <span>{activeReminders[nextChogReminderKey] ? 'सक्रिय' : 'याद दिलाएं'}</span>
-                </button>
-              </div>
+              <span className={`text-[9.5px] font-bold font-mono px-2 py-0.5 rounded-md border ${nextStatusInfo.badgeBg}`}>
+                {nextStatusInfo.label}
+              </span>
             </div>
           )}
 
         </div>
 
       </div>
+
+      {/* A. Interactive Selected Slot Popup Modal (खुलेगा पॉपअप में) */}
+      <SlotDetailModal
+        slot={selectedSlot}
+        onClose={() => setSelectedSlot(null)}
+        onOpenTable={(type) => {
+          setModalTab(type);
+          setIsModalOpen(true);
+        }}
+      />
 
       {/* Schedule Table Modal (16 Choghadiya & 24 Hora) */}
       <ScheduleTableModal

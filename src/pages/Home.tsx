@@ -25,11 +25,13 @@ export const Home: React.FC = () => {
       {/* Top Header */}
       <PortalHeader />
 
-      {/* Main Command Surface */}
-      <main className="w-full pt-32 pb-16 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto space-y-8" id="mukhya">
-        {/* Hero Section */}
+      {/* Full-Bleed Edge-to-Edge Hero Section (Left-to-Right Screen Width) */}
+      <div className="w-full pt-28">
         <PortalHero />
+      </div>
 
+      {/* Main Command Surface */}
+      <main className="w-full py-10 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto space-y-8" id="mukhya">
         {/* 1-Second Actionable Live Status Card */}
         <PortalRightNow />
 
