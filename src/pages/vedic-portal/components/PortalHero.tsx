@@ -1,44 +1,81 @@
-import React, { useState, useEffect } from 'react';
+/**
+ * Sanatan Web (सनातन घड़ी)
+ * Component: PortalHero
+ * Royal Vedic Hero Section with 4-Layer Analog Watch & Unified Smart Cards
+ * Connected to Sanatan Web's Astronomical Engine
+ */
+
+import React, { useState, useEffect, useMemo } from 'react';
 import { GoldenCornerBrackets } from './GoldenCornerBrackets';
 import { SacredGeometryWatermark } from './SacredGeometryWatermark';
 import { VedicIcon3D } from './VedicIcon3D';
+import { LiveMuhuratWatchCard } from '../../../components/watch';
+import { useChoghadiyaData } from '../../choghadiya/hooks/useChoghadiyaData';
 
 export const PortalHero: React.FC = () => {
-  const [timeStr, setTimeStr] = useState<string>('११:४२:०८');
-  const [ghatiStr, setGhatiStr] = useState<string>('१३ घटी ४० पल');
+  const [currentTime, setCurrentTime] = useState<Date>(new Date());
+  const choghadiyaData = useChoghadiyaData();
 
   useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      // Format IST time into Hindi numerals
-      const hours = now.getHours();
-      const minutes = now.getMinutes();
-      const seconds = now.getSeconds();
-      const ampm = hours >= 12 ? 'अपराह्न' : 'पूर्वाह्न';
-      const h12 = hours % 12 || 12;
-
-      const toHindi = (n: number) => {
-        const hindiDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
-        return String(n).padStart(2, '0').split('').map(d => hindiDigits[parseInt(d, 10)] || d).join('');
-      };
-
-      setTimeStr(`${toHindi(h12)}:${toHindi(minutes)}:${toHindi(seconds)} ${ampm}`);
-
-      // Calculate Ghati from approx sunrise (06:14 AM)
-      const sunriseMinutes = 6 * 60 + 14;
-      const currentMinutes = hours * 60 + minutes;
-      let diff = currentMinutes - sunriseMinutes;
-      if (diff < 0) diff += 1440; // 24 hours in minutes
-      const ghati = Math.floor(diff / 24);
-      const pala = Math.floor((diff % 24) * 2.5);
-
-      setGhatiStr(`${toHindi(ghati)} घटी ${toHindi(pala)} पल`);
-    };
-
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
+    const interval = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(interval);
   }, []);
+
+  const { panchang, dayName, dayRuler, activeChoghadiya } = choghadiyaData;
+
+  // Real-time Hindi Time String
+  const timeStr = useMemo(() => {
+    const hours = currentTime.getHours();
+    const minutes = currentTime.getMinutes();
+    const seconds = currentTime.getSeconds();
+    const ampm = hours >= 12 ? 'अपराह्न' : 'पूर्वाह्न';
+    const h12 = hours % 12 || 12;
+
+    const toHindi = (n: number) => {
+      const hindiDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
+      return String(n).padStart(2, '0').split('').map(d => hindiDigits[parseInt(d, 10)] || d).join('');
+    };
+
+    return `${toHindi(h12)}:${toHindi(minutes)}:${toHindi(seconds)} ${ampm}`;
+  }, [currentTime]);
+
+  // Real-time Ghati calculation from Sunrise
+  const ghatiStr = useMemo(() => {
+    const hours = currentTime.getHours();
+    const minutes = currentTime.getMinutes();
+    
+    // Parse sunrise minutes
+    let sunriseMinutes = 6 * 60 + 14;
+    if (panchang?.sunrise) {
+      const parts = panchang.sunrise.split(' ');
+      const [t] = parts;
+      if (t) {
+        const [h, m] = t.split(':').map(Number);
+        if (!isNaN(h) && !isNaN(m)) sunriseMinutes = h * 60 + m;
+      }
+    }
+
+    const currentMinutes = hours * 60 + minutes;
+    let diff = currentMinutes - sunriseMinutes;
+    if (diff < 0) diff += 1440;
+    const ghati = Math.floor(diff / 24);
+    const pala = Math.floor((diff % 24) * 2.5);
+
+    const toHindi = (n: number) => {
+      const hindiDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
+      return String(n).padStart(2, '0').split('').map(d => hindiDigits[parseInt(d, 10)] || d).join('');
+    };
+
+    return `${toHindi(ghati)} घटी ${toHindi(pala)} पल`;
+  }, [currentTime, panchang?.sunrise]);
+
+  // Limbs values with real panchang fallbacks
+  const tithiName = panchang?.hinduDate?.tithi?.name || 'शुक्ल त्रयोदशी';
+  const nakshatraName = panchang?.hinduDate?.nakshatra?.name || 'उत्तर फाल्गुनी';
+  const yogaName = panchang?.hinduDate?.yoga?.name || 'हर्षण योग';
+  const sunriseTime = panchang?.sunrise || '०६:१४ AM';
+  const sunsetTime = panchang?.sunset || '०६:४१ PM';
+  const rahuKaalStr = panchang?.rahuKaal ? `${panchang.rahuKaal.start} – ${panchang.rahuKaal.end}` : '०४:३० – ०६:०० अपराह्न';
 
   return (
     <section className="relative rounded-3xl overflow-hidden border border-[#d95d0f]/25 shadow-[0_20px_48px_-12px_rgba(194,65,12,0.16)] min-h-[460px] flex items-center font-serif">
@@ -55,10 +92,10 @@ export const PortalHero: React.FC = () => {
       <SacredGeometryWatermark variant="swastik" className="opacity-[0.07]" />
       <GoldenCornerBrackets size="lg" />
 
-      <div className="relative z-10 w-full p-6 sm:p-10 lg:p-12 space-y-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+      <div className="relative z-10 w-full p-5 sm:p-8 lg:p-10 space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
-          {/* Left Column: Panchang Overview */}
+          {/* Left Column: Panchang Overview (7 Cols) */}
           <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
             <div className="space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#dec9ab]/70 pb-3">
@@ -67,8 +104,12 @@ export const PortalHero: React.FC = () => {
                     <VedicIcon3D name="temple" size="sm" />
                     <span>श्री गणेशाय नमः • आज का दैनिक पंचांग</span>
                   </div>
-                  <h1 className="text-2xl sm:text-3xl font-bold text-[#26150b] tracking-tight">दैनिक पंचांग एवं विशिष्ट मुहूर्त</h1>
-                  <p className="text-xs text-[#735641] font-medium">काशीस्थ सूर्योदय कालीन वैदिक काल गणना • विक्रम संवत २०८१ (क्रोधी संवत्सर)</p>
+                  <h1 className="text-2xl sm:text-3xl font-bold text-[#26150b] tracking-tight">
+                    दैनिक पंचांग एवं विशिष्ट मुहूर्त
+                  </h1>
+                  <p className="text-xs text-[#735641] font-medium">
+                    काशीस्थ सूर्योदय कालीन वैदिक काल गणना • विक्रम संवत २०८१ (क्रोधी संवत्सर)
+                  </p>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="px-3 py-1.5 rounded-xl glass-inner bg-white/85 border border-[#dec9ab] shadow-xs text-right hover:border-[#ea580c] transition-colors">
@@ -85,7 +126,7 @@ export const PortalHero: React.FC = () => {
                     <span>१. तिथि</span>
                     <VedicIcon3D name="tithi" size="sm" />
                   </div>
-                  <div className="text-sm font-bold text-[#26150b]">शुक्ल त्रयोदशी</div>
+                  <div className="text-sm font-bold text-[#26150b] truncate">{tithiName}</div>
                   <div className="text-[10px] text-[#735641]">सायं ०७:१४ तक</div>
                   <span className="inline-block px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-800 text-[9px] font-bold">शुभ (जयदा)</span>
                 </div>
@@ -95,8 +136,8 @@ export const PortalHero: React.FC = () => {
                     <span>२. वार</span>
                     <VedicIcon3D name="sun" size="sm" />
                   </div>
-                  <div className="text-sm font-bold text-[#26150b]">गुरुवार</div>
-                  <div className="text-[10px] text-[#735641]">देवगुरु बृहस्पति स्वामी</div>
+                  <div className="text-sm font-bold text-[#26150b] truncate">{dayName || 'गुरुवार'}</div>
+                  <div className="text-[10px] text-[#735641] truncate">{dayRuler || 'देवगुरु बृहस्पति'} स्वामी</div>
                   <span className="inline-block px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 text-[9px] font-bold">ज्ञान संवर्धक</span>
                 </div>
 
@@ -105,7 +146,7 @@ export const PortalHero: React.FC = () => {
                     <span>३. नक्षत्र</span>
                     <VedicIcon3D name="nakshatra" size="sm" />
                   </div>
-                  <div className="text-sm font-bold text-[#26150b]">उत्तर फाल्गुनी</div>
+                  <div className="text-sm font-bold text-[#26150b] truncate">{nakshatraName}</div>
                   <div className="text-[10px] text-[#735641]">द्वितीय पद (सूर्य)</div>
                   <span className="inline-block px-1.5 py-0.5 rounded bg-blue-50 text-blue-800 text-[9px] font-bold">ध्रुव संज्ञक</span>
                 </div>
@@ -115,7 +156,7 @@ export const PortalHero: React.FC = () => {
                     <span>४. योग</span>
                     <VedicIcon3D name="yoga" size="sm" />
                   </div>
-                  <div className="text-sm font-bold text-[#26150b]">हर्षण योग</div>
+                  <div className="text-sm font-bold text-[#26150b] truncate">{yogaName}</div>
                   <div className="text-[10px] text-[#735641]">दोपहर ०१:४५ तक</div>
                   <span className="inline-block px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-800 text-[9px] font-bold">सिद्धि प्रदाता</span>
                 </div>
@@ -143,7 +184,7 @@ export const PortalHero: React.FC = () => {
                     </span>
                     <span className="text-[9px] px-1.5 py-0.2 rounded bg-red-100 text-red-800 font-bold">अशुभ</span>
                   </div>
-                  <div className="text-sm font-bold text-red-900 font-mono">०४:३० – ०६:०० अपराह्न</div>
+                  <div className="text-sm font-bold text-red-900 font-mono">{rahuKaalStr}</div>
                   <div className="text-[10px] text-red-800">नवीन कार्य त्याज्य</div>
                 </div>
 
@@ -155,82 +196,15 @@ export const PortalHero: React.FC = () => {
                     </span>
                     <span className="text-[9px] px-1.5 py-0.2 rounded bg-amber-100 text-amber-800 font-bold">सक्रिय</span>
                   </div>
-                  <div className="text-sm font-bold text-amber-900">अमृत (सर्वोत्तम फल)</div>
+                  <div className="text-sm font-bold text-amber-900">
+                    {activeChoghadiya?.hindiName || 'अमृत'} ({activeChoghadiya?.type || 'शुभ'})
+                  </div>
                   <div className="text-[10px] text-amber-800">दिन का प्रशस्त काल</div>
                 </div>
               </div>
-            </div>
 
-            <div className="pt-2 border-t border-[#dec9ab]/60 flex items-center justify-between text-xs text-[#735641]">
-              <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[#ea580c] text-[16px]">wb_twilight</span>
-                <span>सूर्योदय: ०६:१४ • सूर्यास्त: ०६:४१</span>
-              </div>
-              <span className="font-semibold text-[#b8860b]">काशी पंचांग संवत २०८१</span>
-            </div>
-          </div>
-
-          {/* Right Column: Sanatan Ghadi Live Dial with Brackets & Watermark */}
-          <div className="lg:col-span-5 glass-panel-warm rounded-3xl p-5 sm:p-6 border border-[#dec9ab] shadow-xs flex flex-col justify-between space-y-4 bg-gradient-to-br from-[#fffbf5] to-[#fbeecc]/82 relative overflow-hidden">
-            <SacredGeometryWatermark variant="swastik" className="opacity-[0.08]" />
-            <GoldenCornerBrackets size="md" />
-
-            <div className="flex items-center justify-between border-b border-[#dec9ab]/70 pb-3 relative z-10">
-              <div className="flex items-center gap-2.5">
-                <VedicIcon3D name="clock" size="md" />
-                <div>
-                  <h3 className="text-lg font-bold text-[#26150b]">सनातन घड़ी (Sanatan Ghadi)</h3>
-                  <p className="text-[11px] text-[#735641]">वैदिक कालमान • घटी-पल-विपल गणना</p>
-                </div>
-              </div>
-              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#fde8d7] text-[#c2410c] border border-[#f7c29e] flex items-center gap-1.5 shadow-xs">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ea580c] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#ea580c]"></span>
-                </span>
-                लाईव काल चक्र
-              </span>
-            </div>
-
-            <div className="flex flex-col items-center justify-center py-2 relative z-10">
-              <div className="relative w-48 h-48 sm:w-52 sm:h-52 aspect-square flex items-center justify-center">
-                <svg className="w-full h-full drop-shadow-md" viewBox="0 0 200 200">
-                  <circle cx="100" cy="100" r="96" fill="#fffbf5" stroke="#b8860b" strokeWidth="4" />
-                  <circle cx="100" cy="100" r="88" fill="none" stroke="#ea580c" strokeWidth="1.5" strokeDasharray="1 4" />
-                  <circle cx="100" cy="100" r="84" fill="#fff8ed" stroke="#dec9ab" strokeWidth="1" />
-                  <circle cx="100" cy="100" r="88" fill="none" stroke="#ba1a1a" strokeWidth="6" strokeDasharray="35 500" strokeDashoffset="-310" opacity="0.6" />
-                  <circle cx="100" cy="100" r="88" fill="none" stroke="#2e7d32" strokeWidth="6" strokeDasharray="28 500" strokeDashoffset="-190" opacity="0.75" />
-                  <g fill="#26150b" fontFamily="'Noto Serif Devanagari', serif" fontSize="11" fontWeight="bold" textAnchor="middle">
-                    <text x="100" y="28">१२</text>
-                    <text x="139" y="38">१</text>
-                    <text x="165" y="66">२</text>
-                    <text x="175" y="104">३</text>
-                    <text x="165" y="142">४</text>
-                    <text x="138" y="170">५</text>
-                    <text x="100" y="180">६</text>
-                    <text x="62" y="170">७</text>
-                    <text x="35" y="142">८</text>
-                    <text x="25" y="104">९</text>
-                    <text x="35" y="66">१०</text>
-                    <text x="62" y="38">११</text>
-                  </g>
-                  <circle cx="100" cy="100" r="32" fill="none" stroke="#b8860b" strokeWidth="0.8" opacity="0.5" />
-                  <polygon points="100,75 118,100 100,125 82,100" fill="none" stroke="#ea580c" strokeWidth="0.8" opacity="0.6" />
-                  {/* Hands */}
-                  <line x1="100" y1="100" x2="130" y2="75" stroke="#26150b" strokeWidth="3.5" strokeLinecap="round" />
-                  <line x1="100" y1="100" x2="80" y2="38" stroke="#c2410c" strokeWidth="2.5" strokeLinecap="round" />
-                  <line x1="100" y1="105" x2="100" y2="22" stroke="#b8860b" strokeWidth="1.2" strokeLinecap="round" />
-                  <circle cx="100" cy="100" r="4.5" fill="#c2410c" stroke="#ffffff" strokeWidth="1.5" />
-                </svg>
-                <div className="absolute bottom-2 inset-x-0 text-center">
-                  <span className="text-[9px] font-bold text-[#b8860b] px-2 py-0.5 rounded-full bg-white/90 border border-[#dec9ab] shadow-xs">
-                    ६० घटी = २४ होरा
-                  </span>
-                </div>
-              </div>
-
-              {/* Time Readout Box */}
-              <div className="mt-3 w-full grid grid-cols-2 gap-2 text-center">
+              {/* Live IST & Ghati Readout Bar */}
+              <div className="grid grid-cols-2 gap-2 text-center pt-1">
                 <div className="p-2 rounded-xl bg-white/80 border border-[#dec9ab]/70 shadow-xs hover:border-[#ea580c] transition-colors">
                   <div className="text-[10px] text-[#735641] font-semibold">भारतीय मानक समय (IST)</div>
                   <div className="text-sm font-bold text-[#c2410c] font-mono">{timeStr}</div>
@@ -242,12 +216,30 @@ export const PortalHero: React.FC = () => {
               </div>
             </div>
 
-            <div className="pt-2 border-t border-[#dec9ab]/60 flex items-center justify-between text-[11px] text-[#735641] relative z-10">
-              <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
-                अभिजित स्पर्श काल
-              </span>
-              <span className="font-medium">सूर्य सिद्धांत वैदिक घटी</span>
+            <div className="pt-2 border-t border-[#dec9ab]/60 flex items-center justify-between text-xs text-[#735641]">
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-[#ea580c] text-[16px]">wb_twilight</span>
+                <span>सूर्योदय: {sunriseTime} • सूर्यास्त: {sunsetTime}</span>
+              </div>
+              <span className="font-semibold text-[#b8860b]">काशी पंचांग संवत २०८१</span>
+            </div>
+          </div>
+
+          {/* Right Column: Sanatan Ghadi Live Dial with Bottom Smart Cards (5 Cols) */}
+          <div className="lg:col-span-5 glass-panel-warm rounded-3xl p-4 sm:p-5 border border-[#dec9ab] shadow-sm flex flex-col items-center justify-start bg-gradient-to-br from-[#fffbf5] to-[#fbeecc]/82 relative overflow-hidden">
+            <SacredGeometryWatermark variant="swastik" className="opacity-[0.08]" />
+            <GoldenCornerBrackets size="md" />
+
+            <div className="relative z-10 w-full">
+              <LiveMuhuratWatchCard
+                clockTime={currentTime}
+                choghadiyaList={panchang.choghadiya}
+                activeChoghadiyaIndex={choghadiyaData.activeChoghadiyaIndex}
+                horaList={choghadiyaData.allHoras}
+                activeHora={choghadiyaData.activeHora}
+                sunriseTimeStr={panchang.sunrise}
+                sunsetTimeStr={panchang.sunset}
+              />
             </div>
           </div>
 
@@ -256,3 +248,5 @@ export const PortalHero: React.FC = () => {
     </section>
   );
 };
+
+export default PortalHero;
