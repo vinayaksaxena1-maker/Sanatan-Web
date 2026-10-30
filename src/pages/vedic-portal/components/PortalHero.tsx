@@ -95,12 +95,12 @@ export const PortalHero: React.FC = () => {
       <SacredGeometryWatermark variant="swastik" className="opacity-[0.05]" />
       <GoldenCornerBrackets size="lg" />
 
-      {/* Centered Content Container with Balanced Breathing Room */}
+      {/* Centered Content Container with Symmetrical 50-50 Twin Balance */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 xl:gap-12 items-stretch justify-center">
           
-          {/* Left Column: Panchang Overview (7 Cols) - Centered Inside Box */}
-          <div className="lg:col-span-7 rounded-3xl p-5 sm:p-6 lg:p-7 border border-[#dec9ab] shadow-[0_8px_30px_rgba(77,51,34,0.08)] flex flex-col justify-center items-center bg-gradient-to-br from-[#fffbf5]/95 via-[#fffdfa]/92 to-[#fbeecc]/88 relative overflow-hidden backdrop-blur-md">
+          {/* Left Column: Panchang Overview (Equal 50% Width) - Centered Inside Box */}
+          <div className="w-full rounded-3xl p-5 sm:p-6 lg:p-7 border border-[#dec9ab] shadow-[0_8px_30px_rgba(77,51,34,0.08)] flex flex-col justify-center items-center bg-gradient-to-br from-[#fffbf5]/95 via-[#fffdfa]/92 to-[#fbeecc]/88 relative overflow-hidden backdrop-blur-md">
             <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
             <GoldenCornerBrackets size="md" />
 
@@ -236,8 +236,8 @@ export const PortalHero: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Sanatan Ghadi Live Dial (5 Cols) - Centered Inside Box */}
-          <div className="lg:col-span-5 rounded-3xl p-5 sm:p-6 lg:p-7 border border-[#dec9ab] shadow-[0_8px_30px_rgba(77,51,34,0.08)] flex flex-col items-center justify-center bg-gradient-to-br from-[#fffbf5]/95 via-[#fffdfa]/92 to-[#fbeecc]/88 relative overflow-hidden backdrop-blur-md">
+          {/* Right Column: Sanatan Ghadi Live Dial (Equal 50% Width) - Centered Inside Box */}
+          <div className="w-full rounded-3xl p-5 sm:p-6 lg:p-7 border border-[#dec9ab] shadow-[0_8px_30px_rgba(77,51,34,0.08)] flex flex-col items-center justify-center bg-gradient-to-br from-[#fffbf5]/95 via-[#fffdfa]/92 to-[#fbeecc]/88 relative overflow-hidden backdrop-blur-md">
             <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
             <GoldenCornerBrackets size="md" />
 
