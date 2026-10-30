@@ -2,8 +2,8 @@
  * Sanatan Web (सनातन घड़ी)
  * Component: PortalHero
  * Royal Vedic Hero Section with Symmetrical Twin Panels
- * Clear Temple Background Visibility with Centered Balanced Composition
- * Pure Hindi Devanagari Localization
+ * 10% Opacity Cream Parda on Temple Background
+ * Vertically & Horizontally Centered Matter inside both Twin Panels
  */
 
 import React, { useState, useEffect, useMemo } from 'react';
@@ -82,32 +82,31 @@ export const PortalHero: React.FC = () => {
 
   return (
     <section className="relative w-full overflow-hidden border-y border-[#d95d0f]/25 shadow-[0_25px_60px_-15px_rgba(77,51,34,0.18)] min-h-[500px] flex items-center font-serif text-[#26150b]">
-      {/* Sacred Temple Background Image from public/assets (Clear High-Fidelity Visibility) */}
+      {/* Sacred Temple Background Image from public/assets */}
       <img
         alt="प्राचीन वैदिक मन्दिर भित्ति चित्र एवं श्री यंत्र"
-        className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.95] contrast-[1.05]"
+        className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.97] contrast-[1.03]"
         src="/assets/temple_panchang_bg.jpg"
       />
 
-      {/* Gentle Vignette (No Solid Cream Masking - Temple Image Fully Visible) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#26150b]/20 via-transparent to-[#26150b]/25"></div>
-      <div className="absolute inset-0 bg-[#fffdfa]/10 backdrop-blur-[0.5px]"></div>
-      <div className="absolute -right-20 -top-20 w-80 h-80 rounded-full ambient-glow-gold pointer-events-none opacity-40"></div>
+      {/* 10% Opacity Cream Parda (Overlay) as strictly requested */}
+      <div className="absolute inset-0 bg-[#f7f2e6] opacity-10 pointer-events-none"></div>
+      <div className="absolute -right-20 -top-20 w-80 h-80 rounded-full ambient-glow-gold pointer-events-none opacity-30"></div>
       <SacredGeometryWatermark variant="swastik" className="opacity-[0.05]" />
       <GoldenCornerBrackets size="lg" />
 
       {/* Centered Content Container with Balanced Breathing Room */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center justify-center">
           
-          {/* Left Column: Panchang Overview (7 Cols) - Symmetrical Twin Vedic Panel */}
-          <div className="lg:col-span-7 rounded-3xl p-5 sm:p-6 lg:p-7 border border-[#dec9ab] shadow-[0_8px_30px_rgba(77,51,34,0.08)] flex flex-col justify-between bg-gradient-to-br from-[#fffbf5]/95 via-[#fffdfa]/92 to-[#fbeecc]/88 relative overflow-hidden backdrop-blur-md">
+          {/* Left Column: Panchang Overview (7 Cols) - Centered Inside Box */}
+          <div className="lg:col-span-7 rounded-3xl p-5 sm:p-6 lg:p-7 border border-[#dec9ab] shadow-[0_8px_30px_rgba(77,51,34,0.08)] flex flex-col justify-center items-center bg-gradient-to-br from-[#fffbf5]/95 via-[#fffdfa]/92 to-[#fbeecc]/88 relative overflow-hidden backdrop-blur-md">
             <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
             <GoldenCornerBrackets size="md" />
 
-            <div className="relative z-10 flex flex-col justify-between h-full space-y-4">
-              <div className="space-y-3">
-                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#dec9ab]/70 pb-3">
+            <div className="relative z-10 flex flex-col justify-center items-center h-full space-y-4 w-full my-auto">
+              <div className="space-y-3 w-full">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#dec9ab]/70 pb-3 w-full">
                   <div className="space-y-1">
                     <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/85 text-[#c2410c] text-xs font-bold tracking-wide border border-[#ea580c]/30 shadow-xs">
                       <VedicIcon3D name="temple" size="sm" />
@@ -129,7 +128,7 @@ export const PortalHero: React.FC = () => {
                 </div>
 
                 {/* 4 Quick Limb Cards with Micro-Elevation & 3D Icons */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 w-full">
                   <div className="p-3 rounded-2xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer shadow-xs">
                     <div className="flex items-center justify-between text-xs font-bold text-[#c2410c]">
                       <span>१. तिथि</span>
@@ -172,7 +171,7 @@ export const PortalHero: React.FC = () => {
                 </div>
 
                 {/* 3 Quick Muhurat Cards with Micro-Elevation */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1 w-full">
                   <div className="p-3 rounded-2xl bg-emerald-50/85 backdrop-blur-md border border-emerald-300 space-y-1 hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(16,185,129,0.25)] transition-all duration-300 cursor-pointer shadow-xs">
                     <div className="flex items-center justify-between">
                       <span className="text-[11px] font-bold text-emerald-900 flex items-center gap-1">
@@ -215,7 +214,7 @@ export const PortalHero: React.FC = () => {
                 </div>
 
                 {/* Live IST & Ghati Readout Bar */}
-                <div className="grid grid-cols-2 gap-2 text-center pt-1">
+                <div className="grid grid-cols-2 gap-2 text-center pt-1 w-full">
                   <div className="p-2.5 rounded-xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 shadow-xs hover:border-[#ea580c] transition-colors">
                     <div className="text-[10px] text-[#735641] font-semibold">भारतीय मानक समय (IST)</div>
                     <div className="text-sm font-bold text-[#c2410c] font-mono">{timeStr}</div>
@@ -227,7 +226,7 @@ export const PortalHero: React.FC = () => {
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-[#dec9ab]/60 flex items-center justify-between text-xs text-[#735641]">
+              <div className="pt-2 border-t border-[#dec9ab]/60 flex items-center justify-between text-xs text-[#735641] w-full">
                 <div className="flex items-center gap-2">
                   <span className="material-symbols-outlined text-[#ea580c] text-[16px]">wb_twilight</span>
                   <span>सूर्योदय: {sunriseTime} • सूर्यास्त: {sunsetTime}</span>
@@ -237,12 +236,12 @@ export const PortalHero: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Sanatan Ghadi Live Dial (5 Cols) - Symmetrical Twin Vedic Panel */}
-          <div className="lg:col-span-5 rounded-3xl p-5 sm:p-6 lg:p-7 border border-[#dec9ab] shadow-[0_8px_30px_rgba(77,51,34,0.08)] flex flex-col items-center justify-between bg-gradient-to-br from-[#fffbf5]/95 via-[#fffdfa]/92 to-[#fbeecc]/88 relative overflow-hidden backdrop-blur-md">
+          {/* Right Column: Sanatan Ghadi Live Dial (5 Cols) - Centered Inside Box */}
+          <div className="lg:col-span-5 rounded-3xl p-5 sm:p-6 lg:p-7 border border-[#dec9ab] shadow-[0_8px_30px_rgba(77,51,34,0.08)] flex flex-col items-center justify-center bg-gradient-to-br from-[#fffbf5]/95 via-[#fffdfa]/92 to-[#fbeecc]/88 relative overflow-hidden backdrop-blur-md">
             <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
             <GoldenCornerBrackets size="md" />
 
-            <div className="relative z-10 w-full flex flex-col items-center justify-between h-full space-y-3">
+            <div className="relative z-10 w-full flex flex-col items-center justify-center h-full space-y-3 my-auto">
               <LiveMuhuratWatchCard
                 clockTime={currentTime}
                 choghadiyaList={panchang.choghadiya}
