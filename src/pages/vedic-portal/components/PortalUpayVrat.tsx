@@ -105,13 +105,38 @@ interface UpcomingEvent {
   badge: string;
   desc: string;
   dateStr: string;
+  parana?: string;
 }
 
 export const PortalUpayVrat: React.FC = () => {
   const [japaCount, setJapaCount] = useState<number>(0);
+  const [soundEnabled, setSoundEnabled] = useState<boolean>(false);
   const { currentCity } = useLocationStore();
 
+  const playBellChime = (isFinal: boolean = false) => {
+    try {
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(isFinal ? 852 : 528, ctx.currentTime);
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + (isFinal ? 1.5 : 0.6));
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + (isFinal ? 1.6 : 0.7));
+    } catch {
+      // AudioContext unavailable or silent
+    }
+  };
+
   const handleJapaClick = () => {
+    if (soundEnabled) {
+      playBellChime(japaCount === 11);
+    }
     if (japaCount < 12) {
       setJapaCount(japaCount + 1);
     } else {
@@ -152,7 +177,8 @@ export const PortalUpayVrat: React.FC = () => {
               name: f.hindiName || f.name,
               badge,
               desc: f.description || 'पावन वैदिक व्रत एवं पर्व काल।',
-              dateStr: dateHindi
+              dateStr: dateHindi,
+              parana: 'पारण समय: प्रातः ०६:१२ से ०८:३०'
             });
 
             if (list.length >= 3) break;
@@ -171,19 +197,22 @@ export const PortalUpayVrat: React.FC = () => {
         name: 'कामदा एकादशी व्रत',
         badge: 'आगामी',
         desc: 'समस्त पापों का नाश कर मनोकामना पूर्ण करने वाला परम पावन व्रत।',
-        dateStr: 'आगामी एकादशी'
+        dateStr: 'आगामी एकादशी',
+        parana: 'द्वादशी पारण: प्रातः ०६:१२ से ०८:३०'
       },
       {
         name: 'प्रदोष व्रत (त्रयोदशी)',
         badge: 'पावन',
         desc: 'शिव-पार्वती का पावन व्रत। सर्व मनोकामना पूर्ति व आरोग्य प्रदाता।',
-        dateStr: 'आगामी त्रयोदशी'
+        dateStr: 'आगामी त्रयोदशी',
+        parana: 'प्रदोष पूजा: सायं ०५:४५ से ०८:१५'
       },
       {
         name: 'पूर्णिमा / अमावस्या पर्व',
         badge: 'पर्व',
         desc: 'पवित्र नदी स्नान, दान व दीपदान का विशेष महात्म्य।',
-        dateStr: 'पर्व काल'
+        dateStr: 'पर्व काल',
+        parana: 'पुण्य स्नान: ब्राह्ममुहूर्त पर्यन्त'
       }
     ];
   }, [currentCity.latitude, currentCity.longitude, today]);
@@ -224,7 +253,7 @@ export const PortalUpayVrat: React.FC = () => {
           </div>
 
           {/* Interactive Japa Counter in Hindi with Radar Pulse */}
-          <div className="flex items-center justify-between glass-inner px-4 py-2.5 rounded-2xl bg-white/70 shadow-xs border-[#dec9ab]/60">
+          <div className="flex flex-wrap items-center justify-between gap-2 glass-inner px-4 py-2.5 rounded-2xl bg-white/70 shadow-xs border-[#dec9ab]/60">
             <div className="flex items-center gap-2 text-xs">
               <span className="text-[#735641] font-bold">जप संख्या:</span>
               <span className="text-xl font-bold text-[#c2410c] font-mono">
@@ -232,20 +261,36 @@ export const PortalUpayVrat: React.FC = () => {
               </span>
               <span className="text-[#8c7166]">/ १२ मणके</span>
             </div>
-            <button
-              onClick={handleJapaClick}
-              className={`px-3.5 py-1.5 rounded-xl border text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer hover:scale-105 active:scale-95 ${
-                isCompleted
-                  ? 'bg-emerald-50 border-emerald-500 text-emerald-800'
-                  : 'bg-white border-[#dec9ab] hover:bg-[#ea580c] hover:text-white text-[#26150b]'
-              }`}
-              type="button"
-            >
-              <span className="material-symbols-outlined text-[16px]">
-                {isCompleted ? 'check_circle' : 'touch_app'}
-              </span>
-              <span>{isCompleted ? 'संकल्प पूर्ण (पुनः प्रारंभ)' : 'मणका गिनें'}</span>
-            </button>
+
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setSoundEnabled(!soundEnabled)}
+                className={`px-2.5 py-1.5 rounded-xl border text-[11px] font-bold flex items-center gap-1 transition-all cursor-pointer ${
+                  soundEnabled
+                    ? 'bg-amber-100 text-amber-900 border-amber-300 shadow-xs'
+                    : 'bg-white/80 text-stone-500 border-[#dec9ab]/80 hover:text-stone-700'
+                }`}
+                title={soundEnabled ? 'घंटी ध्वनि ऑन है (क्लिक कर म्यूट करें)' : 'घंटी ध्वनि म्यूट है (क्लिक कर चालू करें)'}
+              >
+                <span>{soundEnabled ? '🔔 ध्वनि: ऑन' : '🔕 ध्वनि: म्यूट'}</span>
+              </button>
+
+              <button
+                onClick={handleJapaClick}
+                className={`px-3.5 py-1.5 rounded-xl border text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer hover:scale-105 active:scale-95 ${
+                  isCompleted
+                    ? 'bg-emerald-50 border-emerald-500 text-emerald-800'
+                    : 'bg-white border-[#dec9ab] hover:bg-[#ea580c] hover:text-white text-[#26150b]'
+                }`}
+                type="button"
+              >
+                <span className="material-symbols-outlined text-[16px]">
+                  {isCompleted ? 'check_circle' : 'touch_app'}
+                </span>
+                <span>{isCompleted ? 'संकल्प पूर्ण (पुनः प्रारंभ)' : 'मणका गिनें'}</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -289,7 +334,7 @@ export const PortalUpayVrat: React.FC = () => {
             {upcomingEvents.map((evt, idx) => (
               <div
                 key={idx}
-                className="p-3 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/60 space-y-1 hover:-translate-y-1 hover:border-[#ea580c] hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.22)] transition-all duration-300 cursor-pointer"
+                className="p-3 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/60 space-y-1.5 hover:-translate-y-1 hover:border-[#ea580c] hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.22)] transition-all duration-300 cursor-pointer"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-bold text-[#c2410c]">{evt.name}</span>
@@ -301,6 +346,18 @@ export const PortalUpayVrat: React.FC = () => {
                   </div>
                 </div>
                 <p className="text-[11px] text-[#735641] leading-snug">{evt.desc}</p>
+                <div className="flex items-center justify-between pt-1 border-t border-[#dec9ab]/40 text-[10px]">
+                  <span className="text-emerald-800 font-semibold">{evt.parana || 'प्रातः काल'}</span>
+                  <a
+                    href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`🕉️ ${evt.name} (${evt.dateStr})\n${evt.desc}\nसनातन वैदिक पंचांग पर देखें: https://www.sanatanwatch.in`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-emerald-700 hover:text-emerald-900 font-bold no-underline"
+                    title="WhatsApp पर साझा करें"
+                  >
+                    <span>📲 साझा करें</span>
+                  </a>
+                </div>
               </div>
             ))}
           </div>

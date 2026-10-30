@@ -7,12 +7,12 @@
 import React from 'react';
 import { PortalHeader } from './vedic-portal/components/PortalHeader';
 import { PortalHero } from './vedic-portal/components/PortalHero';
-import { PortalRightNow } from './vedic-portal/components/PortalRightNow';
+import { PortalQuickServices } from './vedic-portal/components/PortalQuickServices';
 import { PortalKundli } from './vedic-portal/components/PortalKundli';
-import { PortalPanchang } from './vedic-portal/components/PortalPanchang';
 import { PortalRashifal } from './vedic-portal/components/PortalRashifal';
-import { PortalNavagraha } from './vedic-portal/components/PortalNavagraha';
 import { PortalUpayVrat } from './vedic-portal/components/PortalUpayVrat';
+import { PortalPanchang } from './vedic-portal/components/PortalPanchang';
+import { PortalNavagraha } from './vedic-portal/components/PortalNavagraha';
 import { PortalFooter } from './vedic-portal/components/PortalFooter';
 
 export const Home: React.FC = () => {
@@ -30,25 +30,25 @@ export const Home: React.FC = () => {
         <PortalHero />
       </div>
 
-      {/* Main Command Surface */}
-      <main className="w-full py-10 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto space-y-8" id="mukhya">
-        {/* 1-Second Actionable Live Status Card */}
-        <PortalRightNow />
+      {/* Main Command Surface - Standardized 1320px Master Container */}
+      <main className="w-full py-8 lg:py-10 px-4 sm:px-6 lg:px-8 max-w-[1320px] mx-auto space-y-8 lg:space-y-10" id="mukhya">
+        {/* 1. 8-Card Quick Services Bento Grid */}
+        <PortalQuickServices />
 
-        {/* Interactive Kundli Section */}
+        {/* 2. Interactive Kundli & 36 Guna Milan Desk */}
         <PortalKundli />
 
-        {/* Dedicated Daily Panchang Section */}
-        <PortalPanchang />
-
-        {/* Aaj Ka Rashifal - 12 Rashis */}
+        {/* 3. Aaj Ka Rashifal - 12 Rashis with Name Letters */}
         <PortalRashifal />
 
-        {/* Navagraha Position Strip */}
-        <PortalNavagraha />
-
-        {/* Dual Section: Upay & Vrat */}
+        {/* 4. Dual Section: Daily Vedic Upay, Japa Counter & Vrats */}
         <PortalUpayVrat />
+
+        {/* 5. Advanced Shastriya Panchang Desk (No Duplicate Basic Cards) */}
+        <PortalPanchang />
+
+        {/* 6. Navagraha Position Strip & Transit */}
+        <PortalNavagraha />
       </main>
 
       {/* Scriptural Vedic Footer */}

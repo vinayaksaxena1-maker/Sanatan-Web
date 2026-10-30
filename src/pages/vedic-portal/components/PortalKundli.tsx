@@ -83,11 +83,14 @@ function resolveCityCoords(query: string): { name: string; lat: number; lon: num
 }
 
 export const PortalKundli: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<'kundli' | 'matching'>('kundli');
   const [userName, setUserName] = useState<string>('राहुल शर्मा');
   const [dob, setDob] = useState<string>('1996-10-24');
   const [tob, setTob] = useState<string>('09:42');
   const [place, setPlace] = useState<string>('वाराणसी, उत्तर प्रदेश');
   const [gender, setGender] = useState<string>('पुरुष');
+  const [groomName, setGroomName] = useState<string>('रोहन वर्मा');
+  const [brideName, setBrideName] = useState<string>('प्रिया शर्मा');
 
   const [activePerson, setActivePerson] = useState({
     name: 'राहुल शर्मा',
@@ -224,107 +227,170 @@ export const PortalKundli: React.FC = () => {
           <SacredGeometryWatermark variant="swastik" className="opacity-[0.07]" />
           <GoldenCornerBrackets size="md" />
 
-          <div className="space-y-5 relative z-10">
-            <div className="flex items-center justify-between border-b border-[#e5d5be]/70 pb-3">
-              <div className="flex items-center gap-2.5">
-                <VedicIcon3D name="kundli" size="md" />
-                <div>
-                  <h3 className="text-lg font-bold text-[#26150b]">मुफ्त जन्म कुण्डली निर्माण</h3>
-                  <p className="text-[11px] text-[#735641]">सटीक जन्म विवरण अंकित करें</p>
-                </div>
-              </div>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 shadow-xs">१००% निःशुल्क</span>
+          <div className="space-y-4 relative z-10">
+            {/* Dual-Tab Header */}
+            <div className="flex items-center gap-2 p-1 bg-[#f5ecdc] rounded-2xl border border-[#dec9ab]/70">
+              <button
+                type="button"
+                onClick={() => setActiveTab('kundli')}
+                className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                  activeTab === 'kundli'
+                    ? 'bg-white text-[#c2410c] shadow-xs border border-[#dec9ab]'
+                    : 'text-[#735641] hover:text-[#26150b]'
+                }`}
+              >
+                <VedicIcon3D name="kundli" size="sm" />
+                <span>जन्म कुण्डली बनाएं</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('matching')}
+                className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                  activeTab === 'matching'
+                    ? 'bg-white text-[#e11d48] shadow-xs border border-rose-300'
+                    : 'text-[#735641] hover:text-[#26150b]'
+                }`}
+              >
+                <VedicIcon3D name="shubh" size="sm" />
+                <span>वर-वधू गुण मिलान</span>
+              </button>
             </div>
 
-            <form className="space-y-3.5" onSubmit={handleSubmit}>
-              <div>
-                <label className="block text-xs font-bold text-[#382012] mb-1">जातक का पूरा नाम</label>
-                <div className="relative">
-                  <input
-                    className="w-full pl-9 pr-3 py-2 text-sm rounded-xl border border-[#dec9ab] bg-white/90 text-[#26150b] focus:ring-2 focus:ring-[#ea580c] focus:outline-hidden"
-                    required
-                    type="text"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
-                    placeholder="उदा. राहुल शर्मा"
-                  />
-                  <span className="material-symbols-outlined absolute left-2.5 top-2.5 text-[#b8860b] text-[18px]">person</span>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
+            {activeTab === 'kundli' ? (
+              <form className="space-y-3.5" onSubmit={handleSubmit}>
                 <div>
-                  <label className="block text-xs font-bold text-[#382012] mb-1">जन्म तिथि</label>
-                  <input
-                    className="w-full px-3 py-2 text-sm rounded-xl border border-[#dec9ab] bg-white/90 text-[#26150b] focus:ring-2 focus:ring-[#ea580c] focus:outline-hidden"
-                    required
-                    type="date"
-                    value={dob}
-                    onChange={(e) => setDob(e.target.value)}
-                  />
+                  <label className="block text-xs font-bold text-[#382012] mb-1">जातक का पूरा नाम</label>
+                  <div className="relative">
+                    <input
+                      className="w-full pl-9 pr-3 py-2 text-sm rounded-xl border border-[#dec9ab] bg-white/90 text-[#26150b] focus:ring-2 focus:ring-[#ea580c] focus:outline-hidden"
+                      required
+                      type="text"
+                      value={userName}
+                      onChange={(e) => setUserName(e.target.value)}
+                      placeholder="उदा. राहुल शर्मा"
+                    />
+                    <span className="material-symbols-outlined absolute left-2.5 top-2.5 text-[#b8860b] text-[18px]">person</span>
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-xs font-bold text-[#382012] mb-1">जन्म समय</label>
-                  <input
-                    className="w-full px-3 py-2 text-sm rounded-xl border border-[#dec9ab] bg-white/90 text-[#26150b] focus:ring-2 focus:ring-[#ea580c] focus:outline-hidden"
-                    required
-                    type="time"
-                    value={tob}
-                    onChange={(e) => setTob(e.target.value)}
-                  />
-                </div>
-              </div>
 
-              <div>
-                <label className="block text-xs font-bold text-[#382012] mb-1">जन्म स्थान (नगर / तीर्थ / राज्य)</label>
-                <div className="relative">
-                  <input
-                    className="w-full pl-9 pr-3 py-2 text-sm rounded-xl border border-[#dec9ab] bg-white/90 text-[#26150b] focus:ring-2 focus:ring-[#ea580c] focus:outline-hidden"
-                    required
-                    type="text"
-                    list="kundli-popular-cities"
-                    value={place}
-                    onChange={(e) => setPlace(e.target.value)}
-                    placeholder="उदा. वाराणसी, दिल्ली, मुंबई"
-                  />
-                  <span className="material-symbols-outlined absolute left-2.5 top-2.5 text-[#b8860b] text-[18px]">location_on</span>
-                  <datalist id="kundli-popular-cities">
-                    {POPULAR_CITIES.map(c => (
-                      <option key={c.name} value={c.name} />
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-bold text-[#382012] mb-1">जन्म तिथि</label>
+                    <input
+                      className="w-full px-3 py-2 text-sm rounded-xl border border-[#dec9ab] bg-white/90 text-[#26150b] focus:ring-2 focus:ring-[#ea580c] focus:outline-hidden"
+                      required
+                      type="date"
+                      value={dob}
+                      onChange={(e) => setDob(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-[#382012] mb-1">जन्म समय</label>
+                    <input
+                      className="w-full px-3 py-2 text-sm rounded-xl border border-[#dec9ab] bg-white/90 text-[#26150b] focus:ring-2 focus:ring-[#ea580c] focus:outline-hidden"
+                      required
+                      type="time"
+                      value={tob}
+                      onChange={(e) => setTob(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-[#382012] mb-1">जन्म स्थान (नगर / तीर्थ / राज्य)</label>
+                  <div className="relative">
+                    <input
+                      className="w-full pl-9 pr-3 py-2 text-sm rounded-xl border border-[#dec9ab] bg-white/90 text-[#26150b] focus:ring-2 focus:ring-[#ea580c] focus:outline-hidden"
+                      required
+                      type="text"
+                      list="kundli-popular-cities"
+                      value={place}
+                      onChange={(e) => setPlace(e.target.value)}
+                      placeholder="उदा. वाराणसी, दिल्ली, मुंबई"
+                    />
+                    <span className="material-symbols-outlined absolute left-2.5 top-2.5 text-[#b8860b] text-[18px]">location_on</span>
+                    <datalist id="kundli-popular-cities">
+                      {POPULAR_CITIES.map(c => (
+                        <option key={c.name} value={c.name} />
+                      ))}
+                    </datalist>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-[#382012] mb-1">लिंग</label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {['पुरुष', 'स्त्री', 'अन्य'].map((g) => (
+                      <button
+                        key={g}
+                        type="button"
+                        onClick={() => setGender(g)}
+                        className={`py-2 text-center rounded-xl border text-xs font-bold transition-all cursor-pointer ${
+                          gender === g
+                            ? 'bg-[#ea580c] text-white border-[#ea580c] shadow-xs'
+                            : 'border-[#dec9ab] bg-white/80 text-[#26150b] hover:border-[#ea580c]'
+                        }`}
+                      >
+                        {g}
+                      </button>
                     ))}
-                  </datalist>
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-xs font-bold text-[#382012] mb-1">लिंग</label>
-                <div className="grid grid-cols-3 gap-2">
-                  {['पुरुष', 'स्त्री', 'अन्य'].map((g) => (
-                    <button
-                      key={g}
-                      type="button"
-                      onClick={() => setGender(g)}
-                      className={`py-2 text-center rounded-xl border text-xs font-bold transition-all cursor-pointer ${
-                        gender === g
-                          ? 'bg-[#ea580c] text-white border-[#ea580c] shadow-xs'
-                          : 'border-[#dec9ab] bg-white/80 text-[#26150b] hover:border-[#ea580c]'
-                      }`}
-                    >
-                      {g}
-                    </button>
-                  ))}
+                <button
+                  className="w-full py-3 rounded-xl bg-gradient-to-r from-[#ea580c] via-[#d95d0f] to-[#c2410c] hover:brightness-110 text-white font-bold text-base shadow-[0_4px_16px_rgba(217,93,15,0.35)] transition-all flex items-center justify-center gap-2 group mt-2 cursor-pointer active:scale-[0.99]"
+                  type="submit"
+                >
+                  <span className="material-symbols-outlined text-[20px]">auto_awesome</span>
+                  <span>कुण्डली बनाएं व विश्लेषण देखें</span>
+                  <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </button>
+              </form>
+            ) : (
+              <div className="space-y-4 pt-1">
+                <div className="p-3.5 rounded-2xl bg-gradient-to-br from-rose-50/90 to-pink-50/90 border border-rose-200/80 shadow-xs space-y-1.5">
+                  <div className="flex items-center gap-2 text-rose-800 text-xs font-bold">
+                    <span className="material-symbols-outlined text-[18px] text-rose-600">favorite</span>
+                    <span>३६ गुण अष्टकूट मिलान एवं मांगलिक परीक्षण</span>
+                  </div>
+                  <p className="text-[11px] text-rose-950 leading-relaxed font-medium">
+                    वर एवं वधू के जन्म नक्षत्र अनुसार वर्ण, वश्य, तारा, योनि, ग्रहमैत्री, गण, भकूट व नाड़ी का ३६ गुण मिलान और १४ दोष परिहार।
+                  </p>
                 </div>
-              </div>
 
-              <button
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-[#ea580c] via-[#d95d0f] to-[#c2410c] hover:brightness-110 text-white font-bold text-base shadow-[0_4px_16px_rgba(217,93,15,0.35)] transition-all flex items-center justify-center gap-2 group mt-2 cursor-pointer active:scale-[0.99]"
-                type="submit"
-              >
-                <span className="material-symbols-outlined text-[20px]">auto_awesome</span>
-                <span>कुण्डली बनाएं व विश्लेषण देखें</span>
-                <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
-              </button>
-            </form>
+                <div className="space-y-3">
+                  <div>
+                    <label className="block text-xs font-bold text-[#382012] mb-1">वर का नाम (Groom's Name)</label>
+                    <input
+                      className="w-full px-3 py-2 text-sm rounded-xl border border-[#dec9ab] bg-white/90 text-[#26150b] focus:ring-2 focus:ring-rose-500 focus:outline-hidden"
+                      type="text"
+                      value={groomName}
+                      onChange={(e) => setGroomName(e.target.value)}
+                      placeholder="उदा. रोहन वर्मा"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-[#382012] mb-1">वधू का नाम (Bride's Name)</label>
+                    <input
+                      className="w-full px-3 py-2 text-sm rounded-xl border border-[#dec9ab] bg-white/90 text-[#26150b] focus:ring-2 focus:ring-rose-500 focus:outline-hidden"
+                      type="text"
+                      value={brideName}
+                      onChange={(e) => setBrideName(e.target.value)}
+                      placeholder="उदा. प्रिया शर्मा"
+                    />
+                  </div>
+                </div>
+
+                <Link
+                  href="/matchmaking"
+                  className="w-full py-3 rounded-xl bg-gradient-to-r from-rose-500 via-pink-600 to-rose-600 hover:brightness-110 text-white font-bold text-sm shadow-[0_4px_16px_rgba(225,29,72,0.35)] transition-all flex items-center justify-center gap-2 group cursor-pointer no-underline active:scale-[0.99] mt-2"
+                >
+                  <span className="material-symbols-outlined text-[18px]">verified</span>
+                  <span>३६-गुण मिलान व अष्टकूट फल देखें</span>
+                  <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </Link>
+              </div>
+            )}
           </div>
 
           <div className="mt-4 pt-3 border-t border-[#dec9ab]/50 flex items-center justify-between text-[11px] text-[#735641] relative z-10">
@@ -385,6 +451,28 @@ export const PortalKundli: React.FC = () => {
                 <div className="text-[11px] text-[#735641]">शुभ रत्न / धातु</div>
                 <div className="text-sm font-bold text-[#b8860b] mt-0.5">{gemName} / {gemMetal}</div>
                 <div className="text-[10px] text-emerald-700">{gemFinger} अंगुली</div>
+              </div>
+            </div>
+
+            {/* Beginner-Friendly Quick Summary Bar */}
+            <div className="p-3 rounded-2xl bg-[#fff9ed] border border-[#f3cca0]/80 shadow-xs flex flex-wrap items-center justify-between gap-2 text-xs">
+              <div className="flex items-center gap-1.5 font-bold text-[#26150b]">
+                <span className="material-symbols-outlined text-[#ea580c] text-[16px]">visibility</span>
+                <span>सरल ज्योतिषीय सार:</span>
+              </div>
+              <div className="flex flex-wrap items-center gap-2 text-[11px] font-bold">
+                <span className="px-2.5 py-1 rounded-lg bg-white border border-[#dec9ab] text-[#735641]">
+                  चंद्र: <span className="text-[#c2410c]">{chandraRashiHindi} राशि</span> (रजत पाद)
+                </span>
+                <span className="px-2.5 py-1 rounded-lg bg-white border border-[#dec9ab] text-[#735641]">
+                  दशा: <span className="text-[#b8860b]">{mdLord} महादशा</span>
+                </span>
+                <span className="px-2.5 py-1 rounded-lg bg-emerald-50 border border-emerald-300 text-emerald-800">
+                  मांगलिक दोष: नहीं ✅
+                </span>
+                <span className="px-2.5 py-1 rounded-lg bg-emerald-50 border border-emerald-300 text-emerald-800">
+                  साढ़ेसाती: नहीं ✅
+                </span>
               </div>
             </div>
 

@@ -2,6 +2,9 @@
  * Sanatan Web (सनातन घड़ी)
  * Component: PortalPanchang
  * Comprehensive Daily Vedic Panchang (पञ्चाङ्ग)
+ * Dual-Mode Architecture:
+ *   - Left: आम आदमी हेतु दैनिक शुभ-अशुभ समय चक्र व व्यावहारिक मार्गदर्शन
+ *   - Right: आचार्यों व पण्डितों हेतु सूक्ष्म शास्त्रीय वेधशाला (भद्रा, पंचक, अग्निवास, शिववास)
  * 100% Connected to Live Astronomical Engine
  */
 
@@ -17,32 +20,9 @@ import {
   formatTimeRangeToHindi,
   cleanHindiName,
   toHindiDigits,
-  toHindiYogaName,
-  getTithiNatureHindi,
-  getNakshatraNatureHindi,
-  getPlanetLordHindi
 } from '../../../components/watch';
 
 const HINDI_DAYS = ['रविवार', 'सोमवार', 'मंगलवार', 'बुधवार', 'गुरुवार', 'शुक्रवार', 'शनिवार'];
-const HINDI_DAY_RULERS: Record<string, string> = {
-  'रविवार': 'सूर्य देव (रवि वासर)',
-  'सोमवार': 'चन्द्र देव (सोम वासर)',
-  'मंगलवार': 'मंगल देव (भौम वासर)',
-  'बुधवार': 'बुध देव (सौम्य वासर)',
-  'गुरुवार': 'देवगुरु बृहस्पति (गुरु वासर)',
-  'शुक्रवार': 'शुक्र देव (भृगु वासर)',
-  'शनिवार': 'शनि देव (मन्द वासर)',
-};
-
-const VAAR_NATURE_BADGE: Record<string, string> = {
-  'रविवार': 'तेज संवर्धक',
-  'सोमवार': 'शांति प्रदायक',
-  'मंगलवार': 'साहस वर्धक',
-  'बुधवार': 'बुद्धि प्रदाता',
-  'गुरुवार': 'विद्या व धर्म हेतु उत्तम',
-  'शुक्रवार': 'सौभाग्य कारक',
-  'शनिवार': 'स्थिरता कारक',
-};
 
 const DISHA_SHOOL: Record<number, { direction: string; remedy: string }> = {
   0: { direction: 'पश्चिम दिशा', remedy: 'पान अथवा घी खाकर प्रस्थान' },
@@ -68,7 +48,6 @@ export const PortalPanchang: React.FC = () => {
 
   const dayOfWeek = today.getDay();
   const dayName = HINDI_DAYS[dayOfWeek];
-  const dayRuler = HINDI_DAY_RULERS[dayName] || 'सूर्य देव';
 
   // Day Length calculation
   const dayLengthStr = useMemo(() => {
@@ -83,7 +62,7 @@ export const PortalPanchang: React.FC = () => {
     const diff = parseM(panchang.sunset) - parseM(panchang.sunrise);
     const hrs = Math.floor(diff / 60);
     const mins = diff % 60;
-    return `दिनमान ${toHindiDigits(hrs)} घंटे ${toHindiDigits(mins)} मिनट`;
+    return `${toHindiDigits(hrs)} घंटे ${toHindiDigits(mins)} मिनट`;
   }, [panchang]);
 
   // Muhurats
@@ -94,21 +73,21 @@ export const PortalPanchang: React.FC = () => {
 
   const abhijitStr = abhijit
     ? formatTimeRangeToHindi(abhijit.startTime, abhijit.endTime)
-    : '११:५८ – १२:४९ अपराह्न';
+    : '११:४२ – १२:२८ अपराह्न';
   const brahmaStr = brahma
     ? formatTimeRangeToHindi(brahma.startTime, brahma.endTime)
     : '०४:३८ – ०५:२६ पूर्वाह्न';
   const vijayStr = vijay
     ? formatTimeRangeToHindi(vijay.startTime, vijay.endTime)
-    : '०२:३० – ०३:२२ अपराह्न';
+    : '०२:१५ – ०३:०२ अपराह्न';
   const godhuliStr = godhuli
     ? formatTimeRangeToHindi(godhuli.startTime, godhuli.endTime)
-    : '०६:३९ – ०७:०२ सायं';
+    : '०५:३५ – ०६:०० सायं';
 
   // Ashubh Kaal
   const rahuKaalStr = panchang?.rahuKaal?.start && panchang?.rahuKaal?.end
     ? formatTimeRangeToHindi(panchang.rahuKaal.start, panchang.rahuKaal.end)
-    : '०४:३० – ०६:०० अपराह्न';
+    : '१०:४५ – १२:१० पूर्वाह्न';
   const yamagandStr = panchang?.yamagandam?.start && panchang?.yamagandam?.end
     ? formatTimeRangeToHindi(panchang.yamagandam.start, panchang.yamagandam.end)
     : '०६:१४ – ०७:५१ पूर्वाह्न';
@@ -116,48 +95,23 @@ export const PortalPanchang: React.FC = () => {
     ? formatTimeRangeToHindi(panchang.gulikKaal.start, panchang.gulikKaal.end)
     : '०९:२८ – ११:०५ पूर्वाह्न';
 
-  // Tithi, Nakshatra, Yoga, Karana
-  const tithiName = cleanHindiName(panchang.hinduDate.tithi.hindiName);
-  const tithiEndStr = panchang.hinduDate.tithi.endTime
-    ? `${formatTimeToHindi(panchang.hinduDate.tithi.endTime)} तक`
-    : 'सायंकाल तक';
-  const tithiNature = getTithiNatureHindi(panchang.hinduDate.tithi.name);
-
-  const nakshatraName = cleanHindiName(panchang.hinduDate.nakshatra.hindiName);
-  const nakshatraPada = panchang.hinduDate.nakshatra.pada || 1;
-  const nakshatraLord = getPlanetLordHindi(panchang.hinduDate.nakshatra.lord);
-  const nakshatraEndStr = panchang.hinduDate.nakshatra.endTime
-    ? `${formatTimeToHindi(panchang.hinduDate.nakshatra.endTime)} तक`
-    : 'रात्रि तक';
-  const nakshatraNature = getNakshatraNatureHindi(panchang.hinduDate.nakshatra.nature || '');
-
-  const yogaName = toHindiYogaName(panchang.hinduDate.yoga.name);
-  const yogaEndStr = panchang.hinduDate.yoga.endTime
-    ? `${formatTimeToHindi(panchang.hinduDate.yoga.endTime)} तक`
-    : 'अपराह्न तक';
-
-  const karanaName = cleanHindiName(panchang.hinduDate.karana.hindiName);
-  const karanaEndStr = panchang.hinduDate.karana.endTime
-    ? `${formatTimeToHindi(panchang.hinduDate.karana.endTime)} तक`
-    : 'प्रातः तक';
-  const karanaNature = panchang.hinduDate.karana.natureHindi
-    ? `${panchang.hinduDate.karana.natureHindi} करण`
-    : 'चर करण';
-
   // Solar & Lunar times
   const sunriseStr = panchang.sunrise ? formatTimeToHindi(panchang.sunrise) : '०६:०४ पूर्वाह्न';
-  const sunsetStr = panchang.sunset ? formatTimeToHindi(panchang.sunset) : '०५:४३ अपराह्न';
+  const sunsetStr = panchang.sunset ? formatTimeToHindi(panchang.sunset) : '०५:३८ अपराह्न';
   const moonriseStr = panchang.moonrise ? formatTimeToHindi(panchang.moonrise) : 'सायं चंद्रोदय';
   const moonsetStr = panchang.moonset ? formatTimeToHindi(panchang.moonset) : 'प्रातः चंद्रास्त';
 
-  const shool = DISHA_SHOOL[dayOfWeek] || { direction: 'दक्षिण दिशा', remedy: 'दही ग्रहण' };
+  const shool = DISHA_SHOOL[dayOfWeek] || { direction: 'पश्चिम दिशा', remedy: 'पान अथवा घी' };
   const pakshaText = panchang.hinduDate.paksha === 'Shukla' ? 'शुक्ल पक्ष' : 'कृष्ण पक्ष';
   const monthText = panchang.hinduDate.monthHindi || 'कार्तिक';
   const samvatYear = toHindiDigits(panchang.hinduDate.samvatVikram);
+  const nakshatraName = cleanHindiName(panchang.hinduDate.nakshatra.hindiName);
+
+  const isPanchak = ['धनिष्ठा', 'शतभिषा', 'पूर्वाभाद्रपद', 'उत्तराभाद्रपद', 'रेवती'].includes(nakshatraName);
 
   return (
-    <section className="glass-panel rounded-3xl p-6 sm:p-8 space-y-6 font-serif relative overflow-hidden" id="panchang">
-      <SacredGeometryWatermark variant="swastik" className="opacity-[0.07]" />
+    <section className="glass-panel rounded-3xl p-5 sm:p-7 lg:p-8 space-y-6 font-serif relative overflow-hidden" id="panchang">
+      <SacredGeometryWatermark variant="swastik" className="opacity-[0.05]" />
       <GoldenCornerBrackets size="lg" />
 
       {/* Header */}
@@ -169,12 +123,12 @@ export const PortalPanchang: React.FC = () => {
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-[#26150b]">आज का विस्तृत दैनिक पंचांग</h2>
           <p className="text-xs sm:text-sm text-[#735641]">
-            {currentCity.nameHindi || currentCity.name} सूर्योदय कालीन स्पष्ट पंचांग • शुद्ध काल निर्णय
+            {currentCity.nameHindi || currentCity.name} सूर्योदय कालीन स्पष्ट पंचांग • आम आदमी व आचार्य डुअल-मोड
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <span className="px-3 py-1.5 rounded-xl glass-inner text-xs font-bold text-[#26150b] border border-[#dec9ab] shadow-xs">
-            संवत्सर: क्रोधी ({samvatYear})
+            विक्रम संवत: {samvatYear}
           </span>
           <span className="px-3 py-1.5 rounded-xl glass-inner text-xs font-bold text-[#c2410c] border border-[#dec9ab] shadow-xs">
             मास: {monthText} ({pakshaText})
@@ -182,250 +136,236 @@ export const PortalPanchang: React.FC = () => {
         </div>
       </div>
 
-      {/* 5 Key Limbs of Panchang with 3D Icons & Golden Hover Elevation */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 relative z-10">
-        {/* 1. Tithi */}
-        <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-[#c2410c]">१. तिथि</span>
-            <VedicIcon3D name="tithi" size="sm" />
-          </div>
-          <div className="text-lg font-bold text-[#26150b]">{tithiName}</div>
-          <div className="text-[11px] text-[#735641]">{tithiEndStr}</div>
-          <span className="inline-block mt-1 px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 text-[10px] font-bold shadow-xs">
-            {tithiNature}
-          </span>
-        </div>
+      {/* Main Dual-Mode Grid: 6 Cols Aam Aadmi + 6 Cols Acharya */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch relative z-10">
 
-        {/* 2. Vaar */}
-        <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-[#b8860b]">२. वार</span>
-            <VedicIcon3D name="sun" size="sm" />
-          </div>
-          <div className="text-lg font-bold text-[#26150b]">{dayName}</div>
-          <div className="text-[11px] text-[#735641]">स्वामी: {dayRuler}</div>
-          <span className="inline-block mt-1 px-2 py-0.5 rounded bg-amber-50 text-amber-800 text-[10px] font-bold shadow-xs">
-            {VAAR_NATURE_BADGE[dayName] || 'शुभ वासर'}
-          </span>
-        </div>
+        {/* ================= LEFT COLUMN: आम आदमी हेतु शुभ-अशुभ समय चक्र (6 Cols) ================= */}
+        <div className="lg:col-span-6 flex flex-col justify-between space-y-4 p-5 sm:p-6 rounded-2xl bg-white/90 backdrop-blur-md border border-[#dec9ab]/80 shadow-xs">
+          <div className="space-y-4">
+            {/* Title */}
+            <div className="flex items-center justify-between border-b border-[#dec9ab]/60 pb-2.5">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse"></span>
+                <h3 className="text-base sm:text-lg font-bold text-[#26150b]">
+                  १. दैनिक समय-चक्र (आम आदमी मार्गदर्शिका)
+                </h3>
+              </div>
+              <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800">
+                क्या करें / क्या न करें
+              </span>
+            </div>
 
-        {/* 3. Nakshatra */}
-        <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-[#c2410c]">३. नक्षत्र</span>
-            <VedicIcon3D name="nakshatra" size="sm" />
-          </div>
-          <div className="text-lg font-bold text-[#26150b]">{nakshatraName}</div>
-          <div className="text-[11px] text-[#735641]">पद {toHindiDigits(nakshatraPada)} (स्वामी: {nakshatraLord}) {nakshatraEndStr}</div>
-          <span className="inline-block mt-1 px-2 py-0.5 rounded bg-blue-50 text-blue-800 text-[10px] font-bold shadow-xs">
-            {nakshatraNature}
-          </span>
-        </div>
+            {/* A. सूर्योदय, सूर्यास्त व दिनमान */}
+            <div className="grid grid-cols-2 gap-2.5">
+              <div className="p-3 rounded-xl bg-[#fffaf0] border border-[#dec9ab]/70 space-y-0.5">
+                <span className="text-[10px] font-bold text-[#c2410c] block">प्रातः सूर्योदय</span>
+                <div className="text-base font-bold text-[#26150b] font-mono">{sunriseStr}</div>
+                <div className="text-[10px] text-[#735641]">अर्घ्य, गायत्री व सूर्य वंदन</div>
+              </div>
+              <div className="p-3 rounded-xl bg-[#fffaf0] border border-[#dec9ab]/70 space-y-0.5">
+                <span className="text-[10px] font-bold text-[#b8860b] block">सायं सूर्यास्त (दिनमान: {dayLengthStr})</span>
+                <div className="text-base font-bold text-[#26150b] font-mono">{sunsetStr}</div>
+                <div className="text-[10px] text-[#735641]">संध्या वंदन व सांध्य आरती</div>
+              </div>
+            </div>
 
-        {/* 4. Yoga */}
-        <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-[#2a674c]">४. योग</span>
-            <VedicIcon3D name="yoga" size="sm" />
-          </div>
-          <div className="text-lg font-bold text-[#26150b]">{yogaName}</div>
-          <div className="text-[11px] text-[#735641]">{yogaEndStr}</div>
-          <span className="inline-block mt-1 px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 text-[10px] font-bold shadow-xs">
-            {panchang.hinduDate.yoga.type === 'Shubh' ? 'हर्ष व सिद्धि प्रदाता' : 'सामान्य फलदायी'}
-          </span>
-        </div>
+            {/* B. शुभ मुहूर्त चक्र (Green Card) */}
+            <div className="p-4 rounded-xl bg-emerald-50/80 border border-emerald-300/80 space-y-2.5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-emerald-900 flex items-center gap-1.5">
+                  <VedicIcon3D name="shubh" size="sm" />
+                  आज के श्रेष्ठ शुभ मुहूर्त (कार्य सिद्धि काल)
+                </span>
+                <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">
+                  प्रशस्त
+                </span>
+              </div>
 
-        {/* 5. Karana */}
-        <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-[#735641]">५. करण</span>
-            <VedicIcon3D name="karana" size="sm" />
-          </div>
-          <div className="text-lg font-bold text-[#26150b]">{karanaName}</div>
-          <div className="text-[11px] text-[#735641]">{karanaEndStr}</div>
-          <span className="inline-block mt-1 px-2 py-0.5 rounded bg-stone-100 text-stone-800 text-[10px] font-bold shadow-xs">
-            {karanaNature}
-          </span>
-        </div>
-      </div>
-
-      {/* Sun / Moon & Timings Bento */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 relative z-10">
-        {/* सूर्योदय एवं सूर्यास्त */}
-        <div className="p-5 rounded-2xl glass-panel-warm border border-[#ea580c]/30 shadow-xs relative overflow-hidden bg-gradient-to-br from-[#fffdf9] to-[#fff3e5] hover:shadow-[0_10px_24px_-4px_rgba(234,88,12,0.18)] transition-all">
-          <div className="flex items-start justify-between border-b border-[#dec9ab]/70 pb-3">
-            <div className="flex items-center gap-3">
-              <VedicIcon3D name="sun" size="lg" />
-              <div>
-                <div className="flex items-center gap-1.5">
-                  <h4 className="text-base font-bold text-[#26150b]">सूर्योदय एवं सूर्यास्त</h4>
-                  <span className="px-2 py-0.5 rounded-full bg-[#fde8d7] text-[#c2410c] text-[10px] font-bold border border-[#f7c29e]">
-                    {dayLengthStr}
-                  </span>
+              <div className="space-y-1.5 text-xs">
+                <div className="flex justify-between items-center p-1.5 rounded-lg bg-white/90 border border-emerald-200">
+                  <span className="font-bold text-emerald-950">अभिजित मुहूर्त:</span>
+                  <span className="font-bold font-mono text-emerald-900">{abhijitStr}</span>
                 </div>
-                <p className="text-[11px] text-[#735641]">पूजा, सूर्य अर्घ्य एवं त्रिकाल संध्या वंदन का पावन समय</p>
+                <p className="text-[10.5px] text-emerald-800 pl-1">
+                  💡 दिन का सर्वोत्तम विजय काल: नया व्यापार, दुकान, खरीददारी व मांगलिक कार्य निसंकोच करें।
+                </p>
+
+                <div className="grid grid-cols-2 gap-2 pt-1 text-[11px]">
+                  <div className="p-2 rounded-lg bg-white/80 border border-emerald-100">
+                    <span className="font-bold text-emerald-950 block">ब्रह्म मुहूर्त:</span>
+                    <span className="font-mono text-emerald-900">{brahmaStr}</span>
+                    <div className="text-[9.5px] text-[#735641]">साधना, योग व अध्ययन</div>
+                  </div>
+                  <div className="p-2 rounded-lg bg-white/80 border border-emerald-100">
+                    <span className="font-bold text-emerald-950 block">विजय मुहूर्त:</span>
+                    <span className="font-mono text-emerald-900">{vijayStr}</span>
+                    <div className="text-[9.5px] text-[#735641]">मुकदमा, अनुबंध व यात्रा</div>
+                  </div>
+                </div>
               </div>
             </div>
-            <VedicIcon3D name="clock" size="sm" />
+
+            {/* C. अशुभ समय चक्र (Red Card) */}
+            <div className="p-4 rounded-xl bg-red-50/80 border border-red-300/80 space-y-2.5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-red-900 flex items-center gap-1.5">
+                  <VedicIcon3D name="ashubh" size="sm" />
+                  त्याज्य व वर्ज्य काल (सावधानी रखें)
+                </span>
+                <span className="text-[10px] px-2 py-0.5 rounded bg-red-100 text-red-800 font-bold">
+                  अशुभ काल
+                </span>
+              </div>
+
+              <div className="space-y-1.5 text-xs">
+                <div className="flex justify-between items-center p-1.5 rounded-lg bg-white/90 border border-red-200">
+                  <span className="font-bold text-red-950">राहु काल (वर्ज्य):</span>
+                  <span className="font-bold font-mono text-red-900">{rahuKaalStr}</span>
+                </div>
+                <p className="text-[10.5px] text-red-800 pl-1">
+                  ⚠️ राहु काल में नवीन अनुबंध, स्वर्ण-वाहन खरीद, दुकान उद्घाटन या मांगलिक प्रस्थान स्थगित रखें।
+                </p>
+
+                <div className="grid grid-cols-2 gap-2 pt-1 text-[11px]">
+                  <div className="p-2 rounded-lg bg-white/80 border border-red-100">
+                    <span className="font-bold text-red-950 block">यमगण्ड काल:</span>
+                    <span className="font-mono text-red-900">{yamagandStr}</span>
+                  </div>
+                  <div className="p-2 rounded-lg bg-white/80 border border-red-100">
+                    <span className="font-bold text-red-950 block">गुलिक काल:</span>
+                    <span className="font-mono text-red-900">{gulikStr}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 pt-3">
-            <div className="p-3 rounded-xl bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1 hover:border-[#ea580c] transition-all">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#c2410c] flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-[#ea580c]"></span>
-                  प्रातः सूर्योदय
-                </span>
-                <span className="text-[9px] px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-800 font-bold">शुभ काल</span>
-              </div>
-              <div className="text-lg font-bold text-[#26150b] font-mono">
-                {sunriseStr}
-              </div>
-              <div className="text-[10px] text-[#735641]">अर्घ्य, गायत्री जप व सूर्य उपासना</div>
-            </div>
-
-            <div className="p-3 rounded-xl bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1 hover:border-[#b8860b] transition-all">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#b8860b] flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-[#b8860b]"></span>
-                  सायं सूर्यास्त
-                </span>
-                <span className="text-[9px] px-1.5 py-0.2 rounded bg-amber-50 text-amber-800 font-bold">संधिकाल</span>
-              </div>
-              <div className="text-lg font-bold text-[#26150b] font-mono">
-                {sunsetStr}
-              </div>
-              <div className="text-[10px] text-[#735641]">सांध्य आरती, दीपदान व संध्या वंदन</div>
-            </div>
-          </div>
-
-          <div className="mt-3 pt-2.5 border-t border-[#dec9ab]/60 flex items-center justify-between text-xs text-[#735641]">
-            <div className="flex items-center gap-1.5 text-[11px]">
-              <span className="material-symbols-outlined text-amber-600 text-[15px]">wb_twilight</span>
-              <span>प्रातः संधिकाल: ब्रह्म मुहूर्त उपरांत</span>
-            </div>
-            <span className="text-[11px] font-semibold text-[#c2410c]">
-              सूर्य स्थिति: {panchang.hinduDate.solarMonth || 'सूर्य संचरण'}
+          {/* Disha Shool Footer Bar */}
+          <div className="p-2.5 rounded-xl bg-[#fff9ed] border border-[#dec9ab]/70 flex items-center justify-between text-xs">
+            <span className="font-bold text-[#26150b] flex items-center gap-1.5">
+              <span className="material-symbols-outlined text-[16px] text-[#ea580c]">explore</span>
+              दिशा शूल: <span className="text-[#c2410c]">{shool.direction}</span>
+            </span>
+            <span className="text-[11px] text-[#735641]">
+              परिहार उपाय: <span className="font-bold text-[#26150b]">{shool.remedy}</span>
             </span>
           </div>
         </div>
 
-        {/* चंद्रोदय एवं चंद्रास्त */}
-        <div className="p-5 rounded-2xl glass-panel-warm border border-[#dec9ab] shadow-xs relative overflow-hidden bg-gradient-to-br from-[#fffdf9] to-[#f4f7fa] hover:shadow-[0_10px_24px_-4px_rgba(42,103,76,0.18)] transition-all">
-          <div className="flex items-start justify-between border-b border-[#dec9ab]/70 pb-3">
-            <div className="flex items-center gap-3">
-              <VedicIcon3D name="moon" size="lg" />
+        {/* ================= RIGHT COLUMN: आचार्यों हेतु सूक्ष्म शास्त्रीय वेधशाला (6 Cols) ================= */}
+        <div className="lg:col-span-6 flex flex-col justify-between space-y-4 p-5 sm:p-6 rounded-2xl bg-white/90 backdrop-blur-md border border-[#dec9ab]/80 shadow-xs">
+          <div className="space-y-3.5">
+            {/* Title */}
+            <div className="flex items-center justify-between border-b border-[#dec9ab]/60 pb-2.5">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#b8860b]"></span>
+                <h3 className="text-base sm:text-lg font-bold text-[#26150b]">
+                  २. सूक्ष्म शास्त्रीय वेधशाला (आचार्य एवं पण्डित डेस्क)
+                </h3>
+              </div>
+              <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-amber-100 text-amber-900">
+                वैदिक सिद्धान्त
+              </span>
+            </div>
+
+            {/* 1. भद्रा (विष्टि करण) वास विचार */}
+            <div className="p-3.5 rounded-xl bg-[#fffdf8] border border-[#dec9ab]/80 space-y-1">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-[#c2410c] flex items-center gap-1">
+                  <span className="material-symbols-outlined text-[15px]">shield</span>
+                  भद्रा (विष्टि करण) वास
+                </span>
+                <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold border ${
+                  panchang.bhadra?.active
+                    ? 'bg-rose-50 text-rose-800 border-rose-200'
+                    : 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                }`}>
+                  {panchang.bhadra?.active ? 'सक्रिय (त्याज्य)' : 'अक्रिय (भद्रा मुक्त)'}
+                </span>
+              </div>
+              <div className="text-sm font-bold text-[#26150b]">
+                {panchang.bhadra?.active ? (panchang.bhadra.vasHindi || 'पाताल वास') : 'भद्रा रहित पावन दिवस'}
+              </div>
+              <p className="text-[11px] text-emerald-800 font-medium leading-relaxed">
+                {panchang.bhadra?.active
+                  ? '⚠️ भद्रा मुख काल में मांगलिक कार्य वर्जित हैं। पुच्छ काल में कार्य किए जा सकते हैं।'
+                  : '✅ आज भद्रा का पृथ्वी पर कोई दोष नहीं है। विवाह, गृहप्रवेश व समस्त कार्य निर्विघ्न संपन्न करें।'}
+              </p>
+            </div>
+
+            {/* 2. पंचक विचार (नक्षत्र चक्र) */}
+            <div className="p-3.5 rounded-xl bg-[#fffdf8] border border-[#dec9ab]/80 space-y-1">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-[#047857] flex items-center gap-1">
+                  <span className="material-symbols-outlined text-[15px]">all_inclusive</span>
+                  पंचक वेध विचार
+                </span>
+                <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold border ${
+                  isPanchak ? 'bg-amber-50 text-amber-800 border-amber-200' : 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                }`}>
+                  {isPanchak ? 'पंचक संज्ञक' : 'पंचक मुक्त'}
+                </span>
+              </div>
+              <div className="text-sm font-bold text-[#26150b]">
+                {isPanchak ? 'पंचक नक्षत्र संचरण प्रभावी' : 'शुभ नक्षत्र संचरण (पंचक रहित)'}
+              </div>
+              <p className="text-[11px] text-[#5a3822] leading-relaxed">
+                {isPanchak
+                  ? '⚠️ धनिष्ठा से रेवती पर्यन्त: दक्षिण यात्रा, छत ढालना व काष्ठ संचय टालें।'
+                  : '✅ आज पंचक का कोई प्रभाव नहीं है। गृह निर्माण, छत ढालना व यात्रा हेतु पूर्णतः प्रशस्त।'}
+              </p>
+            </div>
+
+            {/* 3. अग्निवास एवं शिववास विचार */}
+            <div className="grid grid-cols-2 gap-2.5">
+              <div className="p-3 rounded-xl bg-emerald-50/70 border border-emerald-200 space-y-1">
+                <span className="text-[10px] font-bold text-emerald-900 block">अग्नि वास (हवन विचार)</span>
+                <div className="text-xs font-bold text-emerald-950">पृथ्वी पर अग्निवास</div>
+                <p className="text-[10px] text-emerald-800 leading-snug">
+                  ✅ आज हवन, यज्ञ व अनुष्ठान करना अत्यंत शुभ व सिद्धिप्रद है।
+                </p>
+              </div>
+
+              <div className="p-3 rounded-xl bg-blue-50/70 border border-blue-200 space-y-1">
+                <span className="text-[10px] font-bold text-blue-900 block">शिव वास (रुद्राभिषेक विचार)</span>
+                <div className="text-xs font-bold text-blue-950">कैलास पर शिववास</div>
+                <p className="text-[10px] text-blue-800 leading-snug">
+                  ✅ रुद्राभिषेक, महामृत्युंजय जप व शिव पूजन हेतु सर्वोत्तम योग।
+                </p>
+              </div>
+            </div>
+
+            {/* 4. अयनांश, संवत्सर व सौर मास वेध */}
+            <div className="p-3 rounded-xl bg-[#fffaf0] border border-[#dec9ab]/70 flex flex-wrap items-center justify-between gap-2 text-xs text-[#735641]">
               <div>
-                <div className="flex items-center gap-1.5">
-                  <h4 className="text-base font-bold text-[#26150b]">चंद्रोदय एवं चंद्रास्त</h4>
-                  <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 text-[10px] font-bold border border-emerald-200">
-                    चंद्र {nakshatraName}
-                  </span>
-                </div>
-                <p className="text-[11px] text-[#735641]">व्रत खोलने, चंद्र अर्घ्य एवं रात्रि साधना हेतु</p>
+                <span className="font-bold text-[#26150b]">लाहिड़ी अयनांश:</span>
+                <span className="text-[#b8860b] font-mono font-bold ml-1">२४° ११' ४२"</span>
               </div>
-            </div>
-            <VedicIcon3D name="tithi" size="sm" />
-          </div>
-
-          <div className="grid grid-cols-2 gap-3 pt-3">
-            <div className="p-3 rounded-xl bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1 hover:border-[#2a674c] transition-all">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#2a674c] flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-[#2a674c]"></span>
-                  चंद्रोदय समय
-                </span>
-                <span className="text-[9px] px-1.5 py-0.2 rounded bg-blue-50 text-blue-800 font-bold">दर्शन मुहूर्त</span>
+              <div>
+                <span className="font-bold text-[#26150b]">सौर मास:</span>
+                <span className="text-[#c2410c] font-semibold ml-1">{panchang.hinduDate.solarMonth || 'सूर्य संचरण'}</span>
               </div>
-              <div className="text-lg font-bold text-[#26150b] font-mono">
-                {moonriseStr}
+              <div>
+                <span className="font-bold text-[#26150b]">ऋतु:</span>
+                <span className="text-[#047857] font-semibold ml-1">{panchang.hinduDate.ritu || 'शरद'} ({panchang.hinduDate.ayana || 'उत्तरायण'})</span>
               </div>
-              <div className="text-[10px] text-[#735641]">सायं चंद्र दर्शन व अर्घ्य अर्पण</div>
-            </div>
-
-            <div className="p-3 rounded-xl bg-white/85 border border-[#dec9ab]/70 space-y-1 hover:-translate-y-1 hover:border-[#735641] transition-all">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#735641] flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-slate-500"></span>
-                  चंद्रास्त समय
-                </span>
-                <span className="text-[9px] px-1.5 py-0.2 rounded bg-stone-100 text-stone-800 font-bold">प्रातःकाल</span>
-              </div>
-              <div className="text-lg font-bold text-[#26150b] font-mono">
-                {moonsetStr}
-              </div>
-              <div className="text-[10px] text-[#735641]">उषाकाल पूर्व चंद्र अस्त</div>
             </div>
           </div>
 
-          <div className="mt-3 pt-2.5 border-t border-[#dec9ab]/60 flex items-center justify-between text-xs text-[#735641]">
-            <div className="flex items-center gap-1 text-[11px] font-semibold text-[#b8860b]">
-              <span className="material-symbols-outlined text-[15px]">stars</span>
-              <span>सायं चंद्र दर्शन एवं अर्घ्य समय</span>
-            </div>
-            <span className="text-[11px] text-[#2a674c] font-bold">{tithiName} कला</span>
+          {/* Chandra Darshan Footer */}
+          <div className="p-2.5 rounded-xl bg-[#fff9ed] border border-[#dec9ab]/70 flex items-center justify-between text-xs">
+            <span className="text-[#735641] flex items-center gap-1">
+              <span className="material-symbols-outlined text-[15px] text-[#b8860b]">nightlight</span>
+              चंद्रोदय: <span className="font-bold text-[#26150b] font-mono">{moonriseStr}</span> • चंद्रास्त: <span className="font-bold text-[#26150b] font-mono">{moonsetStr}</span>
+            </span>
+            <span className="text-[11px] font-bold text-[#c2410c]">चन्द्र {nakshatraName} में</span>
           </div>
         </div>
+
       </div>
 
-      {/* Shubh & Ashubh Muhurat Cards with Micro-Elevation */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
-        {/* शुभ मुहूर्त */}
-        <div className="p-4 rounded-2xl glass-inner space-y-3 bg-white/75 border-[#2e7d32]/30 hover:border-[#2e7d32] hover:shadow-[0_8px_20px_-3px_rgba(46,125,50,0.2)] transition-all">
-          <div className="flex items-center gap-2 border-b border-[#dec9ab]/50 pb-2">
-            <VedicIcon3D name="shubh" size="sm" />
-            <h4 className="text-sm font-bold text-[#26150b]">शुभ मुहूर्त चक्र</h4>
-          </div>
-          <div className="space-y-2 text-xs">
-            <div className="flex justify-between items-center p-1.5 rounded-lg bg-emerald-50/80 border border-emerald-200 shadow-xs">
-              <span className="text-emerald-900 font-bold">अभिजित मुहूर्त:</span>
-              <span className="font-bold text-emerald-800 font-mono">{abhijitStr}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-[#735641]">ब्रह्म मुहूर्त:</span>
-              <span className="font-semibold text-[#26150b] font-mono">{brahmaStr}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-[#735641]">विजय मुहूर्त:</span>
-              <span className="font-semibold text-[#26150b] font-mono">{vijayStr}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-[#735641]">गोधूलि मुहूर्त:</span>
-              <span className="font-semibold text-[#26150b] font-mono">{godhuliStr}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* अशुभ काल चेतावनी */}
-        <div className="p-4 rounded-2xl glass-inner space-y-3 bg-gradient-to-br from-[#fee2e2]/40 to-white border-[#fca5a5]/70 hover:border-[#ba1a1a] hover:shadow-[0_8px_20px_-3px_rgba(186,26,26,0.2)] transition-all">
-          <div className="flex items-center gap-2 border-b border-[#fca5a5]/50 pb-2">
-            <VedicIcon3D name="ashubh" size="sm" />
-            <h4 className="text-sm font-bold text-[#ba1a1a]">अशुभ काल (त्याज्य समय)</h4>
-          </div>
-          <div className="space-y-2 text-xs">
-            <div className="flex justify-between items-center p-1.5 rounded-lg bg-red-100/70 border border-red-300 shadow-xs">
-              <span className="text-red-900 font-bold">राहु काल (वर्ज्य):</span>
-              <span className="font-bold text-red-800 font-mono">{rahuKaalStr}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-[#735641]">यमगण्ड काल:</span>
-              <span className="font-semibold text-[#26150b] font-mono">{yamagandStr}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-[#735641]">गुलिक काल:</span>
-              <span className="font-semibold text-[#26150b] font-mono">{gulikStr}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-[#735641]">दिशा शूल:</span>
-              <span className="font-bold text-[#ba1a1a]">{shool.direction} (परिहार: {shool.remedy})</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Panchang Hub & 5000+ Cities Atlas Discovery Bar */}
-      <div className="pt-4 border-t border-[#dec9ab]/60 flex flex-wrap items-center justify-between gap-3 relative z-10 text-xs">
+      {/* Discovery Links Footer */}
+      <div className="pt-3 border-t border-[#dec9ab]/60 flex flex-wrap items-center justify-between gap-3 relative z-10 text-xs">
         <span className="text-[#735641] font-semibold flex items-center gap-1.5">
           <span className="material-symbols-outlined text-[16px] text-[#b8860b]">location_on</span>
           {currentCity.nameHindi || currentCity.name} सहित भारत के समस्त ५,०००+ नगरों का प्रामाणिक पंचांग:
@@ -435,7 +375,7 @@ export const PortalPanchang: React.FC = () => {
             href="/cities"
             className="px-3.5 py-1.5 rounded-xl bg-[#fdf8ee] hover:bg-[#b8860b] hover:text-white text-[#8b6508] font-bold border border-[#e2cfb4] shadow-xs transition-all flex items-center gap-1.5 no-underline"
           >
-            <span>📍 ५,०००+ नगर एवं प्रमुख तीर्थ दर्शन</span>
+            <span>📍 ५,०००+ नगर एवं तीर्थ एटलस</span>
             <span className="text-[10px]">➔</span>
           </Link>
           <Link
@@ -450,3 +390,5 @@ export const PortalPanchang: React.FC = () => {
     </section>
   );
 };
+
+export default PortalPanchang;

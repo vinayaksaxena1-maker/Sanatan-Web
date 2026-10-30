@@ -190,6 +190,21 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
   const nextStatusInfo = getChoghadiyaStatusInfo(nextChoghadiya?.type);
   const isNightTime = currentChoghadiya ? !currentChoghadiya.isDay : clockTime.getHours() >= 19 || clockTime.getHours() < 6;
 
+  const isCurrentShubh = currentChoghadiya?.type === 'Amrit' || currentChoghadiya?.type === 'Shubh' || currentChoghadiya?.type === 'Labh';
+  const isCurrentAshubh = currentChoghadiya?.type === 'Rog' || currentChoghadiya?.type === 'Kaal' || currentChoghadiya?.type === 'Udveg';
+
+  const nextShubhChoghadiya = useMemo(() => {
+    if (!choghadiyaList || choghadiyaList.length === 0 || activeChoghadiyaIndex < 0) return null;
+    for (let i = 1; i < choghadiyaList.length; i++) {
+      const idx = (activeChoghadiyaIndex + i) % choghadiyaList.length;
+      const item = choghadiyaList[idx];
+      if (item && (item.type === 'Amrit' || item.type === 'Shubh' || item.type === 'Labh')) {
+        return item;
+      }
+    }
+    return null;
+  }, [choghadiyaList, activeChoghadiyaIndex]);
+
   const currentTimingHindi = currentChoghadiya
     ? formatTimeRangeToHindi(currentChoghadiya.startTime, currentChoghadiya.endTime)
     : '—';
@@ -263,7 +278,22 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
             </div>
           </div>
 
-          {/* 2. सक्रिय होरा स्थिति पट्टी (Active Hora Status Bar) */}
+          {/* 2. अगला शुभ समय (Next Auspicious Window) */}
+          <div className="flex items-center justify-between text-xs py-1.5 px-3 bg-emerald-500/10 rounded-xl border border-emerald-300/60">
+            <span className="font-bold text-emerald-900 flex items-center gap-1.5 whitespace-nowrap">
+              <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+              अगला शुभ समय:
+            </span>
+            <span className="font-bold font-serif text-emerald-950 text-[11.5px] leading-relaxed text-right pl-2">
+              {isCurrentShubh
+                ? `वर्तमान समय शुभ है (${currentChoghadiya ? (currentChoghadiya.hindiName || currentChoghadiya.name) : ''} काल)`
+                : nextShubhChoghadiya
+                  ? `${formatTimeToHindi(nextShubhChoghadiya.startTime)} से (${nextShubhChoghadiya.hindiName || nextShubhChoghadiya.name} चौघड़िया)`
+                  : 'शीघ्र प्रारंभ'}
+            </span>
+          </div>
+
+          {/* 3. सक्रिय होरा स्थिति पट्टी (Active Hora Status Bar) */}
           <div className="flex items-center justify-between text-xs py-1.5 px-3 bg-orange-500/10 rounded-xl border border-orange-200/50">
             <span className="font-bold text-slate-700 whitespace-nowrap">सक्रिय होरा:</span>
             <span className="font-bold font-serif text-[#78350F] text-[11.5px] leading-relaxed text-right pl-2">
@@ -271,23 +301,33 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
             </span>
           </div>
 
-          {/* 3. ✅ क्या करें (मार्गदर्शन - Recommended Action) */}
+          {/* 4. स्पष्ट निर्देश (क्या करें / क्या न करें) */}
           {currentChoghadiya && (
-            <div className="text-xs space-y-0.5 pt-0.5">
-              <span className="font-black text-slate-900 block">
-                ✅ क्या करें (मार्गदर्शन):
-              </span>
-              <p className="text-slate-700 font-medium leading-relaxed">
-                {getChoghadiyaUpyuktKarya(currentChoghadiya.type, isNightTime)}
-              </p>
+            <div className="text-xs space-y-1 pt-0.5 border-t border-orange-100/70">
+              <div className="flex items-start gap-1.5">
+                <span className="font-black text-emerald-800 whitespace-nowrap">✅ क्या करें:</span>
+                <span className="text-slate-700 font-medium leading-relaxed">
+                  {getChoghadiyaUpyuktKarya(currentChoghadiya.type, isNightTime)}
+                </span>
+              </div>
+              <div className="flex items-start gap-1.5">
+                <span className="font-black text-rose-800 whitespace-nowrap">❌ क्या न करें:</span>
+                <span className="text-slate-700 font-medium leading-relaxed">
+                  {isCurrentAshubh
+                    ? 'नया व्यापार, दुकान उद्घाटन, नवीन निवेश या मांगलिक यात्रा स्थगित रखें।'
+                    : isCurrentShubh
+                      ? 'कोई निषेध नहीं। सभी शुभ संकल्प व नवीन कार्य निर्विघ्न संपन्न करें।'
+                      : 'अति-महत्वपूर्ण जोखिम भरे वित्तीय व मांगलिक निर्णय टालें।'}
+                </span>
+              </div>
             </div>
           )}
 
-          {/* 4. ⏭️ अगला चौघड़िया (Next Upcoming Preview - बिना अलार्म बटन) */}
+          {/* 5. ⏭️ अगला चौघड़िया (Next Upcoming Preview) */}
           {nextChoghadiya && (
             <div className="pt-1.5 border-t border-orange-100/90 flex items-center justify-between text-xs flex-wrap gap-1.5">
               <div className="flex items-center gap-1.5 flex-wrap">
-                <span className="font-bold text-slate-500">⏭️ अगला चौघड़िया:</span>
+                <span className="font-bold text-slate-500">⏭️ आगामी चौघड़िया:</span>
                 <span className="font-bold font-serif text-slate-900">
                   {nextStatusInfo.dot} {nextChoghadiya.hindiName || nextChoghadiya.name} ({formatTimeToHindi(nextChoghadiya.startTime)} से)
                 </span>
