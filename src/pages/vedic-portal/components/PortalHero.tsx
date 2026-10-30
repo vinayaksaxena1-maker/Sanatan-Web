@@ -89,8 +89,8 @@ export const PortalHero: React.FC = () => {
         src="/assets/temple_panchang_bg.jpg"
       />
 
-      {/* 10% Opacity Cream Parda (Overlay) as strictly requested */}
-      <div className="absolute inset-0 bg-[#f7f2e6] opacity-10 pointer-events-none"></div>
+      {/* 30% Opacity Cream Parda (Overlay) as strictly requested */}
+      <div className="absolute inset-0 bg-[#f7f2e6] opacity-30 pointer-events-none"></div>
       <div className="absolute -right-20 -top-20 w-80 h-80 rounded-full ambient-glow-gold pointer-events-none opacity-30"></div>
       <SacredGeometryWatermark variant="swastik" className="opacity-[0.05]" />
       <GoldenCornerBrackets size="lg" />
