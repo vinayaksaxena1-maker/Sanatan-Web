@@ -191,8 +191,8 @@ export const PortalHero: React.FC = () => {
       <SacredGeometryWatermark variant="swastik" className="opacity-[0.05]" />
       <GoldenCornerBrackets size="lg" />
 
-      {/* Standardized Master Container with Exact 35px Outer Inset */}
-      <div className="relative z-10 w-full pt-[35px] pb-[35px] px-4 sm:px-5 lg:px-6">
+      {/* Standardized Master Container with Responsive Insets */}
+      <div className="relative z-10 w-full pt-4 pb-4 sm:pt-6 sm:pb-6 lg:pt-[35px] lg:pb-[35px] px-2.5 sm:px-5 lg:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 xl:gap-7 items-stretch justify-center">
           
           {/* Left Column: Panchang Overview (7 Cols) - 500px Symmetrical Height */}

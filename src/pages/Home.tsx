@@ -25,8 +25,8 @@ export const Home: React.FC = () => {
       {/* Universal Top Header with Built-in Global Spotlight Search (Ctrl+K) */}
       <PortalHeader />
 
-      {/* Unified Master Command Surface - Mathematically Calibrated 1520px Container (200px Left/Right Gap on 1080p FHD) */}
-      <main className="responsive-portal-container pt-[146px] pb-12 space-y-[25px]" id="mukhya">
+      {/* Unified Master Command Surface - Mathematically Calibrated 1520px Container */}
+      <main className="responsive-portal-container pt-[126px] sm:pt-[132px] lg:pt-[146px] pb-12 space-y-[20px] sm:space-y-[25px]" id="mukhya">
         {/* 1. Contained Boxed Hero Section (Panchang Overview + Kaal Chakra Live Watch) */}
         <PortalHero />
 

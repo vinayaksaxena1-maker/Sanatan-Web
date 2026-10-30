@@ -236,8 +236,8 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
         </button>
       </div>
 
-      {/* 2. CENTRAL ANALOG DIAL (Expanded Grand Vedic Dial) */}
-      <div className="w-[220px] h-[220px] sm:w-[245px] sm:h-[245px] lg:w-[245px] lg:h-[245px] aspect-square flex items-center justify-center [&_svg]:overflow-visible drop-shadow-[0_8px_24px_rgba(180,83,9,0.22)] my-auto shrink-0">
+      {/* 2. CENTRAL ANALOG DIAL (Expanded Grand Vedic Dial - Fully Responsive) */}
+      <div className="w-[195px] h-[195px] min-[400px]:w-[215px] min-[400px]:h-[215px] sm:w-[240px] sm:h-[240px] lg:w-[245px] lg:h-[245px] aspect-square flex items-center justify-center [&_svg]:overflow-visible drop-shadow-[0_8px_24px_rgba(180,83,9,0.22)] my-auto shrink-0">
         <AnalogClock
           time={clockTime}
           choghadiyaList={choghadiyaList}

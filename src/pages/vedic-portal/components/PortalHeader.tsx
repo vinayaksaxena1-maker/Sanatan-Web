@@ -32,6 +32,7 @@ export const PortalHeader: React.FC = () => {
   const [isCityDropdownOpen, setIsCityDropdownOpen] = useState(false);
   const [citySearch, setCitySearch] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const cityDropdownRef = useRef<HTMLDivElement>(null);
 
@@ -44,11 +45,17 @@ export const PortalHeader: React.FC = () => {
       }
       if (e.key === 'Escape') {
         setIsDropdownOpen(false);
+        setIsMobileMenuOpen(false);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
+
+  // Dismiss mobile drawer on route navigation
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [currentPath]);
 
   // Click outside to dismiss dropdown
   useEffect(() => {
@@ -191,17 +198,28 @@ export const PortalHeader: React.FC = () => {
       </div>
 
       {/* Main Hindi Navigation Bar */}
-      <div className="h-18 lg:h-20 w-full px-4 sm:px-8 lg:px-12 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-6 xl:gap-8">
-          <Link href="/" className="flex items-center gap-3 cursor-pointer group no-underline">
-            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden flex items-center justify-center shrink-0 border-2 border-[#d4af37]/80 shadow-[0_2px_12px_rgba(212,175,55,0.3)] group-hover:scale-105 group-hover:border-[#ea580c] transition-all duration-300 bg-white">
+      <div className="h-18 lg:h-20 w-full px-3 sm:px-6 lg:px-12 flex items-center justify-between gap-2 sm:gap-4">
+        <div className="flex items-center gap-2.5 sm:gap-6 xl:gap-8">
+          {/* Mobile & Tablet Navigation Hamburger Menu Toggle (< 1024px) */}
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="lg:hidden p-2 rounded-xl bg-white/90 hover:bg-amber-100/80 text-[#c2410c] border border-[#dec9ab] shadow-2xs transition-colors cursor-pointer shrink-0"
+            aria-label="मुख्य मेन्यू खोलें"
+            title="मेन्यू"
+          >
+            <span className="material-symbols-outlined text-[22px]">menu</span>
+          </button>
+
+          <Link href="/" className="flex items-center gap-2 sm:gap-3 cursor-pointer group no-underline">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden flex items-center justify-center shrink-0 border-2 border-[#d4af37]/80 shadow-[0_2px_12px_rgba(212,175,55,0.3)] group-hover:scale-105 group-hover:border-[#ea580c] transition-all duration-300 bg-white">
               <img src="/App1.png" alt="Sanatan Ghadi Vedic Logo" className="w-full h-full object-cover rounded-full" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xl sm:text-2xl font-bold tracking-wide text-[#c2410c]">
+              <span className="text-base sm:text-xl lg:text-2xl font-bold tracking-wide text-[#c2410c] leading-tight">
                 सनातन घड़ी वैदिक
               </span>
-              <span className="text-[10px] tracking-widest text-[#735641] font-semibold">
+              <span className="text-[8.5px] sm:text-[10px] tracking-widest text-[#735641] font-semibold leading-tight">
                 SANATAN GHADI VEDIC
               </span>
             </div>
@@ -444,6 +462,99 @@ export const PortalHeader: React.FC = () => {
 
       {/* Universal Spotlight Search Modal */}
       <HeaderSearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+
+      {/* Mobile & Tablet Slide-Over Navigation Drawer (< 1024px) */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-50 flex lg:hidden">
+          {/* Backdrop with Soft Blur */}
+          <div
+            className="fixed inset-0 bg-black/45 backdrop-blur-xs transition-opacity"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+
+          {/* Drawer Content Surface */}
+          <div className="relative z-10 w-72 sm:w-80 max-w-[85vw] bg-[#fffdfa] border-r border-[#dec9ab] shadow-2xl flex flex-col justify-between h-full p-4 font-serif animate-in slide-in-from-left duration-200">
+            <div>
+              {/* Drawer Brand Header */}
+              <div className="flex items-center justify-between pb-3 border-b border-[#dec9ab]/70">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#d4af37] bg-white p-0.5 shadow-xs">
+                    <img src="/App1.png" alt="Logo" className="w-full h-full object-cover rounded-full" />
+                  </div>
+                  <div>
+                    <span className="text-base font-bold text-[#c2410c] block leading-tight">सनातन घड़ी वैदिक</span>
+                    <span className="text-[9px] text-[#735641] font-sans font-semibold leading-tight">SANATAN GHADI VEDIC</span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-8 h-8 rounded-lg flex items-center justify-center text-[#735641] hover:text-[#c2410c] hover:bg-amber-100/70 border border-[#dec9ab]/60 transition-colors cursor-pointer"
+                  aria-label="मेन्यू बंद करें"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Main Navigation Links */}
+              <div className="py-3 space-y-1">
+                {navItems.map((item) => {
+                  const isActive = item.match
+                    ? item.match.includes(currentPath)
+                    : currentPath === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors no-underline ${
+                        isActive
+                          ? 'bg-[#ea580c]/12 text-[#c2410c] font-bold border border-[#ea580c]/30 shadow-2xs'
+                          : 'text-[#382012] hover:bg-amber-50 hover:text-[#c2410c]'
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      <span className="text-xs text-[#b8860b]">➔</span>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              {/* Quick Tools Grid in Mobile Menu */}
+              <div className="pt-2.5 border-t border-[#dec9ab]/60 space-y-2">
+                <span className="text-[10px] font-bold text-[#735641] uppercase tracking-wider block px-1">
+                  ✨ समस्त वैदिक साधन:
+                </span>
+                <div className="grid grid-cols-2 gap-1.5 max-h-56 overflow-y-auto pr-1">
+                  {toolsDropdownItems.map((tool) => (
+                    <Link
+                      key={tool.href + tool.label}
+                      href={tool.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="p-2 rounded-xl bg-amber-50/70 hover:bg-amber-100/80 border border-amber-200/70 flex flex-col items-start gap-0.5 no-underline transition-colors"
+                    >
+                      <span className="text-base">{tool.icon}</span>
+                      <span className="text-xs font-bold text-[#26150b] truncate w-full">{tool.label}</span>
+                      <span className="text-[9px] text-[#735641] truncate w-full">{tool.desc}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Drawer Bottom Status Strip */}
+            <div className="pt-3 border-t border-[#dec9ab]/60 text-xs text-[#735641] flex items-center justify-between">
+              <span className="flex items-center gap-1 font-bold text-[#c2410c]">
+                <span className="material-symbols-outlined text-[15px]">location_on</span>
+                {currentCity.nameHindi || currentCity.name}
+              </span>
+              <span className="text-[10.5px] text-[#b8860b] font-medium">
+                {panchang?.hinduDate?.monthHindi || 'कार्तिक'} मास
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 };

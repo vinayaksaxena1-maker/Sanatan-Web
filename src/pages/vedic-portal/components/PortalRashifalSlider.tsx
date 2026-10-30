@@ -129,9 +129,9 @@ export const PortalRashifalSlider: React.FC = () => {
         </div>
       </div>
 
-      {/* 12-Rashi Symmetrical Balanced Grid (Full Width on Desktop) */}
+      {/* 12-Rashi Symmetrical Balanced Grid (Mobile: 3-4 Cols, Tab: 6 Cols, Desktop: 12 Cols) */}
       <div className="relative z-10 w-full">
-        <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-12 gap-2 w-full pb-2 pt-1">
+        <div className="grid grid-cols-3 min-[440px]:grid-cols-4 sm:grid-cols-6 lg:grid-cols-12 gap-1.5 sm:gap-2 w-full pb-2 pt-1">
           {rashiList.map((r, idx) => {
             const isSelected = selectedIdx === idx;
             return (

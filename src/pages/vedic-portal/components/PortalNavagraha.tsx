@@ -186,8 +186,8 @@ export const PortalNavagraha: React.FC = () => {
         </div>
       </div>
 
-      {/* 9 Graha Bento Strip with Golden Rim Elevation */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-2.5 relative z-10">
+      {/* 9 Graha Bento Strip (Mobile: 2-3 Cols, Tab: 3-5 Cols, Desktop: 9 Cols) */}
+      <div className="grid grid-cols-2 min-[480px]:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-2 sm:gap-2.5 relative z-10 pb-1">
         {grahas.map((g) => (
           <div
             key={g.name}
