@@ -79,8 +79,6 @@ export const PortalFooter: React.FC = () => {
       <div className="w-full px-4 sm:px-8 lg:px-12 py-4 bg-[#1d1009] border-t border-[#382012] flex flex-col md:flex-row items-center justify-between text-[#a8907f] text-xs gap-3">
         <div>© २०२६ सनातन घड़ी वैदिक (Sanatan Ghadi Vedic) • सर्वधर्म सद्भाव एवं वैदिक कालगणना। सर्वाधिकार सुरक्षित।</div>
         <div className="flex items-center gap-6">
-          <a className="hover:text-[#f2ca50] transition-colors no-underline" href="#">मूल संस्कृत ग्रंथ</a>
-          <a className="hover:text-[#f2ca50] transition-colors no-underline" href="#">खगोलीय शुद्धता</a>
           <Link className="hover:text-[#f2ca50] transition-colors no-underline" href="/privacy-policy">गोपनीयता नीति</Link>
           <Link className="hover:text-[#f2ca50] transition-colors no-underline" href="/terms">नियम व शर्तें</Link>
         </div>
