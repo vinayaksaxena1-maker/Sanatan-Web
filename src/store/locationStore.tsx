@@ -4,7 +4,7 @@
  * Guaranteed 0 crash on GPS permission denial (Instant Ujjain Mahakal fallback)
  */
 
-import { useState, useCallback, createContext, useContext, type ReactNode } from 'react';
+import { useState, useEffect, useCallback, createContext, useContext, type ReactNode } from 'react';
 import type { CityLocation } from '../types/location';
 import majorCitiesData from '../data/majorCities250.json';
 import { searchCitiesDatabase } from '../engine/citiesDatabase';
@@ -211,6 +211,22 @@ export const LocationProvider: React.FC<LocationProviderProps> = ({
       );
     });
   }, [setCity]);
+
+  /**
+   * Automatic Device Geolocation on First Visit
+   * If user hasn't explicitly chosen or saved a preferred city, attempt GPS auto-selection
+   */
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof navigator === 'undefined' || !navigator.geolocation) return;
+    try {
+      const saved = localStorage.getItem(STORAGE_LOCATION_KEY);
+      if (!saved) {
+        detectDeviceLocation().catch(() => {});
+      }
+    } catch {
+      // storage disabled
+    }
+  }, [detectDeviceLocation]);
 
   /**
    * Fast In-Memory Fuzzy Search against 250+ Major Cities

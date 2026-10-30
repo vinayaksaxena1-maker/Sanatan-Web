@@ -69,12 +69,22 @@ export const CitySelectModal: React.FC<CitySelectModalProps> = ({ isOpen, onClos
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
-      {/* Backdrop click */}
-      <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200 cursor-pointer"
+      onClick={onClose}
+      onTouchStart={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      {/* Backdrop click / touch overlay */}
+      <div className="absolute inset-0 cursor-pointer" onClick={onClose} aria-hidden="true" />
 
-      {/* Modal Card */}
-      <div className="relative w-full max-w-lg bg-[#FAF6F0] rounded-3xl border border-[#E6DEC8] shadow-2xl overflow-hidden z-10 flex flex-col max-h-[85vh]">
+      {/* Modal Card - stop propagation so clicks inside card do not close popup */}
+      <div
+        className="relative w-full max-w-lg bg-[#FAF6F0] rounded-3xl border border-[#E6DEC8] shadow-2xl overflow-hidden z-10 flex flex-col max-h-[85vh] cursor-default"
+        onClick={(e) => e.stopPropagation()}
+        onTouchStart={(e) => e.stopPropagation()}
+      >
         
         {/* Header */}
         <div className="px-6 pt-6 pb-4 border-b border-[#E6DEC8]/80 bg-white/80 backdrop-blur-sm flex items-center justify-between">

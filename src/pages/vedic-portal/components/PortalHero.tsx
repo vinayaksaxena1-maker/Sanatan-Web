@@ -7,11 +7,9 @@
  */
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { Link } from '../../../routes/AppRoutes';
 import { GoldenCornerBrackets } from './GoldenCornerBrackets';
 import { SacredGeometryWatermark } from './SacredGeometryWatermark';
 import { VedicIcon3D } from './VedicIcon3D';
-import { getFestivalsForDay } from '../../../engine';
 import {
   LiveMuhuratWatchCard,
   formatTimeToHindi,
@@ -134,35 +132,49 @@ export const PortalHero: React.FC = () => {
   const rituText = getRituHindi(panchang?.hinduDate?.ritu);
   const ayanaText = getAyanaHindi(panchang?.hinduDate?.ayana);
   const cityName = currentCity?.nameHindi || currentCity?.name || 'काशी (वाराणसी)';
-  const samvatVikram = toHindiDigits(panchang?.hinduDate?.samvatVikram || 2081);
+  const samvatVikram = toHindiDigits(panchang?.hinduDate?.samvatVikram || 2083);
+  const samvatShaka = toHindiDigits(panchang?.hinduDate?.samvatShaka || 1948);
+
+  const gregorianDateStr = useMemo(() => {
+    const day = toHindiDigits(currentTime.getDate());
+    const year = toHindiDigits(currentTime.getFullYear());
+    const monthHindi = currentTime.toLocaleDateString('hi-IN', { month: 'long' });
+    return `${day} ${monthHindi} ${year}`;
+  }, [currentTime]);
   const vaarBadge = VAAR_NATURE_BADGE[dayName] || 'शुभ संज्ञक';
 
   const dayOfWeek = currentTime.getDay();
   const shool = DISHA_SHOOL_HERO[dayOfWeek] || { direction: 'पश्चिम दिशा', remedy: 'पान अथवा घी' };
 
-  const todayFestivals = useMemo(() => {
-    if (!panchang) return null;
-    try {
-      const fests = getFestivalsForDay(panchang);
-      return fests && fests.length > 0 ? (fests[0].hindiName || fests[0].name) : null;
-    } catch {
-      return null;
-    }
-  }, [panchang]);
+  // Auspicious state check for immediate user answer
+  const isCurrentTimeAuspicious = useMemo(() => {
+    const type = activeChoghadiya?.type;
+    return type === 'Amrit' || type === 'Shubh' || type === 'Labh' || type === 'Chal';
+  }, [activeChoghadiya]);
+
+  // Warm Dynamic Greeting based on time of day
+  const greetingText = useMemo(() => {
+    const hr = currentTime.getHours();
+    let greet = 'सुप्रभात';
+    if (hr >= 12 && hr < 16) greet = 'शुभ दोपहर';
+    else if (hr >= 16 && hr < 20) greet = 'शुभ संध्या';
+    else if (hr >= 20 || hr < 4) greet = 'शुभ रात्रि';
+    return `${greet}! आज ${dayName} है`;
+  }, [currentTime, dayName]);
 
   // Zero-Knowledge (आम आदमी) 5-Second Daily Summary
   const aamAadmiSummary = useMemo(() => {
-    let dayNuance = 'दैनिक कार्य, आर्थिक योजना एवं भगवत्-स्मरण हेतु अनुकूल दिन।';
-    if (dayName === 'रविवार') dayNuance = 'सूर्य देव उपासना, प्रशासनिक कार्य, स्वास्थ्य सुधार व बुजुर्गों के मार्गदर्शन हेतु श्रेष्ठ।';
-    else if (dayName === 'सोमवार') dayNuance = 'शिव पूजन, मानसिक शांति, पारिवारिक सौहार्द व रचनात्मक कार्यों हेतु उत्तम।';
-    else if (dayName === 'मंगलवार') dayNuance = 'श्री हनुमान साधना, साहस-पराक्रम, ऋण-मुक्ति प्रयास व तकनीकी कार्य हेतु शुभ।';
-    else if (dayName === 'बुधवार') dayNuance = 'गणेश जी की आराधना, व्यापारिक वार्ता, हिसाब-किताब व विद्या अध्ययन हेतु फलप्रद।';
-    else if (dayName === 'गुरुवार') dayNuance = 'श्री हरि विष्णु व गुरु पूजन, ज्ञानार्जन, नवीन संकल्प व आर्थिक योजना हेतु सर्वोत्तम।';
-    else if (dayName === 'शुक्रवार') dayNuance = 'माँ महालक्ष्मी पूजन, कला, वस्त्र-आभूषण क्रय व सौहार्दपूर्ण पारिवारिक जीवन हेतु उत्तम।';
-    else if (dayName === 'शनिवार') dayNuance = 'शनि देव आराधना, पीपल सेवा, दान-पुण्य व धैर्य से रुके हुए पुराने कार्य निपटाएं।';
+    let dayNuance = 'दैनिक कार्य, आर्थिक योजना एवं भगवत्-स्मरण के लिए अनुकूल दिन।';
+    if (dayName === 'रविवार') dayNuance = 'सूर्य देव उपासना, प्रशासनिक कार्य, स्वास्थ्य सुधार व मार्गदर्शन के लिए श्रेष्ठ दिन।';
+    else if (dayName === 'सोमवार') dayNuance = 'शिव पूजन, मानसिक शांति, पारिवारिक सौहार्द व रचनात्मक कार्यों के लिए अनुकूल दिन।';
+    else if (dayName === 'मंगलवार') dayNuance = 'श्री हनुमान साधना, साहस-पराक्रम, ऋण-मुक्ति प्रयास व तकनीकी कार्यों के लिए उत्तम दिन।';
+    else if (dayName === 'बुधवार') dayNuance = 'गणेश जी की आराधना, व्यापारिक वार्ता, हिसाब-किताब व विद्या अध्ययन के लिए फलदायी दिन।';
+    else if (dayName === 'गुरुवार') dayNuance = 'श्री हरि विष्णु व गुरु पूजन, ज्ञानार्जन, नए संकल्प व आर्थिक योजनाओं के लिए सर्वोत्तम दिन।';
+    else if (dayName === 'शुक्रवार') dayNuance = 'माँ महालक्ष्मी पूजन, कला, वस्त्र-आभूषण क्रय व पारिवारिक सौहार्द के लिए उत्तम दिन।';
+    else if (dayName === 'शनिवार') dayNuance = 'शनि देव आराधना, पीपल सेवा, दान-पुण्य व धैर्य से रुके हुए पुराने कार्य निपटाने का दिन।';
 
-    return `आज ${dayName}, ${tithiName} एवं ${nakshatraName} नक्षत्र है। ${dayNuance} दोपहर में राहु काल (${rahuKaalStr}) के दौरान नवीन अनुबंध, बड़ा निवेश या मांगलिक यात्रा स्थगित रखें।`;
-  }, [dayName, tithiName, nakshatraName, rahuKaalStr]);
+    return dayNuance;
+  }, [dayName]);
 
   return (
     <section className="relative w-full overflow-hidden border-y border-[#d95d0f]/25 shadow-[0_20px_50px_-15px_rgba(77,51,34,0.16)] flex items-center font-serif text-[#26150b]">
@@ -193,25 +205,99 @@ export const PortalHero: React.FC = () => {
                 
                 {/* Centered Top Title Area */}
                 <div className="flex flex-col items-center justify-center gap-2 border-b border-[#dec9ab]/70 pb-3 w-full text-center">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/85 text-[#c2410c] text-xs font-bold tracking-wide border border-[#ea580c]/30 shadow-xs">
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/90 text-[#c2410c] text-xs font-bold tracking-wide border border-[#ea580c]/30 shadow-xs">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                     <VedicIcon3D name="temple" size="sm" />
-                    <span>श्री गणेशाय नमः • आज का दैनिक पंचांग</span>
+                    <span>{greetingText} • श्री गणेशाय नमः</span>
                   </div>
                   <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#26150b] tracking-tight">
                     दैनिक पंचांग एवं विशिष्ट मुहूर्त
                   </h1>
+                  
+                  {/* Gregorian Date, Vikram Samvat & Shak Samvat Badges */}
+                  <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-bold pt-0.5">
+                    <span className="px-2.5 py-0.5 rounded-full bg-white/90 text-[#c2410c] border border-amber-200/90 shadow-2xs">
+                      📅 {gregorianDateStr}
+                    </span>
+                    <span className="text-[#dec9ab]">•</span>
+                    <span className="px-2.5 py-0.5 rounded-full bg-white/90 text-[#b8860b] border border-amber-200/90 shadow-2xs">
+                      विक्रम संवत {samvatVikram}
+                    </span>
+                    <span className="text-[#dec9ab]">•</span>
+                    <span className="px-2.5 py-0.5 rounded-full bg-white/90 text-[#735641] border border-amber-200/90 shadow-2xs">
+                      शक संवत {samvatShaka}
+                    </span>
+                  </div>
+
                   <p className="text-xs sm:text-sm text-[#735641] font-medium">
-                    {cityName} सूर्योदय कालीन वैदिक काल गणना • विक्रम संवत {samvatVikram}
+                    {cityName} • सूर्योदय कालीन काल गणना
                   </p>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/85 border border-[#dec9ab] shadow-xs text-xs font-bold text-[#735641]">
+                  <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-white/85 border border-[#dec9ab] shadow-xs text-[11px] font-bold text-[#735641]">
                     <span>ऋतु एवं अयन:</span>
                     <span className="text-[#b8860b]">{rituText} • {ayanaText}</span>
                   </div>
                 </div>
 
+                {/* 3 Instant Actionable Q&A Pills for Zero-Knowledge Users */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 w-full">
+                  <div className="p-2.5 rounded-2xl bg-gradient-to-br from-emerald-50/95 to-emerald-100/70 border border-emerald-300 shadow-xs flex flex-col justify-between text-left hover:-translate-y-0.5 transition-all">
+                    <div className="flex items-center justify-between gap-1 w-full">
+                      <span className="text-[11px] font-bold text-emerald-950 flex items-center gap-1.5">
+                        <span className={`w-2 h-2 rounded-full ${isCurrentTimeAuspicious ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`}></span>
+                        क्या अभी शुभ समय है?
+                      </span>
+                      <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-bold ${isCurrentTimeAuspicious ? 'bg-emerald-200/80 text-emerald-900' : 'bg-amber-200/80 text-amber-900'}`}>
+                        {isCurrentTimeAuspicious ? 'शुभ समय' : 'सावधानी'}
+                      </span>
+                    </div>
+                    <div className="text-xs font-bold text-emerald-900 mt-1 truncate">
+                      {isCurrentTimeAuspicious ? `हाँ, ${choghadiyaNameClean} मुहूर्त शुभ है` : `अभी ${choghadiyaNameClean} है, सतर्क रहें`}
+                    </div>
+                    <div className="text-[10px] text-emerald-800 mt-0.5 border-t border-emerald-200/60 pt-0.5 truncate">
+                      अभिजित: {abhijitStr}
+                    </div>
+                  </div>
+
+                  <div className="p-2.5 rounded-2xl bg-gradient-to-br from-red-50/95 to-amber-50/70 border border-red-200 shadow-xs flex flex-col justify-between text-left hover:-translate-y-0.5 transition-all">
+                    <div className="flex items-center justify-between gap-1 w-full">
+                      <span className="text-[11px] font-bold text-red-950 flex items-center gap-1.5">
+                        <span className="material-symbols-outlined text-red-600 text-[14px]">warning</span>
+                        आज राहु काल कब है?
+                      </span>
+                      <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-red-200/80 text-red-900 font-bold">
+                        वर्ज्य काल
+                      </span>
+                    </div>
+                    <div className="text-xs font-bold text-red-900 font-mono mt-1 truncate">
+                      {rahuKaalStr}
+                    </div>
+                    <div className="text-[10px] text-red-800 mt-0.5 border-t border-red-200/60 pt-0.5 truncate">
+                      नया कार्य व क्रय-विक्रय टालें
+                    </div>
+                  </div>
+
+                  <div className="p-2.5 rounded-2xl bg-gradient-to-br from-amber-50/95 to-orange-50/70 border border-amber-200 shadow-xs flex flex-col justify-between text-left hover:-translate-y-0.5 transition-all">
+                    <div className="flex items-center justify-between gap-1 w-full">
+                      <span className="text-[11px] font-bold text-amber-950 flex items-center gap-1.5">
+                        <span className="material-symbols-outlined text-amber-700 text-[14px]">explore</span>
+                        आज यात्रा कहाँ न करें?
+                      </span>
+                      <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-200/80 text-amber-900 font-bold">
+                        दिशा शूल
+                      </span>
+                    </div>
+                    <div className="text-xs font-bold text-amber-900 mt-1 truncate">
+                      {shool.direction} यात्रा वर्जित
+                    </div>
+                    <div className="text-[10px] text-amber-800 mt-0.5 border-t border-amber-200/60 pt-0.5 truncate">
+                      परिहार: {shool.remedy}
+                    </div>
+                  </div>
+                </div>
+
                 {/* 4 Quick Limb Cards with Micro-Elevation & Uniform Centered Symmetrical Heights */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 w-full">
-                  <div className="p-2.5 sm:p-3 rounded-2xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 flex flex-col items-center justify-between text-center min-h-[120px] hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer shadow-xs">
+                  <div className="p-2.5 sm:p-3 rounded-2xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 flex flex-col items-center justify-between text-center min-h-[110px] hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer shadow-xs">
                     <div className="flex items-center justify-center gap-1 text-xs font-bold text-[#c2410c] w-full">
                       <span>१. तिथि</span>
                       <VedicIcon3D name="tithi" size="sm" />
@@ -222,7 +308,7 @@ export const PortalHero: React.FC = () => {
                     <div className="text-[9.5px] text-stone-600 leading-tight border-t border-[#dec9ab]/50 pt-1 mt-0.5 w-full truncate">पूजा व नित्य कर्म उत्तम</div>
                   </div>
 
-                  <div className="p-2.5 sm:p-3 rounded-2xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 flex flex-col items-center justify-between text-center min-h-[120px] hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer shadow-xs">
+                  <div className="p-2.5 sm:p-3 rounded-2xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 flex flex-col items-center justify-between text-center min-h-[110px] hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer shadow-xs">
                     <div className="flex items-center justify-center gap-1 text-xs font-bold text-[#b8860b] w-full">
                       <span>२. वार</span>
                       <VedicIcon3D name="sun" size="sm" />
@@ -233,7 +319,7 @@ export const PortalHero: React.FC = () => {
                     <div className="text-[9.5px] text-stone-600 leading-tight border-t border-[#dec9ab]/50 pt-1 mt-0.5 w-full truncate">सौभाग्य व उत्साह कारक</div>
                   </div>
 
-                  <div className="p-2.5 sm:p-3 rounded-2xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 flex flex-col items-center justify-between text-center min-h-[120px] hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer shadow-xs">
+                  <div className="p-2.5 sm:p-3 rounded-2xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 flex flex-col items-center justify-between text-center min-h-[110px] hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer shadow-xs">
                     <div className="flex items-center justify-center gap-1 text-xs font-bold text-[#c2410c] w-full">
                       <span>३. नक्षत्र</span>
                       <VedicIcon3D name="nakshatra" size="sm" />
@@ -244,7 +330,7 @@ export const PortalHero: React.FC = () => {
                     <div className="text-[9.5px] text-stone-600 leading-tight border-t border-[#dec9ab]/50 pt-1 mt-0.5 w-full truncate">शिव ध्यान व शांति रखें</div>
                   </div>
 
-                  <div className="p-2.5 sm:p-3 rounded-2xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 flex flex-col items-center justify-between text-center min-h-[120px] hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer shadow-xs">
+                  <div className="p-2.5 sm:p-3 rounded-2xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 flex flex-col items-center justify-between text-center min-h-[110px] hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer shadow-xs">
                     <div className="flex items-center justify-center gap-1 text-xs font-bold text-[#2a674c] w-full">
                       <span>४. योग</span>
                       <VedicIcon3D name="yoga" size="sm" />
@@ -253,62 +339,6 @@ export const PortalHero: React.FC = () => {
                     <div className="text-[10px] text-[#735641] truncate w-full">{yogaEndTime}</div>
                     <span className="inline-block px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 text-[9px] font-bold">{yogaNature}</span>
                     <div className="text-[9.5px] text-stone-600 leading-tight border-t border-[#dec9ab]/50 pt-1 mt-0.5 w-full truncate">सिद्धिप्रद मंगल कार्य</div>
-                  </div>
-                </div>
-
-                {/* 3 Quick Muhurat Cards with Micro-Elevation & Uniform Centered Symmetrical Heights */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1 w-full">
-                  <div className="p-2.5 sm:p-3 rounded-2xl bg-emerald-50/85 backdrop-blur-md border border-emerald-300 flex flex-col items-center justify-between text-center min-h-[96px] hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(16,185,129,0.25)] transition-all duration-300 cursor-pointer shadow-xs">
-                    <div className="flex items-center justify-center gap-1.5 w-full">
-                      <span className="text-[11px] font-bold text-emerald-900 flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px] text-emerald-700">verified</span>
-                        अभिजित मुहूर्त
-                      </span>
-                      <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold">शुभ</span>
-                    </div>
-                    <div className="text-sm font-bold text-emerald-900 font-mono my-0.5">{abhijitStr}</div>
-                    <div className="text-[9.5px] text-emerald-800 font-medium">दिन का सर्वोत्तम विजय काल (कोई भी नया कार्य शुरू करें)</div>
-                  </div>
-
-                  <div className="p-2.5 sm:p-3 rounded-2xl bg-red-50/85 backdrop-blur-md border border-red-300 flex flex-col items-center justify-between text-center min-h-[96px] hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(220,38,38,0.25)] transition-all duration-300 cursor-pointer shadow-xs">
-                    <div className="flex items-center justify-center gap-1.5 w-full">
-                      <span className="text-[11px] font-bold text-red-900 flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px] text-red-700">warning</span>
-                        राहु काल (वर्ज्य)
-                      </span>
-                      <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-red-100 text-red-800 font-bold">अशुभ</span>
-                    </div>
-                    <div className="text-sm font-bold text-red-900 font-mono my-0.5">{rahuKaalStr}</div>
-                    <div className="text-[9.5px] text-red-800 font-medium">अशुभ समय (नया काम, क्रय-विक्रय व यात्रा टालें)</div>
-                  </div>
-
-                  <div className="p-2.5 sm:p-3 rounded-2xl bg-amber-50/85 backdrop-blur-md border border-amber-300 flex flex-col items-center justify-between text-center min-h-[96px] hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(217,119,6,0.25)] transition-all duration-300 cursor-pointer shadow-xs">
-                    <div className="flex items-center justify-center gap-1.5 w-full">
-                      <span className="text-[11px] font-bold text-amber-900 flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px] text-amber-700">schedule</span>
-                        सक्रिय चौघड़िया
-                      </span>
-                      <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-800 font-bold">
-                        {activeChoghadiya?.type === 'Rog' || activeChoghadiya?.type === 'Kaal' || activeChoghadiya?.type === 'Udveg' ? 'अशुभ' : 'शुभ'}
-                      </span>
-                    </div>
-                    <div className="text-sm font-bold text-amber-900 my-0.5">
-                      {choghadiyaNameClean} चौघड़िया
-                    </div>
-                    <div className="text-[9.5px] text-amber-800 font-medium">दैनिक सामान्य कार्य व गतिशीलता हेतु उपयुक्त</div>
-                  </div>
-                </div>
-
-                {/* आज का निष्कर्ष (Aam Aadmi 5-Second Summary Card) */}
-                <div className="w-full p-3 rounded-2xl bg-[#fffaf0] border border-amber-300/80 shadow-xs flex items-start gap-2.5 text-left text-[#26150b]">
-                  <span className="material-symbols-outlined text-[#ea580c] text-[20px] shrink-0 mt-0.5">lightbulb</span>
-                  <div className="space-y-0.5">
-                    <span className="text-[11px] font-bold text-[#c2410c] uppercase tracking-wider block">
-                      📌 आज का निष्कर्ष (दैनिक व्यावहारिक सार):
-                    </span>
-                    <p className="text-xs sm:text-[13px] text-[#3d2414] leading-relaxed font-medium">
-                      {aamAadmiSummary}
-                    </p>
                   </div>
                 </div>
 
@@ -324,40 +354,18 @@ export const PortalHero: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Daily Highlight Strip: आज का विशेष (दिशा शूल व परिहार, पर्व) */}
-                <div className="w-full p-2.5 rounded-xl bg-[#fff9ed]/95 border border-[#dec9ab]/80 shadow-xs flex flex-wrap items-center justify-between gap-2 text-xs text-[#735641]">
-                  <div className="flex items-center gap-1.5 font-bold text-[#26150b]">
-                    <span className="material-symbols-outlined text-[#ea580c] text-[16px]">explore</span>
-                    <span>दिशा शूल:</span>
-                    <span className="text-[#c2410c]">{shool.direction}</span>
-                    <span className="text-[11px] font-normal text-[#735641]">(परिहार: {shool.remedy})</span>
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    {todayFestivals && (
-                      <span className="px-2 py-0.5 rounded-md bg-[#ea580c]/12 text-[#c2410c] font-bold text-[11px] border border-[#ea580c]/25">
-                        🌟 {todayFestivals}
-                      </span>
-                    )}
-                    <Link
-                      href="/cities"
-                      className="px-2.5 py-1 rounded-md bg-white text-[#b8860b] hover:text-[#ea580c] font-bold text-[11px] border border-[#dec9ab] shadow-xs transition-colors flex items-center gap-1 no-underline"
-                    >
-                      <span className="material-symbols-outlined text-[13px]">location_on</span>
-                      <span>नगर बदलें</span>
-                    </Link>
+                {/* आज का निष्कर्ष (Aam Aadmi 5-Second Summary Card) - Placed at the very bottom */}
+                <div className="w-full p-3 rounded-2xl bg-[#fffaf0] border border-amber-300/80 shadow-xs flex items-start gap-2.5 text-left text-[#26150b]">
+                  <span className="material-symbols-outlined text-[#ea580c] text-[20px] shrink-0 mt-0.5">lightbulb</span>
+                  <div className="space-y-0.5">
+                    <span className="text-[11px] font-bold text-[#c2410c] uppercase tracking-wider block">
+                      📌 आज का निष्कर्ष (दैनिक व्यावहारिक सार):
+                    </span>
+                    <p className="text-xs sm:text-[13px] text-[#3d2414] leading-relaxed font-medium">
+                      {aamAadmiSummary}
+                    </p>
                   </div>
                 </div>
-              </div>
-
-              {/* Centered Footer Strip inside Box */}
-              <div className="pt-2 border-t border-[#dec9ab]/60 flex flex-wrap items-center justify-center gap-4 text-xs text-[#735641] w-full text-center">
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-[#ea580c] text-[16px]">wb_twilight</span>
-                  <span>सूर्योदय: {sunriseTime} • सूर्यास्त: {sunsetTime}</span>
-                </div>
-                <span className="text-[#dec9ab]">•</span>
-                <span className="font-semibold text-[#b8860b]">{cityName.split(' ')[0]} पंचांग संवत {samvatVikram}</span>
               </div>
             </div>
           </div>

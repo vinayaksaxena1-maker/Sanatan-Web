@@ -3,9 +3,9 @@ import { Link } from '../../../routes/AppRoutes';
 
 export const PortalFooter: React.FC = () => {
   return (
-    <footer className="w-full bg-[#26160e] text-[#f7f2e6] mt-16 border-t-2 border-[#b8860b] font-serif">
+    <footer className="w-full bg-[#26160e] text-[#f7f2e6] border-t-2 border-[#b8860b] font-serif">
       {/* Sacred Shanti Mantra Strip */}
-      <div className="w-full px-4 sm:px-8 lg:px-12 py-8 flex flex-col items-center justify-center text-center bg-[#1d1009]/95 border-b border-[#3e2417]">
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-8 flex flex-col items-center justify-center text-center bg-[#1d1009]/95 border-b border-[#3e2417]">
         <div className="text-[#f2ca50] text-xl sm:text-2xl font-bold tracking-wider mb-2">
           ॐ असतो मा सद्गमय । तमसो मा ज्योतिर्गमय । मृत्योर्मा अमृतं गमय ॥
         </div>
@@ -15,7 +15,7 @@ export const PortalFooter: React.FC = () => {
       </div>
 
       {/* Main Footer Columns */}
-      <div className="w-full px-4 sm:px-8 lg:px-12 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 max-w-7xl mx-auto text-sm">
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 max-w-[1320px] mx-auto text-sm">
         <div className="lg:col-span-2 space-y-4">
           <div className="flex items-center gap-3.5">
             <div className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(212,175,55,0.35)] border-2 border-[#d4af37]/80 bg-[#1d1009] hover:scale-105 transition-transform duration-300">

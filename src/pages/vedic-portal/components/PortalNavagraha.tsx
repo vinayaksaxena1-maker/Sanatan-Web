@@ -164,24 +164,24 @@ export const PortalNavagraha: React.FC = () => {
           <span className="w-2.5 h-2.5 rounded-full bg-[#ea580c]"></span>
           <div>
             <h3 className="text-lg font-bold text-[#26150b]">नवग्रह स्पष्ट स्थिति एवं संचरण (Navagraha Sthiti)</h3>
-            <p className="text-xs text-[#735641]">नासा जेपीएल एवं द्रिक पंचांग आधारित वास्तविक खगोलीय अंश</p>
+            <p className="text-xs text-[#735641]">नासा JPL आधारित वास्तविक ग्रह स्थिति एवं राशि संचरण • एक दृष्टि में</p>
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-2 text-xs text-[#735641] font-semibold">
           <span className="px-2.5 py-0.5 rounded-full bg-white/80 border border-[#dec9ab] flex items-center gap-1.5 shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-emerald-600"></span>उच्च ग्रह
+            <span className="w-2 h-2 rounded-full bg-emerald-600"></span>उच्च
           </span>
           <span className="px-2.5 py-0.5 rounded-full bg-white/80 border border-[#dec9ab] flex items-center gap-1.5 shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-amber-600"></span>स्वक्षेत्रीय
+            <span className="w-2 h-2 rounded-full bg-amber-600"></span>स्वगृही
           </span>
           <span className="px-2.5 py-0.5 rounded-full bg-white/80 border border-[#dec9ab] flex items-center gap-1.5 shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-red-600"></span>वक्री ग्रह
+            <span className="w-2 h-2 rounded-full bg-red-600"></span>वक्री
           </span>
           <Link
             href="/navagraha"
             className="px-3 py-1 rounded-xl bg-[#fff2e8] hover:bg-[#ea580c] hover:text-white text-[#c2410c] text-xs font-bold border border-[#ffd8bf] shadow-xs transition-all no-underline"
           >
-            विस्तृत गोचर व दृष्टि चक्र ➔
+            विस्तृत गोचर चक्र ➔
           </Link>
         </div>
       </div>
@@ -203,7 +203,7 @@ export const PortalNavagraha: React.FC = () => {
           >
             {g.statusBadge && (
               <div
-                className={`absolute top-0 right-0 px-1 py-0.2 rounded-bl text-[8px] font-bold shadow-xs ${g.statusBadge.bg} ${g.statusBadge.text}`}
+                className={`absolute top-0 right-0 px-1.5 py-0.5 rounded-bl text-[9px] font-bold shadow-xs ${g.statusBadge.bg} ${g.statusBadge.text}`}
               >
                 {g.statusBadge.label}
               </div>
@@ -225,11 +225,18 @@ export const PortalNavagraha: React.FC = () => {
               </div>
               <span className="text-[10px] text-[#735641] font-serif">({g.alias})</span>
             </div>
-            <div className="my-2">
-              <div className="text-base font-bold text-[#26150b] font-mono tracking-tight">{g.degree}</div>
-              <div className="text-[11px] font-semibold text-[#8b6508]">{g.rashi}</div>
+            
+            {/* Rashi First, Subtle Degrees */}
+            <div className="my-1.5 space-y-0.5">
+              <div className="text-sm font-bold text-[#26150b] leading-tight">
+                {g.rashi} राशि
+              </div>
+              <div className="text-[10px] text-[#735641] font-mono">
+                {g.degree}
+              </div>
             </div>
-            <div className="text-[9px] text-[#735641] border-t border-[#dec9ab]/60 pt-1 font-serif">
+
+            <div className="text-[9.5px] text-[#b8860b] font-medium border-t border-[#dec9ab]/60 pt-1 truncate font-serif">
               {g.pada}
             </div>
           </div>

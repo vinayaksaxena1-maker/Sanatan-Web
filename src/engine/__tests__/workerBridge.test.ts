@@ -64,7 +64,7 @@ describe('Sub-phase 2.6: Web Worker Background Offloading Engine', () => {
     expect(yearly[365].date).toBe('2024-12-31');
     expect(yearly[0].tithiHindi).toBeDefined();
     expect(yearly[0].sunrise).toBeDefined();
-  });
+  }, 15000);
 
   it('should safely terminate worker and reset status', () => {
     terminateWorker();

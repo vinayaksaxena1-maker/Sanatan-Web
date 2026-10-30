@@ -10,6 +10,7 @@ import React, { useState, useMemo } from 'react';
 import { AnalogClock } from './AnalogClock';
 import { ScheduleTableModal } from './ScheduleTableModal';
 import { SlotDetailModal, SelectedSlotInfo } from './SlotDetailModal';
+import { KaalChakraGuideModal } from './KaalChakraGuideModal';
 import { formatTimeRangeToHindi, formatTimeToHindi, toHindiDigits } from './timeHindiFormat';
 import type { ChoghadiyaInterval, HoraInterval } from '../../engine/types';
 
@@ -134,6 +135,7 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
 }) => {
   const [selectedSlot, setSelectedSlot] = useState<SelectedSlotInfo | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
   const [modalTab, setModalTab] = useState<'choghadiya' | 'hora'>('choghadiya');
 
   const handleSelectChoghadiya = (seg: ChoghadiyaInterval) => {
@@ -212,15 +214,26 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
   return (
     <div className="w-full flex flex-col items-center select-none font-serif text-[#26150B]">
       
-      {/* 1. TOP SECTION HEADER (सुंदर सी हेडिंग - केवल शीर्षक, लाइट थीम) */}
-      <div className="w-full text-center mb-3 p-3 rounded-2xl bg-white/80 backdrop-blur-md border border-[#D4AF37]/50 shadow-[0_4px_16px_rgba(212,175,55,0.15)]">
-        <div className="flex items-center justify-center gap-2">
+      {/* 1. TOP SECTION HEADER (शीर्षक + कैसे देखें गाइड बटन) */}
+      <div className="w-full mb-3 p-2.5 sm:p-3 rounded-2xl bg-white/80 backdrop-blur-md border border-[#D4AF37]/50 shadow-[0_4px_16px_rgba(212,175,55,0.15)] flex items-center justify-between gap-2">
+        <div className="flex-1 flex items-center justify-center gap-1.5 pl-3 sm:pl-6">
           <span className="text-amber-600 font-bold text-base select-none">ॐ</span>
-          <h3 className="text-sm sm:text-base font-serif font-extrabold bg-gradient-to-r from-[#9A3412] via-[#C2410C] to-[#B45309] bg-clip-text text-transparent tracking-wide">
-            ।। सनातन वैदिक कालचक्र एवं चौघड़िया ।।
+          <h3 className="text-sm sm:text-base font-serif font-extrabold bg-gradient-to-r from-[#9A3412] via-[#C2410C] to-[#B45309] bg-clip-text text-transparent tracking-wide text-center">
+            ।। चौघड़िया एवं होरा कालचक्र ।।
           </h3>
           <span className="text-amber-600 font-bold text-base select-none">ॐ</span>
         </div>
+
+        {/* Guide Help Button */}
+        <button
+          type="button"
+          onClick={() => setIsGuideOpen(true)}
+          className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 hover:from-amber-100 hover:to-orange-100 text-[#c2410c] hover:text-[#9a3412] border border-[#d4af37]/70 text-[11px] font-bold transition-all shadow-3xs cursor-pointer shrink-0 active:scale-95"
+          title="कालचक्र को देखने व समझने का पूरा तरीका"
+        >
+          <span className="material-symbols-outlined text-[15px] text-[#ea580c]">help</span>
+          <span className="hidden sm:inline">कैसे देखें?</span>
+        </button>
       </div>
 
       {/* 2. CENTRAL ANALOG DIAL (4-Layer Vedic Analog Clock) */}
@@ -361,6 +374,12 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
         activeChoghadiyaIndex={activeChoghadiyaIndex}
         horaList={horaList}
         activeHora={activeHora}
+      />
+
+      {/* Kaal Chakra How-to-Read Guide Modal */}
+      <KaalChakraGuideModal
+        isOpen={isGuideOpen}
+        onClose={() => setIsGuideOpen(false)}
       />
 
     </div>

@@ -1,11 +1,12 @@
 /**
  * Sanatan Web (सनातन घड़ी)
  * Component: PortalUpayVrat
- * Daily Vedic Upay & Mantra based on Day Lord + Real Upcoming Vrat Calendar
+ * Compact Daily Vedic Remedies by Weekday Lord + Live Upcoming Vrats & Parana
  * Connected directly to Sanatan AstroEngine & Festival Engine
+ * Strict < 300 Lines Modular Standard
  */
 
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Link } from '../../../routes/AppRoutes';
 import { GoldenCornerBrackets } from './GoldenCornerBrackets';
 import { SacredGeometryWatermark } from './SacredGeometryWatermark';
@@ -14,89 +15,87 @@ import { useLocationStore } from '../../../store/locationStore';
 import { calculatePanchang, getFestivalsForDay } from '../../../engine';
 import { toHindiDigits } from '../../../components/watch';
 
-const HINDI_NUMERALS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९', '१०', '११', '१२'];
-
 interface DailyUpayData {
   title: string;
   badge: string;
+  dayLord: string;
   desc: string;
   mantraTitle: string;
   mantra: string;
-  mantraEng: string;
   remedy1: string;
   remedy2: string;
 }
 
 const UPAY_BY_WEEKDAY: Record<number, DailyUpayData> = {
-  0: { // Sunday
-    title: 'दैनिक वैदिक उपाय एवं सूर्य अर्घ्य विधि',
-    badge: 'आत्मकारक बल',
-    desc: 'आज के दिन तांबे के पात्र में शुद्ध जल, रक्तचन्दन व लाल पुष्प मिलाकर भगवान सूर्य नारायण को अर्घ्य प्रदान करें। इससे पितृदोष की शांति एवं आरोग्य प्राप्त होता है।',
-    mantraTitle: 'मूल सूर्य बीज मन्त्र (१२ आवृत्ति जप)',
+  0: {
+    title: 'सूर्य अर्घ्य व आत्मबल संवर्धन',
+    badge: 'आरोग्य व प्रतिष्ठा',
+    dayLord: 'भगवान सूर्य नारायण',
+    desc: 'तांबे के लोटे में शुद्ध जल, रक्तचन्दन व लाल पुष्प मिलाकर भगवान सूर्य को अर्घ्य दें।',
+    mantraTitle: 'मूल सूर्य बीज मन्त्र:',
     mantra: 'ॐ घृणिः सूर्याय नमः',
-    mantraEng: '"Om Ghrinih Suryaya Namah"',
-    remedy1: 'ताम्र लोटा एवं लाल पुष्प अर्पण',
-    remedy2: 'गाय को गुड़ व गेहूं खिलाएं'
+    remedy1: 'गाय को गुड़ व गेहूं खिलाएं',
+    remedy2: 'पिता अथवा वरिष्ठजनों का आशीर्वाद लें'
   },
-  1: { // Monday
-    title: 'दैनिक वैदिक उपाय एवं चन्द्र-शिव उपासना',
-    badge: 'मनोबल कारक',
-    desc: 'आज शिवलिंग पर शुद्ध जल, कच्चा दूध एवं श्वेत चन्दन अर्पण करें। चन्द्रमा की कृपा से मानसिक शांति, तनावमुक्ति व एकाग्रता प्राप्त होती है।',
-    mantraTitle: 'शिव पंचाक्षर व चन्द्र मन्त्र (१२ आवृत्ति जप)',
+  1: {
+    title: 'शिव उपासना व मानसिक शांति',
+    badge: 'मनोबल व सौहार्द',
+    dayLord: 'भगवान शिव व चन्द्र देव',
+    desc: 'शिवलिंग पर शुद्ध जल, कच्चा दूध व बेलपत्र अर्पित करें। चन्द्रमा की कृपा से तनावमुक्ति मिलती है।',
+    mantraTitle: 'शिव व चन्द्र मन्त्र:',
     mantra: 'ॐ नमः शिवाय • ॐ सों सोमाय नमः',
-    mantraEng: '"Om Namah Shivaya • Om Som Somaya Namah"',
-    remedy1: 'शिवलिंग पर कच्चा दूध व बेलपत्र',
-    remedy2: 'श्वेत वस्त्र अथवा चावल का दान'
+    remedy1: 'सफेद पुष्प व चन्दन अर्पण करें',
+    remedy2: 'चावल अथवा दूध का दान करें'
   },
-  2: { // Tuesday
-    title: 'दैनिक वैदिक उपाय एवं हनुमान साधना',
-    badge: 'ऋण व भय मुक्ति',
-    desc: 'आज श्री हनुमान जी को सिन्दूर व चमेली का तेल अर्पित करें। लाल मसूर की दाल अथवा गुड़ का दान करने से मंगल दोष शांत होता है व पराक्रम बढ़ता है।',
-    mantraTitle: 'हनुमान व मंगल बीज मन्त्र (१२ आवृत्ति जप)',
+  2: {
+    title: 'श्री हनुमान साधना व भय निवारण',
+    badge: 'ऋण व संकट मुक्ति',
+    dayLord: 'श्री हनुमान व मंगल देव',
+    desc: 'हनुमान जी को सिन्दूर व चमेली का तेल अर्पित करें और सुंदरकांड या चालीसा का पाठ करें।',
+    mantraTitle: 'हनुमान व मंगल बीज मन्त्र:',
     mantra: 'ॐ हं हनुमते नमः • ॐ अं अंगारकाय नमः',
-    mantraEng: '"Om Hum Hanumate Namah • Om Angarakaya Namah"',
-    remedy1: 'हनुमान चालीसा अथवा सुंदरकांड पाठ',
-    remedy2: 'गुड़ व भुने चने का प्रसाद वितरण'
+    remedy1: 'गुड़ व भुने चने का प्रसाद लगाएं',
+    remedy2: 'लाल मसूर की दाल का दान करें'
   },
-  3: { // Wednesday
-    title: 'दैनिक वैदिक उपाय एवं गणेश-बुध आराधना',
-    badge: 'बुद्धि व व्यापार वृद्धि',
-    desc: 'भगवान श्री गणेश को दूर्वा दल व मोदक अर्पित करें। हरी मूंग की दाल अथवा हरे वस्त्र का दान करने से व्यापार, वाणी व विद्या में उन्नति मिलती है।',
-    mantraTitle: 'गणेश व बुध बीज मन्त्र (१२ आवृत्ति जप)',
+  3: {
+    title: 'श्री गणेश पूजन व व्यापार वृद्धि',
+    badge: 'बुद्धि व वाणी चातुर्य',
+    dayLord: 'भगवान श्री गणेश व बुध देव',
+    desc: 'गणेश जी को दूर्वा दल व मोदक अर्पित करें। इससे व्यापार, हिसाब-किताब व विद्या में सफलता मिलती है।',
+    mantraTitle: 'गणेश व बुध बीज मन्त्र:',
     mantra: 'ॐ गं गणपतये नमः • ॐ ब्रां ब्रीं ब्रौं सः बुधाय नमः',
-    mantraEng: '"Om Gam Ganapataye Namah • Om Budhaya Namah"',
-    remedy1: 'गणेश जी को २१ दूर्वा अर्पण',
-    remedy2: 'गाय को हरा चारा अथवा पालक खिलाएं'
+    remedy1: 'गाय को हरा चारा या पालक खिलाएं',
+    remedy2: 'हरी मूंग की दाल का दान करें'
   },
-  4: { // Thursday
-    title: 'दैनिक वैदिक उपाय एवं गुरु-विष्णु पूजन',
-    badge: 'विद्या व भाग्य वृद्धि',
-    desc: 'भगवान लक्ष्मीनारायण को चने की दाल व गुड़ अर्पित करें। केले के वृक्ष का सिंचन एवं पीत चन्दन का तिलक करने से गुरु कृपा व सौभाग्य की प्राप्ति होती है।',
-    mantraTitle: 'विष्णु व गुरु बीज मन्त्र (१२ आवृत्ति जप)',
+  4: {
+    title: 'श्री लक्ष्मीनारायण पूजन व ज्ञानार्जन',
+    badge: 'विद्या व सौभाग्य वृद्धि',
+    dayLord: 'श्री हरि विष्णु व गुरु देव',
+    desc: 'भगवान विष्णु को चने की दाल व गुड़ अर्पित करें। केले के वृक्ष में जल देने से गुरु कृपा मिलती है।',
+    mantraTitle: 'विष्णु व गुरु बीज मन्त्र:',
     mantra: 'ॐ नमो भगवते वासुदेवाय • ॐ बृं बृहस्पतये नमः',
-    mantraEng: '"Om Namo Bhagavate Vasudevaya • Om Brihaspataye Namah"',
-    remedy1: 'केसर अथवा पीत चन्दन का तिलक',
-    remedy2: 'चने की दाल, हल्दी व पीले फल दान'
+    remedy1: 'माथे पर केसर या पीत चन्दन का तिलक लगाएं',
+    remedy2: 'पीले फल अथवा धार्मिक पुस्तक का दान करें'
   },
-  5: { // Friday
-    title: 'दैनिक वैदिक उपाय एवं महालक्ष्मी आराधना',
-    badge: 'सुख व ऐश्वर्य प्रदाता',
-    desc: 'माँ भगवती महालक्ष्मी को श्वेत पुष्प, खीर अथवा बताशे का भोग लगाएं। कन्याओं को मीठा भोजन कराने से जीवन में सुख, वैभव व दांपत्य प्रीति बढ़ती है।',
-    mantraTitle: 'महालक्ष्मी व शुक्र बीज मन्त्र (१२ आवृत्ति जप)',
+  5: {
+    title: 'महालक्ष्मी आराधना व सुख-ऐश्वर्य',
+    badge: 'वैभव व दांपत्य प्रीति',
+    dayLord: 'माँ महालक्ष्मी व शुक्र देव',
+    desc: 'माँ लक्ष्मी को श्वेत पुष्प व खीर का भोग लगाएं। जीवन में ऐश्वर्य, शांति व धन-धान्य की वृद्धि होती है।',
+    mantraTitle: 'महालक्ष्मी व शुक्र बीज मन्त्र:',
     mantra: 'ॐ श्रीं महालक्ष्म्यै नमः • ॐ शुं शुक्राय नमः',
-    mantraEng: '"Om Shreem Mahalakshmyai Namah • Om Shukraya Namah"',
-    remedy1: 'माँ लक्ष्मी को श्वेत पुष्प व इत्र अर्पण',
-    remedy2: 'कन्याओं को खीर अथवा मिश्री का भोग'
+    remedy1: 'कन्याओं को मीठा भोजन अथवा खीर खिलाएं',
+    remedy2: 'सफेद वस्त्र, चावल या इत्र का दान करें'
   },
-  6: { // Saturday
-    title: 'दैनिक वैदिक उपाय एवं शनि शांति विधि',
-    badge: 'कष्ट व व्याधि निवारण',
-    desc: 'पीपल वृक्ष के नीचे संध्या समय सरसों के तेल का चौमुखा दीपक प्रज्वलित करें। काले तिल, उड़द अथवा नीले वस्त्र का दान करने से शनि की कृपा प्राप्त होती है।',
-    mantraTitle: 'शनि बीज मन्त्र एवं महामृत्युंजय (१२ आवृत्ति जप)',
+  6: {
+    title: 'शनि देव आराधना व कष्ट निवारण',
+    badge: 'धैर्य व कर्म शुद्धि',
+    dayLord: 'शनि देव व हनुमान जी',
+    desc: 'संध्या समय पीपल के वृक्ष के नीचे सरसों के तेल का दीपक जलाएं और निर्धन को भोजन कराएं।',
+    mantraTitle: 'शनि बीज मन्त्र:',
     mantra: 'ॐ शं शनैश्चराय नमः • ॐ त्र्यम्बकं यजामहे',
-    mantraEng: '"Om Sham Shanaishcharaya Namah"',
-    remedy1: 'पीपल के वृक्ष पर जल व दीपक',
-    remedy2: 'काले तिल, उड़द अथवा तेल का दान'
+    remedy1: 'काले तिल, उड़द अथवा तेल का दान करें',
+    remedy2: 'पीपल की सात परिक्रमा कर जल अर्पण करें'
   }
 };
 
@@ -109,48 +108,13 @@ interface UpcomingEvent {
 }
 
 export const PortalUpayVrat: React.FC = () => {
-  const [japaCount, setJapaCount] = useState<number>(0);
-  const [soundEnabled, setSoundEnabled] = useState<boolean>(false);
   const { currentCity } = useLocationStore();
-
-  const playBellChime = (isFinal: boolean = false) => {
-    try {
-      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
-      if (!AudioCtx) return;
-      const ctx = new AudioCtx();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(isFinal ? 852 : 528, ctx.currentTime);
-      gain.gain.setValueAtTime(0.08, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + (isFinal ? 1.5 : 0.6));
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start();
-      osc.stop(ctx.currentTime + (isFinal ? 1.6 : 0.7));
-    } catch {
-      // AudioContext unavailable or silent
-    }
-  };
-
-  const handleJapaClick = () => {
-    if (soundEnabled) {
-      playBellChime(japaCount === 11);
-    }
-    if (japaCount < 12) {
-      setJapaCount(japaCount + 1);
-    } else {
-      setJapaCount(0); // Reset after 12
-    }
-  };
-
-  const isCompleted = japaCount === 12;
 
   const today = useMemo(() => new Date(), []);
   const weekday = today.getDay();
   const upay = UPAY_BY_WEEKDAY[weekday] || UPAY_BY_WEEKDAY[0];
 
-  // Scan upcoming 14 days for festivals using engine
+  // Scan upcoming 14 days for festivals using AstroEngine
   const upcomingEvents: UpcomingEvent[] = useMemo(() => {
     try {
       const list: UpcomingEvent[] = [];
@@ -178,7 +142,7 @@ export const PortalUpayVrat: React.FC = () => {
               badge,
               desc: f.description || 'पावन वैदिक व्रत एवं पर्व काल।',
               dateStr: dateHindi,
-              parana: 'पारण समय: प्रातः ०६:१२ से ०८:३०'
+              parana: 'पारण: सूर्योदय पश्चात् (प्रातः ०६:१५ - ०८:३०)'
             });
 
             if (list.length >= 3) break;
@@ -194,192 +158,177 @@ export const PortalUpayVrat: React.FC = () => {
 
     return [
       {
-        name: 'कामदा एकादशी व्रत',
+        name: 'पावन एकादशी व्रत',
         badge: 'आगामी',
-        desc: 'समस्त पापों का नाश कर मनोकामना पूर्ण करने वाला परम पावन व्रत।',
+        desc: 'समस्त पापों का नाश कर मनोकामना पूर्ण करने वाला पावन व्रत।',
         dateStr: 'आगामी एकादशी',
-        parana: 'द्वादशी पारण: प्रातः ०६:१२ से ०८:३०'
+        parana: 'पारण: द्वादशी तिथि में प्रातः ०६:२० से ०८:३०'
       },
       {
-        name: 'प्रदोष व्रत (त्रयोदशी)',
-        badge: 'पावन',
-        desc: 'शिव-पार्वती का पावन व्रत। सर्व मनोकामना पूर्ति व आरोग्य प्रदाता।',
-        dateStr: 'आगामी त्रयोदशी',
-        parana: 'प्रदोष पूजा: सायं ०५:४५ से ०८:१५'
+        name: 'प्रदोष व्रत (शिव उपासना)',
+        badge: 'आगामी',
+        desc: 'सायंकालीन त्रयोदशी तिथि में भगवान शिव की विशेष आराधना।',
+        dateStr: 'आगामी त्रयोदशी'
       },
       {
-        name: 'पूर्णिमा / अमावस्या पर्व',
-        badge: 'पर्व',
-        desc: 'पवित्र नदी स्नान, दान व दीपदान का विशेष महात्म्य।',
-        dateStr: 'पर्व काल',
-        parana: 'पुण्य स्नान: ब्राह्ममुहूर्त पर्यन्त'
+        name: 'सत्यनारायण पूर्णिमा व्रत',
+        badge: 'आगामी',
+        desc: 'श्री सत्यनारायण कथा एवं चन्द्र अर्घ्य द्वारा परिवार में सुख-शांति।',
+        dateStr: 'आगामी पूर्णिमा'
       }
     ];
-  }, [currentCity.latitude, currentCity.longitude, today]);
+  }, [today, currentCity]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch font-serif">
-      {/* दैनिक वैदिक उपाय (7 Cols) with Golden Brackets */}
-      <div className="lg:col-span-7 glass-panel-warm rounded-3xl p-6 sm:p-7 flex flex-col justify-between space-y-4 relative overflow-hidden">
-        <GoldenCornerBrackets size="md" />
+    <section className="glass-panel rounded-3xl p-5 sm:p-7 space-y-5 font-serif relative overflow-hidden" id="upay-vrat">
+      <SacredGeometryWatermark variant="swastik" className="opacity-[0.05]" />
+      <GoldenCornerBrackets size="lg" />
 
-        <div className="space-y-3 relative z-10">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <VedicIcon3D name="upay" size="md" />
-              <h3 className="text-lg font-bold text-[#26150b]">{upay.title}</h3>
-            </div>
-            <span className="text-xs px-2.5 py-0.5 rounded-full glass-pill text-[#b8860b] font-bold shadow-xs">
-              {upay.badge}
-            </span>
-          </div>
-
-          <p className="text-xs text-[#5a3822] leading-relaxed">
-            {upay.desc}
-          </p>
-
-          {/* Sacred Mantra Chant Display with Bold Vedic Swastika Watermark */}
-          <div className="p-4 rounded-2xl glass-inner bg-white/80 border border-[#ea580c]/30 text-center space-y-1 relative overflow-hidden shadow-xs hover:border-[#ea580c] transition-colors">
-            <SacredGeometryWatermark variant="swastik" className="opacity-[0.07]" />
-            <div className="relative z-10">
-              <span className="text-[11px] font-bold text-[#c2410c] tracking-wider uppercase">
-                {upay.mantraTitle}
-              </span>
-              <div className="text-xl sm:text-2xl font-bold text-[#c2410c] py-1 tracking-wide">
-                {upay.mantra}
-              </div>
-              <span className="text-xs text-[#735641] italic font-serif">{upay.mantraEng}</span>
-            </div>
-          </div>
-
-          {/* Interactive Japa Counter in Hindi with Radar Pulse */}
-          <div className="flex flex-wrap items-center justify-between gap-2 glass-inner px-4 py-2.5 rounded-2xl bg-white/70 shadow-xs border-[#dec9ab]/60">
-            <div className="flex items-center gap-2 text-xs">
-              <span className="text-[#735641] font-bold">जप संख्या:</span>
-              <span className="text-xl font-bold text-[#c2410c] font-mono">
-                {HINDI_NUMERALS[japaCount] || japaCount}
-              </span>
-              <span className="text-[#8c7166]">/ १२ मणके</span>
-            </div>
-
+      {/* Section Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#dec9ab]/70 pb-3 relative z-10">
+        <div className="flex items-center gap-3">
+          <VedicIcon3D name="upay" size="md" />
+          <div>
             <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setSoundEnabled(!soundEnabled)}
-                className={`px-2.5 py-1.5 rounded-xl border text-[11px] font-bold flex items-center gap-1 transition-all cursor-pointer ${
-                  soundEnabled
-                    ? 'bg-amber-100 text-amber-900 border-amber-300 shadow-xs'
-                    : 'bg-white/80 text-stone-500 border-[#dec9ab]/80 hover:text-stone-700'
-                }`}
-                title={soundEnabled ? 'घंटी ध्वनि ऑन है (क्लिक कर म्यूट करें)' : 'घंटी ध्वनि म्यूट है (क्लिक कर चालू करें)'}
-              >
-                <span>{soundEnabled ? '🔔 ध्वनि: ऑन' : '🔕 ध्वनि: म्यूट'}</span>
-              </button>
-
-              <button
-                onClick={handleJapaClick}
-                className={`px-3.5 py-1.5 rounded-xl border text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer hover:scale-105 active:scale-95 ${
-                  isCompleted
-                    ? 'bg-emerald-50 border-emerald-500 text-emerald-800'
-                    : 'bg-white border-[#dec9ab] hover:bg-[#ea580c] hover:text-white text-[#26150b]'
-                }`}
-                type="button"
-              >
-                <span className="material-symbols-outlined text-[16px]">
-                  {isCompleted ? 'check_circle' : 'touch_app'}
-                </span>
-                <span>{isCompleted ? 'संकल्प पूर्ण (पुनः प्रारंभ)' : 'मणका गिनें'}</span>
-              </button>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#26150b]">दैनिक वैदिक नियम एवं आगामी व्रत</h2>
+              <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 text-[10px] font-bold border border-emerald-200 shadow-xs">
+                दैनिक मार्गदर्शन
+              </span>
             </div>
+            <p className="text-xs text-[#735641]">
+              वार अनुसार आज का सरल वैदिक उपाय, मन्त्र साधना एवं आगामी पावन व्रत-त्योहार
+            </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-2 text-xs text-[#5a3822] pt-2 border-t border-[#dec9ab]/50 relative z-10">
-          <div className="flex items-center gap-1.5">
-            <span className="material-symbols-outlined text-amber-600 text-[16px]">water_drop</span>
-            <span>{upay.remedy1}</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="material-symbols-outlined text-rose-600 text-[16px]">volunteer_activism</span>
-            <span>{upay.remedy2}</span>
-          </div>
-        </div>
-
-        <div className="pt-2 border-t border-[#dec9ab]/60 relative z-10">
-          <Link
-            href="/utilities"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#c2410c] hover:underline no-underline"
-          >
-            <span>🪔 सम्पूर्ण वैदिक साधना, स्तोत्र एवं मन्त्र संग्रह देखें</span>
-            <span className="text-[10px]">➔</span>
-          </Link>
-        </div>
-      </div>
-
-      {/* आगामी व्रत एवं पर्व (5 Cols) with Golden Brackets */}
-      <div className="lg:col-span-5 glass-panel rounded-3xl p-6 sm:p-7 flex flex-col justify-between space-y-4 relative overflow-hidden">
-        <SacredGeometryWatermark variant="swastik" className="opacity-[0.07]" />
-        <GoldenCornerBrackets size="md" />
-
-        <div className="space-y-3 relative z-10">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <VedicIcon3D name="vrat" size="md" />
-              <h3 className="text-lg font-bold text-[#26150b]">आगामी व्रत एवं पर्व सारणी</h3>
-            </div>
-            <span className="text-xs text-[#735641] font-semibold">शुद्ध गणना</span>
-          </div>
-
-          <div className="space-y-2.5">
-            {upcomingEvents.map((evt, idx) => (
-              <div
-                key={idx}
-                className="p-3 rounded-2xl glass-inner bg-white/80 border border-[#dec9ab]/60 space-y-1.5 hover:-translate-y-1 hover:border-[#ea580c] hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.22)] transition-all duration-300 cursor-pointer"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-bold text-[#c2410c]">{evt.name}</span>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-orange-100 text-[#c2410c] shadow-xs">
-                      {evt.badge}
-                    </span>
-                    <span className="text-xs font-bold text-[#735641] font-mono">{evt.dateStr}</span>
-                  </div>
-                </div>
-                <p className="text-[11px] text-[#735641] leading-snug">{evt.desc}</p>
-                <div className="flex items-center justify-between pt-1 border-t border-[#dec9ab]/40 text-[10px]">
-                  <span className="text-emerald-800 font-semibold">{evt.parana || 'प्रातः काल'}</span>
-                  <a
-                    href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`🕉️ ${evt.name} (${evt.dateStr})\n${evt.desc}\nसनातन वैदिक पंचांग पर देखें: https://www.sanatanwatch.in`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-emerald-700 hover:text-emerald-900 font-bold no-underline"
-                    title="WhatsApp पर साझा करें"
-                  >
-                    <span>📲 साझा करें</span>
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-2 relative z-10">
+        <div className="flex items-center gap-2">
           <Link
             href="/calendar"
-            className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#ea580c] to-[#c2410c] hover:brightness-110 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md no-underline"
+            className="text-xs font-bold text-[#ea580c] hover:underline flex items-center gap-1 no-underline"
           >
-            <span className="material-symbols-outlined text-[16px]">calendar_month</span>
-            <span>सम्पूर्ण वार्षिक व्रत एवं एकादशी कैलेंडर देखें ➔</span>
-          </Link>
-          <Link
-            href="/download-panchang"
-            className="w-full py-2 rounded-xl bg-[#f0e5d1] hover:bg-[#b8860b] hover:text-white text-[#26150b] text-[11px] font-bold border border-[#dec9ab] transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs no-underline"
-          >
-            <span className="material-symbols-outlined text-[15px]">picture_as_pdf</span>
-            <span>विक्रम संवत २०८१ हिन्दू पंचांग विवरण (PDF / प्रिंट)</span>
+            <span>सम्पूर्ण वर्ष कैलेंडर</span>
+            <span>➔</span>
           </Link>
         </div>
       </div>
-    </div>
+
+      {/* 2-Column Responsive Compact Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 relative z-10">
+        
+        {/* Left Column: Today's Vedic Remedy & Sacred Mantra */}
+        <div className="p-5 rounded-2xl bg-gradient-to-br from-[#fffdfa] to-[#fff7ed]/60 border border-orange-200 shadow-xs flex flex-col justify-between space-y-3.5">
+          <div className="space-y-2.5">
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-xs px-2.5 py-0.5 rounded-full bg-orange-100/80 text-[#c2410c] font-bold">
+                आज का नियम • {upay.dayLord}
+              </span>
+              <span className="text-[11px] font-bold text-[#b8860b]">
+                {upay.badge}
+              </span>
+            </div>
+
+            <h3 className="text-base sm:text-lg font-bold text-[#26150b]">
+              {upay.title}
+            </h3>
+
+            <p className="text-xs text-[#5c3e2b] leading-relaxed">
+              {upay.desc}
+            </p>
+
+            {/* Sacred Mantra Box */}
+            <div className="p-3 rounded-xl bg-white border border-[#dec9ab]/70 text-center space-y-1 shadow-2xs">
+              <span className="text-[10.5px] font-bold text-[#735641] uppercase tracking-wider block">
+                {upay.mantraTitle}
+              </span>
+              <div className="text-sm sm:text-base font-bold text-[#ea580c] tracking-wide font-serif">
+                {upay.mantra}
+              </div>
+            </div>
+
+            {/* Practical Remedies */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 text-[11px] text-[#735641]">
+              <div className="p-2 rounded-lg bg-white/70 border border-[#dec9ab]/50 flex items-center gap-1.5 font-medium">
+                <span className="text-emerald-600 font-bold">✓</span>
+                <span>{upay.remedy1}</span>
+              </div>
+              <div className="p-2 rounded-lg bg-white/70 border border-[#dec9ab]/50 flex items-center gap-1.5 font-medium">
+                <span className="text-emerald-600 font-bold">✓</span>
+                <span>{upay.remedy2}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-2 border-t border-[#dec9ab]/40 flex items-center justify-between text-xs">
+            <span className="text-[#735641]">रत्न, साढ़ेसाती व वास्तु निवारण हेतु:</span>
+            <Link
+              href="/utilities"
+              className="text-[#b8860b] hover:text-[#ea580c] font-bold transition-colors no-underline"
+            >
+              वैदिक टूल्स खोलें ➔
+            </Link>
+          </div>
+        </div>
+
+        {/* Right Column: Upcoming 3 Vrats & Ekadashis */}
+        <div className="p-5 rounded-2xl bg-gradient-to-br from-[#fffdfa] to-[#fffbeb]/60 border border-amber-200 shadow-xs flex flex-col justify-between space-y-3">
+          <div className="space-y-2.5">
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-100/80 text-amber-900 font-bold">
+                आगामी पावन व्रत व तिथियां
+              </span>
+              <span className="text-[11px] font-bold text-[#735641]">
+                {currentCity.nameHindi || currentCity.name} समय
+              </span>
+            </div>
+
+            <div className="space-y-2">
+              {upcomingEvents.map((evt, idx) => (
+                <div
+                  key={idx}
+                  className="p-3 rounded-xl bg-white border border-[#dec9ab]/60 hover:border-[#ea580c]/60 shadow-2xs transition-all flex flex-col justify-between space-y-1"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs sm:text-[13px] font-bold text-[#26150b]">
+                      🕉️ {evt.name}
+                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 font-bold border border-amber-200">
+                        {evt.badge}
+                      </span>
+                      <span className="text-[11px] font-mono text-[#c2410c] font-bold">
+                        {evt.dateStr}
+                      </span>
+                    </div>
+                  </div>
+
+                  <p className="text-[11px] text-[#735641] line-clamp-1">
+                    {evt.desc}
+                  </p>
+
+                  {evt.parana && (
+                    <div className="text-[10px] text-emerald-800 font-semibold bg-emerald-50/70 px-2 py-0.5 rounded inline-block w-fit">
+                      {evt.parana}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="pt-2 border-t border-[#dec9ab]/40 flex items-center justify-between text-xs">
+            <span className="text-[#735641]">वर्ष २०२६ के समस्त व्रत व तिथियां:</span>
+            <Link
+              href="/calendar"
+              className="text-[#ea580c] hover:underline font-bold transition-colors no-underline"
+            >
+              संपूर्ण व्रत कैलेंडर देखें ➔
+            </Link>
+          </div>
+        </div>
+
+      </div>
+    </section>
   );
 };
+
+export default PortalUpayVrat;
