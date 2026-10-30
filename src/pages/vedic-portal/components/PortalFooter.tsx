@@ -15,7 +15,7 @@ export const PortalFooter: React.FC = () => {
       </div>
 
       {/* Main Footer Columns */}
-      <div className="w-full px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 max-w-[1320px] mx-auto text-sm">
+      <div className="responsive-portal-container py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 text-sm">
         <div className="lg:col-span-2 space-y-4">
           <div className="flex items-center gap-3.5">
             <div className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(212,175,55,0.35)] border-2 border-[#d4af37]/80 bg-[#1d1009] hover:scale-105 transition-transform duration-300">

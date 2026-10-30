@@ -177,7 +177,7 @@ export const PortalHero: React.FC = () => {
   }, [dayName]);
 
   return (
-    <section className="relative w-full overflow-hidden border-y border-[#d95d0f]/25 shadow-[0_20px_50px_-15px_rgba(77,51,34,0.16)] flex items-center font-serif text-[#26150b]">
+    <section className="relative w-full rounded-3xl overflow-hidden border border-[#d95d0f]/30 shadow-[0_12px_40px_rgba(77,51,34,0.12)] flex items-center font-serif text-[#26150b]">
       {/* Sacred Temple Background Image from public/assets */}
       <img
         alt="प्राचीन वैदिक मन्दिर भित्ति चित्र एवं श्री यंत्र"
@@ -191,177 +191,163 @@ export const PortalHero: React.FC = () => {
       <SacredGeometryWatermark variant="swastik" className="opacity-[0.05]" />
       <GoldenCornerBrackets size="lg" />
 
-      {/* Standardized 1320px Master Container - 100% Vertical Edge Alignment */}
-      <div className="relative z-10 w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6 lg:py-8">
+      {/* Standardized Master Container with Exact 35px Outer Inset */}
+      <div className="relative z-10 w-full pt-[35px] pb-[35px] px-4 sm:px-5 lg:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 xl:gap-7 items-stretch justify-center">
           
-          {/* Left Column: Panchang Overview (7 Cols) - Centered Inside Box with Uniform Card Symmetry */}
-          <div className="lg:col-span-7 rounded-3xl p-5 sm:p-6 lg:p-7 border border-[#dec9ab] shadow-[0_8px_30px_rgba(77,51,34,0.08)] flex flex-col justify-between items-center bg-gradient-to-br from-[#fffbf5]/95 via-[#fffdfa]/92 to-[#fbeecc]/88 relative overflow-hidden backdrop-blur-md">
+          {/* Left Column: Panchang Overview (7 Cols) - 500px Symmetrical Height */}
+          <div className="lg:col-span-7 rounded-3xl p-3 sm:p-4 border border-[#dec9ab] shadow-[0_8px_30px_rgba(77,51,34,0.08)] flex flex-col justify-between items-center bg-gradient-to-br from-[#fffbf5]/95 via-[#fffdfa]/92 to-[#fbeecc]/88 relative overflow-hidden backdrop-blur-md lg:h-[500px]">
             <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
-            <GoldenCornerBrackets size="md" />
 
-            <div className="relative z-10 flex flex-col justify-between items-center h-full space-y-4 w-full my-auto text-center">
-              <div className="space-y-3 w-full flex flex-col items-center">
+            <div className="relative z-10 flex flex-col justify-between items-center h-full w-full text-center py-1">
+              <div className="space-y-1.5 sm:space-y-2 w-full flex flex-col items-center">
                 
-                {/* Centered Top Title Area */}
-                <div className="flex flex-col items-center justify-center gap-2 border-b border-[#dec9ab]/70 pb-3 w-full text-center">
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/90 text-[#c2410c] text-xs font-bold tracking-wide border border-[#ea580c]/30 shadow-xs">
+                {/* Centered Top Title Area (Unboxed Clean Bold Typography) */}
+                <div className="flex flex-col items-center justify-center gap-1 border-b border-[#dec9ab]/70 pb-1.5 w-full text-center">
+                  <div className="flex items-center justify-center gap-1.5 text-xs sm:text-sm font-bold text-[#c2410c] leading-normal pt-0.5">
                     <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <VedicIcon3D name="temple" size="sm" />
                     <span>{greetingText} • श्री गणेशाय नमः</span>
                   </div>
-                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#26150b] tracking-tight">
+                  <h1 className="text-lg sm:text-xl lg:text-[23px] font-bold text-[#26150b] leading-normal pt-1">
                     दैनिक पंचांग एवं विशिष्ट मुहूर्त
                   </h1>
                   
-                  {/* Gregorian Date, Vikram Samvat & Shak Samvat Badges */}
-                  <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-bold pt-0.5">
-                    <span className="px-2.5 py-0.5 rounded-full bg-white/90 text-[#c2410c] border border-amber-200/90 shadow-2xs">
-                      📅 {gregorianDateStr}
-                    </span>
+                  {/* Gregorian Date, Vikram Samvat, Shak Samvat, Ritu & Ayan (Clean Inline Bold Row) */}
+                  <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5 text-xs sm:text-[12.5px] font-bold text-[#735641] pt-0.5 leading-normal">
+                    <span className="text-[#c2410c]">📅 {gregorianDateStr}</span>
                     <span className="text-[#dec9ab]">•</span>
-                    <span className="px-2.5 py-0.5 rounded-full bg-white/90 text-[#b8860b] border border-amber-200/90 shadow-2xs">
-                      विक्रम संवत {samvatVikram}
-                    </span>
+                    <span className="text-[#b8860b]">विक्रम संवत {samvatVikram}</span>
                     <span className="text-[#dec9ab]">•</span>
-                    <span className="px-2.5 py-0.5 rounded-full bg-white/90 text-[#735641] border border-amber-200/90 shadow-2xs">
-                      शक संवत {samvatShaka}
-                    </span>
-                  </div>
-
-                  <p className="text-xs sm:text-sm text-[#735641] font-medium">
-                    {cityName} • सूर्योदय कालीन काल गणना
-                  </p>
-                  <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-white/85 border border-[#dec9ab] shadow-xs text-[11px] font-bold text-[#735641]">
-                    <span>ऋतु एवं अयन:</span>
-                    <span className="text-[#b8860b]">{rituText} • {ayanaText}</span>
+                    <span className="text-[#735641]">शक संवत {samvatShaka}</span>
+                    <span className="text-[#dec9ab]">•</span>
+                    <span className="text-[#8c5819]">ऋतु: {rituText}</span>
+                    <span className="text-[#dec9ab]">•</span>
+                    <span className="text-[#8c5819]">अयन: {ayanaText}</span>
+                    <span className="text-[#dec9ab]">•</span>
+                    <span className="text-[#26150b]">{cityName}</span>
                   </div>
                 </div>
 
                 {/* 3 Instant Actionable Q&A Pills for Zero-Knowledge Users */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 w-full">
-                  <div className="p-2.5 rounded-2xl bg-gradient-to-br from-emerald-50/95 to-emerald-100/70 border border-emerald-300 shadow-xs flex flex-col justify-between text-left hover:-translate-y-0.5 transition-all">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-1.5 sm:gap-2 w-full">
+                  <div className="p-2 rounded-xl bg-gradient-to-br from-emerald-50/95 to-emerald-100/70 border border-emerald-300 shadow-xs flex flex-col justify-between text-left hover:-translate-y-0.5 transition-all">
                     <div className="flex items-center justify-between gap-1 w-full">
-                      <span className="text-[11px] font-bold text-emerald-950 flex items-center gap-1.5">
+                      <span className="text-[10.5px] font-bold text-emerald-950 flex items-center gap-1 leading-normal">
                         <span className={`w-2 h-2 rounded-full ${isCurrentTimeAuspicious ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`}></span>
                         क्या अभी शुभ समय है?
                       </span>
-                      <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-bold ${isCurrentTimeAuspicious ? 'bg-emerald-200/80 text-emerald-900' : 'bg-amber-200/80 text-amber-900'}`}>
+                      <span className={`text-[8.5px] px-1.5 py-0.2 rounded-full font-bold ${isCurrentTimeAuspicious ? 'bg-emerald-200/80 text-emerald-900' : 'bg-amber-200/80 text-amber-900'}`}>
                         {isCurrentTimeAuspicious ? 'शुभ समय' : 'सावधानी'}
                       </span>
                     </div>
-                    <div className="text-xs font-bold text-emerald-900 mt-1 truncate">
+                    <div className="text-[11.5px] font-bold text-emerald-900 mt-0.5 truncate py-0.5 leading-normal">
                       {isCurrentTimeAuspicious ? `हाँ, ${choghadiyaNameClean} मुहूर्त शुभ है` : `अभी ${choghadiyaNameClean} है, सतर्क रहें`}
                     </div>
-                    <div className="text-[10px] text-emerald-800 mt-0.5 border-t border-emerald-200/60 pt-0.5 truncate">
+                    <div className="text-[9.5px] text-emerald-800 mt-0.5 border-t border-emerald-200/60 pt-0.5 truncate leading-normal">
                       अभिजित: {abhijitStr}
                     </div>
                   </div>
 
-                  <div className="p-2.5 rounded-2xl bg-gradient-to-br from-red-50/95 to-amber-50/70 border border-red-200 shadow-xs flex flex-col justify-between text-left hover:-translate-y-0.5 transition-all">
+                  <div className="p-2 rounded-xl bg-gradient-to-br from-red-50/95 to-amber-50/70 border border-red-200 shadow-xs flex flex-col justify-between text-left hover:-translate-y-0.5 transition-all">
                     <div className="flex items-center justify-between gap-1 w-full">
-                      <span className="text-[11px] font-bold text-red-950 flex items-center gap-1.5">
-                        <span className="material-symbols-outlined text-red-600 text-[14px]">warning</span>
+                      <span className="text-[10.5px] font-bold text-red-950 flex items-center gap-1 leading-normal">
+                        <span className="material-symbols-outlined text-red-600 text-[13px]">warning</span>
                         आज राहु काल कब है?
                       </span>
-                      <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-red-200/80 text-red-900 font-bold">
+                      <span className="text-[8.5px] px-1.5 py-0.2 rounded-full bg-red-200/80 text-red-900 font-bold">
                         वर्ज्य काल
                       </span>
                     </div>
-                    <div className="text-xs font-bold text-red-900 font-mono mt-1 truncate">
+                    <div className="text-[11.5px] font-bold text-red-900 font-mono mt-0.5 truncate py-0.5 leading-normal">
                       {rahuKaalStr}
                     </div>
-                    <div className="text-[10px] text-red-800 mt-0.5 border-t border-red-200/60 pt-0.5 truncate">
+                    <div className="text-[9.5px] text-red-800 mt-0.5 border-t border-red-200/60 pt-0.5 truncate leading-normal">
                       नया कार्य व क्रय-विक्रय टालें
                     </div>
                   </div>
 
-                  <div className="p-2.5 rounded-2xl bg-gradient-to-br from-amber-50/95 to-orange-50/70 border border-amber-200 shadow-xs flex flex-col justify-between text-left hover:-translate-y-0.5 transition-all">
+                  <div className="p-2 rounded-xl bg-gradient-to-br from-amber-50/95 to-orange-50/70 border border-amber-200 shadow-xs flex flex-col justify-between text-left hover:-translate-y-0.5 transition-all">
                     <div className="flex items-center justify-between gap-1 w-full">
-                      <span className="text-[11px] font-bold text-amber-950 flex items-center gap-1.5">
-                        <span className="material-symbols-outlined text-amber-700 text-[14px]">explore</span>
+                      <span className="text-[10.5px] font-bold text-amber-950 flex items-center gap-1 leading-normal">
+                        <span className="material-symbols-outlined text-amber-700 text-[13px]">explore</span>
                         आज यात्रा कहाँ न करें?
                       </span>
-                      <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-200/80 text-amber-900 font-bold">
+                      <span className="text-[8.5px] px-1.5 py-0.2 rounded-full bg-amber-200/80 text-amber-900 font-bold">
                         दिशा शूल
                       </span>
                     </div>
-                    <div className="text-xs font-bold text-amber-900 mt-1 truncate">
+                    <div className="text-[11.5px] font-bold text-amber-900 mt-0.5 truncate py-0.5 leading-normal">
                       {shool.direction} यात्रा वर्जित
                     </div>
-                    <div className="text-[10px] text-amber-800 mt-0.5 border-t border-amber-200/60 pt-0.5 truncate">
+                    <div className="text-[9.5px] text-amber-800 mt-0.5 border-t border-amber-200/60 pt-0.5 truncate leading-normal">
                       परिहार: {shool.remedy}
                     </div>
                   </div>
                 </div>
 
                 {/* 4 Quick Limb Cards with Micro-Elevation & Uniform Centered Symmetrical Heights */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 w-full">
-                  <div className="p-2.5 sm:p-3 rounded-2xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 flex flex-col items-center justify-between text-center min-h-[110px] hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer shadow-xs">
-                    <div className="flex items-center justify-center gap-1 text-xs font-bold text-[#c2410c] w-full">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2 w-full">
+                  <div className="p-1.5 sm:p-2 rounded-xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 flex flex-col items-center justify-between text-center min-h-[66px] sm:min-h-[72px] hover:-translate-y-0.5 hover:shadow-xs hover:border-[#d4af37] transition-all duration-300 cursor-pointer shadow-2xs">
+                    <div className="flex items-center justify-center gap-1 text-[11px] font-bold text-[#c2410c] w-full leading-normal">
                       <span>१. तिथि</span>
                       <VedicIcon3D name="tithi" size="sm" />
                     </div>
-                    <div className="text-sm font-bold text-[#26150b] truncate w-full">{tithiName}</div>
-                    <div className="text-[10px] text-[#735641] truncate w-full">{tithiEndTime}</div>
-                    <span className="inline-block px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 text-[9px] font-bold">{tithiNature}</span>
-                    <div className="text-[9.5px] text-stone-600 leading-tight border-t border-[#dec9ab]/50 pt-1 mt-0.5 w-full truncate">पूजा व नित्य कर्म उत्तम</div>
+                    <div className="text-xs sm:text-[13px] font-bold text-[#26150b] truncate w-full py-0.5 leading-normal">{tithiName}</div>
+                    <div className="text-[9.5px] text-[#735641] truncate w-full leading-normal">{tithiEndTime}</div>
+                    <span className="inline-block px-1.5 py-0.2 rounded-full bg-emerald-50 text-emerald-800 text-[8.5px] font-bold">{tithiNature}</span>
                   </div>
 
-                  <div className="p-2.5 sm:p-3 rounded-2xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 flex flex-col items-center justify-between text-center min-h-[110px] hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer shadow-xs">
-                    <div className="flex items-center justify-center gap-1 text-xs font-bold text-[#b8860b] w-full">
+                  <div className="p-1.5 sm:p-2 rounded-xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 flex flex-col items-center justify-between text-center min-h-[66px] sm:min-h-[72px] hover:-translate-y-0.5 hover:shadow-xs hover:border-[#d4af37] transition-all duration-300 cursor-pointer shadow-2xs">
+                    <div className="flex items-center justify-center gap-1 text-[11px] font-bold text-[#b8860b] w-full leading-normal">
                       <span>२. वार</span>
                       <VedicIcon3D name="sun" size="sm" />
                     </div>
-                    <div className="text-sm font-bold text-[#26150b] truncate w-full">{dayName}</div>
-                    <div className="text-[10px] text-[#735641] truncate w-full">{dayRuler} स्वामी</div>
-                    <span className="inline-block px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 text-[9px] font-bold">{vaarBadge}</span>
-                    <div className="text-[9.5px] text-stone-600 leading-tight border-t border-[#dec9ab]/50 pt-1 mt-0.5 w-full truncate">सौभाग्य व उत्साह कारक</div>
+                    <div className="text-xs sm:text-[13px] font-bold text-[#26150b] truncate w-full py-0.5 leading-normal">{dayName}</div>
+                    <div className="text-[9.5px] text-[#735641] truncate w-full leading-normal">{dayRuler} स्वामी</div>
+                    <span className="inline-block px-1.5 py-0.2 rounded-full bg-amber-50 text-amber-800 text-[8.5px] font-bold">{vaarBadge}</span>
                   </div>
 
-                  <div className="p-2.5 sm:p-3 rounded-2xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 flex flex-col items-center justify-between text-center min-h-[110px] hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer shadow-xs">
-                    <div className="flex items-center justify-center gap-1 text-xs font-bold text-[#c2410c] w-full">
+                  <div className="p-1.5 sm:p-2 rounded-xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 flex flex-col items-center justify-between text-center min-h-[66px] sm:min-h-[72px] hover:-translate-y-0.5 hover:shadow-xs hover:border-[#d4af37] transition-all duration-300 cursor-pointer shadow-2xs">
+                    <div className="flex items-center justify-center gap-1 text-[11px] font-bold text-[#c2410c] w-full leading-normal">
                       <span>३. नक्षत्र</span>
                       <VedicIcon3D name="nakshatra" size="sm" />
                     </div>
-                    <div className="text-sm font-bold text-[#26150b] truncate w-full">{nakshatraName}</div>
-                    <div className="text-[10px] text-[#735641] truncate w-full">{nakshatraSub}</div>
-                    <span className="inline-block px-2 py-0.5 rounded-full bg-blue-50 text-blue-800 text-[9px] font-bold">{nakshatraNature}</span>
-                    <div className="text-[9.5px] text-stone-600 leading-tight border-t border-[#dec9ab]/50 pt-1 mt-0.5 w-full truncate">शिव ध्यान व शांति रखें</div>
+                    <div className="text-xs sm:text-[13px] font-bold text-[#26150b] truncate w-full py-0.5 leading-normal">{nakshatraName}</div>
+                    <div className="text-[9.5px] text-[#735641] truncate w-full leading-normal">{nakshatraSub}</div>
+                    <span className="inline-block px-1.5 py-0.2 rounded-full bg-blue-50 text-blue-800 text-[8.5px] font-bold">{nakshatraNature}</span>
                   </div>
 
-                  <div className="p-2.5 sm:p-3 rounded-2xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 flex flex-col items-center justify-between text-center min-h-[110px] hover:-translate-y-1 hover:shadow-[0_8px_20px_-3px_rgba(212,175,55,0.25)] hover:border-[#d4af37] transition-all duration-300 cursor-pointer shadow-xs">
-                    <div className="flex items-center justify-center gap-1 text-xs font-bold text-[#2a674c] w-full">
+                  <div className="p-1.5 sm:p-2 rounded-xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 flex flex-col items-center justify-between text-center min-h-[66px] sm:min-h-[72px] hover:-translate-y-0.5 hover:shadow-xs hover:border-[#d4af37] transition-all duration-300 cursor-pointer shadow-2xs">
+                    <div className="flex items-center justify-center gap-1 text-[11px] font-bold text-[#2a674c] w-full leading-normal">
                       <span>४. योग</span>
                       <VedicIcon3D name="yoga" size="sm" />
                     </div>
-                    <div className="text-sm font-bold text-[#26150b] truncate w-full">{yogaName}</div>
-                    <div className="text-[10px] text-[#735641] truncate w-full">{yogaEndTime}</div>
-                    <span className="inline-block px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 text-[9px] font-bold">{yogaNature}</span>
-                    <div className="text-[9.5px] text-stone-600 leading-tight border-t border-[#dec9ab]/50 pt-1 mt-0.5 w-full truncate">सिद्धिप्रद मंगल कार्य</div>
+                    <div className="text-xs sm:text-[13px] font-bold text-[#26150b] truncate w-full py-0.5 leading-normal">{yogaName}</div>
+                    <div className="text-[9.5px] text-[#735641] truncate w-full leading-normal">{yogaEndTime}</div>
+                    <span className="inline-block px-1.5 py-0.2 rounded-full bg-emerald-50 text-emerald-800 text-[8.5px] font-bold">{yogaNature}</span>
                   </div>
                 </div>
 
                 {/* Live IST & Ghati Readout Bar - Centered */}
-                <div className="grid grid-cols-2 gap-2 text-center pt-1 w-full">
-                  <div className="p-2.5 rounded-xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 shadow-xs hover:border-[#ea580c] transition-colors flex flex-col items-center justify-center min-h-[64px]">
-                    <div className="text-[10px] text-[#735641] font-semibold">भारतीय मानक समय (IST)</div>
-                    <div className="text-sm font-bold text-[#c2410c] font-mono mt-0.5">{timeStr}</div>
+                <div className="grid grid-cols-2 gap-2 text-center pt-0.5 w-full">
+                  <div className="p-1.5 rounded-xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 shadow-2xs hover:border-[#ea580c] transition-colors flex flex-col items-center justify-center min-h-[44px]">
+                    <div className="text-[9.5px] text-[#735641] font-semibold leading-normal">भारतीय मानक समय (IST)</div>
+                    <div className="text-xs sm:text-[13px] font-bold text-[#c2410c] font-mono mt-0.5 leading-normal">{timeStr}</div>
                   </div>
-                  <div className="p-2.5 rounded-xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 shadow-xs hover:border-[#ea580c] transition-colors flex flex-col items-center justify-center min-h-[64px]">
-                    <div className="text-[10px] text-[#735641] font-semibold">सनातन वैदिक कालमान</div>
-                    <div className="text-sm font-bold text-[#26150b] font-mono mt-0.5">{ghatiStr}</div>
+                  <div className="p-1.5 rounded-xl bg-white/85 backdrop-blur-md border border-[#dec9ab]/70 shadow-2xs hover:border-[#ea580c] transition-colors flex flex-col items-center justify-center min-h-[44px]">
+                    <div className="text-[9.5px] text-[#735641] font-semibold leading-normal">सनातन वैदिक कालमान</div>
+                    <div className="text-xs sm:text-[13px] font-bold text-[#26150b] font-mono mt-0.5 leading-normal">{ghatiStr}</div>
                   </div>
                 </div>
 
                 {/* आज का निष्कर्ष (Aam Aadmi 5-Second Summary Card) - Placed at the very bottom */}
-                <div className="w-full p-3 rounded-2xl bg-[#fffaf0] border border-amber-300/80 shadow-xs flex items-start gap-2.5 text-left text-[#26150b]">
-                  <span className="material-symbols-outlined text-[#ea580c] text-[20px] shrink-0 mt-0.5">lightbulb</span>
+                <div className="w-full p-2 rounded-xl bg-[#fffaf0] border border-amber-300/80 shadow-2xs flex items-start gap-2 text-left text-[#26150b]">
+                  <span className="material-symbols-outlined text-[#ea580c] text-[16px] shrink-0 mt-0.5">lightbulb</span>
                   <div className="space-y-0.5">
-                    <span className="text-[11px] font-bold text-[#c2410c] uppercase tracking-wider block">
+                    <span className="text-[10px] font-bold text-[#c2410c] uppercase tracking-wider block leading-normal">
                       📌 आज का निष्कर्ष (दैनिक व्यावहारिक सार):
                     </span>
-                    <p className="text-xs sm:text-[13px] text-[#3d2414] leading-relaxed font-medium">
+                    <p className="text-[11px] sm:text-xs text-[#3d2414] leading-normal font-medium">
                       {aamAadmiSummary}
                     </p>
                   </div>
@@ -370,12 +356,11 @@ export const PortalHero: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Sanatan Ghadi Live Dial (5 Cols) - Centered Inside Box */}
-          <div className="lg:col-span-5 rounded-3xl p-5 sm:p-6 lg:p-7 border border-[#dec9ab] shadow-[0_8px_30px_rgba(77,51,34,0.08)] flex flex-col items-center justify-center bg-gradient-to-br from-[#fffbf5]/95 via-[#fffdfa]/92 to-[#fbeecc]/88 relative overflow-hidden backdrop-blur-md">
+          {/* Right Column: Sanatan Ghadi Live Dial (5 Cols) - Exact 500px Height */}
+          <div className="lg:col-span-5 rounded-3xl p-3 sm:p-3.5 border border-[#dec9ab] shadow-[0_8px_30px_rgba(77,51,34,0.08)] flex flex-col items-center justify-between bg-gradient-to-br from-[#fffbf5]/95 via-[#fffdfa]/92 to-[#fbeecc]/88 relative overflow-hidden backdrop-blur-md lg:h-[500px]">
             <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
-            <GoldenCornerBrackets size="md" />
 
-            <div className="relative z-10 w-full flex flex-col items-center justify-center h-full space-y-3 my-auto">
+            <div className="relative z-10 w-full h-full flex flex-col items-center justify-between py-1">
               <LiveMuhuratWatchCard
                 clockTime={currentTime}
                 choghadiyaList={panchang.choghadiya}

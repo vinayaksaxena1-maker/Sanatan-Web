@@ -168,7 +168,7 @@ export const PortalJigyasa: React.FC = () => {
       </div>
 
       {/* Slim 1-Line Anchor to Panchang Hub with Full Clearance for Bottom Golden Brackets */}
-      <div className="relative z-10 pt-3 mt-1 border-t border-[#dec9ab]/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-[#735641]">
+      <div className="relative z-10 pt-3 pb-1 px-3 sm:px-4 mt-1 border-t border-[#dec9ab]/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-[#735641]">
         <div className="flex items-center gap-1.5">
           <span className="material-symbols-outlined text-[#ea580c] text-[16px]">verified</span>
           <span>

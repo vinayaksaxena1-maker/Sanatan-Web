@@ -30,6 +30,10 @@
     --text-muted: #a8a29e;
   }
 
+  html {
+    font-size: 17.5px;
+  }
+
   body {
     background-color: var(--canvas-bg);
     color: var(--text-primary);
@@ -37,7 +41,26 @@
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    line-height: 1.45;
     transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  /* Universal Devanagari Matra Top-Clipping Safeguard */
+  body, .font-serif, .font-sans, p, span, div, a, button {
+    line-height: 1.45;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.35 !important;
+    padding-top: 0.15em;
+    padding-bottom: 0.05em;
+    overflow: visible !important;
+  }
+
+  .truncate {
+    padding-top: 2px;
+    padding-bottom: 1px;
+    line-height: 1.4;
   }
 }
 
@@ -289,5 +312,48 @@
   }
   .ambient-glow-gold {
     background: radial-gradient(circle, rgba(212, 175, 55, 0.16) 0%, rgba(247, 242, 230, 0) 70%);
+  }
+
+  /* Mathematically Calibrated Responsive Portal Container (180px Left, 200px Right on 1080p FHD) */
+  .responsive-portal-container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1540px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  @media (min-width: 640px) {
+    .responsive-portal-container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .responsive-portal-container {
+      padding-left: 1.875rem;
+      padding-right: 2.375rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    .responsive-portal-container {
+      padding-left: 2.8125rem;
+      padding-right: 3.4375rem;
+    }
+  }
+  @media (min-width: 1536px) {
+    .responsive-portal-container {
+      padding-left: 4.375rem;
+      padding-right: 5rem;
+    }
+  }
+  @media (min-width: 1900px) {
+    .responsive-portal-container {
+      padding-left: 0;
+      padding-right: 0;
+      margin-left: 180px;
+      margin-right: auto;
+      max-width: 1540px;
+    }
   }
 }

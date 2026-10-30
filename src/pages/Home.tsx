@@ -25,54 +25,28 @@ export const Home: React.FC = () => {
       {/* Universal Top Header with Built-in Global Spotlight Search (Ctrl+K) */}
       <PortalHeader />
 
-      {/* 1. Full-Bleed Edge-to-Edge Hero Section (Panchang Overview + Sanatan Watch) */}
-      <div className="w-full pt-28">
+      {/* Unified Master Command Surface - Mathematically Calibrated 1520px Container (200px Left/Right Gap on 1080p FHD) */}
+      <main className="responsive-portal-container pt-[146px] pb-12 space-y-[25px]" id="mukhya">
+        {/* 1. Contained Boxed Hero Section (Panchang Overview + Kaal Chakra Live Watch) */}
         <PortalHero />
-      </div>
 
-      {/* Main Command Surface - Full-Bleed Section Bands with Standardized 1320px Inner Grid */}
-      <main className="w-full" id="mukhya">
         {/* 2. 1-Tap Zero-Friction Daily Horoscope Slider (Personal Engagement Hook) */}
-        <section className="w-full bg-[#fcf9f2] border-b border-[#dec9ab]/70 relative">
-          <div className="w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 py-7 sm:py-8 lg:py-10">
-            <PortalRashifalSlider />
-          </div>
-        </section>
+        <PortalRashifalSlider />
 
         {/* 3. Sacred Festivals, Upcoming Vrats & Ekadashi Parana Timings */}
-        <section className="w-full bg-[#f8f3e8] border-b border-[#d4af37]/25 relative">
-          <div className="w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 py-7 sm:py-8 lg:py-10">
-            <PortalVratFestival />
-          </div>
-        </section>
+        <PortalVratFestival />
 
         {/* 4. Navagraha Real-Time Planetary Positions (Visual Cosmic Divider) */}
-        <section className="w-full bg-gradient-to-b from-[#fcf9f2] via-[#f7f0e1]/70 to-[#fcf9f2] border-b border-[#dec9ab]/70 relative">
-          <div className="w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 py-7 sm:py-8 lg:py-10">
-            <PortalNavagraha />
-          </div>
-        </section>
+        <PortalNavagraha />
 
         {/* 5. Express Vedic Kundli & 36 Guna Milan Form + Quick Tools */}
-        <section className="w-full bg-[#f8f3e8] border-b border-[#d4af37]/25 relative">
-          <div className="w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 py-7 sm:py-8 lg:py-10">
-            <PortalKundli />
-          </div>
-        </section>
+        <PortalKundli />
 
         {/* 6. Sanatan Jigyasa & Shanka Samadhan (Vedic FAQ & Myth-Busters) */}
-        <section className="w-full bg-[#fcf9f2] border-b border-[#dec9ab]/70 relative">
-          <div className="w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 py-7 sm:py-8 lg:py-10">
-            <PortalJigyasa />
-          </div>
-        </section>
+        <PortalJigyasa />
 
         {/* 7. All Hidden Tools & Calculation Engines Quick Strip Box */}
-        <section className="w-full bg-[#f8f3e8] border-b border-[#d4af37]/30 relative">
-          <div className="w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 py-7 sm:py-8 lg:py-10">
-            <PortalVedicToolsStrip />
-          </div>
-        </section>
+        <PortalVedicToolsStrip />
       </main>
 
       {/* Scriptural Vedic Footer */}

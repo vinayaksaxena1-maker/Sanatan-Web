@@ -93,9 +93,6 @@ export const PortalKundli: React.FC = () => {
               <h2 className="text-xl sm:text-2xl font-bold text-[#26150b]">
                 {activeTab === 'kundli' ? 'त्वरित जन्म कुण्डली निर्माण' : 'विवाह कुण्डली ३६ गुण मिलान'}
               </h2>
-              <span className="px-2.5 py-0.5 rounded-full bg-[#dec9ab]/30 text-[#735641] text-[10px] font-bold border border-[#dec9ab] shadow-xs">
-                D1 से D60 षोडशवर्ग
-              </span>
             </div>
             <p className="text-xs text-[#735641]">
               {activeTab === 'kundli'
@@ -193,51 +190,25 @@ export const PortalKundli: React.FC = () => {
               </div>
             </div>
 
-            {/* City Selector with Quick Pills */}
-            <div className="space-y-1.5 pt-1">
+            {/* City Selector Input Box */}
+            <div className="space-y-1 pt-1">
               <label className="text-xs font-bold text-[#735641] block">
                 जन्म स्थान (नगर / तीर्थ)
               </label>
-              <div className="flex flex-wrap items-center gap-1.5">
-                {QUICK_CITIES.map((c) => (
-                  <button
-                    key={c.name}
-                    type="button"
-                    onClick={() => {
-                      setCityName(c.name);
-                      setSelectedCoords({ lat: c.lat, lon: c.lon });
-                    }}
-                    className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold border transition-all ${
-                      cityName === c.name
-                        ? 'bg-[#ea580c] text-white border-[#ea580c] shadow-2xs'
-                        : 'bg-white text-[#735641] border-[#dec9ab] hover:border-[#ea580c]'
-                    }`}
-                  >
-                    📍 {c.name}
-                  </button>
-                ))}
+              <div className="relative">
+                <span className="absolute left-3 top-2.5 text-sm pointer-events-none">📍</span>
+                <input
+                  type="text"
+                  value={cityName}
+                  onChange={(e) => setCityName(e.target.value)}
+                  placeholder="अपना जन्म नगर या शहर दर्ज करें (उदा. नई दिल्ली, वाराणसी, जयपुर, मुम्बई)"
+                  className="w-full pl-9 pr-3 py-2 rounded-xl bg-[#fffdfa] border border-[#dec9ab] focus:border-[#ea580c] focus:outline-none text-xs font-semibold text-[#26150b]"
+                />
               </div>
             </div>
 
             {/* Launch CTA */}
-            <div className="pt-3 border-t border-[#dec9ab]/50 flex flex-col sm:flex-row items-center justify-between gap-3">
-              <div className="flex flex-wrap items-center gap-2 text-[11px] text-[#735641]">
-                <span className="flex items-center gap-1 font-semibold text-emerald-800">
-                  <span className="material-symbols-outlined text-[14px]">verified</span>
-                  D1 से D60 षोडशवर्ग
-                </span>
-                <span>•</span>
-                <span className="flex items-center gap-1 font-semibold text-[#b8860b]">
-                  <span className="material-symbols-outlined text-[14px]">psychology</span>
-                  विंशोत्तरी दशा
-                </span>
-                <span>•</span>
-                <span className="flex items-center gap-1 font-semibold text-[#c2410c]">
-                  <span className="material-symbols-outlined text-[14px]">picture_as_pdf</span>
-                  A4 कुण्डली पत्रक
-                </span>
-              </div>
-
+            <div className="pt-3 border-t border-[#dec9ab]/50 flex items-center justify-end">
               <button
                 type="submit"
                 className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#ea580c] to-[#c2410c] hover:brightness-110 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
@@ -299,7 +270,7 @@ export const PortalKundli: React.FC = () => {
       </div>
 
       {/* 5 Quick Navigation Tools Ribbon */}
-      <div className="relative z-10 pt-2 border-t border-[#dec9ab]/50 flex flex-wrap items-center justify-between gap-2 text-xs">
+      <div className="relative z-10 pt-2 pb-1 px-3 sm:px-4 border-t border-[#dec9ab]/50 flex flex-wrap items-center justify-between gap-2 text-xs">
         <span className="text-[11px] font-bold text-[#735641] uppercase tracking-wider flex items-center gap-1">
           <span className="material-symbols-outlined text-[#ea580c] text-[15px]">apps</span>
           त्वरित वैदिक टूल्स:

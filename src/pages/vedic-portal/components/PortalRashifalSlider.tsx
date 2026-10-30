@@ -129,9 +129,9 @@ export const PortalRashifalSlider: React.FC = () => {
         </div>
       </div>
 
-      {/* 12-Rashi Horizontal Scroll Tap Strip */}
-      <div className="relative z-10">
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 pt-1 scrollbar-thin scrollbar-thumb-amber-200">
+      {/* 12-Rashi Symmetrical Balanced Grid (Full Width on Desktop) */}
+      <div className="relative z-10 w-full">
+        <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-12 gap-2 w-full pb-2 pt-1">
           {rashiList.map((r, idx) => {
             const isSelected = selectedIdx === idx;
             return (
@@ -139,14 +139,18 @@ export const PortalRashifalSlider: React.FC = () => {
                 key={r.rashiKey}
                 type="button"
                 onClick={() => setSelectedIdx(idx)}
-                className={`flex flex-col items-center justify-center p-2.5 rounded-2xl border transition-all duration-300 shrink-0 min-w-[78px] cursor-pointer ${
+                className={`flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-2xl border transition-all duration-300 w-full cursor-pointer ${
                   isSelected
                     ? 'bg-gradient-to-b from-[#ea580c] to-[#c2410c] text-white border-[#ea580c] shadow-[0_6px_18px_rgba(234,88,12,0.35)] scale-105'
                     : 'bg-white/90 text-[#26150b] border-[#dec9ab]/70 hover:border-[#ea580c] hover:bg-amber-50/60 shadow-2xs'
                 }`}
               >
-                <VedicRashiGoldIcon rashi={r.rashiKey} size="md" />
-                <span className="text-xs font-bold mt-1">{r.name}</span>
+                <VedicRashiGoldIcon
+                  rashi={r.rashiKey}
+                  size="md"
+                  className={isSelected ? 'brightness-0 invert' : ''}
+                />
+                <span className="text-xs font-bold mt-1 truncate">{r.name}</span>
                 <span className={`text-[9.5px] font-mono mt-0.5 ${isSelected ? 'text-white/90' : 'text-[#735641]'}`}>
                   {toHindiDigits(r.score)}%
                 </span>

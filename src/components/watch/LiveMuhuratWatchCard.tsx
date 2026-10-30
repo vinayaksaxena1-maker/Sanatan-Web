@@ -212,32 +212,32 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
     : '—';
 
   return (
-    <div className="w-full flex flex-col items-center select-none font-serif text-[#26150B]">
+    <div className="w-full h-full flex flex-col justify-between items-center select-none font-serif text-[#26150B]">
       
-      {/* 1. TOP SECTION HEADER (शीर्षक + कैसे देखें गाइड बटन) */}
-      <div className="w-full mb-3 p-2.5 sm:p-3 rounded-2xl bg-white/80 backdrop-blur-md border border-[#D4AF37]/50 shadow-[0_4px_16px_rgba(212,175,55,0.15)] flex items-center justify-between gap-2">
-        <div className="flex-1 flex items-center justify-center gap-1.5 pl-3 sm:pl-6">
-          <span className="text-amber-600 font-bold text-base select-none">ॐ</span>
-          <h3 className="text-sm sm:text-base font-serif font-extrabold bg-gradient-to-r from-[#9A3412] via-[#C2410C] to-[#B45309] bg-clip-text text-transparent tracking-wide text-center">
+      {/* 1. TOP SECTION HEADER (Clean Bold Title without enclosing box) */}
+      <div className="w-full mb-1 flex items-center justify-between gap-2 border-b border-[#dec9ab]/60 pb-1 shrink-0 pt-0.5">
+        <div className="flex-1 flex items-center justify-center gap-1.5 pl-4 sm:pl-8">
+          <span className="text-amber-600 font-bold text-xs select-none">ॐ</span>
+          <h3 className="text-xs sm:text-sm font-serif font-extrabold text-[#9A3412] tracking-wide text-center leading-normal pt-0.5">
             ।। चौघड़िया एवं होरा कालचक्र ।।
           </h3>
-          <span className="text-amber-600 font-bold text-base select-none">ॐ</span>
+          <span className="text-amber-600 font-bold text-xs select-none">ॐ</span>
         </div>
 
         {/* Guide Help Button */}
         <button
           type="button"
           onClick={() => setIsGuideOpen(true)}
-          className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 hover:from-amber-100 hover:to-orange-100 text-[#c2410c] hover:text-[#9a3412] border border-[#d4af37]/70 text-[11px] font-bold transition-all shadow-3xs cursor-pointer shrink-0 active:scale-95"
+          className="flex items-center gap-1 px-2 py-0.5 rounded-lg bg-gradient-to-r from-amber-50 to-orange-50 hover:from-amber-100 hover:to-orange-100 text-[#c2410c] hover:text-[#9a3412] border border-[#d4af37]/70 text-[10px] font-bold transition-all shadow-3xs cursor-pointer shrink-0 active:scale-95"
           title="कालचक्र को देखने व समझने का पूरा तरीका"
         >
-          <span className="material-symbols-outlined text-[15px] text-[#ea580c]">help</span>
+          <span className="material-symbols-outlined text-[13px] text-[#ea580c]">help</span>
           <span className="hidden sm:inline">कैसे देखें?</span>
         </button>
       </div>
 
-      {/* 2. CENTRAL ANALOG DIAL (4-Layer Vedic Analog Clock) */}
-      <div className="w-[260px] h-[260px] sm:w-[280px] sm:h-[280px] lg:w-[290px] lg:h-[290px] aspect-square flex items-center justify-center [&_svg]:overflow-visible drop-shadow-[0_6px_20px_rgba(180,83,9,0.2)]">
+      {/* 2. CENTRAL ANALOG DIAL (Expanded Grand Vedic Dial) */}
+      <div className="w-[220px] h-[220px] sm:w-[245px] sm:h-[245px] lg:w-[245px] lg:h-[245px] aspect-square flex items-center justify-center [&_svg]:overflow-visible drop-shadow-[0_8px_24px_rgba(180,83,9,0.22)] my-auto shrink-0">
         <AnalogClock
           time={clockTime}
           choghadiyaList={choghadiyaList}
@@ -252,101 +252,104 @@ export const LiveMuhuratWatchCard: React.FC<LiveMuhuratWatchCardProps> = ({
         />
       </div>
 
-      {/* 3. BOTTOM ELEMENTS (Under the Dial) */}
-      <div className="w-full space-y-2.5 mt-3">
+      {/* 3. BOTTOM ELEMENTS (Under the Dial - Compact Status Card) */}
+      <div className="w-full space-y-1 mt-1 shrink-0">
 
         {/* 3-COLOR INTUITIVE LEGEND */}
-        <div className="flex items-center justify-center gap-3 sm:gap-4 text-[11px] font-bold font-serif flex-wrap pt-0.5">
+        <div className="flex items-center justify-center gap-3 text-[9.5px] sm:text-[10px] font-bold font-serif flex-wrap">
           <span className="flex items-center gap-1 text-emerald-700">
-            🟢 शुभ (अमृत/शुभ/लाभ)
+            🟢 शुभ
           </span>
           <span className="flex items-center gap-1 text-amber-700">
-            🟡 सामान्य (चर)
+            🟡 सामान्य
           </span>
           <span className="flex items-center gap-1 text-rose-700">
-            🔴 अशुभ (रोग/काल/उद्वेग)
+            🔴 अशुभ
           </span>
         </div>
 
-        {/* UNIFIED SMART LIVE CARD (LIGHT CHANDAN THEME) */}
-        <div className="w-full p-3.5 rounded-2xl border border-[#ff9933]/50 bg-white/90 backdrop-blur-md shadow-xs space-y-2 text-left text-[#26150b]">
+        {/* UNIFIED SMART LIVE STATUS (CLEAN COMPACT LINES - 2PX PADDING) */}
+        <div className="w-full divide-y divide-[#dec9ab]/60 text-left text-[#26150b]">
           
           {/* 1. वर्तमान स्थिति & लाइव काउंटडाउन */}
-          <div className="flex items-center justify-between gap-2 pb-1.5 border-b border-orange-100/90 flex-wrap">
-            <div className="flex items-center gap-2">
-              <span className="text-base select-none">{currentStatusInfo.dot}</span>
-              <div>
-                <h4 className="text-[13.5px] sm:text-[14px] font-black text-slate-900 font-serif leading-tight">
-                  अभी: {currentChoghadiya ? (currentChoghadiya.hindiName || currentChoghadiya.name) : 'लाभ'} चौघड़िया ({currentStatusInfo.label})
-                </h4>
-                <div className="text-[10.5px] text-slate-500 font-mono mt-0.5">
-                  समय: {currentTimingHindi}
-                </div>
-              </div>
+          <div className="flex items-center justify-between gap-1.5 py-[2px] flex-wrap">
+            <div className="flex items-center gap-1">
+              <span className="text-xs select-none">{currentStatusInfo.dot}</span>
+              <span className="text-[11.5px] font-bold text-[#26150b]">
+                अभी: {currentChoghadiya ? (currentChoghadiya.hindiName || currentChoghadiya.name) : 'लाभ'} ({currentStatusInfo.label})
+              </span>
+              <span className="text-[#dec9ab]">•</span>
+              <span className="text-[10px] text-[#735641] font-mono">
+                समय: {currentTimingHindi}
+              </span>
             </div>
 
             {/* Live Countdown Badge */}
-            <div className={`px-2.5 py-0.5 rounded-full border text-[10.5px] font-mono font-black shrink-0 ${currentStatusInfo.badgeBg}`}>
-              ⏳ {choghadiyaRemainingMinutes > 0 ? `${toHindiDigits(choghadiyaRemainingMinutes)} मिनट शेष` : 'समय समाप्त'}
-            </div>
+            <span className="text-[10.5px] font-mono font-bold text-[#c2410c] shrink-0">
+              ⏳ {choghadiyaRemainingMinutes > 0 ? `${toHindiDigits(choghadiyaRemainingMinutes)} मि. शेष` : 'समय समाप्त'}
+            </span>
           </div>
 
           {/* 2. अगला शुभ समय (Next Auspicious Window) */}
-          <div className="flex items-center justify-between text-xs py-1.5 px-3 bg-emerald-500/10 rounded-xl border border-emerald-300/60">
-            <span className="font-bold text-emerald-900 flex items-center gap-1.5 whitespace-nowrap">
-              <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+          <div className="flex items-center justify-between text-[11px] py-[2px] gap-2">
+            <span className="font-bold text-[#735641] flex items-center gap-1 shrink-0">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
               अगला शुभ समय:
             </span>
-            <span className="font-bold font-serif text-emerald-950 text-[11.5px] leading-relaxed text-right pl-2">
+            <span className="font-bold text-emerald-900 text-[11px] text-right truncate">
               {isCurrentShubh
-                ? `वर्तमान समय शुभ है (${currentChoghadiya ? (currentChoghadiya.hindiName || currentChoghadiya.name) : ''} काल)`
+                ? `वर्तमान समय शुभ है (${currentChoghadiya ? (currentChoghadiya.hindiName || currentChoghadiya.name) : ''})`
                 : nextShubhChoghadiya
-                  ? `${formatTimeToHindi(nextShubhChoghadiya.startTime)} से (${nextShubhChoghadiya.hindiName || nextShubhChoghadiya.name} चौघड़िया)`
+                  ? `${formatTimeToHindi(nextShubhChoghadiya.startTime)} से (${nextShubhChoghadiya.hindiName || nextShubhChoghadiya.name})`
                   : 'शीघ्र प्रारंभ'}
             </span>
           </div>
 
           {/* 3. सक्रिय होरा स्थिति पट्टी (Active Hora Status Bar) */}
-          <div className="flex items-center justify-between text-xs py-1.5 px-3 bg-orange-500/10 rounded-xl border border-orange-200/50">
-            <span className="font-bold text-slate-700 whitespace-nowrap">सक्रिय होरा:</span>
-            <span className="font-bold font-serif text-[#78350F] text-[11.5px] leading-relaxed text-right pl-2">
-              {activeHora ? getHoraPracticalNuance(activeHora.lordHindi, activeHora.lord) : 'सूर्य होरा: प्रशासनिक व महत्वपूर्ण कार्यों हेतु श्रेष्ठ'}
+          <div className="flex items-center justify-between text-[11px] py-[2px] gap-2">
+            <span className="font-bold text-[#735641] shrink-0">सक्रिय होरा:</span>
+            <span className="font-bold text-[#9A3412] text-[11px] text-right truncate">
+              {activeHora ? getHoraPracticalNuance(activeHora.lordHindi, activeHora.lord) : 'सूर्य होरा: प्रशासनिक कार्य'}
             </span>
           </div>
 
-          {/* 4. स्पष्ट निर्देश (क्या करें / क्या न करें) */}
+          {/* 4. स्पष्ट निर्देश (क्या करें / क्या न करें) - Interactive Dropdown */}
           {currentChoghadiya && (
-            <div className="text-xs space-y-1 pt-0.5 border-t border-orange-100/70">
-              <div className="flex items-start gap-1.5">
-                <span className="font-black text-emerald-800 whitespace-nowrap">✅ क्या करें:</span>
-                <span className="text-slate-700 font-medium leading-relaxed">
-                  {getChoghadiyaUpyuktKarya(currentChoghadiya.type, isNightTime)}
+            <details className="group text-[11px] py-[2px]">
+              <summary className="flex items-center justify-between cursor-pointer list-none text-[#9A3412] font-bold transition-all select-none text-[11px] hover:text-[#ea580c]">
+                <span className="flex items-center gap-1">
+                  <span>📋</span>
+                  <span>उपयुक्त व वर्ज्य कार्य (क्या करें / क्या न करें)</span>
                 </span>
+                <span className="text-[9px] transform group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <div className="space-y-0.5 pt-1 pb-1 px-2 mt-0.5 bg-amber-50/70 rounded-lg border border-amber-200/60 text-[10.5px]">
+                <div className="flex items-start gap-1">
+                  <span className="font-bold text-emerald-800 whitespace-nowrap">✅ क्या करें:</span>
+                  <span className="text-slate-700 font-medium leading-relaxed">
+                    {getChoghadiyaUpyuktKarya(currentChoghadiya.type, isNightTime)}
+                  </span>
+                </div>
+                <div className="flex items-start gap-1">
+                  <span className="font-bold text-rose-800 whitespace-nowrap">❌ क्या न करें:</span>
+                  <span className="text-slate-700 font-medium leading-relaxed">
+                    {isCurrentAshubh
+                      ? 'नया व्यापार, दुकान उद्घाटन, नवीन निवेश या मांगलिक यात्रा स्थगित रखें।'
+                      : isCurrentShubh
+                        ? 'कोई निषेध नहीं। सभी शुभ संकल्प व नवीन कार्य निर्विघ्न संपन्न करें।'
+                        : 'अति-महत्वपूर्ण जोखिम भरे वित्तीय व मांगलिक निर्णय टालें।'}
+                  </span>
+                </div>
               </div>
-              <div className="flex items-start gap-1.5">
-                <span className="font-black text-rose-800 whitespace-nowrap">❌ क्या न करें:</span>
-                <span className="text-slate-700 font-medium leading-relaxed">
-                  {isCurrentAshubh
-                    ? 'नया व्यापार, दुकान उद्घाटन, नवीन निवेश या मांगलिक यात्रा स्थगित रखें।'
-                    : isCurrentShubh
-                      ? 'कोई निषेध नहीं। सभी शुभ संकल्प व नवीन कार्य निर्विघ्न संपन्न करें।'
-                      : 'अति-महत्वपूर्ण जोखिम भरे वित्तीय व मांगलिक निर्णय टालें।'}
-                </span>
-              </div>
-            </div>
+            </details>
           )}
 
-          {/* 5. ⏭️ अगला चौघड़िया (Next Upcoming Preview) */}
+          {/* 5. ⏭️ आगामी चौघड़िया (Next Upcoming Preview) */}
           {nextChoghadiya && (
-            <div className="pt-1.5 border-t border-orange-100/90 flex items-center justify-between text-xs flex-wrap gap-1.5">
-              <div className="flex items-center gap-1.5 flex-wrap">
-                <span className="font-bold text-slate-500">⏭️ आगामी चौघड़िया:</span>
-                <span className="font-bold font-serif text-slate-900">
-                  {nextStatusInfo.dot} {nextChoghadiya.hindiName || nextChoghadiya.name} ({formatTimeToHindi(nextChoghadiya.startTime)} से)
-                </span>
-              </div>
-              <span className={`text-[9.5px] font-bold font-mono px-2 py-0.5 rounded-md border ${nextStatusInfo.badgeBg}`}>
-                {nextStatusInfo.label}
+            <div className="flex items-center justify-between text-[11px] py-[2px] gap-2">
+              <span className="font-bold text-[#735641]">⏭️ आगामी चौघड़िया:</span>
+              <span className="font-bold text-[#26150b] text-[11px] text-right">
+                {nextStatusInfo.dot} {nextChoghadiya.hindiName || nextChoghadiya.name} ({formatTimeToHindi(nextChoghadiya.startTime)} से)
               </span>
             </div>
           )}
