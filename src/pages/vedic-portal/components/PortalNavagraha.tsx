@@ -6,6 +6,7 @@
  */
 
 import React, { useMemo } from 'react';
+import { Link } from '../../../routes/AppRoutes';
 import { GoldenCornerBrackets } from './GoldenCornerBrackets';
 import { SacredGeometryWatermark } from './SacredGeometryWatermark';
 import { calculatePlanets } from '../../../engine';
@@ -176,6 +177,12 @@ export const PortalNavagraha: React.FC = () => {
           <span className="px-2.5 py-0.5 rounded-full bg-white/80 border border-[#dec9ab] flex items-center gap-1.5 shadow-xs">
             <span className="w-2 h-2 rounded-full bg-red-600"></span>वक्री ग्रह
           </span>
+          <Link
+            href="/navagraha"
+            className="px-3 py-1 rounded-xl bg-[#fff2e8] hover:bg-[#ea580c] hover:text-white text-[#c2410c] text-xs font-bold border border-[#ffd8bf] shadow-xs transition-all no-underline"
+          >
+            विस्तृत गोचर व दृष्टि चक्र ➔
+          </Link>
         </div>
       </div>
 

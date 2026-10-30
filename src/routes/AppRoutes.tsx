@@ -32,6 +32,10 @@ const TermsOfService = lazy(() => import('../pages/legal/TermsOfService'));
 const AboutUs = lazy(() => import('../pages/legal/AboutUs'));
 const EngineSandbox = lazy(() => import('../pages/sandbox/EngineSandbox'));
 const VedicPortalPage = lazy(() => import('../pages/vedic-portal/VedicPortalPage'));
+const RashifalPage = lazy(() => import('../pages/rashifal/RashifalPage'));
+const NavagrahaHub = lazy(() => import('../pages/navagraha/NavagrahaHub'));
+const ContactPage = lazy(() => import('../pages/contact/ContactPage'));
+const PanchangPdfPage = lazy(() => import('../pages/panchang/PanchangPdfPage'));
 
 export type HubRoute =
   | '/'
@@ -52,7 +56,13 @@ export type HubRoute =
   | '/sandbox'
   | '/engine-sandbox'
   | '/portal'
-  | '/vedic-portal';
+  | '/vedic-portal'
+  | '/rashifal'
+  | '/navagraha'
+  | '/gochar'
+  | '/contact'
+  | '/feedback'
+  | '/download-panchang';
 
 interface RouterContextValue {
   currentPath: string;
@@ -202,6 +212,16 @@ export const AppRoutes: React.FC = () => {
       case '/portal':
       case '/vedic-portal':
         return <VedicPortalPage />;
+      case '/rashifal':
+        return <RashifalPage />;
+      case '/navagraha':
+      case '/gochar':
+        return <NavagrahaHub />;
+      case '/contact':
+      case '/feedback':
+        return <ContactPage />;
+      case '/download-panchang':
+        return <PanchangPdfPage />;
       default:
         return <Home />;
     }

@@ -57,6 +57,8 @@ export const PortalFooter: React.FC = () => {
           <h4 className="text-base font-bold text-[#f2ca50]">कुण्डली एवं ज्योतिष</h4>
           <ul className="space-y-2 text-xs text-[#d9c5b2]">
             <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/kundli">जन्म कुण्डली (D1-D60 पराशर)</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/rashifal">दैनिक राशिफल (१२ राशियां)</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/navagraha">नवग्रह स्पष्ट स्थिति व गोचर</Link></li>
             <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/matchmaking">विवाह कुण्डली मिलान (३६ गुण)</Link></li>
             <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/utilities">वैदिक साधना, मन्त्र व स्तोत्र संग्रह</Link></li>
             <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/cities">५,०००+ नगर एवं प्रमुख तीर्थ दर्शन</Link></li>
@@ -69,6 +71,7 @@ export const PortalFooter: React.FC = () => {
           <ul className="space-y-2 text-xs text-[#d9c5b2]">
             <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/">सनातन घड़ी मुख्य पृष्ठ</Link></li>
             <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/about-us">हमारे बारे में व परंपरा</Link></li>
+            <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/contact">संपर्क एवं परामर्श केंद्र</Link></li>
             <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/privacy-policy">गोपनीयता नीति</Link></li>
             <li><Link className="hover:text-[#ea580c] transition-colors no-underline" href="/terms">नियम व शर्तें</Link></li>
           </ul>

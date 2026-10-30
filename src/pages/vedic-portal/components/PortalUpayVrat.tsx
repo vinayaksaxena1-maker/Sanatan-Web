@@ -315,11 +315,11 @@ export const PortalUpayVrat: React.FC = () => {
             <span>सम्पूर्ण वार्षिक व्रत एवं एकादशी कैलेंडर देखें ➔</span>
           </Link>
           <Link
-            href="/panchang"
+            href="/download-panchang"
             className="w-full py-2 rounded-xl bg-[#f0e5d1] hover:bg-[#b8860b] hover:text-white text-[#26150b] text-[11px] font-bold border border-[#dec9ab] transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs no-underline"
           >
-            <span className="material-symbols-outlined text-[15px]">menu_book</span>
-            <span>दैनिक पंचांग व काल निर्णय विस्तार</span>
+            <span className="material-symbols-outlined text-[15px]">picture_as_pdf</span>
+            <span>विक्रम संवत २०८१ हिन्दू पंचांग विवरण (PDF / प्रिंट)</span>
           </Link>
         </div>
       </div>
