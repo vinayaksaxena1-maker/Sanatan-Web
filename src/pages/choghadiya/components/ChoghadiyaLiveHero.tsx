@@ -1,7 +1,7 @@
 /**
  * Sanatan Web (सनातन घड़ी)
  * Component: ChoghadiyaLiveHero
- * Box-Free Pure Typographic Real-time Active Choghadiya, Countdown & Hora
+ * Box-Free Pure Typographic Real-time Active Choghadiya & Live Countdown
  * Strict < 300 lines modular standard
  */
 
@@ -16,7 +16,7 @@ export interface ChoghadiyaLiveHeroProps {
 }
 
 export const ChoghadiyaLiveHero: React.FC<ChoghadiyaLiveHeroProps> = ({ data }) => {
-  const { activeChoghadiya, countdownFormatted, progressPercent, activeHora } = data;
+  const { activeChoghadiya, countdownFormatted, progressPercent } = data;
 
   const chogType = activeChoghadiya?.type || 'Amrit';
   const meta = CHOGHADIYA_INFO[chogType] || CHOGHADIYA_INFO.Amrit;
@@ -30,9 +30,9 @@ export const ChoghadiyaLiveHero: React.FC<ChoghadiyaLiveHeroProps> = ({ data }) 
       {/* Vedic Background Swastika Watermark */}
       <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
 
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-        {/* ================= 1. ACTIVE CHOGHADIYA (5 Cols) - Box-Free ================= */}
-        <div className="lg:col-span-5 space-y-3 lg:pr-6 lg:border-r border-[#dec9ab]/60">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+        {/* ================= 1. ACTIVE CHOGHADIYA (8 Cols) ================= */}
+        <div className="md:col-span-8 space-y-3 md:pr-8 md:border-r border-[#dec9ab]/60">
           {/* Live Status Pill with Radar Wave */}
           <div className="flex items-center gap-2">
             <span className="relative flex h-2.5 w-2.5">
@@ -60,7 +60,7 @@ export const ChoghadiyaLiveHero: React.FC<ChoghadiyaLiveHeroProps> = ({ data }) 
           </div>
 
           {/* Title & Badge */}
-          <div className="flex flex-wrap items-baseline gap-2 pt-0.5">
+          <div className="flex flex-wrap items-baseline gap-2.5 pt-0.5">
             <h2 className="text-2xl sm:text-3xl font-bold text-[#26150b] tracking-tight">
               {activeChoghadiya?.hindiName || activeChoghadiya?.name || 'अमृत'} चौघड़िया
             </h2>
@@ -85,28 +85,28 @@ export const ChoghadiyaLiveHero: React.FC<ChoghadiyaLiveHeroProps> = ({ data }) 
             <span className="font-semibold text-[#b45309]">स्वामी: {meta.lord}</span>
           </div>
 
-          {/* Guidance Suggestion - Pure text with left accent border, NO nested box */}
+          {/* Guidance Suggestion */}
           <p className="text-xs sm:text-sm text-[#5a3822] leading-relaxed border-l-2 border-[#ea580c]/60 pl-3 pt-0.5">
             <strong className="text-[#c2410c]">शुभ परामर्श:</strong> {meta.significance}
           </p>
         </div>
 
-        {/* ================= 2. LIVE DYNAMIC COUNTDOWN (3 Cols) - Box-Free ================= */}
-        <div className="lg:col-span-3 flex flex-col items-center justify-center text-center space-y-2 lg:px-4 lg:border-r border-[#dec9ab]/60">
+        {/* ================= 2. LIVE DYNAMIC COUNTDOWN (4 Cols) ================= */}
+        <div className="md:col-span-4 flex flex-col items-center justify-center text-center space-y-2.5">
           <div className="inline-flex items-center gap-1.5 text-xs text-[#735641] uppercase tracking-wider font-semibold">
             <span>⏳</span>
             <span>वर्तमान काल शेष</span>
           </div>
 
           {/* Big Devanagari Countdown Display */}
-          <div className="text-3xl sm:text-4xl font-bold text-[#c2410c] tabular-nums font-mono tracking-tight drop-shadow-xs">
+          <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#c2410c] tabular-nums font-mono tracking-tight drop-shadow-xs">
             {countdownFormatted}
           </div>
 
           <span className="text-[11px] text-[#735641]">मिनट एवं सेकंड शेष</span>
 
           {/* Real-time Progress Bar */}
-          <div className="w-full space-y-1 pt-1">
+          <div className="w-full max-w-xs space-y-1 pt-1">
             <div className="w-full bg-[#f5ebd7] rounded-full h-2 overflow-hidden shadow-inner">
               <div
                 className="bg-gradient-to-r from-amber-500 to-[#c2410c] h-full rounded-full transition-all duration-1000"
@@ -119,39 +119,6 @@ export const ChoghadiyaLiveHero: React.FC<ChoghadiyaLiveHeroProps> = ({ data }) 
               <span>समाप्त</span>
             </div>
           </div>
-        </div>
-
-        {/* ================= 3. ACTIVE HORA SNAPSHOT (4 Cols) - Box-Free ================= */}
-        <div className="lg:col-span-4 space-y-3 lg:pl-2">
-          <div className="flex items-center justify-between border-b border-[#dec9ab]/60 pb-2">
-            <span className="text-xs font-bold text-[#b45309] flex items-center gap-1.5">
-              <VedicIcon3D name="sun" size="xs" />
-              <span>वर्तमान सक्रिय होरा</span>
-            </span>
-            <span className="text-xs font-mono text-[#c2410c] font-bold">
-              {activeHora?.startTime || '०६:१४'} - {activeHora?.endTime || '०७:१२'}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#fef08a] via-[#f59e0b] to-[#b45309] text-white flex items-center justify-center font-bold text-sm shadow-xs shrink-0">
-              {activeHora?.lordHindi || 'सूर्य'}
-            </div>
-            <div>
-              <h3 className="text-base sm:text-lg font-bold text-[#26150b]">
-                {activeHora?.lordHindi || 'सूर्य'} ग्रह होरा
-              </h3>
-              <span className="text-xs font-bold text-emerald-700">
-                {activeHora?.qualityHindi || 'अति शुभ एवं श्रेष्ठ'}
-              </span>
-            </div>
-          </div>
-
-          {/* Guidance without box */}
-          <p className="text-xs text-[#5a3822] leading-relaxed border-l-2 border-amber-400 pl-3 pt-0.5">
-            <strong className="text-[#26150b]">प्रशस्त कार्य:</strong>{' '}
-            {activeHora?.benefits || 'राजकीय कार्य, पदभार ग्रहण, औषधि निर्माण, पिता का आशीर्वाद एवं नया संकल्प।'}
-          </p>
         </div>
       </div>
     </section>
