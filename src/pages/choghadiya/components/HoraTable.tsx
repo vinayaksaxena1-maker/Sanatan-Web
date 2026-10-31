@@ -1,8 +1,8 @@
 /**
  * Sanatan Web (सनातन घड़ी)
  * Component: HoraTable
- * 24-Hour Planetary Hora Wheel & Table (वैदिक ग्रहीय होरा सारिणी)
- * Real engine calculation with active hora highlight & Vedic Beej Mantras
+ * 24-Hour Planetary Hora Wheel & Table (ग्रहीय होरा सारिणी)
+ * Real engine calculation with active hora highlight & Beej Mantras
  * Strict < 300 lines modular standard
  */
 
@@ -35,19 +35,22 @@ export const HoraTable: React.FC<HoraTableProps> = ({ data }) => {
   };
 
   return (
-    <section className="relative overflow-hidden rounded-3xl p-6 sm:p-8 bg-gradient-to-br from-[#fffdfa] via-[#fdf9f2] to-[#fbf2e3] border border-[#dec9ab]/70 shadow-[0_8px_30px_rgb(180,120,40,0.06)] font-serif space-y-6">
-      <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
+    <section className="relative overflow-hidden rounded-2xl p-5 sm:p-6 bg-gradient-to-b from-[#fffcf7] via-[#fdfaf3] to-[#fbf4e8] border border-amber-300/80 shadow-xs font-serif space-y-4">
+      {/* Ornate Vedic Golden Corner Brackets */}
       <GoldenCornerBrackets size="lg" />
 
+      {/* Vedic Background Swastika Watermark */}
+      <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
+
       {/* Header & Theory Insight */}
-      <div className="relative z-10 flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-[#dec9ab]/60 pb-4">
-        <div className="space-y-1.5 max-w-3xl">
+      <div className="relative z-10 flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-[#dec9ab]/60 pb-3">
+        <div className="space-y-1 max-w-3xl">
           <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#c2410c] uppercase tracking-wider">
             <span>🪐</span>
             <span>ग्रह काल निर्णय • Planetary Hora Watch</span>
           </div>
           <h2 className="text-xl sm:text-2xl font-bold text-[#26150b]">
-            २४ होरा चक्र (वैदिक ग्रहीय होरा सारिणी)
+            २४ होरा चक्र (ग्रहीय होरा सारिणी)
           </h2>
           <p className="text-xs text-[#735641] leading-relaxed">
             प्रत्येक होरा लगभग एक घंटे (६० मिनट) की होती है। दिन की प्रथम होरा उस दिन के वार स्वामी ग्रह की होती है। इसके उपरांत मंद गति से तीव्र गति के ग्रह क्रम (शनि, गुरु, मंगल, सूर्य, शुक्र, बुध, चंद्र) में निरंतर चक्र चलता है।
@@ -84,10 +87,10 @@ export const HoraTable: React.FC<HoraTableProps> = ({ data }) => {
       </div>
 
       {/* Table Surface */}
-      <div className="relative z-10 w-full overflow-x-auto rounded-2xl border border-[#dec9ab]/70 shadow-xs bg-white/90 backdrop-blur-md">
+      <div className="relative z-10 w-full overflow-x-auto rounded-xl border border-amber-200/90 shadow-xs bg-white/95 backdrop-blur-md">
         <table className="w-full text-left border-collapse min-w-[760px]">
           <thead>
-            <tr className="bg-[#fff9eb] border-b border-[#dec9ab]/70 text-[#735641] text-xs font-bold uppercase tracking-wider">
+            <tr className="bg-[#fff9eb] border-b border-amber-200/80 text-[#735641] text-xs font-bold uppercase tracking-wider">
               <th className="py-3 px-4">क्र.सं.</th>
               <th className="py-3 px-4">समय अवधि (IST)</th>
               <th className="py-3 px-4">होरा स्वामी</th>
@@ -96,7 +99,7 @@ export const HoraTable: React.FC<HoraTableProps> = ({ data }) => {
               <th className="py-3 px-4 text-right">फल प्रभाव</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#dec9ab]/40 text-xs text-[#26150b]">
+          <tbody className="divide-y divide-amber-100/80 text-xs text-[#26150b]">
             {displayedHoras.map((h: HoraInterval) => {
               const isActive = activeHora?.number === h.number;
               const mantra = HORA_MANTRAS[h.lordHindi] || HORA_MANTRAS[h.lord] || 'ॐ सूर्याय नमः';

@@ -1,13 +1,18 @@
 /**
  * Sanatan Web (सनातन घड़ी)
  * Component: PanchangRitualShuddhi
- * Section: ७. निवास, चक्र एवं अनुष्ठान विचार (Ritual Shuddhi)
- * Box-free, pure typographic layout with clear Normal Headings
+ * Section: ७. निवास, चक्र एवं अनुष्ठान विचार
+ * Box 1: अनुष्ठान एवं शुद्धि विचार
+ * Box 2: दिशा वास एवं चक्र विचार
+ * 5% - 40% - 10% - 40% - 5% Balanced Layout matching Section 1, 2, 3
  * Pure Web, React 19, Strict < 300 lines modular standard
  */
 
 import React from 'react';
 import type { UsePanchangDataResult } from '../hooks/usePanchangData';
+import { GoldenCornerBrackets } from '../../vedic-portal/components/GoldenCornerBrackets';
+import { SacredGeometryWatermark } from '../../vedic-portal/components/SacredGeometryWatermark';
+import { RitualShuddhi3DIcon, DishaChakra3DIcon } from './VedicSection3DIcons';
 
 interface Props {
   data: UsePanchangDataResult;
@@ -30,93 +35,151 @@ export const PanchangRitualShuddhi: React.FC<Props> = ({ data }) => {
   ];
   const dishaShool = dishaShoolMap[day] || dishaShoolMap[0];
 
-  const ritualItems = [
+  const ritualRows = [
     {
-      name: 'रुद्राभिषेक विचार (शिववास)',
-      heading: `शिववास: ${shivaVaas?.residenceHindi || 'कैलाश पर'}`,
-      status: shivaVaas?.isAuspicious ? '✓ अभिषेक शुभ' : '⚠ विचारणीय',
-      statusColor: shivaVaas?.isAuspicious ? 'text-emerald-800' : 'text-amber-800',
-      details: shivaVaas?.description || (shivaVaas?.isAuspicious
-        ? 'आज भगवान शिव शुभ स्थान पर विराजमान हैं, रुद्राभिषेक व महामृत्युंजय अनुष्ठान अत्यंत फलदायी है।'
-        : 'विशेष कामनापरक रुद्राभिषेक हेतु ज्योतिषी से परामर्श करें अथवा पार्थिव शिव पूजन करें।'),
+      label: 'रुद्राभिषेक विचार (शिववास)',
+      value: `${shivaVaas?.residenceHindi || 'कैलाश पर'} (${shivaVaas?.isAuspicious ? 'शुभ फलदायी' : 'सावधानी'})`,
+      highlight: shivaVaas?.isAuspicious,
     },
     {
-      name: 'हवन / यज्ञ विचार (अग्निवास)',
-      heading: `अग्निवास: ${agniVaas?.residenceHindi || 'पृथ्वी पर'}`,
-      status: agniVaas?.isAuspicious ? '✓ हवन शुभ' : '✗ हवन वर्जित',
-      statusColor: agniVaas?.isAuspicious ? 'text-emerald-800' : 'text-rose-800',
-      details: agniVaas?.description || (agniVaas?.isAuspicious
-        ? 'अग्नि देव पृथ्वी पर उपस्थित हैं, दैनिक अथवा विशेष हवन सुख-समृद्धि व फलदायक होगा।'
-        : 'अग्नि का वास आकाश या पाताल में है; नित्य हवन को छोड़कर विशेष काम्य हवन में आहुति से बचें।'),
+      label: 'हवन / यज्ञ विचार (अग्निवास)',
+      value: `${agniVaas?.residenceHindi || 'पृथ्वी पर'} (${agniVaas?.isAuspicious ? 'हवन शुभ' : 'हवन वर्जित'})`,
+      highlight: agniVaas?.isAuspicious,
     },
     {
-      name: 'भद्रा (विष्टि करण) स्थिति',
-      heading: `भद्रा वास: ${bhadraMicroBreakup.vasHindi}`,
-      status: bhadra?.active || bhadraMicroBreakup.active ? '⚠ भद्रा स्थिति' : '✓ भद्रा रहित',
-      statusColor: bhadra?.active || bhadraMicroBreakup.active ? 'text-amber-800' : 'text-emerald-800',
-      details: `भद्रा मुख (${bhadraMicroBreakup.mukhaWindow.start} – ${bhadraMicroBreakup.mukhaWindow.end}, २ घंटे: अत्यंत वर्जित) | भद्रा पुच्छ (${bhadraMicroBreakup.puchhaWindow.start} – ${bhadraMicroBreakup.puchhaWindow.end}, १ घंटा १२ मिनट: सर्वकार्य सिद्धिदायक)।`,
+      label: 'भद्रा (विष्टि) स्थिति',
+      value: bhadra?.active || bhadraMicroBreakup.active ? '⚠ भद्रा सक्रिय' : '✓ भद्रा रहित (निर्दोष)',
+      highlight: !(bhadra?.active || bhadraMicroBreakup.active),
     },
     {
-      name: 'दिशा शूल एवं परिहार',
-      heading: `दिशाशूल: ${dishaShool.dir}`,
-      status: 'यात्रा विचार',
-      statusColor: 'text-[#b45309]',
-      details: `आज ${dishaShool.dir} दिशा में यात्रा करने से बचें। परिहार / उपाय: ${dishaShool.parihar}`,
+      label: 'भद्रा निवास लोक',
+      value: bhadraMicroBreakup.vasHindi,
     },
     {
-      name: 'चन्द्र वास एवं राहु वास',
-      heading: `चन्द्र वास: ${chandraVasa.directionHindi} | राहु वास: ${rahuVasa.directionHindi}`,
-      status: 'दिशा वास',
-      statusColor: 'text-[#26150b]',
-      details: `चन्द्रमा ${chandraVasa.directionHindi} में सम्मुख शुभ फलदायी हैं। राहु वास को यात्रा में सम्मुख रखने से बचें।`,
+      label: 'भद्रा मुख काल (वर्जित)',
+      value: `${bhadraMicroBreakup.mukhaWindow.start} – ${bhadraMicroBreakup.mukhaWindow.end}`,
     },
     {
-      name: 'होमाहुति, कुम्भ चक्र व नेत्र-जीवन',
-      heading: `होमाहुति: ${homahuti.planetHindi} | कुम्भ चक्र: ${kumbhaChakra}`,
-      status: 'अनुष्ठान चक्र',
-      statusColor: 'text-emerald-800',
-      details: `अधिष्ठाता: ${homahuti.planetHindi} | नेत्र: ${netrama} | जीवन: ${jeevanama}`,
+      label: 'भद्रा पुच्छ काल (सिद्धिप्रद)',
+      value: `${bhadraMicroBreakup.puchhaWindow.start} – ${bhadraMicroBreakup.puchhaWindow.end}`,
+      highlight: true,
+    },
+  ];
+
+  const dishaRows = [
+    {
+      label: 'चन्द्र वास (शुभ सम्मुख)',
+      value: `${chandraVasa.directionHindi} दिशा`,
+      highlight: true,
+    },
+    {
+      label: 'राहु वास (सम्मुख त्याज्य)',
+      value: `${rahuVasa.directionHindi} दिशा`,
+    },
+    {
+      label: 'दिशा शूल',
+      value: `${dishaShool.dir} दिशा (यात्रा वर्जित)`,
+    },
+    {
+      label: 'दिशाशूल परिहार',
+      value: dishaShool.parihar,
+    },
+    {
+      label: 'होमाहुति अधिष्ठाता',
+      value: `${homahuti.planetHindi} देव`,
+    },
+    {
+      label: 'कुम्भ चक्र स्थिति',
+      value: kumbhaChakra,
+    },
+    {
+      label: 'नेत्र व जीवन विचार',
+      value: `${netrama} • ${jeevanama}`,
     },
   ];
 
   return (
-    <section className="font-serif py-4 border-b border-[#dec9ab]/70 space-y-4">
-      {/* 1. Main Section Heading (No Box) */}
-      <div className="border-b border-[#dec9ab]/50 pb-3">
-        <h2 className="text-2xl sm:text-3xl font-bold text-[#26150b]">
-          ७. निवास, चक्र एवं अनुष्ठान विचार
+    <section className="relative overflow-hidden rounded-2xl p-5 sm:p-6 bg-gradient-to-b from-[#fffcf7] via-[#fdfaf3] to-[#fbf4e8] border border-amber-300/80 shadow-xs font-serif space-y-4">
+      {/* Ornate Vedic Golden Corner Brackets */}
+      <GoldenCornerBrackets size="lg" />
+
+      {/* Vedic Background Swastika Watermark */}
+      <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
+
+      {/* 1. Main Section Heading */}
+      <div className="border-b border-amber-300/50 pb-3 relative z-10">
+        <h2 className="text-2xl sm:text-3xl font-bold text-[#26150b] flex items-center gap-2.5">
+          <RitualShuddhi3DIcon className="w-7 h-7 sm:w-8 sm:h-8" />
+          <span>७. निवास, चक्र एवं अनुष्ठान विचार</span>
         </h2>
         <p className="text-xs sm:text-sm text-[#735641] mt-1">
           रुद्राभिषेक, हवन, भद्रा शुद्धि, दिशा शूल एवं दिशा वास का शास्त्रीय निर्णय
         </p>
       </div>
 
-      {/* 2. Clean Normal Headings & Rows (No Boxes) */}
-      <div className="divide-y divide-[#dec9ab]/40">
-        {ritualItems.map((item, idx) => (
-          <div
-            key={idx}
-            className="py-3 sm:py-4 flex flex-col md:flex-row md:items-center justify-between gap-2 sm:gap-4"
-          >
-            <div>
-              <div className="text-xs font-semibold text-[#b45309] uppercase">
-                {item.name}
-              </div>
-              <h3 className="text-base sm:text-lg font-bold text-[#26150b] mt-0.5">
-                {item.heading}
-              </h3>
-              <p className="text-xs text-[#735641] mt-0.5 leading-relaxed">
-                {item.details}
-              </p>
-            </div>
-
-            <div className="shrink-0 pt-1 md:pt-0">
-              <span className={`text-xs font-bold ${item.statusColor}`}>
-                {item.status}
-              </span>
-            </div>
+      {/* 2. 5% Outer Gap - 40% अनुष्ठान Box - 10% Inner Gap - 40% दिशा वास Box - 5% Outer Gap */}
+      <div className="w-[90%] mx-auto flex flex-col md:flex-row justify-between gap-4 md:gap-0 relative z-10">
+        {/* Box 1: अनुष्ठान एवं शुद्धि विचार (40%) */}
+        <div className="w-full md:w-[44.44%] rounded-xl p-4 sm:p-5 bg-gradient-to-br from-[#fffdf9] via-[#fefaf3] to-[#fbf2e3] border border-amber-300/70 shadow-xs space-y-3 transition-all duration-300 ease-out cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37]">
+          <div className="flex items-center justify-between border-b border-amber-300/60 pb-2">
+            <h3 className="text-base font-bold text-[#451a03] flex items-center gap-2">
+              <RitualShuddhi3DIcon className="w-5 h-5 sm:w-5.5 sm:h-5.5" />
+              <span>अनुष्ठान एवं शुद्धि विचार</span>
+            </h3>
+            <span className="text-[11px] text-[#b45309] font-semibold">
+              🔱 शिव-अग्नि वास
+            </span>
           </div>
-        ))}
+
+          <div className="divide-y divide-[#dec9ab]/30">
+            {ritualRows.map((item, idx) => (
+              <div
+                key={idx}
+                className="py-1 flex items-center justify-between gap-2 text-xs sm:text-sm"
+              >
+                <span className="text-[#5c4033] font-medium shrink-0">{item.label}</span>
+                <span
+                  className={`font-bold font-mono text-right leading-tight max-w-[65%] ${
+                    item.highlight ? 'text-[#c2410c]' : 'text-[#26150b]'
+                  }`}
+                >
+                  {item.value}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Box 2: दिशा वास एवं चक्र विचार (40%) */}
+        <div className="w-full md:w-[44.44%] rounded-xl p-4 sm:p-5 bg-gradient-to-br from-[#fcfcff] via-[#f7f8fd] to-[#eef2ff] border border-indigo-200/80 shadow-xs space-y-3 transition-all duration-300 ease-out cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37]">
+          <div className="flex items-center justify-between border-b border-indigo-200/70 pb-2">
+            <h3 className="text-base font-bold text-[#1e1b4b] flex items-center gap-2">
+              <DishaChakra3DIcon className="w-5 h-5 sm:w-5.5 sm:h-5.5" />
+              <span>दिशा वास एवं चक्र विचार</span>
+            </h3>
+            <span className="text-[11px] text-indigo-700 font-semibold">
+              🧭 आकाशीय चक्र
+            </span>
+          </div>
+
+          <div className="divide-y divide-[#dec9ab]/30">
+            {dishaRows.map((item, idx) => (
+              <div
+                key={idx}
+                className="py-1 flex items-center justify-between gap-2 text-xs sm:text-sm"
+              >
+                <span className="text-[#5c4033] font-medium shrink-0">{item.label}</span>
+                <span
+                  className={`font-bold font-mono text-right leading-tight max-w-[65%] ${
+                    item.highlight ? 'text-[#4338ca]' : 'text-[#26150b]'
+                  }`}
+                >
+                  {item.value}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -16,6 +16,7 @@ import { PanchangSolarLunar } from './components/PanchangSolarLunar';
 import { PanchangShubhAshubh } from './components/PanchangShubhAshubh';
 import { PanchangRitualShuddhi } from './components/PanchangRitualShuddhi';
 import { PanchangLagnaShuddhi } from './components/PanchangLagnaShuddhi';
+import { PanchangJigyasa } from './components/PanchangJigyasa';
 import { PanchangExtendedYogas } from './components/PanchangExtendedYogas';
 import { PanchangSamvatsaraMandala } from './components/PanchangSamvatsaraMandala';
 import { PanchangAstronomicalEpochs } from './components/PanchangAstronomicalEpochs';
@@ -36,7 +37,7 @@ export const PanchangHub: React.FC = () => {
       <PortalHeader />
 
       {/* Main Command Surface */}
-      <main className="w-full pt-32 pb-16 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto space-y-8" id="panchang-hub">
+      <main className="w-full pt-32 pb-16 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto space-y-[22px]" id="panchang-hub">
         {/* Top Header Banner, Location Chips, Date Controller */}
         <PanchangTopBar
           data={panchangData}
@@ -67,6 +68,9 @@ export const PanchangHub: React.FC = () => {
 
         {/* ८. मुहूर्त व लग्न शुद्धि (Lagna & Muhurta Depth: १२ उदय लग्न, पंचक, चन्द्रबल, ताराबल) */}
         <PanchangLagnaShuddhi data={panchangData} />
+
+        {/* ९. सनातन जिज्ञासा एवं शंका समाधान (Panchang-Specific FAQ Accordion) */}
+        <PanchangJigyasa />
       </main>
 
       {/* 5. Modals */}

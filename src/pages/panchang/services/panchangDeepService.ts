@@ -497,9 +497,9 @@ export function calculateDeepPanchang(
   return {
     chandraVasa,
     rahuVasa,
-    kumbhaChakra: 'गर्भ (गर्भाधान व संचय अनुकूल)',
-    netrama: 'द्विनेत्र (२ नेत्र - उत्तम दृष्टि)',
-    jeevanama: 'सजीव (पूर्ण प्राण युक्त)',
+    kumbhaChakra: 'गर्भ (अनुकूल संचय)',
+    netrama: 'द्विनेत्र (२ नेत्र)',
+    jeevanama: 'सजीव',
     homahuti,
     bhadraMicroBreakup,
     udayaLagnas,

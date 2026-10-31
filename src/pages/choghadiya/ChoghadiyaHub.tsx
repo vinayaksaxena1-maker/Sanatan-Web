@@ -1,7 +1,7 @@
 /**
  * Sanatan Web (सनातन घड़ी)
  * Hub 03: Vedic Choghadiya & 24 Planetary Hora Hub (चौघड़िया एवं होरा हब)
- * Official Luxury Redesign based on Stitch Screen 2f10997a070d415da90ac806c23805cb
+ * Standardized Sacred Vedic Design in Parity with Panchang Hub
  * Pure Web, React 19, Strict < 300 lines modular standard
  */
 
@@ -15,6 +15,7 @@ import { ChoghadiyaLiveHero } from './components/ChoghadiyaLiveHero';
 import { ChoghadiyaLegend } from './components/ChoghadiyaLegend';
 import { ChoghadiyaDayNightGrid } from './components/ChoghadiyaDayNightGrid';
 import { HoraTable } from './components/HoraTable';
+import { ChoghadiyaJigyasa } from './components/ChoghadiyaJigyasa';
 
 export const ChoghadiyaHub: React.FC = () => {
   const choghadiyaData = useChoghadiyaData();
@@ -30,8 +31,8 @@ export const ChoghadiyaHub: React.FC = () => {
       <PortalHeader />
 
       {/* Main Command Surface */}
-      <main className="w-full pt-32 pb-16 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto space-y-8" id="choghadiya-hub">
-        {/* 1. Header Banner, Location Chips, Date Controller & Solar Metrics */}
+      <main className="w-full pt-32 pb-16 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto space-y-[22px]" id="choghadiya-hub">
+        {/* 1. Header Banner, Title, Interactive Date Selector */}
         <ChoghadiyaTopBar
           data={choghadiyaData}
           onOpenCityModal={() => setIsCityModalOpen(true)}
@@ -48,9 +49,12 @@ export const ChoghadiyaHub: React.FC = () => {
 
         {/* 5. 24 Planetary Hora Matrix with Beej Mantras & Real-time Indicator */}
         <HoraTable data={choghadiyaData} />
+
+        {/* 6. सनातन जिज्ञासा एवं शंका समाधान (Choghadiya & Hora FAQ Accordion) */}
+        <ChoghadiyaJigyasa />
       </main>
 
-      {/* 6. City Selector Modal */}
+      {/* City Selector Modal */}
       <CitySelectModal
         isOpen={isCityModalOpen}
         onClose={() => setIsCityModalOpen(false)}

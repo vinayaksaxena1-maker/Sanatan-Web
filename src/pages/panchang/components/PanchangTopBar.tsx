@@ -5,139 +5,125 @@
  * Strict < 300 lines modular standard
  */
 
-import React from 'react';
-import { Link } from '../../../routes/AppRoutes';
+import React, { useRef } from 'react';
+import { GoldenCornerBrackets } from '../../vedic-portal/components/GoldenCornerBrackets';
 import { SacredGeometryWatermark } from '../../vedic-portal/components/SacredGeometryWatermark';
-import { VedicIcon3D } from '../../vedic-portal/components/VedicIcon3D';
-import { toDevanagariNumerals, type UsePanchangDataResult } from '../hooks/usePanchangData';
+import { Panchang5Angas3DIcon } from './Panchang5Angas3DIcon';
+import type { UsePanchangDataResult } from '../hooks/usePanchangData';
 
 export interface PanchangTopBarProps {
   data: UsePanchangDataResult;
-  onOpenCityModal: () => void;
-  onOpenSocialModal: () => void;
+  onOpenCityModal?: () => void;
+  onOpenSocialModal?: () => void;
 }
 
 export const PanchangTopBar: React.FC<PanchangTopBarProps> = ({
   data,
-  onOpenCityModal,
+  onOpenCityModal: _onOpenCityModal,
   onOpenSocialModal,
 }) => {
-  const { currentCity, panchang, formattedDate, isToday, goToPreviousDay, goToNextDay, goToToday } = data;
-  const hd = panchang.hinduDate;
+  const { selectedDate, setSelectedDate, formattedDate, isToday, goToToday } = data;
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Format date as YYYY-MM-DD for native date input
+  const yyyy = selectedDate.getFullYear();
+  const mm = String(selectedDate.getMonth() + 1).padStart(2, '0');
+  const dd = String(selectedDate.getDate()).padStart(2, '0');
+  const dateInputValue = `${yyyy}-${mm}-${dd}`;
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.value) return;
+    const [year, month, day] = e.target.value.split('-').map(Number);
+    // Construct local date at noon to avoid any timezone midnight shift
+    const nextDate = new Date(year, month - 1, day, 12, 0, 0);
+    setSelectedDate(nextDate);
+  };
+
+  const handleOpenCalendar = () => {
+    if (inputRef.current?.showPicker) {
+      try {
+        inputRef.current.showPicker();
+      } catch {
+        // Fallback for browsers that require user gesture on the input itself
+        inputRef.current.focus();
+      }
+    } else {
+      inputRef.current?.focus();
+    }
+  };
 
   return (
-    <div className="space-y-4">
-      {/* 1. Header Banner & Location Strip with Frosted Glass */}
-      <section className="relative overflow-hidden rounded-3xl p-6 sm:p-8 bg-gradient-to-br from-[#fffdfa] via-[#fdf7ee] to-[#fbf2e3] border border-[#dec9ab]/70 shadow-[0_8px_30px_rgb(180,120,40,0.06)]">
-        <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
+    <section className="relative overflow-hidden rounded-2xl p-5 sm:p-6 bg-gradient-to-b from-[#fffcf7] via-[#fdfaf3] to-[#fbf4e8] border border-amber-300/80 shadow-xs font-serif space-y-4">
+      {/* Ornate Vedic Golden Corner Brackets */}
+      <GoldenCornerBrackets size="lg" />
 
-        <div className="relative z-10 space-y-5">
-          {/* Top Row: Breadcrumb & Social Share Pill */}
-          <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-[#735641]">
-            <div className="flex items-center gap-1.5">
-              <Link href="/" className="hover:text-[#c2410c] transition-colors flex items-center gap-1 font-semibold no-underline">
-                <span>मुख्य पृष्ठ</span>
-              </Link>
-              <span>/</span>
-              <span className="text-[#c2410c] font-bold">दैनिक पंचांग</span>
-            </div>
+      {/* Vedic Background Swastika Watermark */}
+      <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
 
+      <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        {/* Left: Heading with 3D Medallion and Subtitle */}
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#26150b] flex items-center gap-2.5">
+            <Panchang5Angas3DIcon className="w-7 h-7 sm:w-8 sm:h-8" />
+            <span>दैनिक पंचांग एवं विस्तृत काल निर्णय</span>
+          </h1>
+          <p className="text-xs sm:text-sm text-[#735641] mt-1">
+            तिथि, नक्षत्र और शुभ मुहूर्तों का सम्पूर्ण विवरण — आपके अपने नगर अनुसार
+          </p>
+        </div>
+
+        {/* Right: Compact Interactive Calendar Date Selector */}
+        <div className="flex items-center gap-2 shrink-0">
+          <div
+            onClick={handleOpenCalendar}
+            className="relative group flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/95 hover:bg-[#fffbf0] border border-[#dec9ab] hover:border-amber-400 shadow-xs transition-all duration-150 cursor-pointer"
+            title="कैलेंडर से दिनांक चुनें"
+          >
+            <span className="text-base select-none">📅</span>
+            <span className="text-xs font-bold text-[#26150b] select-none whitespace-nowrap">
+              {formattedDate}
+            </span>
+            <span className="text-[10px] text-[#b45309] font-bold group-hover:translate-y-0.5 transition-transform select-none">
+              ▼
+            </span>
+
+            {/* Invisible native date input layered on top */}
+            <input
+              ref={inputRef}
+              type="date"
+              value={dateInputValue}
+              onChange={handleDateChange}
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+              aria-label="कैलेंडर से दिनांक चुनें"
+            />
+          </div>
+
+          {/* Quick 'आज' (Today) Jump Button if different date is selected */}
+          {!isToday && (
+            <button
+              onClick={goToToday}
+              className="px-2.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-[11px] font-bold shadow-xs transition-all cursor-pointer shrink-0"
+              title="वापस आज के पंचांग पर जाएं"
+            >
+              आज
+            </button>
+          )}
+
+          {/* Compact Share / PDF Button */}
+          {onOpenSocialModal && (
             <button
               onClick={onOpenSocialModal}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-bold shadow-xs hover:from-amber-600 hover:to-amber-700 transition-all cursor-pointer"
+              className="px-2.5 py-1.5 rounded-xl bg-white/95 hover:bg-[#fffbf0] border border-[#dec9ab] hover:border-amber-400 text-[#b45309] hover:text-[#c2410c] text-xs font-bold shadow-xs transition-all cursor-pointer flex items-center gap-1 shrink-0"
+              title="WhatsApp पर साझा करें एवं PDF डाउनलोड करें"
+              type="button"
             >
-              <span>📱</span>
-              <span>आज का पंचांग सोशल कार्ड</span>
+              <span>📤</span>
+              <span className="hidden sm:inline">शेयर</span>
             </button>
-          </div>
-
-          {/* Main Title & Actionable Chips */}
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5">
-            <div className="space-y-2 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/70 border border-amber-300/60 text-[#c2410c] text-xs font-bold w-fit">
-                <VedicIcon3D name="temple" size="sm" />
-                <span>वैदिक काल-विधान एवं सूक्ष्म खगोलीय सारणी</span>
-              </div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#26150b] tracking-tight">
-                वैदिक दैनिक पंचांग एवं विस्तृत काल निर्णय
-              </h1>
-              <p className="text-xs sm:text-sm text-[#735641] leading-relaxed">
-                सूर्य-सिद्धांत एवं नासा JPL द्रिक गणित पर आधारित शुद्ध सूक्ष्म पंचांग — किसी भी तिथि, संवत एवं नगर हेतु अचूक गणना
-              </p>
-            </div>
-
-            {/* Location & Ayanamsha Badges */}
-            <div className="flex flex-wrap items-center gap-2.5">
-              {/* City Selector */}
-              <div className="flex items-center gap-2.5 px-3.5 py-2 rounded-2xl bg-white/90 border border-[#dec9ab] shadow-xs">
-                <span className="text-lg">📍</span>
-                <div className="flex flex-col">
-                  <span className="text-xs font-bold text-[#26150b]">
-                    {currentCity.nameHindi || currentCity.name}
-                  </span>
-                  <span className="text-[10px] text-[#735641] tabular-nums font-mono">
-                    {currentCity.latitude.toFixed(2)}° N, {currentCity.longitude.toFixed(2)}° E
-                  </span>
-                </div>
-                <button
-                  onClick={onOpenCityModal}
-                  className="ml-1 px-2.5 py-1 rounded-lg bg-[#fef3c7] hover:bg-[#fde68a] text-[#b45309] text-[11px] font-bold transition-colors cursor-pointer"
-                >
-                  स्थान बदलें
-                </button>
-              </div>
-
-              {/* Lahiri Ayanamsha */}
-              <div className="flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-white/90 border border-[#dec9ab] shadow-xs">
-                <span className="text-lg">🧭</span>
-                <div className="flex flex-col">
-                  <span className="text-[10px] text-[#735641]">लाहिड़ी अयनांश</span>
-                  <span className="text-xs font-bold text-[#b45309] tabular-nums font-mono">
-                    २४° ११' ३२"
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
-      </section>
-
-      {/* 2. Interactive Date Controller */}
-      <section className="rounded-2xl p-4 bg-white/80 backdrop-blur-xl border border-[#dec9ab]/70 shadow-xs flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <button
-            onClick={goToPreviousDay}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#fffaf0] hover:bg-[#fbeecc] border border-[#dec9ab] text-[#26150b] text-xs font-semibold transition-all cursor-pointer shadow-2xs"
-          >
-            <span>‹</span> पिछला दिन
-          </button>
-          <button
-            onClick={goToToday}
-            className={`px-4 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-2xs ${
-              isToday
-                ? 'bg-gradient-to-r from-[#ea580c] to-[#c2410c] text-white shadow-xs'
-                : 'bg-[#fffaf0] hover:bg-[#fbeecc] border border-[#dec9ab] text-[#26150b]'
-            }`}
-          >
-            आज
-          </button>
-          <button
-            onClick={goToNextDay}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#fffaf0] hover:bg-[#fbeecc] border border-[#dec9ab] text-[#26150b] text-xs font-semibold transition-all cursor-pointer shadow-2xs"
-          >
-            अगला दिन <span>›</span>
-          </button>
-        </div>
-
-        {/* Selected Date Readout */}
-        <div className="flex items-center gap-2 px-4 py-1.5 rounded-xl bg-gradient-to-r from-[#fff9eb] to-[#fbeecc] border border-[#dec9ab]">
-          <span className="text-sm">📅</span>
-          <span className="text-xs sm:text-sm font-bold text-[#26150b] tracking-wide">
-            {formattedDate}
-          </span>
-        </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 

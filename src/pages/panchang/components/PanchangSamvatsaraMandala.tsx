@@ -1,13 +1,18 @@
 /**
  * Sanatan Web (सनातन घड़ी)
  * Component: PanchangSamvatsaraMandala
- * Section: ७. संवत्सर व मन्त्री मण्डल (Samvatsara & Governance Mandala)
- * Box-free, pure typographic layout with clear Normal Headings
+ * Section: ३. संवत्सर व मन्त्री मण्डल
+ * Box 1: ६० बृहस्पति संवत्सर चक्र
+ * Box 2: वर्ष का आकाशीय मन्त्री मण्डल
+ * 5% - 40% - 10% - 40% - 5% Balanced Layout matching Section 1 & 2
  * Pure Web, React 19, Strict < 300 lines modular standard
  */
 
 import React from 'react';
 import type { UsePanchangDataResult } from '../hooks/usePanchangData';
+import { GoldenCornerBrackets } from '../../vedic-portal/components/GoldenCornerBrackets';
+import { SacredGeometryWatermark } from '../../vedic-portal/components/SacredGeometryWatermark';
+import { Brihaspati3DIcon, MantriMandala3DIcon } from './VedicSection3DIcons';
 
 interface Props {
   data: UsePanchangDataResult;
@@ -18,79 +23,118 @@ export const PanchangSamvatsaraMandala: React.FC<Props> = ({ data }) => {
   const { samvatVikram, samvatShaka } = panchang.hinduDate || {};
   const { brihaspatiSamvatsara, mantriMandala } = deepAnalysis;
 
+  const samvatsaraRows = [
+    {
+      label: 'विक्रम संवत्सर',
+      value: `${brihaspatiSamvatsara.vikramSamvatsara} (${samvatVikram})`,
+      highlight: true,
+    },
+    {
+      label: 'शक संवत्सर',
+      value: `${brihaspatiSamvatsara.shakaSamvatsara} (${samvatShaka})`,
+    },
+    {
+      label: 'बृहस्पति चक्र क्रम',
+      value: `६० में से #${brihaspatiSamvatsara.index + 1}`,
+    },
+    {
+      label: 'वर्ष का राजा',
+      value: 'देवगुरु बृहस्पति 👑',
+      highlight: true,
+    },
+    {
+      label: 'वर्ष का मन्त्री',
+      value: 'मंगल देव ⚔️',
+      highlight: true,
+    },
+    {
+      label: 'वर्ष फल प्रभाव',
+      value: 'ज्ञान, धर्म, रक्षा व सैन्य वृद्धि',
+    },
+  ];
+
   return (
-    <section className="font-serif py-4 border-b border-[#dec9ab]/70 space-y-6">
-      {/* 1. Main Section Heading (No Box) */}
-      <div className="border-b border-[#dec9ab]/50 pb-3">
-        <h2 className="text-2xl sm:text-3xl font-bold text-[#26150b]">
-          ३. संवत्सर व मन्त्री मण्डल
+    <section className="relative overflow-hidden rounded-2xl p-5 sm:p-6 bg-gradient-to-b from-[#fffcf7] via-[#fdfaf3] to-[#fbf4e8] border border-amber-300/80 shadow-xs font-serif space-y-4">
+      {/* Ornate Vedic Golden Corner Brackets */}
+      <GoldenCornerBrackets size="lg" />
+
+      {/* Vedic Background Swastika Watermark */}
+      <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
+
+      {/* 1. Main Section Heading */}
+      <div className="border-b border-amber-300/50 pb-3 relative z-10">
+        <h2 className="text-2xl sm:text-3xl font-bold text-[#26150b] flex items-center gap-2.5">
+          <Brihaspati3DIcon className="w-7 h-7 sm:w-8 sm:h-8" />
+          <span>३. संवत्सर व मन्त्री मण्डल</span>
         </h2>
         <p className="text-xs sm:text-sm text-[#735641] mt-1">
           ६० बृहस्पति संवत्सर चक्र एवं विक्रम संवत् का आकाशीय मन्त्री मण्डल
         </p>
       </div>
 
-      {/* 2. Samvatsara Overview Rows */}
-      <div className="divide-y divide-[#dec9ab]/40">
-        <div className="py-3 flex flex-col md:flex-row md:items-center justify-between gap-2">
-          <div>
-            <div className="text-xs font-semibold text-[#b45309] uppercase">
-              विक्रम एवं शक संवत्सर चक्र
-            </div>
-            <h3 className="text-base sm:text-lg font-bold text-[#26150b] mt-0.5">
-              विक्रम संवत्सर: <span className="text-[#c2410c]">{brihaspatiSamvatsara.vikramSamvatsara}</span> ({samvatVikram}) | शक संवत्सर: <span className="text-[#26150b]">{brihaspatiSamvatsara.shakaSamvatsara}</span> ({samvatShaka})
+      {/* 2. 5% Outer Gap - 40% संवत्सर Box - 10% Inner Gap - 40% मन्त्री मण्डल Box - 5% Outer Gap */}
+      <div className="w-[90%] mx-auto flex flex-col md:flex-row justify-between gap-4 md:gap-0 relative z-10">
+        {/* Box 1: ६० बृहस्पति संवत्सर चक्र (40%) */}
+        <div className="w-full md:w-[44.44%] rounded-xl p-4 sm:p-5 bg-gradient-to-br from-[#fffdf9] via-[#fefaf3] to-[#fbf2e3] border border-amber-300/70 shadow-xs space-y-3 transition-all duration-300 ease-out cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37]">
+          <div className="flex items-center justify-between border-b border-amber-300/60 pb-2">
+            <h3 className="text-base font-bold text-[#451a03] flex items-center gap-2">
+              <Brihaspati3DIcon className="w-5 h-5 sm:w-5.5 sm:h-5.5" />
+              <span>६० बृहस्पति संवत्सर चक्र</span>
             </h3>
-            <p className="text-xs text-[#735641] mt-0.5">
-              उत्तर भारतीय बृहस्पति चक्र के अनुसार संवत्सर संख्या #{brihaspatiSamvatsara.index + 1} | दक्षिण भारतीय व शक गणना अनुसार {brihaspatiSamvatsara.shakaSamvatsara} संवत्सर।
-            </p>
+            <span className="text-[11px] text-[#b45309] font-semibold">
+              👑 आकाशीय शासनाध्यक्ष
+            </span>
           </div>
-          <span className="text-xs font-bold text-[#c2410c] shrink-0">
-            ६० संवत्सर चक्र
-          </span>
-        </div>
 
-        <div className="py-3 flex flex-col md:flex-row md:items-center justify-between gap-2">
-          <div>
-            <div className="text-xs font-semibold text-[#b45309] uppercase">
-              वर्ष का आकाशीय शासनाध्यक्ष
-            </div>
-            <h3 className="text-base sm:text-lg font-bold text-[#26150b] mt-0.5">
-              राजा: देवगुरु बृहस्पति 👑 | मन्त्री: मंगल देव ⚔️
-            </h3>
-            <p className="text-xs text-[#735641] mt-0.5">
-              बृहस्पति का राजा होना ज्ञान, धर्म, न्याय व शिक्षा की वृद्धि दर्शाता है; मंगल का मन्त्रित्व रक्षा व सैन्य शक्ति को बल देता है।
-            </p>
-          </div>
-          <span className="text-xs font-bold text-emerald-800 shrink-0">
-            शुभ शासी परिषद
-          </span>
-        </div>
-      </div>
-
-      {/* 3. The 10 Planetary Portfolios (Clean Normal List, No Boxes) */}
-      <div className="space-y-3 pt-2">
-        <div className="border-b border-[#dec9ab]/40 pb-1.5">
-          <h3 className="text-lg font-bold text-[#26150b]">
-            वर्ष का मन्त्री मण्डल
-          </h3>
-          <p className="text-xs text-[#735641] mt-0.5">
-            संवत्सर के विभिन्न प्राकृतिक, सामाजिक व आर्थिक विभागों के ग्रहीय अधिपति:
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-x-6 gap-y-3 text-xs py-1">
-          {mantriMandala.map((item, idx) => (
-            <div key={idx} className="py-1.5 border-b border-[#dec9ab]/25 flex flex-col justify-between">
-              <div>
-                <span className="text-[#735641] block text-[11px]">
-                  {item.icon} {item.portfolioHindi}
+          <div className="divide-y divide-[#dec9ab]/30">
+            {samvatsaraRows.map((item, idx) => (
+              <div
+                key={idx}
+                className="py-1 flex items-center justify-between gap-3 text-xs sm:text-sm"
+              >
+                <span className="text-[#5c4033] font-medium">
+                  {item.label}
                 </span>
-                <span className="text-sm font-bold text-[#26150b] block mt-0.5 font-serif">
+                <span
+                  className={`font-bold font-mono text-right shrink-0 ${
+                    item.highlight ? 'text-[#c2410c]' : 'text-[#26150b]'
+                  }`}
+                >
+                  {item.value}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Box 2: वर्ष का मन्त्री मण्डल (40%) */}
+        <div className="w-full md:w-[44.44%] rounded-xl p-4 sm:p-5 bg-gradient-to-br from-[#fcfcff] via-[#f7f8fd] to-[#eef2ff] border border-indigo-200/80 shadow-xs space-y-3 transition-all duration-300 ease-out cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37]">
+          <div className="flex items-center justify-between border-b border-indigo-200/80 pb-2">
+            <h3 className="text-base font-bold text-[#1e1b4b] flex items-center gap-2">
+              <MantriMandala3DIcon className="w-5 h-5 sm:w-5.5 sm:h-5.5" />
+              <span>वर्ष का मन्त्री मण्डल</span>
+            </h3>
+            <span className="text-[11px] text-indigo-900 font-semibold">
+              🏛️ १० ग्रहीय विभाग
+            </span>
+          </div>
+
+          <div className="divide-y divide-[#dec9ab]/30">
+            {mantriMandala.slice(0, 6).map((item, idx) => (
+              <div
+                key={idx}
+                className="py-1 flex items-center justify-between gap-3 text-xs sm:text-sm"
+              >
+                <span className="text-[#5c4033] font-medium flex items-center gap-1.5">
+                  <span>{item.icon}</span>
+                  <span>{item.portfolioHindi}</span>
+                </span>
+                <span className="font-bold font-serif text-right text-indigo-900 shrink-0">
                   {item.planetHindi}
                 </span>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

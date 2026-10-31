@@ -23,13 +23,13 @@ export const ChoghadiyaLiveHero: React.FC<ChoghadiyaLiveHeroProps> = ({ data }) 
   const isAuspicious = meta.isAuspicious;
 
   return (
-    <section className="relative overflow-hidden rounded-3xl p-6 sm:p-8 bg-gradient-to-br from-[#fffdfa] via-[#fbf5eb] to-[#f7eedc] border border-[#dec9ab]/80 shadow-[0_8px_30px_rgb(180,120,40,0.06)] font-serif">
+    <section className="relative overflow-hidden rounded-2xl p-5 sm:p-6 bg-gradient-to-b from-[#fffcf7] via-[#fdfaf3] to-[#fbf4e8] border border-amber-300/80 shadow-xs font-serif">
       <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
       <GoldenCornerBrackets size="lg" />
 
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         {/* ================= 1. ACTIVE CHOGHADIYA (5 Cols) ================= */}
-        <div className="lg:col-span-5 flex flex-col justify-between space-y-4 p-5 sm:p-6 rounded-2xl bg-white/85 backdrop-blur-md border border-[#dec9ab] shadow-xs">
+        <div className="lg:col-span-5 flex flex-col justify-between space-y-4 p-5 sm:p-6 rounded-2xl bg-white/90 backdrop-blur-md border border-[#dec9ab] shadow-xs">
           <div className="space-y-3">
             {/* Live Status Pill with Radar Wave */}
             <div className="flex items-center gap-2">
@@ -38,12 +38,12 @@ export const ChoghadiyaLiveHero: React.FC<ChoghadiyaLiveHeroProps> = ({ data }) 
                   className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
                     isAuspicious ? 'bg-emerald-400' : 'bg-rose-400'
                   }`}
-                ></span>
+                />
                 <span
                   className={`relative inline-flex rounded-full h-2.5 w-2.5 ${
                     isAuspicious ? 'bg-emerald-600' : 'bg-rose-600'
                   }`}
-                ></span>
+                />
               </span>
               <span
                 className={`text-[11px] font-bold px-2 py-0.5 rounded tracking-wider uppercase ${
@@ -85,7 +85,7 @@ export const ChoghadiyaLiveHero: React.FC<ChoghadiyaLiveHeroProps> = ({ data }) 
 
             {/* Guidance Suggestion */}
             <p className="text-xs text-[#5a3822] leading-relaxed bg-[#fff9eb] p-3 rounded-xl border border-[#dec9ab]/70">
-              <strong className="text-[#c2410c]">वैदिक परामर्श:</strong> {meta.significance}
+              <strong className="text-[#c2410c]">शुभ परामर्श:</strong> {meta.significance}
             </p>
           </div>
         </div>
@@ -110,7 +110,7 @@ export const ChoghadiyaLiveHero: React.FC<ChoghadiyaLiveHeroProps> = ({ data }) 
               <div
                 className="bg-gradient-to-r from-amber-500 to-[#c2410c] h-full rounded-full transition-all duration-1000"
                 style={{ width: `${progressPercent}%` }}
-              ></div>
+              />
             </div>
             <div className="flex justify-between text-[10px] text-[#735641] font-mono">
               <span>आरंभ</span>
@@ -121,7 +121,7 @@ export const ChoghadiyaLiveHero: React.FC<ChoghadiyaLiveHeroProps> = ({ data }) 
         </div>
 
         {/* ================= 3. ACTIVE HORA SNAPSHOT (4 Cols) ================= */}
-        <div className="lg:col-span-4 flex flex-col justify-between space-y-3 p-5 sm:p-6 rounded-2xl bg-white/85 backdrop-blur-md border border-[#dec9ab] shadow-xs">
+        <div className="lg:col-span-4 flex flex-col justify-between space-y-3 p-5 sm:p-6 rounded-2xl bg-white/90 backdrop-blur-md border border-[#dec9ab] shadow-xs">
           <div className="space-y-3">
             <div className="flex items-center justify-between border-b border-[#dec9ab]/60 pb-2">
               <span className="text-xs font-bold text-[#b45309] flex items-center gap-1.5">
@@ -134,7 +134,7 @@ export const ChoghadiyaLiveHero: React.FC<ChoghadiyaLiveHeroProps> = ({ data }) 
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#fef08a] via-[#f59e0b] to-[#b45309] text-white flex items-center justify-center font-bold text-sm shadow-sm shrink-0">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#fef08a] via-[#f59e0b] to-[#b45309] text-white flex items-center justify-center font-bold text-sm shadow-xs shrink-0">
                 {activeHora?.lordHindi || 'सूर्य'}
               </div>
               <div>

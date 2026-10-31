@@ -40,6 +40,86 @@ export function formatHindiDate(d: Date): string {
   return `${dateNum} ${monthName} ${yearNum} (${dayName})`;
 }
 
+export const YOGA_HINDI_MAP: Record<string, string> = {
+  Vishkumbha: 'विष्कम्भ',
+  Preeti: 'प्रीति',
+  Ayushman: 'आयुष्मान',
+  Saubhagya: 'सौभाग्य',
+  Shobhana: 'शोभन',
+  Atiganda: 'अतिगण्ड',
+  Sukarma: 'सुकर्मा',
+  Dhriti: 'धृति',
+  Shoola: 'शूल',
+  Ganda: 'गण्ड',
+  Vriddhi: 'वृद्धि',
+  Dhruva: 'ध्रुव',
+  Vyaghata: 'व्याघात',
+  Harshana: 'हर्षण',
+  Vajra: 'वज्र',
+  Siddhi: 'सिद्धि',
+  Vyatipata: 'व्यतीपात',
+  Variyan: 'वरीयान',
+  Parigha: 'परिघ',
+  Shiva: 'शिव',
+  Siddha: 'सिद्ध',
+  Sadhya: 'साध्य',
+  Shubha: 'शुभ',
+  Shukla: 'शुक्ल',
+  Brahma: 'ब्रह्म',
+  Indra: 'इन्द्र',
+  Vaidhriti: 'वैधृति',
+};
+
+export function cleanYogaHindi(rawName?: string): string {
+  if (!rawName) return 'शुभ योग';
+  const base = rawName.split(' ')[0].replace(/[^a-zA-Z]/g, '');
+  return YOGA_HINDI_MAP[base] || rawName;
+}
+
+export const KARANA_HINDI_MAP: Record<string, string> = {
+  Bava: 'बव',
+  Balava: 'बालव',
+  Kaulava: 'कौलव',
+  Taitila: 'तैतिल',
+  Garija: 'गर',
+  Vanija: 'वणिज',
+  Vishti: 'विष्टि (भद्रा)',
+  Shakuni: 'शकुनि',
+  Chatuspada: 'चतुष्पाद',
+  Chatushpada: 'चतुष्पाद',
+  Naga: 'नाग',
+  Kimstughna: 'किस्तुघ्न',
+};
+
+export function cleanKaranaHindi(rawName?: string): string {
+  if (!rawName) return 'कौलव';
+  const base = rawName.split(' ')[0].replace(/[^a-zA-Z]/g, '');
+  return KARANA_HINDI_MAP[base] || rawName;
+}
+
+export const RITU_HINDI_MAP: Record<string, string> = {
+  Vasanta: 'वसन्त ऋतु',
+  Grishma: 'ग्रीष्म ऋतु',
+  Varsha: 'वर्षा ऋतु',
+  Sharad: 'शरद ऋतु',
+  Hemanta: 'हेमन्त ऋतु',
+  Shishira: 'शिशिर ऋतु',
+};
+
+export function cleanRituHindi(rawRitu?: string): string {
+  if (!rawRitu) return 'शरद ऋतु';
+  const base = rawRitu.split(' ')[0].replace(/[^a-zA-Z]/g, '');
+  return RITU_HINDI_MAP[base] || 'शरद ऋतु';
+}
+
+export function formatEndTime(timeStr?: string): string {
+  if (!timeStr) return '';
+  let cleaned = timeStr.trim();
+  cleaned = cleaned.replace(/\(\+1\s*day\)/gi, '(अगले दिन)');
+  cleaned = cleaned.replace(/^तक\s*/g, '').replace(/\s*तक$/g, '');
+  return `(तक ${cleaned})`;
+}
+
 export interface UsePanchangDataResult {
   currentCity: ReturnType<typeof useLocationStore>['currentCity'];
   selectedDate: Date;

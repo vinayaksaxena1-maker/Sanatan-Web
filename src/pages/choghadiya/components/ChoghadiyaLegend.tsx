@@ -2,10 +2,13 @@
  * Sanatan Web (सनातन घड़ी)
  * Component: ChoghadiyaLegend
  * 7 Types of Choghadiya Reference Guide (४ शुभ एवं ३ त्याज्य चौघड़िया)
+ * Standardized Sacred Vedic Container with Golden Brackets & Watermark
  * Strict < 300 lines modular standard
  */
 
 import React from 'react';
+import { GoldenCornerBrackets } from '../../vedic-portal/components/GoldenCornerBrackets';
+import { SacredGeometryWatermark } from '../../vedic-portal/components/SacredGeometryWatermark';
 
 const LEGEND_ITEMS = [
   {
@@ -68,16 +71,22 @@ const LEGEND_ITEMS = [
 
 export const ChoghadiyaLegend: React.FC = () => {
   return (
-    <section className="rounded-2xl p-5 sm:p-6 bg-white/80 backdrop-blur-xl border border-[#dec9ab]/70 shadow-xs font-serif space-y-4">
+    <section className="relative overflow-hidden rounded-2xl p-5 sm:p-6 bg-gradient-to-b from-[#fffcf7] via-[#fdfaf3] to-[#fbf4e8] border border-amber-300/80 shadow-xs font-serif space-y-4">
+      {/* Ornate Vedic Golden Corner Brackets */}
+      <GoldenCornerBrackets size="lg" />
+
+      {/* Vedic Background Swastika Watermark */}
+      <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
+
       {/* Header Row */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#dec9ab]/60 pb-3">
+      <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#dec9ab]/60 pb-3">
         <div>
           <h3 className="text-base sm:text-lg font-bold text-[#26150b] flex items-center gap-2">
             <span>📖</span>
             <span>चौघड़िया फल निर्देशिका (७ मूल भेद)</span>
           </h3>
           <p className="text-xs text-[#735641]">
-            वैदिक काल गणना में चार शुभ (ग्राह्य) एवं तीन अशुभ (त्याज्य) चौघड़िया होते हैं।
+            काल निर्णय में चार शुभ (ग्राह्य) एवं तीन अशुभ (त्याज्य) चौघड़िया होते हैं।
           </p>
         </div>
 
@@ -92,11 +101,11 @@ export const ChoghadiyaLegend: React.FC = () => {
       </div>
 
       {/* 7 Badges Bento Strip */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5">
+      <div className="relative z-10 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5">
         {LEGEND_ITEMS.map((item) => (
           <div
             key={item.name}
-            className={`p-3 rounded-xl border shadow-2xs space-y-1 ${item.colorBg}`}
+            className={`p-3 rounded-xl border shadow-2xs space-y-1 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-xs ${item.colorBg}`}
           >
             <div className="flex items-center justify-between">
               <span className="text-base font-bold">{item.name}</span>
