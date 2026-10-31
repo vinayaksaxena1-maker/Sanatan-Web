@@ -1,7 +1,7 @@
 /**
  * Sanatan Web (सनातन घड़ी)
  * Component: ChoghadiyaDayNightGrid
- * Day (8 पहर) & Night (8 पहर) Choghadiya Bento Grid
+ * Day (8 पहर) & Night (8 पहर) Clean Tabular Rows (No Card Boxes)
  * Standardized Sacred Vedic Container with Golden Brackets & Watermark
  * Strict < 300 lines modular standard
  */
@@ -32,68 +32,102 @@ export const ChoghadiyaDayNightGrid: React.FC<ChoghadiyaDayNightGridProps> = ({ 
   const { dayChoghadiya, nightChoghadiya, activeChoghadiya, dayName } = data;
   const [activeTab, setActiveTab] = useState<'both' | 'day' | 'night'>('both');
 
-  const renderSlotCard = (slot: ChoghadiyaInterval, idx: number, _isNight: boolean) => {
-    const meta = CHOGHADIYA_INFO[slot.type] || CHOGHADIYA_INFO.Amrit;
-    const isAuspicious = meta.isAuspicious;
-    const isActive = activeChoghadiya?.name === slot.name && activeChoghadiya?.startTime === slot.startTime;
-
+  const renderChoghadiyaTable = (slots: ChoghadiyaInterval[]) => {
     return (
-      <div
-        key={`${slot.name}-${slot.startTime}-${idx}`}
-        className={`p-4 rounded-xl border transition-all duration-200 flex flex-col justify-between space-y-3 relative overflow-hidden ${
-          isActive
-            ? 'bg-white border-2 border-amber-500 shadow-[0_12px_32px_rgba(217,119,6,0.25)] ring-2 ring-amber-400/40 -translate-y-1'
-            : 'bg-white/90 hover:bg-white border-[#dec9ab]/80 hover:border-amber-400 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.25)] hover:-translate-y-1'
-        }`}
-      >
-        {/* Active Pill on top-right */}
-        {isActive && (
-          <div className="absolute top-0 right-0 bg-gradient-to-l from-amber-500 to-[#c2410c] text-white text-[10px] font-bold px-3 py-0.5 rounded-bl-xl shadow-xs flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
-            <span>सक्रिय काल</span>
-          </div>
-        )}
+      <div className="relative z-10 w-full overflow-x-auto rounded-xl border border-amber-200/90 shadow-xs bg-white/95 backdrop-blur-md">
+        <table className="w-full text-left border-collapse min-w-[720px]">
+          <thead>
+            <tr className="bg-[#fff9eb] border-b border-amber-200/80 text-[#735641] text-xs font-bold uppercase tracking-wider">
+              <th className="py-3 px-4">पहर</th>
+              <th className="py-3 px-4">चौघड़िया मुहूर्त</th>
+              <th className="py-3 px-4">समय अवधि (IST)</th>
+              <th className="py-3 px-4">ग्रह स्वामी</th>
+              <th className="py-3 px-4">प्रशस्त कार्य एवं निर्देश</th>
+              <th className="py-3 px-4 text-right">फल प्रभाव</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-amber-100/80 text-xs text-[#26150b]">
+            {slots.map((slot, idx) => {
+              const meta = CHOGHADIYA_INFO[slot.type] || CHOGHADIYA_INFO.Amrit;
+              const isAuspicious = meta.isAuspicious;
+              const isActive = activeChoghadiya?.name === slot.name && activeChoghadiya?.startTime === slot.startTime;
 
-        <div className="space-y-2">
-          {/* Slot Number & Auspicious Badge */}
-          <div className="flex items-center justify-between text-xs">
-            <span className="text-[11px] font-bold text-[#735641]">
-              {PEHAR_NAMES[idx] || `${idx + 1}. पहर`}
-            </span>
-            <span
-              className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${
-                isAuspicious
-                  ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
-                  : meta.colorClass === 'amber'
-                  ? 'bg-amber-100 text-amber-900 border border-amber-200'
-                  : 'bg-rose-100 text-rose-800 border border-rose-200'
-              }`}
-            >
-              {slot.hindiName || slot.name}
-            </span>
-          </div>
+              return (
+                <tr
+                  key={`${slot.name}-${slot.startTime}-${idx}`}
+                  className={`transition-colors ${
+                    isActive
+                      ? 'bg-amber-100/80 font-semibold'
+                      : 'hover:bg-amber-50/60'
+                  }`}
+                >
+                  {/* Pehar Name */}
+                  <td className="py-3 px-4 font-mono font-bold text-[#735641]">
+                    {PEHAR_NAMES[idx] || `${idx + 1}. पहर`}
+                  </td>
 
-          {/* Title & Lord */}
-          <div className="flex items-baseline justify-between pt-1">
-            <h4 className="text-base sm:text-lg font-bold text-[#26150b]">
-              {slot.hindiName || slot.name} चौघड़िया
-            </h4>
-            <span className="text-xs text-[#735641] font-semibold">
-              {meta.lord}
-            </span>
-          </div>
+                  {/* Choghadiya Name & Icon */}
+                  <td className="py-3 px-4">
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`w-6 h-6 rounded-lg font-bold flex items-center justify-center text-[11px] ${
+                          isAuspicious
+                            ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                            : meta.colorClass === 'amber'
+                            ? 'bg-amber-100 text-amber-900 border border-amber-300'
+                            : 'bg-rose-100 text-rose-800 border border-rose-300'
+                        }`}
+                      >
+                        {(slot.hindiName || slot.name).slice(0, 1)}
+                      </span>
+                      <span className="font-bold text-[#26150b] text-sm">
+                        {slot.hindiName || slot.name}
+                      </span>
+                    </div>
+                  </td>
 
-          {/* Time Interval */}
-          <div className="text-xs sm:text-sm font-bold text-[#c2410c] font-mono flex items-center gap-1.5 bg-[#fff9eb] px-2.5 py-1 rounded-xl border border-[#dec9ab]/60">
-            <VedicIcon3D name="clock" size="sm" />
-            <span>{slot.startTime} - {slot.endTime}</span>
-          </div>
-        </div>
+                  {/* Time Interval */}
+                  <td className="py-3 px-4 font-mono font-bold">
+                    <div className="flex items-center gap-1.5 text-[#c2410c]">
+                      <span>{slot.startTime} - {slot.endTime}</span>
+                      {isActive && (
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#ea580c] text-white flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
+                          <span>सक्रिय काल</span>
+                        </span>
+                      )}
+                    </div>
+                  </td>
 
-        {/* Guidance / Suitable Actions */}
-        <p className="text-[11px] text-[#5a3822] leading-tight bg-stone-50/80 p-2 rounded-xl border border-stone-200/60">
-          {meta.significance}
-        </p>
+                  {/* Lord */}
+                  <td className="py-3 px-4 font-medium text-[#735641]">
+                    {meta.lord}
+                  </td>
+
+                  {/* Guidance / Significance */}
+                  <td className="py-3 px-4 text-[#5a3822] max-w-sm">
+                    {meta.significance}
+                  </td>
+
+                  {/* Quality Badge */}
+                  <td className="py-3 px-4 text-right">
+                    <span
+                      className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold border ${
+                        isAuspicious
+                          ? 'bg-emerald-100 text-emerald-800 border-emerald-200'
+                          : meta.colorClass === 'amber'
+                          ? 'bg-amber-100 text-amber-900 border-amber-200'
+                          : 'bg-rose-100 text-rose-800 border-rose-200'
+                      }`}
+                    >
+                      {meta.statusLabel}
+                    </span>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     );
   };
@@ -157,9 +191,7 @@ export const ChoghadiyaDayNightGrid: React.FC<ChoghadiyaDayNightGridProps> = ({ 
             </span>
           </div>
 
-          <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-1">
-            {dayChoghadiya.map((slot, idx) => renderSlotCard(slot, idx, false))}
-          </div>
+          {renderChoghadiyaTable(dayChoghadiya)}
         </section>
       )}
 
@@ -182,9 +214,7 @@ export const ChoghadiyaDayNightGrid: React.FC<ChoghadiyaDayNightGridProps> = ({ 
             </span>
           </div>
 
-          <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-1">
-            {nightChoghadiya.map((slot, idx) => renderSlotCard(slot, idx, true))}
-          </div>
+          {renderChoghadiyaTable(nightChoghadiya)}
         </section>
       )}
     </div>
