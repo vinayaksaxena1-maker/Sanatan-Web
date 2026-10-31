@@ -173,16 +173,6 @@ export const ChoghadiyaLiveHero: React.FC<ChoghadiyaLiveHeroProps> = ({ data }) 
           </div>
         </div>
       </div>
-                    ? 'bg-amber-100 text-amber-900'
-                    : 'bg-rose-100 text-rose-800'
-                }`}
-              >
-                {nextMeta.statusLabel}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
   );
 };
