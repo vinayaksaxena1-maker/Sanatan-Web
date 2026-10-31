@@ -1,7 +1,7 @@
 /**
  * Sanatan Web (सनातन घड़ी)
  * Component: ChoghadiyaLiveHero
- * Real-time Active Choghadiya, Dynamic Live Countdown & Current Active Hora
+ * Box-Free Pure Typographic Real-time Active Choghadiya, Countdown & Hora
  * Strict < 300 lines modular standard
  */
 
@@ -24,74 +24,75 @@ export const ChoghadiyaLiveHero: React.FC<ChoghadiyaLiveHeroProps> = ({ data }) 
 
   return (
     <section className="relative overflow-hidden rounded-2xl p-5 sm:p-6 bg-gradient-to-b from-[#fffcf7] via-[#fdfaf3] to-[#fbf4e8] border border-amber-300/80 shadow-xs font-serif">
-      <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
+      {/* Ornate Vedic Golden Corner Brackets */}
       <GoldenCornerBrackets size="lg" />
 
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-        {/* ================= 1. ACTIVE CHOGHADIYA (5 Cols) ================= */}
-        <div className="lg:col-span-5 flex flex-col justify-between space-y-4 p-5 sm:p-6 rounded-2xl bg-white/90 backdrop-blur-md border border-[#dec9ab] shadow-xs">
-          <div className="space-y-3">
-            {/* Live Status Pill with Radar Wave */}
-            <div className="flex items-center gap-2">
-              <span className="relative flex h-2.5 w-2.5">
-                <span
-                  className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
-                    isAuspicious ? 'bg-emerald-400' : 'bg-rose-400'
-                  }`}
-                />
-                <span
-                  className={`relative inline-flex rounded-full h-2.5 w-2.5 ${
-                    isAuspicious ? 'bg-emerald-600' : 'bg-rose-600'
-                  }`}
-                />
-              </span>
+      {/* Vedic Background Swastika Watermark */}
+      <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
+
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+        {/* ================= 1. ACTIVE CHOGHADIYA (5 Cols) - Box-Free ================= */}
+        <div className="lg:col-span-5 space-y-3 lg:pr-6 lg:border-r border-[#dec9ab]/60">
+          {/* Live Status Pill with Radar Wave */}
+          <div className="flex items-center gap-2">
+            <span className="relative flex h-2.5 w-2.5">
               <span
-                className={`text-[11px] font-bold px-2 py-0.5 rounded tracking-wider uppercase ${
-                  isAuspicious
-                    ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
-                    : 'bg-rose-100 text-rose-800 border border-rose-300'
+                className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
+                  isAuspicious ? 'bg-emerald-400' : 'bg-rose-400'
                 }`}
-              >
-                तात्कालिक सक्रिय चौघड़िया
-              </span>
-              <span className="text-xs text-[#735641]">| वर्तमान काल</span>
-            </div>
-
-            {/* Title & Badge */}
-            <div className="flex flex-wrap items-baseline gap-2 pt-1">
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#26150b] tracking-tight">
-                {activeChoghadiya?.hindiName || activeChoghadiya?.name || 'अमृत'} चौघड़िया
-              </h2>
+              />
               <span
-                className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${
-                  isAuspicious
-                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                    : 'bg-rose-50 text-rose-700 border border-rose-200'
+                className={`relative inline-flex rounded-full h-2.5 w-2.5 ${
+                  isAuspicious ? 'bg-emerald-600' : 'bg-rose-600'
                 }`}
-              >
-                {meta.statusLabel}
-              </span>
-            </div>
-
-            {/* Timings & Lord */}
-            <div className="flex flex-wrap items-center gap-3 text-xs text-[#735641]">
-              <div className="flex items-center gap-1 font-mono font-bold text-[#c2410c] text-sm bg-amber-50 px-2 py-0.5 rounded-lg border border-amber-200">
-                <VedicIcon3D name="clock" size="sm" />
-                <span>{activeChoghadiya?.startTime || '०६:१४'} - {activeChoghadiya?.endTime || '०७:४१'}</span>
-              </div>
-              <span>•</span>
-              <span className="font-semibold text-[#b45309]">स्वामी: {meta.lord}</span>
-            </div>
-
-            {/* Guidance Suggestion */}
-            <p className="text-xs text-[#5a3822] leading-relaxed bg-[#fff9eb] p-3 rounded-xl border border-[#dec9ab]/70">
-              <strong className="text-[#c2410c]">शुभ परामर्श:</strong> {meta.significance}
-            </p>
+              />
+            </span>
+            <span
+              className={`text-[11px] font-bold px-2 py-0.5 rounded tracking-wider uppercase ${
+                isAuspicious
+                  ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                  : 'bg-rose-100 text-rose-800 border border-rose-300'
+              }`}
+            >
+              तात्कालिक सक्रिय चौघड़िया
+            </span>
+            <span className="text-xs text-[#735641]">| वर्तमान काल</span>
           </div>
+
+          {/* Title & Badge */}
+          <div className="flex flex-wrap items-baseline gap-2 pt-0.5">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#26150b] tracking-tight">
+              {activeChoghadiya?.hindiName || activeChoghadiya?.name || 'अमृत'} चौघड़िया
+            </h2>
+            <span
+              className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${
+                isAuspicious
+                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                  : 'bg-rose-50 text-rose-700 border border-rose-200'
+              }`}
+            >
+              {meta.statusLabel}
+            </span>
+          </div>
+
+          {/* Timings & Lord */}
+          <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-[#735641]">
+            <div className="flex items-center gap-1.5 font-mono font-bold text-[#c2410c] text-sm sm:text-base">
+              <VedicIcon3D name="clock" size="xs" />
+              <span>{activeChoghadiya?.startTime || '०६:१४'} - {activeChoghadiya?.endTime || '०७:४१'}</span>
+            </div>
+            <span>•</span>
+            <span className="font-semibold text-[#b45309]">स्वामी: {meta.lord}</span>
+          </div>
+
+          {/* Guidance Suggestion - Pure text with left accent border, NO nested box */}
+          <p className="text-xs sm:text-sm text-[#5a3822] leading-relaxed border-l-2 border-[#ea580c]/60 pl-3 pt-0.5">
+            <strong className="text-[#c2410c]">शुभ परामर्श:</strong> {meta.significance}
+          </p>
         </div>
 
-        {/* ================= 2. LIVE DYNAMIC COUNTDOWN (3 Cols) ================= */}
-        <div className="lg:col-span-3 flex flex-col items-center justify-center p-6 rounded-2xl bg-gradient-to-b from-white/95 to-[#fffaf0] border border-[#dec9ab] shadow-xs text-center space-y-3">
+        {/* ================= 2. LIVE DYNAMIC COUNTDOWN (3 Cols) - Box-Free ================= */}
+        <div className="lg:col-span-3 flex flex-col items-center justify-center text-center space-y-2 lg:px-4 lg:border-r border-[#dec9ab]/60">
           <div className="inline-flex items-center gap-1.5 text-xs text-[#735641] uppercase tracking-wider font-semibold">
             <span>⏳</span>
             <span>वर्तमान काल शेष</span>
@@ -120,37 +121,37 @@ export const ChoghadiyaLiveHero: React.FC<ChoghadiyaLiveHeroProps> = ({ data }) 
           </div>
         </div>
 
-        {/* ================= 3. ACTIVE HORA SNAPSHOT (4 Cols) ================= */}
-        <div className="lg:col-span-4 flex flex-col justify-between space-y-3 p-5 sm:p-6 rounded-2xl bg-white/90 backdrop-blur-md border border-[#dec9ab] shadow-xs">
-          <div className="space-y-3">
-            <div className="flex items-center justify-between border-b border-[#dec9ab]/60 pb-2">
-              <span className="text-xs font-bold text-[#b45309] flex items-center gap-1.5">
-                <VedicIcon3D name="sun" size="sm" />
-                <span>वर्तमान सक्रिय होरा</span>
-              </span>
-              <span className="text-[11px] font-mono text-[#735641] bg-amber-50 px-2 py-0.5 rounded border border-amber-200 font-semibold">
-                {activeHora?.startTime || '०६:१४'} - {activeHora?.endTime || '०७:१२'}
-              </span>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#fef08a] via-[#f59e0b] to-[#b45309] text-white flex items-center justify-center font-bold text-sm shadow-xs shrink-0">
-                {activeHora?.lordHindi || 'सूर्य'}
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-[#26150b]">
-                  {activeHora?.lordHindi || 'सूर्य'} ग्रह होरा
-                </h3>
-                <span className="text-xs font-bold text-emerald-700">
-                  {activeHora?.qualityHindi || 'अति शुभ एवं श्रेष्ठ'}
-                </span>
-              </div>
-            </div>
-
-            <p className="text-xs text-[#5a3822] leading-relaxed bg-[#fff9eb] p-2.5 rounded-xl border border-[#dec9ab]/60">
-              <strong className="text-[#26150b]">प्रशस्त कार्य:</strong> {activeHora?.benefits || 'राजकीय कार्य, पदभार ग्रहण, औषधि निर्माण, पिता का आशीर्वाद एवं नया संकल्प।'}
-            </p>
+        {/* ================= 3. ACTIVE HORA SNAPSHOT (4 Cols) - Box-Free ================= */}
+        <div className="lg:col-span-4 space-y-3 lg:pl-2">
+          <div className="flex items-center justify-between border-b border-[#dec9ab]/60 pb-2">
+            <span className="text-xs font-bold text-[#b45309] flex items-center gap-1.5">
+              <VedicIcon3D name="sun" size="xs" />
+              <span>वर्तमान सक्रिय होरा</span>
+            </span>
+            <span className="text-xs font-mono text-[#c2410c] font-bold">
+              {activeHora?.startTime || '०६:१४'} - {activeHora?.endTime || '०७:१२'}
+            </span>
           </div>
+
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#fef08a] via-[#f59e0b] to-[#b45309] text-white flex items-center justify-center font-bold text-sm shadow-xs shrink-0">
+              {activeHora?.lordHindi || 'सूर्य'}
+            </div>
+            <div>
+              <h3 className="text-base sm:text-lg font-bold text-[#26150b]">
+                {activeHora?.lordHindi || 'सूर्य'} ग्रह होरा
+              </h3>
+              <span className="text-xs font-bold text-emerald-700">
+                {activeHora?.qualityHindi || 'अति शुभ एवं श्रेष्ठ'}
+              </span>
+            </div>
+          </div>
+
+          {/* Guidance without box */}
+          <p className="text-xs text-[#5a3822] leading-relaxed border-l-2 border-amber-400 pl-3 pt-0.5">
+            <strong className="text-[#26150b]">प्रशस्त कार्य:</strong>{' '}
+            {activeHora?.benefits || 'राजकीय कार्य, पदभार ग्रहण, औषधि निर्माण, पिता का आशीर्वाद एवं नया संकल्प।'}
+          </p>
         </div>
       </div>
     </section>
