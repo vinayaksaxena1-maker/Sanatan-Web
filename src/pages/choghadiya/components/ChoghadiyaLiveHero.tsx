@@ -61,7 +61,7 @@ export const ChoghadiyaLiveHero: React.FC<ChoghadiyaLiveHeroProps> = ({ data }) 
       {/* 2. 5% Outer Gap - 40% Box 1 - 10% Inner Gap - 40% Box 2 - 5% Outer Gap */}
       <div className="w-[90%] mx-auto flex flex-col md:flex-row justify-between gap-4 md:gap-0 relative z-10">
         {/* Box 1: वर्तमान सक्रिय चौघड़िया (44.44% of 90% = 40%) */}
-        <div className="w-full md:w-[44.44%] rounded-xl p-4 sm:p-5 pb-[13px] sm:pb-[13px] bg-gradient-to-br from-[#fffdf9] via-[#fefaf3] to-[#fbf2e3] border border-amber-300/70 shadow-xs space-y-2 transition-all duration-300 ease-out cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37]">
+        <div className="w-full md:w-[44.44%] rounded-xl p-4 sm:p-5 pb-[8px] sm:pb-[8px] bg-gradient-to-br from-[#fffdf9] via-[#fefaf3] to-[#fbf2e3] border border-amber-300/70 shadow-xs space-y-2 transition-all duration-300 ease-out cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37]">
           <div className="flex items-center justify-between border-b border-amber-300/60 pb-1.5">
             <h3 className="text-base font-bold text-[#451a03] flex items-center gap-2">
               <span className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-gradient-to-br from-amber-200 via-orange-500 to-amber-900 shadow-[0_2px_6px_rgba(234,88,12,0.4)] ring-1 ring-white/90 shrink-0" />
@@ -107,7 +107,7 @@ export const ChoghadiyaLiveHero: React.FC<ChoghadiyaLiveHeroProps> = ({ data }) 
         </div>
 
         {/* Box 2: वर्तमान काल शेष एवं आगामी चौघड़िया (44.44% of 90% = 40%) */}
-        <div className="w-full md:w-[44.44%] rounded-xl p-4 sm:p-5 pb-[13px] sm:pb-[13px] bg-gradient-to-br from-[#fcfcff] via-[#f7f8fd] to-[#eef2ff] border border-indigo-200/80 shadow-xs space-y-2 transition-all duration-300 ease-out cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37]">
+        <div className="w-full md:w-[44.44%] rounded-xl p-4 sm:p-5 pb-[8px] sm:pb-[8px] bg-gradient-to-br from-[#fcfcff] via-[#f7f8fd] to-[#eef2ff] border border-indigo-200/80 shadow-xs space-y-2 transition-all duration-300 ease-out cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37]">
           <div className="flex items-center justify-between border-b border-indigo-200/80 pb-1.5">
             <h3 className="text-base font-bold text-[#1e1b4b] flex items-center gap-2">
               <span className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-gradient-to-br from-indigo-300 via-indigo-600 to-indigo-950 shadow-[0_2px_6px_rgba(79,70,229,0.3)] ring-1 ring-white/90 shrink-0" />
