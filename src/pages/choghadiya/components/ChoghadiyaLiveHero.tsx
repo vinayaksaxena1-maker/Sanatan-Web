@@ -48,18 +48,18 @@ export const ChoghadiyaLiveHero: React.FC<ChoghadiyaLiveHeroProps> = ({ data }) 
       <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
 
       {/* 1. Main Section Heading */}
-      <div className="border-b border-amber-300/50 pb-3 relative z-10">
+      <div className="border-b border-amber-300/50 pb-[7px] relative z-10">
         <h2 className="text-2xl sm:text-3xl font-bold text-[#26150b] flex items-center gap-2.5">
           <VedicIcon3D name="clock" size="sm" className="w-7 h-7 sm:w-8 sm:h-8" />
           <span>तात्कालिक सक्रिय एवं आगामी चौघड़िया</span>
         </h2>
-        <p className="text-xs sm:text-sm text-[#735641] mt-1">
+        <p className="text-xs sm:text-sm text-[#735641] mt-[2px]">
           वर्तमान में चल रहा चौघड़िया, शेष काल एवं इसके उपरांत प्रारंभ होने वाला आगामी मुहूर्त
         </p>
       </div>
 
       {/* 2. 5% Outer Gap - 40% Box 1 - 10% Inner Gap - 40% Box 2 - 5% Outer Gap */}
-      <div className="w-[90%] mx-auto flex flex-col md:flex-row justify-between gap-4 md:gap-0 relative z-10">
+      <div className="w-[90%] mx-auto flex flex-col md:flex-row justify-between gap-4 md:gap-0 relative z-10 !mt-[7px]">
         {/* Box 1: वर्तमान सक्रिय चौघड़िया (44.44% of 90% = 40%) */}
         <div className="w-full md:w-[44.44%] rounded-xl p-4 sm:p-5 pb-[8px] sm:pb-[8px] bg-gradient-to-br from-[#fffdf9] via-[#fefaf3] to-[#fbf2e3] border border-amber-300/70 shadow-xs space-y-2 transition-all duration-300 ease-out cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_12px_24px_-4px_rgba(212,175,55,0.28)] hover:border-[#d4af37]">
           <div className="flex items-center justify-between border-b border-amber-300/60 pb-1.5">
