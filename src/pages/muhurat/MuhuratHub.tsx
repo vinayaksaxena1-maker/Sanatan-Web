@@ -1,7 +1,8 @@
 /**
  * Sanatan Web (सनातन घड़ी)
  * Hub 04: Shubh Muhurat Hub (शुभ मुहूर्त एवं संस्कार काल निर्णय)
- * Official Luxury Redesign based on Stitch Screen 00a4fbd9a3d7401e9fc1844ab2285418
+ * Standardized Sacred Vedic Design matching Panchang & Choghadiya Hubs
+ * Spacing: space-y-[22px], GoldenCornerBrackets, Swastika/Shree Yantra Watermarks
  * Pure Web, React 19, Strict < 300 lines modular standard
  */
 
@@ -13,10 +14,9 @@ import { useMuhuratData } from './hooks/useMuhuratData';
 import { MuhuratTopBar } from './components/MuhuratTopBar';
 import { MuhuratInstantCards } from './components/MuhuratInstantCards';
 import { MuhuratCautionAlerts } from './components/MuhuratCautionAlerts';
-import { MuhuratCategoryTabs } from './components/MuhuratCategoryTabs';
 import { MuhuratCategoryCards } from './components/MuhuratCategoryCards';
 import { MuhuratSanskarTable } from './components/MuhuratSanskarTable';
-import { MuhuratWisdomSection } from './components/MuhuratWisdomSection';
+import { MuhuratJigyasa } from './components/MuhuratJigyasa';
 
 export const MuhuratHub: React.FC = () => {
   const muhuratData = useMuhuratData();
@@ -31,9 +31,9 @@ export const MuhuratHub: React.FC = () => {
       {/* Top Header */}
       <PortalHeader />
 
-      {/* Main Command Surface */}
-      <main className="w-full pt-32 pb-16 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto space-y-8" id="muhurat-hub">
-        {/* 1. Top Heritage Hero Scrim, Breadcrumb & Context Ribbon */}
+      {/* Main Command Surface with Standardized 22px Vertical Spacing */}
+      <main className="w-full pt-32 pb-16 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto space-y-[22px]" id="muhurat-hub">
+        {/* 1. Standardized Heritage TopBar with Compact Calendar Date Picker */}
         <MuhuratTopBar
           data={muhuratData}
           onOpenCityModal={() => setIsCityModalOpen(true)}
@@ -42,23 +42,20 @@ export const MuhuratHub: React.FC = () => {
         {/* 2. Today's Instant & Actionable Muhurats (Abhijit, Vijaya, Godhuli, Brahma) */}
         <MuhuratInstantCards data={muhuratData} />
 
-        {/* 3. Caution Periods & Inauspicious Alert Ribbon (Panchak, Bhadra, Kharmas, Rahu Kaal) */}
+        {/* 3. Caution Periods & Inauspicious Alerts (Panchak, Bhadra, Kharmas, Rahu Kaal) */}
         <MuhuratCautionAlerts data={muhuratData} />
 
-        {/* 4. Category Tabs Navigation & Month/Paksha Toolbar */}
-        <MuhuratCategoryTabs data={muhuratData} />
-
-        {/* 5. Detailed Astrological Ceremony Cards for Selected Category */}
+        {/* 4. Ceremony & Activity Category Selection with Integrated Tabs (8 Categories) */}
         <MuhuratCategoryCards data={muhuratData} />
 
-        {/* 6. High-Density Responsive Table for All 16 Major Vedic Ceremonies */}
+        {/* 5. High-Density Responsive Table for All 16 Major Vedic Ceremonies */}
         <MuhuratSanskarTable data={muhuratData} />
 
-        {/* 7. Scriptural Wisdom & Guidelines (Tribala Shuddhi, 10 Mahadoshas, Choghadiya vs Muhurat) */}
-        <MuhuratWisdomSection />
+        {/* 6. Scriptural Wisdom & FAQ Accordion (सनातन जिज्ञासा एवं शंका समाधान) */}
+        <MuhuratJigyasa />
       </main>
 
-      {/* 8. City Selector Modal */}
+      {/* 7. City Selector Modal */}
       <CitySelectModal
         isOpen={isCityModalOpen}
         onClose={() => setIsCityModalOpen(false)}

@@ -10,6 +10,7 @@ import { useLocationStore } from '../../../store/locationStore';
 import { calculatePanchang, type PanchangInfo } from '../../../engine';
 import { checkMuhurats, type MuhuratSuitability } from '../../../engine/muhuratRules';
 import { getCategoryMuhuratCards, DEFAULT_CEREMONY_ROWS } from './muhuratPresets';
+import { formatHindiDate } from '../../panchang/hooks/usePanchangData';
 
 export interface InstantMuhurat {
   id: string;
@@ -265,6 +266,17 @@ export function useMuhuratData() {
     });
   }, []);
 
+  const isToday = useMemo(() => {
+    const now = new Date();
+    return (
+      now.getFullYear() === selectedDate.getFullYear() &&
+      now.getMonth() === selectedDate.getMonth() &&
+      now.getDate() === selectedDate.getDate()
+    );
+  }, [selectedDate]);
+
+  const formattedDate = useMemo(() => formatHindiDate(selectedDate), [selectedDate]);
+
   const goToToday = useCallback(() => {
     setSelectedDate(new Date());
   }, []);
@@ -272,6 +284,9 @@ export function useMuhuratData() {
   return {
     currentCity,
     selectedDate,
+    setSelectedDate,
+    formattedDate,
+    isToday,
     panchang,
     muhuratSuitability,
     instantMuhurats,
