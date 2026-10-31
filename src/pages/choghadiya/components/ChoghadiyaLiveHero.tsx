@@ -97,11 +97,11 @@ export const ChoghadiyaLiveHero: React.FC<ChoghadiyaLiveHeroProps> = ({ data }) 
               <span className="text-[#5c4033] font-medium">वार / ग्रह स्वामी</span>
               <span className="font-bold text-[#b45309]">{meta.lord}</span>
             </div>
-            <div className="pt-1 pb-0.5 flex flex-col gap-0.5 text-xs">
-              <span className="text-[#5c4033] font-semibold">शुभ परामर्श एवं निर्देश:</span>
-              <p className="text-[#5a3822] leading-relaxed border-l-2 border-[#ea580c]/60 pl-2.5">
+            <div className="py-0.5 flex items-center justify-between gap-3 text-xs sm:text-sm">
+              <span className="text-[#5c4033] font-medium shrink-0">शुभ परामर्श व फल</span>
+              <span className="text-[#5a3822] text-right truncate font-medium" title={meta.significance}>
                 {meta.significance}
-              </p>
+              </span>
             </div>
           </div>
         </div>
