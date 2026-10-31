@@ -1,15 +1,12 @@
 /**
  * Sanatan Web (सनातन घड़ी)
  * Component: PanchangShubhAshubh
- * Auspicious (शुभ काल) and Inauspicious (अशुभ/राहुकाल) Timing Matrix & Disha Shool
- * Live pulsing beacon and 3D Shields
- * Strict < 300 lines modular standard
+ * Section: ५. शुभ मुहूर्त एवं अशुभ काल मैट्रिक्स (Timing Matrix)
+ * Box-free, pure typographic layout with clear Normal Headings (identical to Section 1)
+ * Pure Web, React 19, Strict < 300 lines modular standard
  */
 
 import React from 'react';
-import { GoldenCornerBrackets } from '../../vedic-portal/components/GoldenCornerBrackets';
-import { SacredGeometryWatermark } from '../../vedic-portal/components/SacredGeometryWatermark';
-import { VedicIcon3D } from '../../vedic-portal/components/VedicIcon3D';
 import type { UsePanchangDataResult } from '../hooks/usePanchangData';
 
 export interface PanchangShubhAshubhProps {
@@ -19,12 +16,14 @@ export interface PanchangShubhAshubhProps {
 export const PanchangShubhAshubh: React.FC<PanchangShubhAshubhProps> = ({ data }) => {
   const { panchang, dayName } = data;
 
-  const rahuStart = panchang.rahuKaal?.start || '१६:४८';
-  const rahuEnd = panchang.rahuKaal?.end || '१८:२२';
-  const gulikStart = panchang.gulikKaal?.start || '०७:४५';
-  const gulikEnd = panchang.gulikKaal?.end || '०९:१२';
-  const yamaStart = panchang.yamagandam?.start || '०९:१२';
-  const yamaEnd = panchang.yamagandam?.end || '१०:३८';
+  const rahuStart = panchang.rahuKaal?.start || '०९:१८ AM';
+  const rahuEnd = panchang.rahuKaal?.end || '१०:४१ AM';
+  const gulikStart = panchang.gulikKaal?.start || '०६:३२ AM';
+  const gulikEnd = panchang.gulikKaal?.end || '०७:५५ AM';
+  const yamaStart = panchang.yamagandam?.start || '०१:२८ PM';
+  const yamaEnd = panchang.yamagandam?.end || '०२:५१ PM';
+  const durmuhuratStart = panchang.durmuhurat?.[0]?.start || '०६:३२ AM';
+  const durmuhuratEnd = panchang.durmuhurat?.[0]?.end || '०७:१६ AM';
 
   // Determine Disha Shool based on day of week
   const getDishaShool = () => {
@@ -34,7 +33,7 @@ export const PanchangShubhAshubh: React.FC<PanchangShubhAshubhProps> = ({ data }
         return { dir: 'पश्चिम', remedy: 'घी या पान खाकर यात्रा करें।' };
       case 'सोमवार':
       case 'शनिवार':
-        return { dir: 'पूर्व', remedy: 'दर्पण देखकर या तिल खाकर प्रस्थान करें।' };
+        return { dir: 'पूर्व', remedy: 'दर्पण देखकर या तिल/अदरक खाकर प्रस्थान करें।' };
       case 'मंगलवार':
       case 'बुधवार':
         return { dir: 'उत्तर', remedy: 'गुड़ या धनिया खाकर निकलें।' };
@@ -47,191 +46,184 @@ export const PanchangShubhAshubh: React.FC<PanchangShubhAshubhProps> = ({ data }
 
   const disha = getDishaShool();
 
+  const shubhList = [
+    {
+      name: 'अभिजीत मुहूर्त',
+      category: 'सर्वश्रेष्ठ मुहूर्त',
+      time: '११:४२ AM - १२:२७ PM',
+      details: 'भगवान श्रीहरि का प्रिय समय — समस्त शुभ एवं मांगलिक कार्यों हेतु निर्दोष व सर्वोत्तम',
+      status: 'सर्वकार्य सिद्धि',
+    },
+    {
+      name: 'ब्रह्म मुहूर्त',
+      category: 'साधना काल',
+      time: '०४:४९ AM - ०५:४१ AM',
+      details: 'प्रातःकालीन दिव्य काल — ईश्वर आराधना, मंत्र जप, योग व ध्यान हेतु अति उत्तम',
+      status: 'आत्मिक शुद्धि',
+    },
+    {
+      name: 'अमृत काल',
+      category: 'अमृत वेला',
+      time: '०३:२४ AM - ०४:५४ AM',
+      details: 'नवीन कार्य शुभारंभ, प्रतिष्ठान व पूजन हेतु शुभ व फलदायी',
+      status: 'शुभ फलदायी',
+    },
+    {
+      name: 'विजय मुहूर्त',
+      category: 'विजय काल',
+      time: '०१:५५ PM - ०२:४० PM',
+      details: 'विवाद निस्तारण, व्यापारिक अनुबंध, यात्रा व विजय प्राप्ति हेतु उपयुक्त',
+      status: 'सफलता दायक',
+    },
+    {
+      name: 'गोधूलि मुहूर्त',
+      category: 'सायं काल',
+      time: '०५:३७ PM - ०६:०३ PM',
+      details: 'सूर्यास्त कालीन पवित्र संधि — दीप प्रज्वलन व सायं आरती हेतु प्रशस्त',
+      status: 'शांति व समृद्धि',
+    },
+  ];
+
+  const ashubhList = [
+    {
+      name: 'राहुकाल',
+      category: 'विशेष वर्जित',
+      time: `${rahuStart} - ${rahuEnd}`,
+      details: 'राहु का अनिष्ट काल — नवीन अनुबंध, यात्रा, गृहप्रवेश व शुभ कार्य सर्वथा वर्जित',
+      status: 'त्याज्य काल',
+      danger: true,
+    },
+    {
+      name: 'यमगण्ड काल',
+      category: 'हानि कारक',
+      time: `${yamaStart} - ${yamaEnd}`,
+      details: 'मृत्यु के देवता यम का काल — महत्वपूर्ण कार्यों में हानि व विघ्न की संभावना',
+      status: 'सावधानी रखें',
+    },
+    {
+      name: 'गुलिक काल',
+      category: 'शनि उपग्रह काल',
+      time: `${gulikStart} - ${gulikEnd}`,
+      details: 'शनि देव के पुत्र गुलिक का समय — स्थायी कार्यों को छोड़कर नवीन कार्यों में सावधानी',
+      status: 'मध्यम त्याज्य',
+    },
+    {
+      name: 'दुर्मुहूर्त',
+      category: 'विघ्नकारी समय',
+      time: `${durmuhuratStart} - ${durmuhuratEnd}`,
+      details: 'दिन का विषम मुहूर्त — नए काम शुरू करने से बचें',
+      status: 'त्याज्य काल',
+    },
+  ];
+
   return (
-    <div className="space-y-6 font-serif">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* ================= SHUBH TIMINGS (शुभ मुहूर्त) ================= */}
-        <div className="relative overflow-hidden rounded-3xl p-6 sm:p-7 bg-gradient-to-br from-[#fffdfa] via-[#f7fcf8] to-[#edf9f0] border border-emerald-300 shadow-[0_8px_30px_rgb(16,185,129,0.06)] flex flex-col justify-between space-y-4">
-          <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
-          <GoldenCornerBrackets size="lg" />
+    <section className="font-serif py-4 border-b border-[#dec9ab]/70 space-y-6">
+      {/* 1. Main Section Heading (No Box) */}
+      <div className="border-b border-[#dec9ab]/50 pb-3">
+        <h2 className="text-2xl sm:text-3xl font-bold text-[#26150b]">
+          ५. शुभ मुहूर्त एवं अशुभ काल
+        </h2>
+        <p className="text-xs sm:text-sm text-[#735641] mt-1">
+          अभिजित, ब्रह्म मुहूर्त एवं राहुकाल, यमगण्ड, गुलिक काल का दैनिक समय विभाजन
+        </p>
+      </div>
 
-          <div className="relative z-10 space-y-4">
-            <div className="flex items-center justify-between border-b border-emerald-200/80 pb-3">
-              <div className="flex items-center gap-2.5">
-                <VedicIcon3D name="shubh" size="md" />
-                <div>
-                  <h3 className="text-lg font-bold text-emerald-950">शुभ मुहूर्त एवं अमृत वेला</h3>
-                  <p className="text-xs text-emerald-800">Auspicious Intervals & Siddhi Kaal</p>
-                </div>
-              </div>
-              <span className="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold border border-emerald-300 flex items-center gap-1.5 shadow-2xs">
-                {/* Live Pulsing Emerald Radar Wave */}
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
-                </span>
-                <span>सर्वकार्य सिद्धि</span>
-              </span>
-            </div>
-
-            {/* Shubh Muhurats List */}
-            <div className="space-y-2.5">
-              <div className="p-3 rounded-2xl bg-white/90 border border-emerald-200 flex items-center justify-between shadow-2xs hover:border-emerald-400 transition-colors">
-                <div className="flex items-center gap-2">
-                  <span className="text-base">⭐</span>
-                  <div>
-                    <span className="text-xs font-bold text-emerald-950 block">अभिजीत मुहूर्त (सर्वश्रेष्ठ)</span>
-                    <span className="text-[10px] text-emerald-700">भगवान श्रीहरि का प्रिय समय</span>
-                  </div>
-                </div>
-                <span className="text-xs sm:text-sm font-bold text-emerald-800 font-mono bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
-                  ११:४८ - १२:३२
-                </span>
-              </div>
-
-              <div className="p-3 rounded-2xl bg-white/90 border border-emerald-200 flex items-center justify-between shadow-2xs hover:border-emerald-400 transition-colors">
-                <div className="flex items-center gap-2">
-                  <span className="text-base">🌅</span>
-                  <div>
-                    <span className="text-xs font-bold text-emerald-950 block">ब्रह्म मुहूर्त (साधना काल)</span>
-                    <span className="text-[10px] text-emerald-700">विद्या व मंत्र जप हेतु</span>
-                  </div>
-                </div>
-                <span className="text-xs sm:text-sm font-bold text-emerald-800 font-mono bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
-                  ०४:३८ - ०५:२६
-                </span>
-              </div>
-
-              <div className="p-3 rounded-2xl bg-white/90 border border-emerald-200 flex items-center justify-between shadow-2xs hover:border-emerald-400 transition-colors">
-                <div className="flex items-center gap-2">
-                  <span className="text-base">✨</span>
-                  <div>
-                    <span className="text-xs font-bold text-emerald-950 block">अमृत काल (Amrit Kaal)</span>
-                    <span className="text-[10px] text-emerald-700">नवीन कार्य शुभारंभ</span>
-                  </div>
-                </div>
-                <span className="text-xs sm:text-sm font-bold text-emerald-800 font-mono bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
-                  ०२:१५ - ०३:४८
-                </span>
-              </div>
-
-              <div className="p-3 rounded-2xl bg-white/90 border border-emerald-200 flex items-center justify-between shadow-2xs hover:border-emerald-400 transition-colors">
-                <div className="flex items-center gap-2">
-                  <span className="text-base">🚩</span>
-                  <div>
-                    <span className="text-xs font-bold text-emerald-950 block">विजय मुहूर्त (Vijay Kaal)</span>
-                    <span className="text-[10px] text-emerald-700">विवाद व मुकदमे में विजय</span>
-                  </div>
-                </div>
-                <span className="text-xs sm:text-sm font-bold text-emerald-800 font-mono bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
-                  ०१:५८ - ०२:४४
-                </span>
-              </div>
-            </div>
-          </div>
+      {/* 2. Sub-Heading A: शुभ मुहूर्त */}
+      <div className="space-y-3">
+        <div className="flex items-center justify-between border-b border-emerald-300/60 pb-1.5">
+          <h3 className="text-lg sm:text-xl font-bold text-emerald-950 flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+            <span>शुभ मुहूर्त एवं अमृत वेला</span>
+          </h3>
+          <span className="text-xs text-emerald-800 font-semibold">
+            ✓ सर्वकार्य सिद्धि काल
+          </span>
         </div>
 
-        {/* ================= ASHUBH / RAHU KAAL (अशुभ काल) ================= */}
-        <div className="relative overflow-hidden rounded-3xl p-6 sm:p-7 bg-gradient-to-br from-[#fffdfa] via-[#fdf5f5] to-[#fdeded] border border-rose-300 shadow-[0_8px_30px_rgb(225,29,72,0.06)] flex flex-col justify-between space-y-4">
-          <SacredGeometryWatermark variant="swastik" className="opacity-[0.06]" />
-          <GoldenCornerBrackets size="lg" />
+        <div className="divide-y divide-[#dec9ab]/40">
+          {shubhList.map((item, idx) => (
+            <div
+              key={idx}
+              className="py-3 flex flex-col md:flex-row md:items-center justify-between gap-2 sm:gap-4"
+            >
+              <div>
+                <h4 className="text-base font-bold text-[#26150b]">
+                  {item.name} <span className="text-xs font-normal text-emerald-800">({item.category})</span>
+                </h4>
+                <p className="text-xs text-[#735641] mt-0.5">
+                  {item.details}
+                </p>
+              </div>
 
-          <div className="relative z-10 space-y-4">
-            <div className="flex items-center justify-between border-b border-rose-200/80 pb-3">
-              <div className="flex items-center gap-2.5">
-                <VedicIcon3D name="ashubh" size="md" />
+              <div className="flex items-center gap-4 text-xs shrink-0 pt-1 md:pt-0">
                 <div>
-                  <h3 className="text-lg font-bold text-rose-950">अशुभ काल एवं राहुकाल</h3>
-                  <p className="text-xs text-rose-800">Prohibited & Inauspicious Intervals</p>
+                  <span className="text-[#735641]">समय: </span>
+                  <span className="font-bold font-mono text-emerald-800">{item.time}</span>
                 </div>
-              </div>
-              <span className="px-2.5 py-1 rounded-full bg-rose-100 text-rose-800 text-[11px] font-bold border border-rose-300 flex items-center gap-1 shadow-2xs">
-                <span>⚠️</span>
-                <span>शुभ कार्य वर्जित</span>
-              </span>
-            </div>
-
-            {/* Ashubh Kaal List */}
-            <div className="space-y-2.5">
-              {/* Highlighted Rahu Kaal Card */}
-              <div className="p-3 rounded-2xl bg-white/95 border-2 border-rose-400 flex items-center justify-between shadow-xs">
-                <div className="flex items-center gap-2">
-                  <span className="text-base text-rose-600">🛑</span>
-                  <div>
-                    <span className="text-xs font-bold text-rose-950 block">राहुकाल (Rahu Kaal)</span>
-                    <span className="text-[10px] text-rose-700">यात्रा व नवीन अनुबंध वर्जित</span>
-                  </div>
+                <div className="border-l border-[#dec9ab]/60 pl-3">
+                  <span className="text-[#735641]">प्रभाव: </span>
+                  <span className="font-semibold text-emerald-800">✓ {item.status}</span>
                 </div>
-                <span className="text-xs sm:text-sm font-bold text-rose-800 font-mono bg-rose-100 px-3 py-1 rounded-lg border border-rose-300">
-                  {rahuStart} - {rahuEnd}
-                </span>
-              </div>
-
-              <div className="p-3 rounded-2xl bg-white/90 border border-rose-200 flex items-center justify-between shadow-2xs hover:border-rose-400 transition-colors">
-                <div className="flex items-center gap-2">
-                  <span className="text-base">⏳</span>
-                  <div>
-                    <span className="text-xs font-bold text-rose-950 block">यमगण्ड काल (Yamaganda)</span>
-                    <span className="text-[10px] text-rose-700">हानि कारक समय</span>
-                  </div>
-                </div>
-                <span className="text-xs sm:text-sm font-bold text-rose-800 font-mono bg-rose-50 px-2.5 py-1 rounded-lg border border-rose-200">
-                  {yamaStart} - {yamaEnd}
-                </span>
-              </div>
-
-              <div className="p-3 rounded-2xl bg-white/90 border border-rose-200 flex items-center justify-between shadow-2xs hover:border-rose-400 transition-colors">
-                <div className="flex items-center gap-2">
-                  <span className="text-base">⚔️</span>
-                  <div>
-                    <span className="text-xs font-bold text-rose-950 block">गुलिक काल (Gulika Kaal)</span>
-                    <span className="text-[10px] text-rose-700">शनि का उपग्रह काल</span>
-                  </div>
-                </div>
-                <span className="text-xs sm:text-sm font-bold text-rose-800 font-mono bg-rose-50 px-2.5 py-1 rounded-lg border border-rose-200">
-                  {gulikStart} - {gulikEnd}
-                </span>
-              </div>
-
-              <div className="p-3 rounded-2xl bg-white/90 border border-rose-200 flex items-center justify-between shadow-2xs hover:border-rose-400 transition-colors">
-                <div className="flex items-center gap-2">
-                  <span className="text-base">⚡</span>
-                  <div>
-                    <span className="text-xs font-bold text-rose-950 block">दुर्मुहूर्त (Durmuhurat)</span>
-                    <span className="text-[10px] text-rose-700">विघ्नकारी समय</span>
-                  </div>
-                </div>
-                <span className="text-xs sm:text-sm font-bold text-rose-800 font-mono bg-rose-50 px-2.5 py-1 rounded-lg border border-rose-200">
-                  १०:१२ - १०:५८
-                </span>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
 
-      {/* ================= DISHA SHOOL STRIP ================= */}
-      <div className="rounded-2xl p-4 sm:p-5 bg-gradient-to-r from-[#fff9eb] via-[#fff4dc] to-[#fbeecc] border border-[#dec9ab] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <span className="text-2xl">🧭</span>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-[#c2410c] uppercase">आज का दिशाशूल</span>
-              <span className="px-2 py-0.5 rounded bg-rose-100 text-rose-800 font-bold text-xs">
-                {disha.dir} दिशा
-              </span>
-            </div>
-            <p className="text-xs text-[#735641] mt-0.5">
-              आज {dayName} को {disha.dir} दिशा में यात्रा करने से बचें। यदि आवश्यक हो तो परिहार करें।
-            </p>
-          </div>
+      {/* 3. Sub-Heading B: अशुभ काल एवं राहुकाल */}
+      <div className="space-y-3 pt-2">
+        <div className="flex items-center justify-between border-b border-rose-300/60 pb-1.5">
+          <h3 className="text-lg sm:text-xl font-bold text-rose-950 flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-rose-600"></span>
+            <span>अशुभ काल एवं राहुकाल</span>
+          </h3>
+          <span className="text-xs text-rose-800 font-semibold">
+            ⚠ शुभ कार्य वर्जित काल
+          </span>
         </div>
 
-        <div className="px-3.5 py-2 rounded-xl bg-white/90 border border-amber-300 text-xs font-semibold text-[#b45309] shrink-0">
-          ✨ <span className="font-bold">परिहार / उपाय:</span> {disha.remedy}
+        <div className="divide-y divide-[#dec9ab]/40">
+          {ashubhList.map((item, idx) => (
+            <div
+              key={idx}
+              className="py-3 flex flex-col md:flex-row md:items-center justify-between gap-2 sm:gap-4"
+            >
+              <div>
+                <h4 className={`text-base font-bold ${item.danger ? 'text-rose-800' : 'text-[#26150b]'}`}>
+                  {item.name} <span className="text-xs font-normal text-rose-700">({item.category})</span>
+                </h4>
+                <p className="text-xs text-[#735641] mt-0.5">
+                  {item.details}
+                </p>
+              </div>
+
+              <div className="flex items-center gap-4 text-xs shrink-0 pt-1 md:pt-0">
+                <div>
+                  <span className="text-[#735641]">समय: </span>
+                  <span className="font-bold font-mono text-rose-800">{item.time}</span>
+                </div>
+                <div className="border-l border-[#dec9ab]/60 pl-3">
+                  <span className="text-[#735641]">प्रभाव: </span>
+                  <span className="font-semibold text-rose-800">⚠ {item.status}</span>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
+
+      {/* 4. Sub-Heading C: दिशा शूल एवं परिहार (No Box) */}
+      <div className="pt-2 border-t border-[#dec9ab]/50 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+        <div>
+          <span className="font-bold text-[#c2410c] text-sm">दिशाशूल विचार: </span>
+          <span className="text-[#26150b] font-medium">आज {dayName} को <strong className="text-rose-800">{disha.dir}</strong> दिशा में यात्रा करने से बचें।</span>
+        </div>
+        <div>
+          <span className="text-[#735641]">परिहार / उपाय: </span>
+          <span className="font-bold text-[#b45309]">{disha.remedy}</span>
+        </div>
+      </div>
+    </section>
   );
 };
 

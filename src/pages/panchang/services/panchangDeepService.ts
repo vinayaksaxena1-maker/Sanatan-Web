@@ -60,6 +60,32 @@ export interface MantriMandalaItem {
   icon: string;
 }
 
+export interface AadalVidaalItem {
+  name: 'आडल योग' | 'विडाल योग';
+  type: 'Aadal' | 'Vidaal';
+  isAuspicious: boolean;
+  startTime: string;
+  endTime: string;
+  description: string;
+}
+
+export interface BhadraMicroBreakup {
+  active: boolean;
+  vasHindi: string;
+  mukhaWindow: {
+    start: string;
+    end: string;
+    duration: string;
+    description: string;
+  };
+  puchhaWindow: {
+    start: string;
+    end: string;
+    duration: string;
+    description: string;
+  };
+}
+
 export interface DeepPanchangAnalysis {
   // 1. निवास, चक्र एवं अनुष्ठान
   chandraVasa: { direction: string; directionHindi: string; suitability: string };
@@ -68,6 +94,7 @@ export interface DeepPanchangAnalysis {
   netrama: string;
   jeevanama: string;
   homahuti: { planet: string; planetHindi: string };
+  bhadraMicroBreakup: BhadraMicroBreakup;
 
   // 2. मुहूर्त व लग्न शुद्धि
   udayaLagnas: UdayaLagnaItem[];
@@ -82,7 +109,17 @@ export interface DeepPanchangAnalysis {
   };
   mantriMandala: MantriMandalaItem[];
 
-  // 4. खगोलीय मान व पंचांग प्रणालियां
+  // 4. अतिरिक्त योग (आडल व विडाल योग)
+  aadalVidaalList: AadalVidaalItem[];
+
+  // 5. प्रविष्टे / गते
+  pravishte: {
+    gate: number;
+    formatted: string;
+    solarMonth: string;
+  };
+
+  // 6. खगोलीय मान व पंचांग प्रणालियां
   dinamanaFormatted: string;
   ratrimanaFormatted: string;
   madhyahnaTime: string;
@@ -331,7 +368,130 @@ export function calculateDeepPanchang(
     });
   }
 
-  // 6. Festivals / Vrats for the day
+  // 6. Aadal & Vidaal Yoga Calculation
+  const AADAL_MAP: Record<number, number[]> = {
+    0: [0, 6, 12, 18, 24],      // Sun: Ashwini, Punarvasu, Hasta, Mula, P.Bhadrapada
+    1: [2, 8, 14, 20, 26],      // Mon: Krittika, Ashlesha, Swati, U.Ashadha, Revati
+    2: [4, 10, 16, 22],         // Tue: Mrigashira, P.Phalguni, Anuradha, Dhanishta
+    3: [0, 6, 12, 18, 24],      // Wed: Ashwini, Punarvasu, Hasta, Mula, P.Bhadrapada
+    4: [2, 8, 14, 20, 26],      // Thu: Krittika, Ashlesha, Swati, U.Ashadha, Revati
+    5: [4, 10, 16, 22],         // Fri: Mrigashira, P.Phalguni, Anuradha, Dhanishta
+    6: [6, 12, 18, 24, 0],      // Sat: Punarvasu, Hasta, Mula, P.Bhadrapada, Ashwini
+  };
+
+  const VIDAAL_MAP: Record<number, number[]> = {
+    0: [1, 7, 13, 19, 25],      // Sun: Bharani, Pushya, Chitra, P.Ashadha, U.Bhadrapada
+    1: [3, 9, 15, 21],          // Mon: Rohini, Magha, Vishakha, Shravana
+    2: [5, 11, 17, 23],         // Tue: Ardra, U.Phalguni, Jyeshtha, Shatabhisha
+    3: [1, 7, 13, 19, 25],      // Wed: Bharani, Pushya, Chitra, P.Ashadha, U.Bhadrapada
+    4: [3, 9, 15, 21],          // Thu: Rohini, Magha, Vishakha, Shravana
+    5: [5, 11, 17, 23],         // Fri: Ardra, U.Phalguni, Jyeshtha, Shatabhisha
+    6: [5, 11, 17, 23, 1],      // Sat: Ardra, U.Phalguni, Jyeshtha, Shatabhisha, Bharani
+  };
+
+  const currentNaksIdx = (activeNaksVal - 1 + 27) % 27;
+  const nextNaksIdx = activeNaksVal % 27;
+  const naksEndTimeStr = panchang.hinduDate?.nakshatra?.endTime || '07:12 AM';
+
+  const aadalVidaalList: AadalVidaalItem[] = [];
+  if ((AADAL_MAP[dayOfWeek] || []).includes(currentNaksIdx)) {
+    aadalVidaalList.push({
+      name: 'आडल योग',
+      type: 'Aadal',
+      isAuspicious: true,
+      startTime: panchang.sunrise,
+      endTime: naksEndTimeStr,
+      description: 'आडल योग शत्रु पराजय, प्रतियोगिता व आत्मबल वृद्धि में अत्यंत शुभ होता है।',
+    });
+  } else if ((VIDAAL_MAP[dayOfWeek] || []).includes(currentNaksIdx)) {
+    aadalVidaalList.push({
+      name: 'विडाल योग',
+      type: 'Vidaal',
+      isAuspicious: false,
+      startTime: panchang.sunrise,
+      endTime: naksEndTimeStr,
+      description: 'विडाल योग में धन निवेश, नवीन अनुबंध व यात्रा से बचना श्रेयस्कर है।',
+    });
+  }
+
+  if ((AADAL_MAP[dayOfWeek] || []).includes(nextNaksIdx)) {
+    aadalVidaalList.push({
+      name: 'आडल योग',
+      type: 'Aadal',
+      isAuspicious: true,
+      startTime: naksEndTimeStr,
+      endTime: 'अगले सूर्योदय तक',
+      description: 'आडल योग शत्रु पराजय, प्रतियोगिता व रक्षात्मक कार्यों में अत्यंत शुभ होता है।',
+    });
+  } else if ((VIDAAL_MAP[dayOfWeek] || []).includes(nextNaksIdx)) {
+    aadalVidaalList.push({
+      name: 'विडाल योग',
+      type: 'Vidaal',
+      isAuspicious: false,
+      startTime: naksEndTimeStr,
+      endTime: 'अगले सूर्योदय तक',
+      description: 'विडाल योग में छल, नुकसान व विवाद की सम्भावना रहती है, सावधानी रखें।',
+    });
+  }
+
+  // 7. Pravishte / Gate (प्रविष्टे / गते)
+  const gateVal = panchang.hinduDate?.praviste || 15;
+  const solarMonthStr = panchang.hinduDate?.solarMonth || 'Tula (तुला)';
+  const pravishte = {
+    gate: gateVal,
+    formatted: `${gateVal} प्रविष्टे / गते`,
+    solarMonth: solarMonthStr,
+  };
+
+  // 8. Bhadra Mukha & Puchha Micro-Breakup (5 Ghatis = 2h, 3 Ghatis = 1h 12m)
+  const isBhadraPresent =
+    panchang.bhadra?.active ||
+    panchang.hinduDate?.karana?.name?.includes('Vishti') ||
+    panchang.hinduDate?.karana?.hindiName?.includes('विष्टि') ||
+    panchang.hinduDate?.karana1?.name?.includes('Vishti') ||
+    panchang.hinduDate?.karana2?.name?.includes('Vishti');
+
+  let bStartMin = sunsetMin - 40; // fallback
+  let bEndMin = (bStartMin + 720) % 1440;
+  if (panchang.bhadra?.startTime) {
+    bStartMin = parseTimeToMinutes(panchang.bhadra.startTime);
+  } else if (panchang.hinduDate?.karana?.endTime) {
+    bStartMin = parseTimeToMinutes(panchang.hinduDate.karana.endTime);
+    bEndMin = (bStartMin + 660) % 1440;
+  }
+  if (panchang.bhadra?.endTime) {
+    bEndMin = parseTimeToMinutes(panchang.bhadra.endTime);
+  }
+
+  const mukhaStartMin = bStartMin;
+  const mukhaEndMin = (bStartMin + 120) % 1440;
+  const puchhaStartMin = ((bEndMin - 72) % 1440 + 1440) % 1440;
+  const puchhaEndMin = bEndMin;
+
+  const bhadraMicroBreakup: BhadraMicroBreakup = {
+    active: Boolean(isBhadraPresent),
+    vasHindi:
+      panchang.bhadra?.vasHindi ||
+      ([0, 1, 2].includes(safeMoonSignIdx)
+        ? 'स्वर्गलोक (शुभ)'
+        : [3, 4, 5].includes(safeMoonSignIdx)
+        ? 'पाताललोक (शुभ)'
+        : 'मृत्युलोक / पृथ्वी (अशुभ)'),
+    mukhaWindow: {
+      start: formatMinutesTo12Hr(mukhaStartMin),
+      end: formatMinutesTo12Hr(mukhaEndMin),
+      duration: '२ घंटे (५ घटी)',
+      description: 'भद्रा मुख: अत्यंत अनिष्टकारी एवं त्याज्य काल। इसमें किसी भी प्रकार का शुभ कार्य न करें।',
+    },
+    puchhaWindow: {
+      start: formatMinutesTo12Hr(puchhaStartMin),
+      end: formatMinutesTo12Hr(puchhaEndMin),
+      duration: '१ घंटा १२ मिनट (३ घटी)',
+      description: 'भद्रा पुच्छ: सर्वकार्य सिद्धिदायक काल! इसमें कार्य करने से भद्रा का भय व दोष समाप्त होता है।',
+    },
+  };
+
+  // 9. Festivals / Vrats for the day
   const festivals = getFestivalsForDay(panchang);
 
   return {
@@ -341,11 +501,14 @@ export function calculateDeepPanchang(
     netrama: 'द्विनेत्र (२ नेत्र - उत्तम दृष्टि)',
     jeevanama: 'सजीव (पूर्ण प्राण युक्त)',
     homahuti,
+    bhadraMicroBreakup,
     udayaLagnas,
     chandrabalamList,
     tarabalamSummary: { shubhTaras, ashubhTaras },
     brihaspatiSamvatsara,
     mantriMandala,
+    aadalVidaalList,
+    pravishte,
     dinamanaFormatted,
     ratrimanaFormatted,
     madhyahnaTime,

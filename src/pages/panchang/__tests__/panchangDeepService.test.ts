@@ -16,6 +16,9 @@ describe('panchangDeepService calculations', () => {
     expect(deep.chandraVasa.directionHindi).toBeDefined();
     expect(deep.rahuVasa).toBeDefined();
     expect(deep.homahuti).toBeDefined();
+    expect(deep.bhadraMicroBreakup).toBeDefined();
+    expect(deep.bhadraMicroBreakup.mukhaWindow.duration).toContain('घंटे');
+    expect(deep.bhadraMicroBreakup.puchhaWindow.duration).toContain('घंटा');
 
     // 2. Lagna & Muhurta
     expect(deep.udayaLagnas).toHaveLength(12);
@@ -29,7 +32,15 @@ describe('panchangDeepService calculations', () => {
     expect(deep.mantriMandala).toHaveLength(10);
     expect(deep.mantriMandala[0].portfolio).toBe('King');
 
-    // 4. Astronomical Epochs
+    // 4. Aadal & Vidaal Yogas
+    expect(deep.aadalVidaalList.length).toBeGreaterThan(0);
+    expect(deep.aadalVidaalList[0].name).toMatch(/आडल योग|विडाल योग/);
+
+    // 5. Pravishte / Gate
+    expect(deep.pravishte.gate).toBeGreaterThanOrEqual(1);
+    expect(deep.pravishte.formatted).toContain('प्रविष्टे / गते');
+
+    // 6. Astronomical Epochs
     expect(deep.dinamanaFormatted).toContain('घंटे');
     expect(deep.ratrimanaFormatted).toContain('घंटे');
     expect(deep.kaliyugaYear).toBe(5127);

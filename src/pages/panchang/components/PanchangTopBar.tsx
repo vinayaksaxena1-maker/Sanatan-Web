@@ -39,7 +39,7 @@ export const PanchangTopBar: React.FC<PanchangTopBarProps> = ({
                 <span>मुख्य पृष्ठ</span>
               </Link>
               <span>/</span>
-              <span className="text-[#c2410c] font-bold">दैनिक पंचांग हब</span>
+              <span className="text-[#c2410c] font-bold">दैनिक पंचांग</span>
             </div>
 
             <button
@@ -119,7 +119,7 @@ export const PanchangTopBar: React.FC<PanchangTopBarProps> = ({
                 : 'bg-[#fffaf0] hover:bg-[#fbeecc] border border-[#dec9ab] text-[#26150b]'
             }`}
           >
-            आज (Today)
+            आज
           </button>
           <button
             onClick={goToNextDay}
@@ -135,50 +135,6 @@ export const PanchangTopBar: React.FC<PanchangTopBarProps> = ({
           <span className="text-xs sm:text-sm font-bold text-[#26150b] tracking-wide">
             {formattedDate}
           </span>
-        </div>
-      </section>
-
-      {/* 3. 10-Item Samvat & Cosmic Metadata Strip */}
-      <section className="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 gap-2">
-        <div className="p-2.5 rounded-xl bg-white/85 border border-[#dec9ab]/60 text-center shadow-2xs">
-          <span className="text-[10px] text-[#735641] block">विक्रम संवत</span>
-          <span className="text-xs font-bold text-[#c2410c]">{toDevanagariNumerals(hd.samvatVikram)}</span>
-        </div>
-        <div className="p-2.5 rounded-xl bg-white/85 border border-[#dec9ab]/60 text-center shadow-2xs">
-          <span className="text-[10px] text-[#735641] block">शक संवत</span>
-          <span className="text-xs font-bold text-[#26150b]">{toDevanagariNumerals(hd.samvatShaka)}</span>
-        </div>
-        <div className="p-2.5 rounded-xl bg-white/85 border border-[#dec9ab]/60 text-center shadow-2xs">
-          <span className="text-[10px] text-[#735641] block">कलि संवत</span>
-          <span className="text-xs font-bold text-[#26150b]">५१२६</span>
-        </div>
-        <div className="p-2.5 rounded-xl bg-white/85 border border-[#dec9ab]/60 text-center shadow-2xs">
-          <span className="text-[10px] text-[#735641] block">मास (पूर्णिमान्त)</span>
-          <span className="text-xs font-bold text-[#b45309]">{hd.monthPurnimantaHindi || hd.monthHindi}</span>
-        </div>
-        <div className="p-2.5 rounded-xl bg-white/85 border border-[#dec9ab]/60 text-center shadow-2xs">
-          <span className="text-[10px] text-[#735641] block">मास (अमान्त)</span>
-          <span className="text-xs font-bold text-[#26150b]">{hd.monthAmantaHindi || hd.monthHindi}</span>
-        </div>
-        <div className="p-2.5 rounded-xl bg-white/85 border border-[#dec9ab]/60 text-center shadow-2xs">
-          <span className="text-[10px] text-[#735641] block">पक्ष</span>
-          <span className="text-xs font-bold text-[#c2410c]">{hd.paksha === 'Shukla' ? 'शुक्ल पक्ष' : 'कृष्ण पक्ष'}</span>
-        </div>
-        <div className="p-2.5 rounded-xl bg-white/85 border border-[#dec9ab]/60 text-center shadow-2xs">
-          <span className="text-[10px] text-[#735641] block">ऋतु</span>
-          <span className="text-xs font-bold text-[#26150b]">{hd.ritu || 'शरद ऋतु'}</span>
-        </div>
-        <div className="p-2.5 rounded-xl bg-white/85 border border-[#dec9ab]/60 text-center shadow-2xs">
-          <span className="text-[10px] text-[#735641] block">अयन</span>
-          <span className="text-xs font-bold text-[#26150b]">{hd.ayana || 'दक्षिणायन'}</span>
-        </div>
-        <div className="p-2.5 rounded-xl bg-white/85 border border-[#dec9ab]/60 text-center shadow-2xs">
-          <span className="text-[10px] text-[#735641] block">सूर्य नक्षत्र</span>
-          <span className="text-xs font-bold text-[#b45309]">{panchang.suryaNakshatra?.nameHindi || 'चित्रा'}</span>
-        </div>
-        <div className="p-2.5 rounded-xl bg-white/85 border border-[#dec9ab]/60 text-center shadow-2xs">
-          <span className="text-[10px] text-[#735641] block">सूर्योदय</span>
-          <span className="text-xs font-bold text-[#c2410c] font-mono">{panchang.sunrise}</span>
         </div>
       </section>
     </div>

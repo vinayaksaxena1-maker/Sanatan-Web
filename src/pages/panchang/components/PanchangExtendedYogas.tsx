@@ -1,8 +1,8 @@
 /**
  * Sanatan Web (सनातन घड़ी)
- * Component: PanchangExtendedYogas.tsx
- * Section: अतिरिक्त योग व सूक्ष्म काल
- * आनन्दादि २८ योग, रवि/सर्वार्थ/अमृत सिद्धि, पुष्कर योग, निशीथ, सन्ध्या काल, वर्ज्यम्, गंडमूल
+ * Component: PanchangExtendedYogas
+ * Section: ६. अतिरिक्त योग व सूक्ष्म काल (Special Yogas & Micro-Timings)
+ * Box-free, pure typographic layout with clear Normal Headings
  * Pure Web, React 19, Strict < 300 lines modular standard
  */
 
@@ -16,173 +16,126 @@ interface Props {
 export const PanchangExtendedYogas: React.FC<Props> = ({ data }) => {
   const { panchang, deepAnalysis } = data;
   const { anandadiYoga, shubhYogas, pushkarYog, varjyam, gandMool, dagdaTithi } = panchang;
-  const { nishitaMuhurta, pratahSandhya, sayahnaSandhya } = deepAnalysis;
+  const { nishitaMuhurta, pratahSandhya, sayahnaSandhya, aadalVidaalList } = deepAnalysis;
+
+  const yogaRows = [
+    {
+      name: 'आनन्दादि २८ महायोग',
+      heading: anandadiYoga?.nameHindi || 'आनन्द योग',
+      status: anandadiYoga?.isAuspicious ? '✓ शुभ योग' : '⚠ सामान्य / मध्यम',
+      statusColor: anandadiYoga?.isAuspicious ? 'text-emerald-800' : 'text-amber-800',
+      time: anandadiYoga?.endTime ? `समाप्ति: ${anandadiYoga.endTime}` : 'दिन पर्यन्त',
+      details: anandadiYoga?.description || 'आनन्दादि चक्र का विशिष्ट योग जो दिन के कार्यों में सफलता या अवरोध दर्शाता है।',
+    },
+    {
+      name: 'आडल व विडाल योग',
+      heading: aadalVidaalList && aadalVidaalList.length > 0
+        ? aadalVidaalList.map((av) => `${av.name} (${av.startTime} – ${av.endTime})`).join(' | ')
+        : 'कोई विशेष आडल/विडाल योग नहीं',
+      status: 'वार-नक्षत्र योग',
+      statusColor: 'text-[#c2410c]',
+      time: 'नक्षत्र चक्र काल',
+      details: 'आडल योग शत्रु पराजय, आत्मबल व प्रतियोगिता में शुभ; विडाल योग में लेन-देन व यात्रा में सावधानी रखें।',
+    },
+    {
+      name: 'सिद्धि व रवि योग',
+      heading: shubhYogas && shubhYogas.length > 0
+        ? shubhYogas.map((sy) => `${sy.hindiName} (${sy.start} – ${sy.end})`).join(' | ')
+        : 'आज कोई विशेष सर्वार्थ सिद्धि या अमृत सिद्धि योग सक्रिय नहीं है',
+      status: shubhYogas && shubhYogas.length > 0 ? '✓ सिद्धिप्रद काल' : 'सामान्य काल',
+      statusColor: shubhYogas && shubhYogas.length > 0 ? 'text-emerald-800' : 'text-[#735641]',
+      time: shubhYogas && shubhYogas.length > 0 ? shubhYogas[0].start : '--',
+      details: 'सर्वार्थ सिद्धि एवं अमृत सिद्धि योग समस्त नए कार्यों, खरीदारी व निवेश में शत-प्रतिशत सफलता प्रदान करते हैं।',
+    },
+    {
+      name: 'पुष्कर योग विचार',
+      heading: pushkarYog?.active ? pushkarYog.hindiName : 'द्विपुष्कर / त्रिपुष्कर योग सक्रिय नहीं',
+      status: pushkarYog?.active ? pushkarYog.hindiName : 'सक्रिय नहीं',
+      statusColor: pushkarYog?.active ? 'text-purple-800 font-bold' : 'text-[#735641]',
+      time: pushkarYog?.active ? 'विशेष तिथि-वार योग' : '--',
+      details: pushkarYog?.description || 'पुष्कर योग में किए गए शुभ कार्य २ या ३ गुना फल प्रदान करते हैं, ऋण लेन-देन वर्जित है।',
+    },
+    {
+      name: 'निशीथ मुहूर्त (मध्यरात्रि)',
+      heading: `${nishitaMuhurta.start} – ${nishitaMuhurta.end}`,
+      status: 'महानिशीथ काल',
+      statusColor: 'text-indigo-900',
+      time: `${nishitaMuhurta.start} से`,
+      details: 'तांत्रिक साधना, महालक्ष्मी पूजन, निशा पूजा व कालरात्रि आराधना का मुख्य समय।',
+    },
+    {
+      name: 'सन्ध्या काल (उभय सन्ध्या)',
+      heading: `प्रातः: ${pratahSandhya.start} – ${pratahSandhya.end} | सायं: ${sayahnaSandhya.start} – ${sayahnaSandhya.end}`,
+      status: 'सन्ध्योपासन काल',
+      statusColor: 'text-[#b45309]',
+      time: 'उभय संधिकाल',
+      details: 'गायत्री जप, सूर्य तर्पण एवं दैनिक सन्ध्योपासन हेतु शास्त्रोक्त काल।',
+    },
+    {
+      name: 'वर्ज्यम् काल (त्याज्य समय)',
+      heading: varjyam && varjyam.length > 0 ? `${varjyam[0].start} – ${varjyam[0].end}` : 'आज कोई वर्ज्यम् काल नहीं है',
+      status: varjyam && varjyam.length > 0 ? '⚠ त्याज्य काल' : '✓ निर्दोष',
+      statusColor: varjyam && varjyam.length > 0 ? 'text-rose-800' : 'text-emerald-800',
+      time: varjyam && varjyam.length > 0 ? varjyam[0].start : '--',
+      details: 'नक्षत्र का विष घटी काल — इस अवधि में शुभ कार्य, शल्य चिकित्सा व नवीन शुरुआत न करें।',
+    },
+    {
+      name: 'गंडमूल व दग्ध तिथि विचार',
+      heading: `${gandMool?.isGandMool ? `गंडमूल नक्षत्र: ${gandMool.nakshatraHindiName}` : '✓ गंडमूल दोष नहीं'} | ${dagdaTithi?.isDagda ? '⚠ दग्ध तिथि' : '✓ तिथि निर्दोष'}`,
+      status: gandMool?.isGandMool ? '⚠ गंडमूल' : '✓ निर्दोष',
+      statusColor: gandMool?.isGandMool ? 'text-amber-800' : 'text-emerald-800',
+      time: 'दैनिक शुद्धि',
+      details: 'गंडमूल नक्षत्र में जन्म होने पर शांति आवश्यक होती है। दग्ध तिथि में विवाह आदि मांगलिक कार्य त्याज्य हैं।',
+    },
+  ];
 
   return (
-    <section className="bg-gradient-to-br from-[#fffdf8] via-[#fbf7ee] to-[#f7f0e1] rounded-3xl p-6 sm:p-8 border border-[#d97706]/25 shadow-lg space-y-6">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#d97706]/20 pb-4">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#f59e0b] to-[#ea580c] text-white flex items-center justify-center font-bold text-xl shadow-md">
-            ✨
-          </div>
-          <div>
-            <h2 className="text-xl sm:text-2xl font-bold text-[#451a03] font-serif tracking-wide">
-              अतिरिक्त योग व सूक्ष्म काल (Special Yogas & Micro-Timings)
-            </h2>
-            <p className="text-xs sm:text-sm text-[#78350f]/80">
-              आनन्दादि महायोग, रवि/सर्वार्थ सिद्धि, पुष्कर योग, निशीथ काल एवं वर्ज्यम्
-            </p>
-          </div>
-        </div>
-        <span className="self-start sm:self-auto px-3.5 py-1 rounded-full text-xs font-semibold bg-[#f59e0b]/15 text-[#9a3412] border border-[#f59e0b]/30">
-          शुभ-अशुभ योग विचार
-        </span>
+    <section className="font-serif py-4 border-b border-[#dec9ab]/70 space-y-4">
+      {/* 1. Main Section Heading (No Box) */}
+      <div className="border-b border-[#dec9ab]/50 pb-3">
+        <h2 className="text-2xl sm:text-3xl font-bold text-[#26150b]">
+          ६. अतिरिक्त योग व सूक्ष्म काल
+        </h2>
+        <p className="text-xs sm:text-sm text-[#735641] mt-1">
+          आनन्दादि २८ महायोग, आडल-विडाल, सिद्धि व रवि योग, निशीथ एवं सन्ध्या काल
+        </p>
       </div>
 
-      {/* Grid of Special Yogas */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {/* 1. Anandadi 28 Yoga */}
-        <div className={`p-4 rounded-2xl border ${
-          anandadiYoga?.isAuspicious
-            ? 'bg-emerald-50/70 border-emerald-500/25'
-            : 'bg-amber-50/70 border-amber-500/25'
-        }`}>
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#9a3412]">
-              आनन्दादि २८ महायोग
-            </span>
-            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-              anandadiYoga?.isAuspicious ? 'bg-emerald-600 text-white' : 'bg-amber-600 text-white'
-            }`}>
-              {anandadiYoga?.isAuspicious ? '✓ शुभ योग' : '⚠ सामान्य / मध्यम'}
-            </span>
-          </div>
-          <h3 className="font-bold font-serif text-base text-[#451a03]">
-            {anandadiYoga?.nameHindi || 'आनन्द योग'} ({anandadiYoga?.name || 'Ananda'})
-          </h3>
-          <p className="text-xs text-[#78350f]/80 mt-1">
-            {anandadiYoga?.description || 'आनन्दादि चक्र का विशिष्ट योग जो दिन के कार्यों में सफलता या बाधा दर्शाता है।'}
-          </p>
-          {anandadiYoga?.endTime && (
-            <span className="text-[11px] font-mono font-medium text-[#b45309] block mt-2">
-              समाप्ति: {anandadiYoga.endTime}
-            </span>
-          )}
-        </div>
-
-        {/* 2. Special Siddhi & Ravi Yogas */}
-        <div className="p-4 rounded-2xl border bg-white/80 border-[#d97706]/20">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#9a3412] block mb-1.5">
-            सिद्धि व रवि योग
-          </span>
-          {shubhYogas && shubhYogas.length > 0 ? (
-            <div className="space-y-2">
-              {shubhYogas.map((sy, i) => (
-                <div key={i} className="flex items-center justify-between bg-emerald-50/80 p-2 rounded-lg border border-emerald-500/20">
-                  <span className="text-xs font-bold text-emerald-950 font-serif">
-                    ✓ {sy.hindiName}
-                  </span>
-                  <span className="text-[11px] font-mono text-emerald-800">
-                    {sy.start} – {sy.end}
-                  </span>
-                </div>
-              ))}
+      {/* 2. Clean Normal Headings & Rows (No Boxes) */}
+      <div className="divide-y divide-[#dec9ab]/40">
+        {yogaRows.map((item, idx) => (
+          <div
+            key={idx}
+            className="py-3 sm:py-4 flex flex-col md:flex-row md:items-center justify-between gap-2 sm:gap-4"
+          >
+            <div>
+              <div className="text-xs font-semibold text-[#b45309] uppercase">
+                {item.name}
+              </div>
+              <h3 className="text-base sm:text-lg font-bold text-[#26150b] mt-0.5">
+                {item.heading}
+              </h3>
+              <p className="text-xs text-[#735641] mt-0.5 leading-relaxed">
+                {item.details}
+              </p>
             </div>
-          ) : (
-            <p className="text-xs text-[#78350f]/80 mt-1">
-              आज कोई विशेष सर्वार्थ सिद्धि अथवा अमृत सिद्धि योग सक्रिय नहीं है। सामान्य शुभ मुहूर्तों का अनुसरण करें।
-            </p>
-          )}
-        </div>
 
-        {/* 3. Pushkar Yoga */}
-        <div className={`p-4 rounded-2xl border ${
-          pushkarYog?.active
-            ? 'bg-purple-50/70 border-purple-500/30 text-purple-950'
-            : 'bg-white/80 border-[#d97706]/20'
-        }`}>
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#9a3412]">
-              पुष्कर योग विचार
-            </span>
-            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-              pushkarYog?.active ? 'bg-purple-600 text-white' : 'bg-slate-200 text-slate-700'
-            }`}>
-              {pushkarYog?.active ? pushkarYog.hindiName : 'सक्रिय नहीं'}
-            </span>
+            <div className="flex items-center gap-4 text-xs shrink-0 pt-1 md:pt-0">
+              {item.time !== '--' && (
+                <div>
+                  <span className="text-[#735641]">काल: </span>
+                  <span className="font-bold font-mono text-[#c2410c]">{item.time}</span>
+                </div>
+              )}
+              <div className="border-l border-[#dec9ab]/60 pl-3">
+                <span className={`font-semibold ${item.statusColor}`}>{item.status}</span>
+              </div>
+            </div>
           </div>
-          <h3 className="font-bold font-serif text-base text-[#451a03]">
-            {pushkarYog?.active ? pushkarYog.hindiName : 'द्विपुष्कर / त्रिपुष्कर योग'}
-          </h3>
-          <p className="text-xs text-[#78350f]/80 mt-1">
-            {pushkarYog?.description || 'पुष्कर योग में किए गए शुभ कार्य २ या ३ गुना फल प्रदान करते हैं, ऋण लेन-देन वर्जित है।'}
-          </p>
-        </div>
-      </div>
-
-      {/* Subtle Kaal Matrix: Nishita, Sandhya, Varjyam, Gand Mool */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        {/* Nishita Kaal */}
-        <div className="bg-white/85 p-3.5 rounded-xl border border-[#d97706]/20">
-          <div className="flex items-center justify-between text-xs text-[#9a3412] font-bold">
-            <span>निशीथ मुहूर्त (मध्यरात्रि)</span>
-            <span>🌙</span>
-          </div>
-          <span className="text-sm font-bold font-mono text-[#451a03] block mt-1">
-            {nishitaMuhurta.start} – {nishitaMuhurta.end}
-          </span>
-          <span className="text-[11px] text-[#78350f]/75 block mt-0.5">
-            तांत्रिक साधना, महालक्ष्मी व कालरात्रि पूजा काल
-          </span>
-        </div>
-
-        {/* Sandhya Kaal */}
-        <div className="bg-white/85 p-3.5 rounded-xl border border-[#d97706]/20">
-          <div className="flex items-center justify-between text-xs text-[#9a3412] font-bold">
-            <span>सन्ध्या काल (उभय)</span>
-            <span>🌅</span>
-          </div>
-          <span className="text-xs font-mono text-[#451a03] block mt-1">
-            प्रातः: {pratahSandhya.start} – {pratahSandhya.end}
-          </span>
-          <span className="text-xs font-mono text-[#451a03] block mt-0.5">
-            सायं: {sayahnaSandhya.start} – {sayahnaSandhya.end}
-          </span>
-        </div>
-
-        {/* Varjyam */}
-        <div className="bg-white/85 p-3.5 rounded-xl border border-[#d97706]/20">
-          <div className="flex items-center justify-between text-xs text-[#9a3412] font-bold">
-            <span>वर्ज्यम् (त्याज्य काल)</span>
-            <span>⛔</span>
-          </div>
-          {varjyam && varjyam.length > 0 ? (
-            <span className="text-sm font-bold font-mono text-rose-700 block mt-1">
-              {varjyam[0].start} – {varjyam[0].end}
-            </span>
-          ) : (
-            <span className="text-sm font-bold text-emerald-700 block mt-1">कोई वर्ज्यम् नहीं</span>
-          )}
-          <span className="text-[11px] text-[#78350f]/75 block mt-0.5">
-            नक्षत्र का विष घटी काल, नवीन कार्य न करें
-          </span>
-        </div>
-
-        {/* Gand Mool & Dagda Tithi */}
-        <div className="bg-white/85 p-3.5 rounded-xl border border-[#d97706]/20">
-          <div className="flex items-center justify-between text-xs text-[#9a3412] font-bold">
-            <span>गंडमूल व दग्ध विचार</span>
-            <span>🌿</span>
-          </div>
-          <span className="text-xs font-bold text-[#451a03] block mt-1">
-            {gandMool?.isGandMool ? `गंडमूल: ${gandMool.nakshatraHindiName}` : '✓ गंडमूल दोष नहीं'}
-          </span>
-          <span className="text-[11px] text-[#78350f]/75 block mt-0.5">
-            {dagdaTithi?.isDagda ? '⚠ आज दग्ध तिथि है' : '✓ तिथि निर्दोष है'}
-          </span>
-        </div>
+        ))}
       </div>
     </section>
   );
 };
+
+export default PanchangExtendedYogas;

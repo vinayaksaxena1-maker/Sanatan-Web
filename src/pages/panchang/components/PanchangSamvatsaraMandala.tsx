@@ -1,8 +1,8 @@
 /**
  * Sanatan Web (सनातन घड़ी)
- * Component: PanchangSamvatsaraMandala.tsx
- * Section: संवत्सर व मन्त्री मण्डल (Samvatsara System)
- * ६० बृहस्पति संवत्सर, वर्ष का राजा/मन्त्री/सेनाधिपति मन्त्री मण्डल
+ * Component: PanchangSamvatsaraMandala
+ * Section: ७. संवत्सर व मन्त्री मण्डल (Samvatsara & Governance Mandala)
+ * Box-free, pure typographic layout with clear Normal Headings
  * Pure Web, React 19, Strict < 300 lines modular standard
  */
 
@@ -19,92 +19,76 @@ export const PanchangSamvatsaraMandala: React.FC<Props> = ({ data }) => {
   const { brihaspatiSamvatsara, mantriMandala } = deepAnalysis;
 
   return (
-    <section className="bg-gradient-to-br from-[#fffdf7] via-[#faf5e8] to-[#f5eed6] rounded-3xl p-6 sm:p-8 border border-[#d97706]/25 shadow-lg space-y-6">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#d97706]/20 pb-4">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#b45309] to-[#78350f] text-white flex items-center justify-center font-bold text-xl shadow-md">
-            👑
-          </div>
+    <section className="font-serif py-4 border-b border-[#dec9ab]/70 space-y-6">
+      {/* 1. Main Section Heading (No Box) */}
+      <div className="border-b border-[#dec9ab]/50 pb-3">
+        <h2 className="text-2xl sm:text-3xl font-bold text-[#26150b]">
+          ३. संवत्सर व मन्त्री मण्डल
+        </h2>
+        <p className="text-xs sm:text-sm text-[#735641] mt-1">
+          ६० बृहस्पति संवत्सर चक्र एवं विक्रम संवत् का आकाशीय मन्त्री मण्डल
+        </p>
+      </div>
+
+      {/* 2. Samvatsara Overview Rows */}
+      <div className="divide-y divide-[#dec9ab]/40">
+        <div className="py-3 flex flex-col md:flex-row md:items-center justify-between gap-2">
           <div>
-            <h2 className="text-xl sm:text-2xl font-bold text-[#451a03] font-serif tracking-wide">
-              संवत्सर व मन्त्री मण्डल (Samvatsara & Governance Mandala)
-            </h2>
-            <p className="text-xs sm:text-sm text-[#78350f]/80">
-              ६० बृहस्पति संवत्सर चक्र एवं विक्रम संवत् का आकाशीय मन्त्री मण्डल
+            <div className="text-xs font-semibold text-[#b45309] uppercase">
+              विक्रम एवं शक संवत्सर चक्र
+            </div>
+            <h3 className="text-base sm:text-lg font-bold text-[#26150b] mt-0.5">
+              विक्रम संवत्सर: <span className="text-[#c2410c]">{brihaspatiSamvatsara.vikramSamvatsara}</span> ({samvatVikram}) | शक संवत्सर: <span className="text-[#26150b]">{brihaspatiSamvatsara.shakaSamvatsara}</span> ({samvatShaka})
+            </h3>
+            <p className="text-xs text-[#735641] mt-0.5">
+              उत्तर भारतीय बृहस्पति चक्र के अनुसार संवत्सर संख्या #{brihaspatiSamvatsara.index + 1} | दक्षिण भारतीय व शक गणना अनुसार {brihaspatiSamvatsara.shakaSamvatsara} संवत्सर।
             </p>
           </div>
-        </div>
-        <span className="self-start sm:self-auto px-3.5 py-1 rounded-full text-xs font-semibold bg-[#b45309]/15 text-[#78350f] border border-[#b45309]/30">
-          वार्षिक खगोलीय परिषद
-        </span>
-      </div>
-
-      {/* Samvatsara Identity Card */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {/* Vikram Samvatsara */}
-        <div className="p-4 rounded-2xl bg-white/85 border border-[#d97706]/20">
-          <span className="text-xs font-bold uppercase text-[#9a3412] block">
-            विक्रम संवत् {samvatVikram} संवत्सर
+          <span className="text-xs font-bold text-[#c2410c] shrink-0">
+            ६० संवत्सर चक्र
           </span>
-          <h3 className="text-xl font-bold font-serif text-[#451a03] mt-1">
-            {brihaspatiSamvatsara.vikramSamvatsara}
-          </h3>
-          <p className="text-xs text-[#78350f]/80 mt-1">
-            उत्तर भारतीय बृहस्पति चक्र के अनुसार संवत्सर संख्या #{brihaspatiSamvatsara.index + 1}
-          </p>
         </div>
 
-        {/* Shaka Samvatsara */}
-        <div className="p-4 rounded-2xl bg-white/85 border border-[#d97706]/20">
-          <span className="text-xs font-bold uppercase text-[#9a3412] block">
-            शक संवत् {samvatShaka} संvatsara
+        <div className="py-3 flex flex-col md:flex-row md:items-center justify-between gap-2">
+          <div>
+            <div className="text-xs font-semibold text-[#b45309] uppercase">
+              वर्ष का आकाशीय शासनाध्यक्ष
+            </div>
+            <h3 className="text-base sm:text-lg font-bold text-[#26150b] mt-0.5">
+              राजा: देवगुरु बृहस्पति 👑 | मन्त्री: मंगल देव ⚔️
+            </h3>
+            <p className="text-xs text-[#735641] mt-0.5">
+              बृहस्पति का राजा होना ज्ञान, धर्म, न्याय व शिक्षा की वृद्धि दर्शाता है; मंगल का मन्त्रित्व रक्षा व सैन्य शक्ति को बल देता है।
+            </p>
+          </div>
+          <span className="text-xs font-bold text-emerald-800 shrink-0">
+            शुभ शासी परिषद
           </span>
-          <h3 className="text-xl font-bold font-serif text-[#451a03] mt-1">
-            {brihaspatiSamvatsara.shakaSamvatsara}
-          </h3>
-          <p className="text-xs text-[#78350f]/80 mt-1">
-            दक्षिण भारतीय व शक परम्परा के अनुसार ६० संवत्सरों में स्थिति
-          </p>
-        </div>
-
-        {/* Governance Synopsis */}
-        <div className="p-4 rounded-2xl bg-gradient-to-br from-[#ea580c]/10 to-[#f59e0b]/15 border border-[#ea580c]/25">
-          <span className="text-xs font-bold uppercase text-[#c2410c] block">
-            वर्ष का आकाशीय शासनाध्यक्ष
-          </span>
-          <h3 className="text-lg font-bold font-serif text-[#451a03] mt-1">
-            राजा: देवगुरु बृहस्पति 👑
-          </h3>
-          <p className="text-xs text-[#78350f]/85 mt-1">
-            मन्त्री: मंगल देव ⚔️ | ज्ञान, धर्म, अर्थ एवं नीति की वृद्धि का काल
-          </p>
         </div>
       </div>
 
-      {/* Mantri Mandala 10 Portfolios Bento */}
-      <div>
-        <h4 className="text-xs font-bold uppercase tracking-wider text-[#9a3412] mb-3">
-          वर्ष का मन्त्री मण्डल (The 10 Planetary Portfolios):
-        </h4>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+      {/* 3. The 10 Planetary Portfolios (Clean Normal List, No Boxes) */}
+      <div className="space-y-3 pt-2">
+        <div className="border-b border-[#dec9ab]/40 pb-1.5">
+          <h3 className="text-lg font-bold text-[#26150b]">
+            वर्ष का मन्त्री मण्डल
+          </h3>
+          <p className="text-xs text-[#735641] mt-0.5">
+            संवत्सर के विभिन्न प्राकृतिक, सामाजिक व आर्थिक विभागों के ग्रहीय अधिपति:
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-x-6 gap-y-3 text-xs py-1">
           {mantriMandala.map((item, idx) => (
-            <div
-              key={idx}
-              className="p-3 bg-white/80 rounded-xl border border-[#d97706]/15 hover:border-[#ea580c]/40 transition-all hover:shadow-xs"
-            >
-              <div className="flex items-center gap-1.5 text-base mb-1">
-                <span>{item.icon}</span>
-                <span className="text-xs font-bold text-[#451a03] truncate font-serif">
-                  {item.portfolioHindi.split(' ')[0]}
+            <div key={idx} className="py-1.5 border-b border-[#dec9ab]/25 flex flex-col justify-between">
+              <div>
+                <span className="text-[#735641] block text-[11px]">
+                  {item.icon} {item.portfolioHindi}
+                </span>
+                <span className="text-sm font-bold text-[#26150b] block mt-0.5 font-serif">
+                  {item.planetHindi}
                 </span>
               </div>
-              <span className="text-[11px] text-[#78350f]/80 block truncate">
-                {item.portfolioHindi}
-              </span>
-              <span className="text-xs font-bold text-[#b45309] block mt-1 font-serif">
-                {item.planetHindi}
-              </span>
             </div>
           ))}
         </div>
@@ -112,3 +96,5 @@ export const PanchangSamvatsaraMandala: React.FC<Props> = ({ data }) => {
     </section>
   );
 };
+
+export default PanchangSamvatsaraMandala;
