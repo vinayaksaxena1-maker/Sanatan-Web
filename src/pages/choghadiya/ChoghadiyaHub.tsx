@@ -14,6 +14,7 @@ import { ChoghadiyaTopBar } from './components/ChoghadiyaTopBar';
 import { ChoghadiyaLiveHero } from './components/ChoghadiyaLiveHero';
 import { ChoghadiyaLegend } from './components/ChoghadiyaLegend';
 import { ChoghadiyaDayNightGrid } from './components/ChoghadiyaDayNightGrid';
+import { HoraLiveHero } from './components/HoraLiveHero';
 import { HoraTable } from './components/HoraTable';
 import { ChoghadiyaJigyasa } from './components/ChoghadiyaJigyasa';
 
@@ -47,7 +48,10 @@ export const ChoghadiyaHub: React.FC = () => {
         {/* 4. 8 Day + 8 Night Choghadiya Bento Grid with Active Highlighting */}
         <ChoghadiyaDayNightGrid data={choghadiyaData} />
 
-        {/* 5. 24 Planetary Hora Matrix with Beej Mantras & Real-time Indicator */}
+        {/* 5. Live Active & Upcoming Planetary Hora Hero */}
+        <HoraLiveHero data={choghadiyaData} />
+
+        {/* 6. 24 Planetary Hora Matrix with Beej Mantras & Real-time Indicator */}
         <HoraTable data={choghadiyaData} />
 
         {/* 6. सनातन जिज्ञासा एवं शंका समाधान (Choghadiya & Hora FAQ Accordion) */}

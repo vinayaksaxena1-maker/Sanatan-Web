@@ -127,6 +127,9 @@ export interface UseChoghadiyaDataResult {
   dayHoras: HoraInterval[];
   nightHoras: HoraInterval[];
   activeHora: HoraInterval | null;
+  nextHora: HoraInterval | null;
+  horaCountdownFormatted: string;
+  horaProgressPercent: number;
   goToPreviousDay: () => void;
   goToNextDay: () => void;
   goToToday: () => void;
@@ -250,18 +253,53 @@ export function useChoghadiyaData(initialDate: Date = new Date()): UseChoghadiya
   const dayHoras = useMemo(() => allHoras.filter((h) => h.isDay), [allHoras]);
   const nightHoras = useMemo(() => allHoras.filter((h) => !h.isDay), [allHoras]);
 
-  // Determine active Hora
-  const activeHora = useMemo(() => {
-    for (const h of allHoras) {
+  // Determine active Hora & Hora Countdown
+  const { activeHora, nextHora, horaCountdownFormatted, horaProgressPercent } = useMemo(() => {
+    let found: HoraInterval | null = null;
+    let foundIdx = -1;
+    let remMin = 35;
+    let remSec = 60 - currentSecs;
+    let pct = 45;
+
+    for (let i = 0; i < allHoras.length; i++) {
+      const h = allHoras[i];
       const sM = parseTimeToMinutes(h.startTime);
       let eM = parseTimeToMinutes(h.endTime);
       if (eM < sM) eM += 1440;
       let nowM = currentMinutes;
       if (nowM < sM && sM > 720) nowM += 1440;
-      if (nowM >= sM && nowM < eM) return h;
+      if (nowM >= sM && nowM < eM) {
+        found = h;
+        foundIdx = i;
+        const totalDurationM = eM - sM || 60;
+        const elapsedM = nowM - sM;
+        remMin = Math.max(0, eM - nowM - 1);
+        pct = Math.min(100, Math.max(0, Math.round((elapsedM / totalDurationM) * 100)));
+        break;
+      }
     }
-    return allHoras[0] || null;
-  }, [allHoras, currentMinutes]);
+
+    if (!found && allHoras.length > 0) {
+      found = allHoras[0];
+      foundIdx = 0;
+    }
+
+    const nextH =
+      allHoras.length > 0
+        ? allHoras[(Math.max(0, foundIdx) + 1) % allHoras.length]
+        : null;
+
+    const mm = toDevanagariNumerals(String(remMin).padStart(2, '0'));
+    const ss = toDevanagariNumerals(String(remSec === 60 ? 0 : remSec).padStart(2, '0'));
+    const countdown = `${mm}:${ss}`;
+
+    return {
+      activeHora: found,
+      nextHora: nextH,
+      horaCountdownFormatted: countdown,
+      horaProgressPercent: pct,
+    };
+  }, [allHoras, currentMinutes, currentSecs]);
 
   return {
     currentCity,
@@ -283,6 +321,9 @@ export function useChoghadiyaData(initialDate: Date = new Date()): UseChoghadiya
     dayHoras,
     nightHoras,
     activeHora,
+    nextHora,
+    horaCountdownFormatted,
+    horaProgressPercent,
     goToPreviousDay,
     goToNextDay,
     goToToday,
