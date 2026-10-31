@@ -14,6 +14,11 @@ import { PanchangTopBar } from './components/PanchangTopBar';
 import { PanchangFiveAngas } from './components/PanchangFiveAngas';
 import { PanchangSolarLunar } from './components/PanchangSolarLunar';
 import { PanchangShubhAshubh } from './components/PanchangShubhAshubh';
+import { PanchangRitualShuddhi } from './components/PanchangRitualShuddhi';
+import { PanchangLagnaShuddhi } from './components/PanchangLagnaShuddhi';
+import { PanchangExtendedYogas } from './components/PanchangExtendedYogas';
+import { PanchangSamvatsaraMandala } from './components/PanchangSamvatsaraMandala';
+import { PanchangAstronomicalEpochs } from './components/PanchangAstronomicalEpochs';
 import { PanchangSocialCardModal } from './components/PanchangSocialCardModal';
 
 export const PanchangHub: React.FC = () => {
@@ -47,6 +52,21 @@ export const PanchangHub: React.FC = () => {
 
         {/* 4. Auspicious (शुभ मुहूर्त) & Inauspicious (राहुकाल) Timing Matrix + Disha Shool */}
         <PanchangShubhAshubh data={panchangData} />
+
+        {/* 5. निवास, चक्र एवं अनुष्ठान विचार (Ritual Shuddhi: शिववास, अग्निवास, भद्रा, दिशा शूल, दिशा वास) */}
+        <PanchangRitualShuddhi data={panchangData} />
+
+        {/* 6. मुहूर्त व लग्न शुद्धि (Lagna & Muhurta Depth: १२ उदय लग्न, पंचक रहित मुहूर्त, चन्द्रबल, ताराबल) */}
+        <PanchangLagnaShuddhi data={panchangData} />
+
+        {/* 7. अतिरिक्त योग व सूक्ष्म काल (आनन्दादि २८ योग, रवि/सिद्धि/पुष्कर योग, निशीथ, सन्ध्या, वर्ज्यम्, गंडमूल) */}
+        <PanchangExtendedYogas data={panchangData} />
+
+        {/* 8. संवत्सर व मन्त्री मण्डल (६० बृहस्पति संवत्सर चक्र, वर्ष का राजा/मन्त्री/सेनापति मण्डल) */}
+        <PanchangSamvatsaraMandala data={panchangData} />
+
+        {/* 9. खगोलीय मान व पंचांग प्रणालियां (दिनमान, रात्रिमान, मध्याह्न, कलि संवत्, अहर्गण, JD, राष्ट्रीय सिविल, व्रत) */}
+        <PanchangAstronomicalEpochs data={panchangData} />
       </main>
 
       {/* 5. Modals */}

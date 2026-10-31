@@ -9,6 +9,7 @@ import { useState, useMemo, useCallback } from 'react';
 import { useLocationStore } from '../../../store/locationStore';
 import { calculatePanchang } from '../../../engine';
 import type { PanchangInfo } from '../../../engine/types';
+import { calculateDeepPanchang, type DeepPanchangAnalysis } from '../services/panchangDeepService';
 
 export const HINDI_DAYS = ['रविवार', 'सोमवार', 'मंगलवार', 'बुधवार', 'गुरुवार', 'शुक्रवार', 'शनिवार'];
 export const HINDI_DAY_RULERS = [
@@ -52,6 +53,7 @@ export interface UsePanchangDataResult {
   goToToday: () => void;
   setSelectedDate: (d: Date) => void;
   solarProgressPercent: number;
+  deepAnalysis: DeepPanchangAnalysis;
 }
 
 export function usePanchangData(initialDate: Date = new Date()): UsePanchangDataResult {
@@ -65,6 +67,10 @@ export function usePanchangData(initialDate: Date = new Date()): UsePanchangData
   const panchang = useMemo(() => {
     return calculatePanchang(lat, lon, selectedDate);
   }, [lat, lon, selectedDate]);
+
+  const deepAnalysis = useMemo(() => {
+    return calculateDeepPanchang(panchang, lat, lon, selectedDate);
+  }, [panchang, lat, lon, selectedDate]);
 
   const dayIndex = selectedDate.getDay();
   const dayName = HINDI_DAYS[dayIndex];
@@ -133,5 +139,6 @@ export function usePanchangData(initialDate: Date = new Date()): UsePanchangData
     goToToday,
     setSelectedDate,
     solarProgressPercent,
+    deepAnalysis,
   };
 }
