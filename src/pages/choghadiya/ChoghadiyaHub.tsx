@@ -12,7 +12,6 @@ import CitySelectModal from '../../components/common/CitySelectModal';
 import { useChoghadiyaData } from './hooks/useChoghadiyaData';
 import { ChoghadiyaTopBar } from './components/ChoghadiyaTopBar';
 import { ChoghadiyaLiveHero } from './components/ChoghadiyaLiveHero';
-import { ChoghadiyaLegend } from './components/ChoghadiyaLegend';
 import { ChoghadiyaDayNightGrid } from './components/ChoghadiyaDayNightGrid';
 import { HoraLiveHero } from './components/HoraLiveHero';
 import { HoraTable } from './components/HoraTable';
@@ -42,10 +41,7 @@ export const ChoghadiyaHub: React.FC = () => {
         {/* 2. Live Active Choghadiya Hero & Radar Pulse with Live Countdown */}
         <ChoghadiyaLiveHero data={choghadiyaData} />
 
-        {/* 3. 7-Choghadiya Legend & Auspicious Nature Guide */}
-        <ChoghadiyaLegend />
-
-        {/* 4. 8 Day + 8 Night Choghadiya Bento Grid with Active Highlighting */}
+        {/* 3. 8 Day + 8 Night Choghadiya Bento Grid with Active Highlighting */}
         <ChoghadiyaDayNightGrid data={choghadiyaData} />
 
         {/* 5. Live Active & Upcoming Planetary Hora Hero */}
