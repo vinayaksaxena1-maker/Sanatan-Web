@@ -1,7 +1,7 @@
 /**
  * Sanatan Web (सनातन घड़ी)
  * Component: ChoghadiyaLiveHero
- * Box-Free Pure Typographic Real-time Active Choghadiya & Live Countdown
+ * Box-Free Pure Typographic Real-time Active Choghadiya & Compact Countdown
  * Strict < 300 lines modular standard
  */
 
@@ -91,30 +91,28 @@ export const ChoghadiyaLiveHero: React.FC<ChoghadiyaLiveHeroProps> = ({ data }) 
           </p>
         </div>
 
-        {/* ================= 2. LIVE DYNAMIC COUNTDOWN (4 Cols) ================= */}
-        <div className="md:col-span-4 flex flex-col items-center justify-center text-center space-y-2.5">
-          <div className="inline-flex items-center gap-1.5 text-xs text-[#735641] uppercase tracking-wider font-semibold">
-            <span>⏳</span>
-            <span>वर्तमान काल शेष</span>
+        {/* ================= 2. LIVE COMPACT COUNTDOWN (4 Cols) ================= */}
+        <div className="md:col-span-4 flex flex-col items-center md:items-end justify-center text-center md:text-right space-y-1.5">
+          <div className="flex items-center gap-1.5">
+            <span className="text-xs text-[#735641] font-semibold flex items-center gap-1">
+              <span>⏳</span>
+              <span>काल शेष:</span>
+            </span>
+            <span className="text-xl sm:text-2xl font-bold text-[#c2410c] font-mono tabular-nums">
+              {countdownFormatted}
+            </span>
+            <span className="text-[11px] text-[#735641]">मिनट</span>
           </div>
 
-          {/* Big Devanagari Countdown Display */}
-          <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#c2410c] tabular-nums font-mono tracking-tight drop-shadow-xs">
-            {countdownFormatted}
-          </div>
-
-          <span className="text-[11px] text-[#735641]">मिनट एवं सेकंड शेष</span>
-
-          {/* Real-time Progress Bar */}
-          <div className="w-full max-w-xs space-y-1 pt-1">
-            <div className="w-full bg-[#f5ebd7] rounded-full h-2 overflow-hidden shadow-inner">
+          {/* Sleek Minimal Progress Bar */}
+          <div className="w-44 space-y-0.5">
+            <div className="w-full bg-amber-100/80 rounded-full h-1.5 overflow-hidden">
               <div
                 className="bg-gradient-to-r from-amber-500 to-[#c2410c] h-full rounded-full transition-all duration-1000"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
             <div className="flex justify-between text-[10px] text-[#735641] font-mono">
-              <span>आरंभ</span>
               <span>{progressPercent}% व्यतीत</span>
               <span>समाप्त</span>
             </div>
